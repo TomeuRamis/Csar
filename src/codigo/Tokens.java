@@ -14,11 +14,22 @@ package codigo;
 public enum Tokens {
     Reservadas,
     Igual,
-    Suma,
-    Resta,
-    Multiplicacion,
-    Division,
     Id,
     Numero,
-    ERROR
+    ERROR,
+    Tipo,
+    Const,
+    If,
+    Main,
+    Def,
+    Return,
+    PuntoYComa,
+    a_par,
+    c_par,
+    a_llave,
+    c_llave,
+    Op_aritmetico,
+    Op_logico,
+    Op_relacional,
+    Op_booleano
 }

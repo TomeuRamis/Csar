@@ -1,2 +1,9 @@
 cacadebaca
 jaja lol
+
+main(){
+int colonoscopia = 7;
+if(true){
+cagar();
+}
+}

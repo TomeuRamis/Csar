@@ -10,26 +10,27 @@ espacio=[ ,\t,\r,\n]+
     public String lexeme;
 %}
 %%
-int | bool | char { lexeme=yytext(); return Tipo};
+int | bool | char { lexeme=yytext(); return Tipo;}
 const {return Const;}
 if { return If;}
-else |
+else | 
 while {lexeme=yytext(); return Reservadas;}
-{espacio} {/Ignore/}
-"//". {/Ignore/}
+{espacio} {/*Ignore*/}
+"//".* {/*Ignore*/}
 "main" {return Main;}
 "def" {return Def;}
 "return" {return Return;}
 "=" {return Igual;}
-"+" {return Suma;}
-"-" {return Resta;}
-"" {return Multiplicacion;}
-"/" {return Division;}
+( "+" | "-" | "*" | "/" | "%" ) {lexeme=yytext(); return Op_aritmetico;}
+( "&&" | "||" | "!" | "&" | "|" ) {lexeme=yytext(); return Op_logico;}
+( ">" | "<" | "==" | "!=" | "=>" | "=<" ) {lexeme = yytext(); return Op_relacional;}
+(true | false) {lexeme = yytext(); return Op_booleano;}
 ";" {return PuntoYComa;}
 "(" {return a_par;}
 ")" {return c_par;}
-"{" {return a_cor;}
-"}" {return c_cor;}
-{L}({L}|{D}) {lexeme=yytext(); return Id;}
+"{" {return a_llave;}
+"}" {return c_llave;}
+{L}({L}|{D})* {lexeme=yytext(); return Id;}
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Numero;}
  . {return ERROR;}
+
