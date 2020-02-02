@@ -8,9 +8,11 @@ package codigo;
 import codigo.Lexer;
 import codigo.Tokens;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
@@ -90,20 +92,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         try {
             Reader lector = new BufferedReader(new FileReader(chooser.getSelectedFile()));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("ficheroTokens.txt"));
             Lexer lexer = new Lexer(lector);
             String resultado = "";
+            String strtokens = "";
             while (true) {
                 Tokens tokens = lexer.yylex();
                 if (tokens == null) {
                     resultado += "FIN";
                     txtResultado.setText(resultado);
+                    writer.write(strtokens);
+                    writer.close();
                     return;
                 }
+                if(!tokens.equals(ERROR)){
+                    strtokens += (tokens + "\n");
+                }
+                
                 switch (tokens) {
                     case ERROR:
                         resultado += "Simbolo no definido\n";
                         break;
-                    case Id: case Numero: case Reservadas:
+                    case Id: case Numero:
                         resultado += lexer.lexeme + ": Es un " + tokens + "\n";
                         break;
                     default:

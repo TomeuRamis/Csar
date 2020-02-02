@@ -2,8 +2,9 @@ cacadebaca
 jaja lol
 
 main(){
-int colonoscopia = 7;
+int colonoscopia = 'hola';
 if(true){
 cagar();
 }
 }
+'.*.'

@@ -30,12 +30,12 @@ out { return Out;}
 (true | false) {lexeme = yytext(); return Op_booleano;}
 ";" {return PuntoYComa;}
 "," {return Coma;}
-"(" {return a_par;}
-")" {return c_par;}
-"{" {return a_llave;}
-"}" {return c_llave;}
+"(" {return A_par;}
+")" {return C_par;}
+"{" {return A_llave;}
+"}" {return C_llave;}
 {L}({L}|{D})* {lexeme=yytext(); return Id;}
-"'".*."'" {lexeme=yytext(); return String;}
+["][^"]*["] {lexeme=yytext(); return String;}
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Numero;}
  . {return ERROR;}
 
