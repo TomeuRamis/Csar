@@ -18,7 +18,7 @@ parser code
 terminal While, Igual, Id, Else, Numero, Tipo, Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String;
 non terminal P,  DECLS, DECL, TYPE, ASIGNACION, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO, CALL, 
-    RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRP, EXPR, EXPRS, OPERADOR, LITERAL;
+    RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRP, EXPR, EXPRS, OPERADOR, LAMBDA, LITERAL;
 
 start with P;
 
@@ -27,7 +27,7 @@ P ::=
 ;
 DECLS ::= 
     DECL PuntoYComa DECLS |
-    
+    LAMBDA
 ;
 DECL ::=
     Const TYPE Id ASIGNACION |
@@ -38,11 +38,11 @@ TYPE ::=
 ;
 ASIGNACION ::=
     EXPRP |
-
+    LAMBDA
 ;
 INSTS ::=
     INST PuntoYComa INSTS |
-
+    LAMBDA
 ;
 INST ::=
     ASIG |
@@ -69,6 +69,7 @@ CND ::=
 ELS ::=
     Else CND |
     Else A_llave INSTS C_llave |
+    LAMBDA
 ;
 IO ::= 
     In A_par Id C_par |
@@ -82,7 +83,7 @@ RET ::=
 ;
 FUNCS ::= 
     FUNC FUNCS |
-
+    LAMBDA
 ;
 FUNC ::= 
     DEFINICION Id A_par PARAMS C_par A_llave INSTS C_llave
@@ -93,11 +94,11 @@ DEFINICION ::=
 ;
 PARAMS ::= 
     PARAM PARAMSP | 
-
+    LAMBDA
 ;
 PARAMSP ::= 
     Coma PARAM PARAMSP |
-
+    LAMBDA
 ;
 PARAM ::= 
     TYPE Id
@@ -126,3 +127,4 @@ OPERADOR ::=
     Op_relacional |
     Op_logico
 ;
+LAMBDA ::= /* empty */;
