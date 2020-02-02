@@ -5,7 +5,7 @@ import static codigo.Tokens.*;
 %type Tokens
 L=[a-zA-Z_ÑñÇçüÜ]+
 D=[0-9]+
-espacio=[ ,\t,\r,\n]+
+espacio=[ \t\r\n]+
 %{
     public String lexeme;
 %}
@@ -15,6 +15,7 @@ const {return Const;}
 if { return If;}
 else { return Else;} 
 while { return While;}
+void { return Void;}
 in { return In;} 
 out { return Out;}
 {espacio} {/*Ignore*/}

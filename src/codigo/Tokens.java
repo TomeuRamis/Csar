@@ -8,6 +8,7 @@ package codigo;
  */
 public enum Tokens {
     While,
+    Void,
     Igual,
     Id,
     Else,

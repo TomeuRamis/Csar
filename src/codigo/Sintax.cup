@@ -15,10 +15,10 @@ parser code
 }
 :};
 
-terminal While, Igual, Id, Else, Numero, ERROR, Tipo, Const, If, In,  Out, Main, Def, Return, Coma,
+terminal While, Igual, Id, Else, Numero, Tipo, Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String;
-non terminal P,  DECLS, TYPE, ASIGNACION, INSTS, ASIG, WHL, DCL, CND, IO, INPUT, OUTPUT,
-    CALL, RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMS', PARAM, EXPR', EXPR, EXPRS, OPERANDO, LITERAL;
+non terminal P,  DECLS, DECL, TYPE, ASIGNACION, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO, CALL, 
+    RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRP, EXPR, EXPRS, OPERADOR, LITERAL;
 
 start with P;
 
@@ -26,7 +26,7 @@ P ::=
     DECLS Main A_llave INSTS C_llave FUNCS
 ;
 DECLS ::= 
-    DECLS PuntoYComa DECLS |
+    DECL PuntoYComa DECLS |
     
 ;
 DECL ::=
@@ -37,7 +37,7 @@ TYPE ::=
     Tipo
 ;
 ASIGNACION ::=
-    EXPR' |
+    EXPRP |
 
 ;
 INSTS ::=
@@ -54,33 +54,31 @@ INST ::=
     RET
 ;
 ASIG ::=
-    Id Igual EXPR'
+    Id Igual EXPRP
 ;
 WHL ::=
-    While A_par EXPR’ C_par A_llave INSTS C_llave
+    While A_par EXPRP C_par A_llave INSTS C_llave
 ;
 
 DCL ::= 
     TYPE Id ASIGNACION 
 ;
 CND ::= 
-    If A_par EXPR’ C_par A_llave INSTS C_llave
+    If A_par EXPRP C_par A_llave INSTS C_llave ELS
+;
+ELS ::=
+    Else CND |
+    Else A_llave INSTS C_llave |
 ;
 IO ::= 
-    input |
-    output
-;
-INPUT ::= 
-    In A_par Id C_par
-;
-OUTPUT ::= 
-    Out A_par EXPR’ C_par
+    In A_par Id C_par |
+    Out A_par EXPRP C_par
 ;
 CALL ::=  
     Id A_par EXPRS C_par
 ;
 RET ::= 
-    Return EXPR’
+    Return EXPRP
 ;
 FUNCS ::= 
     FUNC FUNCS |
@@ -90,22 +88,22 @@ FUNC ::=
     DEFINICION Id A_par PARAMS C_par A_llave INSTS C_llave
 ;
 DEFINICION ::= 
-    def type | 
-    def void
+    Def TYPE | 
+    Def Void
 ;
 PARAMS ::= 
-    PARAM PARAMS’ | 
+    PARAM PARAMSP | 
 
 ;
-PARAMS’ ::= 
-    Coma PARAM PARAMS’ |
+PARAMSP ::= 
+    Coma PARAM PARAMSP |
 
 ;
 PARAM ::= 
     TYPE Id
 ;
-EXPR’ ::=  
-    EXPR’ OPERADOR EXPR |
+EXPRP ::=  
+    EXPRP OPERADOR EXPR |
     EXPR
 ;
 EXPR ::= 
@@ -120,7 +118,7 @@ LITERAL ::=
     Numero
 ;
 EXPRS ::= 
-    EXPRS Coma EXPRS|
+    EXPR Coma EXPRS |
     EXPR
 ;
 OPERADOR ::=
