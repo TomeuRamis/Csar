@@ -571,7 +571,7 @@ class Lexer {
           }
         case 19: break;
         case 2: 
-          { lexeme=yytext(); return Identificador;
+          { lexeme=yytext(); return Id;
           }
         case 20: break;
         default: 

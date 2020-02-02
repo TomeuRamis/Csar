@@ -18,7 +18,7 @@ public enum Tokens {
     Resta,
     Multiplicacion,
     Division,
-    Identificador,
+    Id,
     Numero,
     ERROR
 }
