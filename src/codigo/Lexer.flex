@@ -35,7 +35,7 @@ out { return Out;}
 "{" {return a_llave;}
 "}" {return c_llave;}
 {L}({L}|{D})* {lexeme=yytext(); return Id;}
-"'".*."'" {lexeme=yytext(); return String;}
+"*" {lexeme=yytext(); return String;}
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Numero;}
  . {return ERROR;}
 
