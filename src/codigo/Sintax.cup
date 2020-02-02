@@ -1,0 +1,130 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal While, Igual, Id, Else, Numero, ERROR, Tipo, Const, If, In,  Out, Main, Def, Return, Coma,
+    PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String;
+non terminal P,  DECLS, TYPE, ASIGNACION, INSTS, ASIG, WHL, DCL, CND, IO, INPUT, OUTPUT,
+    CALL, RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMS', PARAM, EXPR', EXPR, EXPRS, OPERANDO, LITERAL;
+
+start with P;
+
+P ::=
+    DECLS Main A_llave INSTS C_llave FUNCS
+;
+DECLS ::= 
+    DECLS PuntoYComa DECLS |
+    
+;
+DECL ::=
+    Const TYPE Id ASIGNACION |
+    TYPE Id ASIGNACION 
+;
+TYPE ::=
+    Tipo
+;
+ASIGNACION ::=
+    EXPR' |
+
+;
+INSTS ::=
+    INST PuntoYComa INSTS |
+
+;
+INST ::=
+    ASIG |
+    WHL |
+    DCL |
+    CND |
+    IO |
+    CALL |
+    RET
+;
+ASIG ::=
+    Id Igual EXPR'
+;
+WHL ::=
+    While A_par EXPR’ C_par A_llave INSTS C_llave
+;
+
+DCL ::= 
+    TYPE Id ASIGNACION 
+;
+CND ::= 
+    If A_par EXPR’ C_par A_llave INSTS C_llave
+;
+IO ::= 
+    input |
+    output
+;
+INPUT ::= 
+    In A_par Id C_par
+;
+OUTPUT ::= 
+    Out A_par EXPR’ C_par
+;
+CALL ::=  
+    Id A_par EXPRS C_par
+;
+RET ::= 
+    Return EXPR’
+;
+FUNCS ::= 
+    FUNC FUNCS |
+
+;
+FUNC ::= 
+    DEFINICION Id A_par PARAMS C_par A_llave INSTS C_llave
+;
+DEFINICION ::= 
+    def type | 
+    def void
+;
+PARAMS ::= 
+    PARAM PARAMS’ | 
+
+;
+PARAMS’ ::= 
+    Coma PARAM PARAMS’ |
+
+;
+PARAM ::= 
+    TYPE Id
+;
+EXPR’ ::=  
+    EXPR’ OPERADOR EXPR |
+    EXPR
+;
+EXPR ::= 
+    CALL |
+    Id |
+    LITERAL
+;
+
+LITERAL ::= 
+    Op_booleano | 
+    String |
+    Numero
+;
+EXPRS ::= 
+    EXPRS Coma EXPRS|
+    EXPR
+;
+OPERADOR ::=
+    Op_aritmetico |
+    Op_relacional |
+    Op_logico
+;

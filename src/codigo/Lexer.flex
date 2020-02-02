@@ -13,8 +13,10 @@ espacio=[ ,\t,\r,\n]+
 int | bool | char { lexeme=yytext(); return Tipo;}
 const {return Const;}
 if { return If;}
-else | 
-while {lexeme=yytext(); return Reservadas;}
+else { return Else;} 
+while { return While;}
+in { return In;} 
+out { return Out;}
 {espacio} {/*Ignore*/}
 "//".* {/*Ignore*/}
 "main" {return Main;}
@@ -26,11 +28,13 @@ while {lexeme=yytext(); return Reservadas;}
 ( ">" | "<" | "==" | "!=" | "=>" | "=<" ) {lexeme = yytext(); return Op_relacional;}
 (true | false) {lexeme = yytext(); return Op_booleano;}
 ";" {return PuntoYComa;}
+"," {return Coma;}
 "(" {return a_par;}
 ")" {return c_par;}
 "{" {return a_llave;}
 "}" {return c_llave;}
 {L}({L}|{D})* {lexeme=yytext(); return Id;}
+"'".*."'" {lexeme=yytext(); return String;}
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Numero;}
  . {return ERROR;}
 

@@ -1,33 +1,33 @@
 package codigo;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 
 /**
  *
- * @author Charly Ponce
+ * @author Pepe Gotera
  */
 public enum Tokens {
-    Reservadas,
+    While,
     Igual,
     Id,
+    Else,
     Numero,
+    String,
     ERROR,
     Tipo,
     Const,
     If,
+    In, 
+    Out,
     Main,
     Def,
     Return,
     PuntoYComa,
-    a_par,
-    c_par,
-    a_llave,
-    c_llave,
+    Coma,
+    A_par,
+    C_par,
+    A_llave,
+    C_llave,
     Op_aritmetico,
     Op_logico,
     Op_relacional,
