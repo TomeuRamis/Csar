@@ -2,7 +2,7 @@ cacadebaca
 jaja lol
 
 main(){
-int colonoscopia = 'hola';
+int colonoscopia = "hola";
 if(true){
 cagar();
 }
