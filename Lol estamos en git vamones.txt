@@ -1,10 +1,7 @@
-cacadebaca
-jaja lol
-
-main(){
-int colonoscopia = "jaja";
+main{
+int colonoscopia;
 if(true){
 cagar();
 }
+;
 }
-*

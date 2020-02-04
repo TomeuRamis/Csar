@@ -1,26 +1,6 @@
-Id
-Id
-Id
-Main
-A_par
-C_par
-A_llave
-Tipo
-Id
-Igual
-ERROR
-Id
-ERROR
-PuntoYComa
-If
-A_par
-Op_booleano
-C_par
-A_llave
-Id
-A_par
-C_par
-PuntoYComa
-C_llave
-C_llave
-Op_aritmetico
+  <main><{>
+  <int>  <colonoscopia><;>
+  <if>  <(>  <true>  <)><{>
+  <cagar>  <(>  <)><;>
+  <}><;>
+  <}>
