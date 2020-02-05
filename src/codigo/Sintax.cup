@@ -37,7 +37,7 @@ TYPE ::=
     Tipo
 ;
 ASIGNACION ::=
-    EXPRP |
+    Igual EXPRP |
     LAMBDA
 ;
 INSTS ::=
@@ -61,7 +61,7 @@ WHL ::=
 ;
 
 DCL ::= 
-    TYPE Id ASIGNACION 
+    TYPE Id ASIGNACION
 ;
 CND ::= 
     If A_par EXPRP C_par A_llave INSTS C_llave ELS

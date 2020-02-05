@@ -22,6 +22,9 @@ public class TablaSimbolos {
     ArrayList<FilaTE> te;
     int[] ta = new int[profMax];
     int n;
+    public enum Mvp{
+        dproc, dconst, dvar
+    }
     
     
     public void reset(){
@@ -54,13 +57,36 @@ public class TablaSimbolos {
                 te.get(ta[n]).np = filatd.np;
             }
         }
-        FilaTD nuevaFila = new FilaTD(s,n);
+        FilaTD nuevaFila = new FilaTD(s,n,);
         td.add(nuevaFila);
     }
     
     public void ponerParam(String idproc, String idparam, int d){
         FilaTD fproc = consulta(idproc);
-        if(fproc.tipo != )
+        if(fproc.tipo != mvp.dproc){
+            System.out.println("ERROR");//Error
+        }
+        int i = fproc.first;
+        int pp = -1;
+        while(i != -1 && !te.get(i).nombre.equals(idparam)){
+            pp = i;
+            i = te.get(i).first;
+        }
+        if(i != -1){
+            System.out.println("ERROR");
+        }
+        int nou = ta[n];
+        ta[n] = ta[n+1];
+        te.get(nou).nombre = idparam;
+        te.get(nou).np = -1;
+        te.get(nou).tipo = d;
+        te.get(nou).first = -1;
+        if(pp == -1){
+            fproc.first = nou;
+            
+        }else{
+            te.get(pp).first = nou;
+        }
     }
     
     public void entraBloque(){
@@ -92,18 +118,21 @@ public class TablaSimbolos {
         //Object valor;
         int np;
         int first;
+        Mvp mvp;
         
-        public FilaTD(Symbol s, int amb){
+        public FilaTD(Symbol s, int amb, Mvp mvp){
             nombre = (String)s.value;
             tipo = s.sym;
             //valor = s.value;
             np = amb;
+            this.mvp = mvp;
         }
         public FilaTD(FilaTD f){
             nombre = f.nombre;
             tipo = f.tipo;
             //valor = f.valor;
             np = f.np;
+            mvp = f.mvp;
         }
         
     }

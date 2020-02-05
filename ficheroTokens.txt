@@ -1,6 +1,5 @@
 <main><{>
-<int><colonoscopia><;>
-<if><(><true><)><{>
-<cagar><(><)><;>
-<}><;>
+<int><caca><;>
+<int><vasectomia><=><cacatua><;>
+<}><def><void><cacatua><(><)><{>
 <}>
