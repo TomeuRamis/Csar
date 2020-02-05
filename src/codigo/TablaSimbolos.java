@@ -6,8 +6,6 @@
 package codigo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Stack;
 import java_cup.runtime.Symbol;
 
 /**
@@ -20,10 +18,17 @@ public class TablaSimbolos {
     
     ArrayList<FilaTD> td;
     ArrayList<FilaTE> te;
-    int[] ta = new int[profMax];
+    int[] ta;
     int n;
     public enum Mvp{
         dproc, dconst, dvar
+    }
+    
+    public TablaSimbolos(){
+        td = new ArrayList<>();
+        te = new ArrayList<>();
+        ta = new int[profMax];
+        n = 0;
     }
     
     
@@ -47,7 +52,7 @@ public class TablaSimbolos {
         return (i > td.size()-1) ? null : td.get(i);
     }
     
-    public void add(Symbol s){
+    public void add(Symbol s, Mvp mvp){
         FilaTD filatd = consulta((String)s.value);
         if(filatd != null){
             if(filatd.np != n){
@@ -55,17 +60,19 @@ public class TablaSimbolos {
                 te.get(ta[n]).nombre = filatd.nombre;
                 te.get(ta[n]).tipo = filatd.tipo;
                 te.get(ta[n]).np = filatd.np;
+                te.get(ta[n]).mvp = filatd.mvp;
             }
         }
-        FilaTD nuevaFila = new FilaTD(s,n,);
+        FilaTD nuevaFila = new FilaTD(s,n,mvp);
         td.add(nuevaFila);
     }
     
     public void ponerParam(String idproc, String idparam, int d){
         FilaTD fproc = consulta(idproc);
-        if(fproc.tipo != mvp.dproc){
+        if(fproc.mvp != Mvp.dproc){
             System.out.println("ERROR");//Error
         }
+       
         int i = fproc.first;
         int pp = -1;
         while(i != -1 && !te.get(i).nombre.equals(idparam)){
@@ -81,6 +88,7 @@ public class TablaSimbolos {
         te.get(nou).np = -1;
         te.get(nou).tipo = d;
         te.get(nou).first = -1;
+        te.get(nou).mvp = null;
         if(pp == -1){
             fproc.first = nou;
             
@@ -107,6 +115,7 @@ public class TablaSimbolos {
                 filatd.tipo = filate.tipo;
                 filatd.np = filate.np;
                 filatd.first = filate.first;
+                filatd.mvp = filate.mvp;
             }
             lini--;
         }
@@ -144,21 +153,7 @@ public class TablaSimbolos {
             refTD = ref;
         }
     }
-    
-    public class Llamada{
-        String nombre;
-        ArrayList<Symbol> parametros;
-        
-        public Llamada(String n){
-            nombre = n;
-            parametros = new ArrayList<>();
-        }  
-        
-        public void addParam(Symbol s){
-            parametros.add(s);
-        }
-        
-    }
+   
 }
 
 

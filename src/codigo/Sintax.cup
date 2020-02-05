@@ -15,6 +15,12 @@ parser code
 }
 :};
 
+init with {:
+    TablaSimbolos ts = new TablaSimbolos();
+    
+
+:}
+
 terminal While, Igual, Id, Else, Numero, Tipo, Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String, ERROR;
 non terminal P,  DECLS, DECL, TYPE, ASIGNACION, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO, CALL, 
@@ -23,109 +29,109 @@ non terminal P,  DECLS, DECL, TYPE, ASIGNACION, INSTS, INST, ASIG, WHL, DCL, CND
 start with P;
 
 P ::=
-    DECLS Main A_llave INSTS C_llave FUNCS {: System.out.println("cosas"); :}
+    DECLS Main:v1 A_llave INSTS C_llave FUNCS {: RESULT = new NoTerminales.OPERADOR(v1); :}
 ;
 DECLS ::= 
-    DECL PuntoYComa DECLS |
-    LAMBDA
+    DECL PuntoYComa DECLS | /*{:  :}*/
+    LAMBDA /*{:  :}*/
 ;
 DECL ::=
-    Const TYPE Id ASIGNACION |
-    TYPE Id ASIGNACION 
+    Const TYPE Id ASIGNACION | /*{:  :}*/
+    TYPE Id ASIGNACION  /*{:  :}*/
 ;
 TYPE ::=
-    Tipo
+    Tipo /*{:  :}*/
 ;
 ASIGNACION ::=
-    Igual EXPRP |
-    LAMBDA
+    Igual EXPRP | /*{:  :}*/
+    LAMBDA /*{:  :}*/
 ;
 INSTS ::=
-    INST PuntoYComa INSTS |
-    LAMBDA
+    INST PuntoYComa INSTS | /*{:  :}*/
+    LAMBDA {: :}
 ;
 INST ::=
-    ASIG |
-    WHL |
-    DCL |
-    CND |
-    IO |
-    CALL |
-    RET
+    ASIG | /*{:  :}*/
+    WHL | /*{:  :}*/
+    DCL | /*{:  :}*/
+    CND | /*{:  :}*/
+    IO | /*{:  :}*/
+    CALL | /*{:  :}*/
+    RET /*{:  :}*/
 ;
 ASIG ::=
-    Id Igual EXPRP
+    Id Igual EXPRP /*{:  :}*/
 ;
 WHL ::=
-    While A_par EXPRP C_par A_llave INSTS C_llave
+    While A_par EXPRP C_par A_llave INSTS C_llave /*{:  :}*/
 ;
 
 DCL ::= 
-    TYPE Id ASIGNACION
+    TYPE Id ASIGNACION /*{:  :}*/
 ;
 CND ::= 
-    If A_par EXPRP C_par A_llave INSTS C_llave ELS
+    If A_par EXPRP C_par A_llave INSTS C_llave ELS /*{:  :}*/
 ;
 ELS ::=
-    Else CND |
-    Else A_llave INSTS C_llave |
-    LAMBDA
+    Else CND | /*{:  :}*/
+    Else A_llave INSTS C_llave | /*{:  :}*/
+    LAMBDA /*{:  :}*/
 ;
 IO ::= 
-    In A_par Id C_par |
-    Out A_par EXPRP C_par
+    In A_par Id C_par | /*{:  :}*/
+    Out A_par EXPRP C_par /*{:  :}*/
 ;
 CALL ::=  
-    Id A_par EXPRS C_par |
-    Id A_par C_par
+    Id A_par EXPRS C_par | /*{:  :}*/
+    Id A_par C_par /*{:  :}*/
 ;
 RET ::= 
-    Return EXPRP
+    Return EXPRP /*{:  :}*/
 ;
 FUNCS ::= 
-    FUNC FUNCS |
-    LAMBDA
+    FUNC FUNCS | /*{:  :}*/
+    LAMBDA /*{:  :}*/
 ;
 FUNC ::= 
-    DEFINICION Id A_par PARAMS C_par A_llave INSTS C_llave
+    DEFINICION Id A_par PARAMS C_par A_llave INSTS C_llave /*{:  :}*/
 ;
 DEFINICION ::= 
-    Def TYPE | 
-    Def Void
+    Def TYPE |  /*{:  :}*/
+    Def Void /*{:  :}*/
 ;
 PARAMS ::= 
-    PARAM PARAMSP | 
-    LAMBDA
+    PARAM PARAMSP |  /*{:  :}*/
+    LAMBDA /*{:  :}*/
 ;
 PARAMSP ::= 
-    Coma PARAM PARAMSP |
-    LAMBDA
+    Coma PARAM PARAMSP | /*{:  :}*/
+    LAMBDA /*{:  :}*/
 ;
 PARAM ::= 
-    TYPE Id
+    TYPE Id /*{:  :}*/
 ;
 EXPRP ::=  
-    EXPRP OPERADOR EXPR |
-    EXPR
+    EXPRP OPERADOR EXPR | /*{:  :}*/
+    EXPR /*{:  :}*/
 ;
 EXPR ::= 
-    CALL |
-    Id |
-    LITERAL
+    CALL | /*{:  :}*/
+    Id | /*{:  :}*/
+    LITERAL /*{:  :}*/
 ;
 
 LITERAL ::= 
-    Op_booleano | 
-    String |
-    Numero
+    Op_booleano |  /*{:  :}*/
+    String | /*{:  :}*/
+    Numero /*{:  :}*/
 ;
 EXPRS ::= 
-    EXPR Coma EXPRS |
-    EXPR
+    EXPR Coma EXPRS | /*{:  :}*/
+    EXPR /*{:  :}*/
 ;
 OPERADOR ::=
-    Op_aritmetico |
-    Op_relacional |
-    Op_logico
+    Op_aritmetico | {: //RESULT = new OPERADOR(v2.type, v2.value); :}
+    Op_relacional | 
+    Op_logico 
 ;
 LAMBDA ::= /* empty */;
