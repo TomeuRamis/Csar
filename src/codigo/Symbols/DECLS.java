@@ -9,8 +9,8 @@ package codigo.Symbols;
  *
  * @author Juan
  */
-public class P {
-    public P(){
+public class DECLS {
+    public DECLS(){
         
     }
 }
