@@ -23,7 +23,7 @@ non terminal P,  DECLS, DECL, TYPE, ASIGNACION, INSTS, INST, ASIG, WHL, DCL, CND
 start with P;
 
 P ::=
-    DECLS Main A_llave INSTS C_llave FUNCS
+    DECLS Main A_llave INSTS C_llave FUNCS {: System.out.println("cosas"); :}
 ;
 DECLS ::= 
     DECL PuntoYComa DECLS |

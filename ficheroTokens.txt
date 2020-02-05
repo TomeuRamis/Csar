@@ -1,6 +1,6 @@
-  <main><{>
-  <int>  <colonoscopia><;>
-  <if>  <(>  <true>  <)><{>
-  <cagar>  <(>  <)><;>
-  <}><;>
-  <}>
+<main><{>
+<int><colonoscopia><;>
+<if><(><true><)><{>
+<cagar><(><)><;>
+<}><;>
+<}>
