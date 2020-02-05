@@ -102,6 +102,7 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
 
         txtResultado.setColumns(20);
         txtResultado.setRows(5);
+        txtResultado.setText("int i = 3;\nmain{}");
         jScrollPane1.setViewportView(txtResultado);
 
         txtAnalizarLex.setEditable(false);
@@ -270,8 +271,10 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
             txtAnalizarSin.setForeground(new Color(25, 111, 61));
         } catch (Exception ex) {
             Symbol sym = s.getS();
-            txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
-            txtAnalizarSin.setForeground(Color.red);
+            //if(sym != null){
+                txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
+                txtAnalizarSin.setForeground(Color.red);
+            //}
         }
     }//GEN-LAST:event_btnAnalizarSinActionPerformed
 

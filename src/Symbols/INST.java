@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package codigo.Symbols;
+package Symbols;
 
 /**
  *
  * @author Juan
  */
-public class CND {
-
-    public CND() {
+public class INST {
+    public INST(){
+        
     }
-    
 }
