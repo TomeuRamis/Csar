@@ -9,12 +9,17 @@ package Symbols;
  *
  * @author Juan
  */
-public class WHL {
+public class WHL extends SimboloBase{
     
     EXPR expresion;
     INSTS instruccion;
     
-    public WHL(){
-       
+    //Comprueba expr sea un booleano
+    public WHL(EXPRP exprp){
+       super("WHL");
+       if(exprp.tipo != codigo.TablaSimbolos.Tipo.tBool){
+           //ERROR
+           System.out.println("ERROR: La condicion no es booleana");
+       }
     }
 }

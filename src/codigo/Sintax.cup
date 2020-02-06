@@ -25,8 +25,8 @@ terminal String Id;
 terminal String Numero;
 terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String, ERROR;
-non terminal P,  DECLS, DECL, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO,
-    RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRS, OPERADOR, LAMBDA;
+non terminal P,  DECLS, DECL,
+    FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRS, OPERADOR, LAMBDA;
 non terminal Symbols.TYPE TYPE;
 non terminal Symbols.EXPR EXPR;
 non terminal Symbols.EXPRP EXPRP;
@@ -34,6 +34,15 @@ non terminal Symbols.EXPRS EXPRS;
 non terminal Symbols.ASIGNACION ASIGNACION;
 non terminal Symbols.LITERAL LITERAL;
 non terminal Symbols.CALL CALL;
+non terminal Symbols.INSTS INSTS;
+non terminal Symbols.INST INST;
+non terminal Symbols.ASIG ASIG;
+non terminal Symbols.WHL WHL;
+non terminal Symbols.DCL DCL;
+non terminal Symbols.CND CND;
+non terminal Symbols.ELS ELS;
+non terminal Symbols.IO IO;
+non terminal Symbols.RET RET;
 
 start with P;
 
@@ -46,7 +55,7 @@ DECLS ::=
 ;
 DECL ::=
     Const TYPE Id ASIGNACION /*{:  :}*/ |
-    TYPE:v1 Id:v2 ASIGNACION:v3  {: Symbols.DECL decl = new Symbols.DECL(v1.valor, v2, v3.asignacion); RESULT = decl;  :}
+    TYPE:v1 Id:v2 ASIGNACION:v3  {: RESULT = new Symbols.DECL(v1.valor, v2, v3.asignacion); RESULT = decl;  :}
 ;
 TYPE ::=
     Tipo:v {: Symbols.TYPE t = new Symbols.TYPE((v)); RESULT = t;:}
@@ -56,46 +65,46 @@ ASIGNACION ::=
     LAMBDA /*{:  :}*/
 ;
 INSTS ::=
-    INST INSTS /*{:  :}*/ |
-    LAMBDA {: :}
+    INST INSTS {: RESULT = new Symbols.INSTS(); :} |
+    LAMBDA 
 ;
 INST ::=
-    ASIG PuntoYComa /*{:  :}*/ |
-    WHL /*{:  :}*/ |
-    DCL PuntoYComa /*{:  :}*/ |
-    CND /*{:  :}*/ |
-    IO PuntoYComa /*{:  :}*/ |
-    CALL PuntoYComa /*{:  :}*/ |
-    RET PuntoYComa /*{:  :}*/
+    ASIG PuntoYComa     {: RESULT = new Symbols.INST(); :} |
+    WHL                 {: RESULT = new Symbols.INST(); :} |
+    DCL PuntoYComa      {: RESULT = new Symbols.INST(); :} |
+    CND                 {: RESULT = new Symbols.INST(); :} |
+    IO PuntoYComa       {: RESULT = new Symbols.INST(); :} |
+    CALL PuntoYComa     {: RESULT = new Symbols.INST(); :} |
+    RET PuntoYComa      {: RESULT = new Symbols.INST(); :}
 ;
 ASIG ::=
-    Id Igual EXPRP /*{:  :}*/
+    Id:v1 Igual EXPRP:v2 {: RESULT = new Symbols.ASIG(v1,v2,ts); :}
 ;
 WHL ::=
-    While A_par EXPRP C_par A_llave INSTS C_llave /*{:  :}*/
+    While A_par EXPRP:v C_par A_llave INSTS C_llave {: RESULT = new Symbols.WHL(v);  :}
 ;
 
 DCL ::= 
-    TYPE Id ASIGNACION /*{:  :}*/
+    TYPE:v1 Id:v2 ASIGNACION:v3 {: RESULT = new Symbols.DCL(v1,v2, v3, ts); :}
 ;
 CND ::= 
-    If A_par EXPRP C_par A_llave INSTS C_llave ELS /*{:  :}*/
+    If A_par EXPRP:v C_par A_llave INSTS C_llave ELS {: RESULT = new Symbols.CND(v);  :}
 ;
 ELS ::=
-    Else CND /*{:  :}*/ |
-    Else A_llave INSTS C_llave /*{:  :}*/ |
+    Else CND {: RESULT = new Symbols.ELS(); :} |
+    Else A_llave INSTS C_llave {: RESULT = new Symbols.ELS(); :} |
     LAMBDA /*{:  :}*/
 ;
 IO ::= 
-    In A_par Id C_par /*{:  :}*/ |
-    Out A_par EXPRP C_par /*{:  :}*/
+    In A_par Id:v C_par {: RESULT = new Symbols.IO(v, ts) :} |
+    Out A_par EXPRP C_par {: RESULT = new Symbols.IO() :}
 ;
 CALL ::=  
     Id:v1 A_par EXPRS:v2 C_par  {: RESULT = new CALL(v1, v2, ts);  :} |
     Id:v A_par C_par            {: RESULT = new CALL(v, ts); :}
 ;
 RET ::= 
-    Return EXPRP /*{:  :}*/
+    Return EXPRP:v {: RESULT = new Symbols.RET(v); :}
 ;
 FUNCS ::= 
     FUNC FUNCS /*{:  :}*/ |
