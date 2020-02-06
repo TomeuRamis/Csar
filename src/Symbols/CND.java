@@ -9,9 +9,16 @@ package Symbols;
  *
  * @author Juan
  */
-public class CND {
+public class CND extends SimboloBase{
     EXPRP expresionp;
-    public CND() {
+    
+    //Comprueba que la condicion sea booleana
+    public CND(EXPRP exprp) {
+        super("CND");
+        if(exprp.tipo != codigo.TablaSimbolos.Tipo.tBool){
+            //ERROR
+            System.out.println("ERROR: La condicion no es booleana");
+        }
     }
     
 }

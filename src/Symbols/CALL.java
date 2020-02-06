@@ -66,6 +66,7 @@ public class CALL extends SimboloBase {
                 //ERROR
                 System.out.println("ERROR: faltan parámetros en la llamda a "+id);
             }
+            tipo = d.tipo;
         }
     }
     

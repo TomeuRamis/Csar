@@ -9,7 +9,7 @@ package Symbols;
  *
  * @author Juan
  */
-public class INST {
+public class INST extends SimboloBase {
     
     ASIG asignacion;
     WHL mientras;
@@ -20,6 +20,6 @@ public class INST {
     RET retorno;
     
     public INST(){
-        
+        super("INST");
     }
 }

@@ -9,11 +9,22 @@ package Symbols;
  *
  * @author Juan
  */
-public class IO {
+public class IO extends SimboloBase{
     
     EXPRP expresion;
     
-    public IO() {
+    public IO(String id, codigo.TablaSimbolos ts) {
+        super("IO");
+        
+        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
+        if(fTd == null){
+            //ERROR
+            System.out.println("ERROR: " + id + " no esta definido");
+        }
+    }
+    
+    public IO(){
+        super("IO");
     }
     
 }
