@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package codigo.Symbols;
+package Symbols;
 
 /**
  *
  * @author Juan
  */
-public class EXPRP {
-
-    public EXPRP() {
+public class TYPE extends SimboloBase {
+    public String valor;
+    public TYPE(String valor){
+        super("TYPE", valor);
+        this.valor = valor;
     }
-    
 }

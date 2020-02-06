@@ -19,7 +19,7 @@ espacio=[ \t\r\n]+
     }
 %}
 %%
-int | bool | char { return new Symbol(sym.Tipo, yychar, yyline, yytext());}
+int | bool | string { return new Symbol(sym.Tipo, yychar, yyline, yytext());}
 const {return new Symbol(sym.Const, yychar, yyline, yytext());}
 if { return new Symbol(sym.If, yychar, yyline, yytext());}
 else { return new Symbol(sym.Else, yychar, yyline, yytext());} 

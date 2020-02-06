@@ -69,12 +69,6 @@ public class TablaSimbolos {
     
     public void ponerParam(String idproc, String idparam, int d){
         FilaTD fproc = consulta(idproc);
-<<<<<<< HEAD
-        if(fproc.tipo != dproc ){
-            int i = consulta(idproc).first;
-            int pp = -1;
-            while( i!=-1 && t)
-=======
         if(fproc.mvp != Mvp.dproc){
             System.out.println("ERROR");//Error
         }
@@ -100,7 +94,6 @@ public class TablaSimbolos {
             
         }else{
             te.get(pp).first = nou;
->>>>>>> 8d94035b6a794400e0f3e830c1bdc98cb2ee2d7f
         }
     }
     

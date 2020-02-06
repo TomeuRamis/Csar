@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package codigo.Symbols;
+package Symbols;
 
 /**
  *
  * @author Juan
  */
-public class CALL {
-
-    public CALL() {
+public class ASIGNACION {
+    public ASIGNACION(){
+        
     }
-    
 }
