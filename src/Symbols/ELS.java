@@ -9,10 +9,12 @@ package Symbols;
  *
  * @author Juan
  */
-public class ELS {
+public class ELS extends SimboloBase{
     CND condicion;
     INSTS instrucciones;
+    
     public ELS() {
+        super("ELS");
     }
     
 }

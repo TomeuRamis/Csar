@@ -9,9 +9,23 @@ package Symbols;
  *
  * @author Juan
  */
-public class ASIG {
+public class ASIG extends SimboloBase{
     EXPRP expresionp;
-    public ASIG(){
+    
+    //Consulta si existe id y compara los tipos de id y exprp
+    public ASIG(String id, EXPRP exprp, codigo.TablaSimbolos ts){
+        super("ASIG");
+        
+        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
+        if(fTd == null){
+            //ERROR
+            System.out.println("Error: " + id + "no existe");
+        } else if(fTd.tipo != exprp.tipo){
+            //ERROR
+            System.out.println("ERROR:" + id +" los tipos son inconpatibles");
+        }
+        
+        
         
     }
 }

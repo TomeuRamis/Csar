@@ -55,7 +55,7 @@ public class TablaSimbolos {
         return (i > td.size()-1) ? null : td.get(i);
     }
     
-    public void add(String nombre,Tipo t, Mvp mvp){
+    public boolean add(String nombre,Tipo t, Mvp mvp){
         FilaTD filatd = consulta(nombre);
         if(filatd != null){
             if(filatd.np != n){
@@ -64,16 +64,21 @@ public class TablaSimbolos {
                 te.get(ta[n]).tipo = filatd.tipo;
                 te.get(ta[n]).np = filatd.np;
                 te.get(ta[n]).mvp = filatd.mvp;
+            } else{
+                return false;
             }
         }
         FilaTD nuevaFila = new FilaTD(nombre, t, n,mvp);
         td.add(nuevaFila);
+        return true;
     }
     
-    public void ponerParam(String idproc, String idparam, Tipo tipo){
+    public boolean ponerParam(String idproc, String idparam, Tipo tipo){
         FilaTD fproc = consulta(idproc);
         if(fproc.mvp != Mvp.dproc){
-            System.out.println("ERROR");//Error
+            //Error
+            System.out.println("ERROR: solo se pueden añadir paràmetros a subprogramas");
+            return false;
         }
        
         int i = fproc.first;
@@ -83,7 +88,9 @@ public class TablaSimbolos {
             i = te.get(i).first;
         }
         if(i != -1){
-            System.out.println("ERROR");
+            //ERROR
+            System.out.println("ERROR en ponerParam de "+idproc);
+            return false;
         }
         int nou = ta[n];
         ta[n] = ta[n+1];
@@ -98,6 +105,7 @@ public class TablaSimbolos {
         }else{
             te.get(pp).first = nou;
         }
+        return true;
     }
     
     public void entraBloque(){

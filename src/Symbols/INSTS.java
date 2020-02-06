@@ -9,11 +9,13 @@ package Symbols;
  *
  * @author Juan
  */
-public class INSTS {
+public class INSTS extends SimboloBase{
     
     INST instruccion;
     INSTS instrucciones;
+    
     public INSTS(){
+        super("INSTS");
         
     }
 }
