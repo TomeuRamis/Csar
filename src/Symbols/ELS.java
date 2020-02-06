@@ -10,7 +10,8 @@ package Symbols;
  * @author Juan
  */
 public class ELS {
-
+    CND condicion;
+    INSTS instrucciones;
     public ELS() {
     }
     

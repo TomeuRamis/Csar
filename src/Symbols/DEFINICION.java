@@ -10,7 +10,7 @@ package Symbols;
  * @author Juan
  */
 public class DEFINICION {
-
+    TYPE tipo;
     public DEFINICION() {
     }
     

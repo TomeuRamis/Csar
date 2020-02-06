@@ -10,7 +10,8 @@ package Symbols;
  * @author Juan
  */
 public class DCL {
-
+    TYPE tipo;
+    ASIGNACION asignacion;
     public DCL() {
     }
     

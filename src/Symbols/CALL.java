@@ -9,8 +9,10 @@ package Symbols;
  *
  * @author Juan
  */
-public class CALL  {
 
+public class CALL {
+    EXPRS expresiones;
+    
     public CALL() {
     }
     

@@ -10,6 +10,8 @@ package Symbols;
  * @author Juan
  */
 public class DECL extends SimboloBase {
+    TYPE tipo;
+    ASIGNACION asignacion;
     public DECL(String type, String id, String asig){
         super("DECL", id);
         System.out.println("Objeto de tipo "+type+" con identificador "+id+" con valor asignado "+asig);
