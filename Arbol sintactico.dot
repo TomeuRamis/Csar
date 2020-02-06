@@ -1,0 +1,5 @@
+strict digraph G {
+  EXPRP;
+  EXPR;
+  EXPRP -> EXPR;
+}

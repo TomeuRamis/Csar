@@ -9,8 +9,10 @@ package Symbols;
  *
  * @author Juan
  */
-public class DECL {
+public class DECL extends SimboloBase {
     public DECL(String type, String id, String asig){
+        super("DECL", id);
         System.out.println("Objeto de tipo "+type+" con identificador "+id+" con valor asignado "+asig);
+        imprimirArbol();
     }
 }

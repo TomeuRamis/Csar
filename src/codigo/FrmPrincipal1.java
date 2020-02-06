@@ -272,6 +272,7 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
         } catch (Exception ex) {
             Symbol sym = s.getS();
             //if(sym != null){
+            System.out.println(ex);
                 txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
                 txtAnalizarSin.setForeground(Color.red);
             //}

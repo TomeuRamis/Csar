@@ -9,11 +9,15 @@ package Symbols;
  *
  * @author Juan
  */
-public class EXPRP {
+public class EXPRP extends SimboloBase {
 
     public String expresion;
     public EXPRP(EXPR exp) {
+        super("EXPRP", exp.expresion);
         this.expresion = exp.expresion;
+        
+        g.addVertex("EXPRP");
+        g.addVertex("EXPR");
+        g.addEdge("EXPRP", "EXPR");
     }
-    
 }
