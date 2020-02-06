@@ -10,6 +10,9 @@ package Symbols;
  * @author Juan
  */
 public class INSTS {
+    
+    INST instruccion;
+    INSTS instrucciones;
     public INSTS(){
         
     }

@@ -11,9 +11,12 @@ package Symbols;
  */
 public class EXPR {
 
-    String expresion;
+    CALL llamada;
+    LITERAL literal;
+    
+    String expr;
     public EXPR(String exp) {
-        this.expresion = exp;
+        this.expr = exp;
     }
     
 }

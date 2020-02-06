@@ -11,6 +11,9 @@ package Symbols;
  */
 public class FUNCS {
 
+    FUNC funcion;
+    FUNCS funciones;
+           
     public FUNCS() {
     }
     
