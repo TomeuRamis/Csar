@@ -129,11 +129,11 @@ FUNC ::=
     DEFINICION:v1 Id:v2 A_par PARAMS:v3 C_par A_llave INSTS:v4 C_llave {: RESULT = new Symbols.FUNC(v1,v2,v3,v4,ts); :}
 ;
 DEFINICION ::= 
-    Def TYPE:v |            {: RESULT = new Symbols.DEFINICION(v);  :}
+    Def TYPE:v              {: RESULT = new Symbols.DEFINICION(v);  :} |
     Def Void                {: RESULT = new Symbols.DEFINICION(); :}
 ;
 PARAMS ::= 
-    PARAM:v1 PARAMSP:v2 |       {: RESULT = new Symbols.PARAMS(v1,v2); :}
+    PARAM:v1 PARAMSP:v2         {: RESULT = new Symbols.PARAMS(v1,v2); :} |
     LAMBDA 
 ;
 PARAMSP ::= 

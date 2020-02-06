@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 
 import org.jgrapht.*;
 import org.jgrapht.graph.*;
@@ -20,7 +19,7 @@ import org.jgrapht.io.*;
  *
  * @author Juan
  */
-public class SimboloBase extends ComplexSymbol{
+public class SimboloBase{
 
     private static int id = 0;
     static Graph<SimboloBase, DefaultEdge> g = new DefaultDirectedGraph<>(DefaultEdge.class);
@@ -28,7 +27,6 @@ public class SimboloBase extends ComplexSymbol{
     String etiqueta;
 
     public SimboloBase(String variable) {
-        super(variable,id);
         etiqueta = variable;
         id++;
         g.addVertex(this);
