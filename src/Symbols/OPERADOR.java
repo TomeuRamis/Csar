@@ -12,11 +12,14 @@ import java_cup.runtime.Symbol;
  * @author Juan
  */
 public class OPERADOR {
-
-    public OPERADOR(Object v) {
-        Symbol s = (Symbol)v;
+    
+    public OPERADOR(Symbol s) {
+        
         System.out.println(s.value);
         System.out.println(s.sym);
     }
     
+    public enum Operadores{
+        OPSuma
+    }
 }

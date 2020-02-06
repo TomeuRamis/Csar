@@ -23,6 +23,9 @@ init with {:
 terminal String Tipo;
 terminal String Id;
 terminal String Numero;
+terminal String Op_aritmetico;
+terminal String Op_logico;
+terminal String Op_Relacional;
 terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String, ERROR;
 non terminal P,  DECLS, DECL, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO,
@@ -45,8 +48,8 @@ DECLS ::=
     LAMBDA /*{:  :}*/
 ;
 DECL ::=
-    Const TYPE Id ASIGNACION /*{:  :}*/ |
-    TYPE:v1 Id:v2 ASIGNACION:v3  {: Symbols.DECL decl = new Symbols.DECL(v1.valor, v2, v3.asignacion); RESULT = decl;  :}
+    Const DCL:v {: RESULT = new Symbols.DECL(v,true,ts) :} |
+    DCL:v  {: Symbols.DECL decl = new Symbols.DECL(v,false,null); RESULT = decl;  :}
 ;
 TYPE ::=
     Tipo:v {: Symbols.TYPE t = new Symbols.TYPE((v)); RESULT = t;:}
@@ -139,8 +142,8 @@ EXPRS ::=
     EXPRP:v                 {: RESULTADO = new EXPRS(v); :}
 ;
 OPERADOR ::=
-    Op_aritmetico | {: //RESULT = new OPERADOR(v2.type, v2.value); :}
-    Op_relacional | 
-    Op_logico 
+    Op_aritmetico:v {: RESULT = new Symbols.OPERADOR(v); :}| 
+    Op_relacional   {: RESULT = new Symbols.OPERADOR(v); :}| 
+    Op_logico       {: RESULT = new Symbols.OPERADOR(v); :}
 ;
 LAMBDA ::= /* empty */;
