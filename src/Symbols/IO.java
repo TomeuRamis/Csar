@@ -10,7 +10,9 @@ package Symbols;
  * @author Juan
  */
 public class IO {
-
+    
+    EXPRP expresion;
+    
     public IO() {
     }
     

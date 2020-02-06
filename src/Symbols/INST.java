@@ -10,6 +10,15 @@ package Symbols;
  * @author Juan
  */
 public class INST {
+    
+    ASIG asignacion;
+    WHL mientras;
+    DCL declaracion;
+    CND condicion;
+    IO io;
+    CALL llamada;
+    RET retorno;
+    
     public INST(){
         
     }

@@ -12,6 +12,9 @@ import java_cup.runtime.Symbol;
  * @author Juan
  */
 public class P {
+    DECL declaraciones;
+    INSTS instrucciones;
+    FUNCS funciones;
     public P(Object v){
         //super(sym, value);
         System.out.println(v);

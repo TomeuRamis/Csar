@@ -20,17 +20,17 @@ import org.jgrapht.io.*;
  *
  * @author Juan
  */
-public class SimboloBase extends ComplexSymbol {
+public class SimboloBase{
 
-    private static int idAutoIncrement = 0;
+    private static int id = 0;
     static Graph<SimboloBase, DefaultEdge> g = new DefaultDirectedGraph<>(DefaultEdge.class);
     
     String etiqueta;
 
-    public SimboloBase(String variable, String valor) {
-        super(variable, idAutoIncrement, valor);
+    public SimboloBase(String variable) {
         etiqueta = variable;
-        idAutoIncrement++;
+        id++;
+        g.addVertex(this);
     }
 
     public void imprimirArbol() {

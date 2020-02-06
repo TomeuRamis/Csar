@@ -9,11 +9,39 @@ package Symbols;
  *
  * @author Juan
  */
-public class EXPR {
+public class EXPR extends SimboloBase{
 
-    String expresion;
-    public EXPR(String exp) {
-        this.expresion = exp;
+    CALL llamada;
+    LITERAL literal;
+    codigo.TablaSimbolos.Tipo tipo;
+    
+    public EXPR(LITERAL l) {
+        super("EXPR");
+        literal = l;
+        tipo = l.tipo;
+        
+        g.addEdge(this, literal);
+    }
+    
+    public EXPR(CALL c){
+        super("EXPR");
+        llamada = c;
+        tipo = c.tipo;
+        
+        g.addEdge(this, c);
+    }
+    
+    public EXPR(String id, codigo.TablaSimbolos ts){
+        super("EXPR");
+        
+        codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
+        if (d == null){
+            //ERROR
+            System.out.println("ERROR: error semantico. Variable "+id+" no declarada.");
+        } else{
+            tipo = d.tipo;
+        }
+        
     }
     
 }

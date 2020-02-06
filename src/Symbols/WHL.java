@@ -12,9 +12,9 @@ package Symbols;
 public class WHL {
     
     EXPR expresion;
-    INST instruccion;
+    INSTS instruccion;
     
     public WHL(){
-        
+       
     }
 }

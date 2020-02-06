@@ -11,6 +11,7 @@ package Symbols;
  */
 public class PARAM {
 
+    TYPE tipo;
     public PARAM() {
     }
     

@@ -11,6 +11,9 @@ package Symbols;
  */
 public class EXPRS {
 
+    EXPRP expresionP;
+    EXPRS expresiones;
+         
     public EXPRS() {
     }
     

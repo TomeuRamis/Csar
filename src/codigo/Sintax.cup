@@ -25,13 +25,14 @@ terminal String Id;
 terminal String Numero;
 terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String, ERROR;
-non terminal P,  DECLS, DECL, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO, CALL, 
+non terminal P,  DECLS, DECL, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO,
     RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRS, OPERADOR, LAMBDA;
 non terminal Symbols.TYPE TYPE;
 non terminal Symbols.EXPR EXPR;
 non terminal Symbols.EXPRP EXPRP;
 non terminal Symbols.ASIGNACION ASIGNACION;
 non terminal Symbols.LITERAL LITERAL;
+non terminal Symbols.CALL CALL;
 
 start with P;
 
@@ -122,15 +123,15 @@ EXPRP ::=
     EXPR:v {:Symbols.EXPRP exprp = new Symbols.EXPRP(v); RESULT = exprp;  :}
 ;
 EXPR ::= 
-    CALL /*{:  :}*/ |
-    Id:v {: Symbols.EXPR id = new Symbols.EXPR(v); RESULT = id; :} |
-    LITERAL:v {: Symbols.EXPR id = new Symbols.EXPR(v.literal); RESULT = id; :}
+    CALL:v          {: RESULT = new Symbol.EXPR(v); :} |
+    Id:v            {: RESULT = new Symbol.EXPR(v, ts); :} |
+    LITERAL:v       {: RESULT = new Symbols.EXPR(v); :}
 ;
 
 LITERAL ::= 
-    Op_booleano |  /*{:  :}*/
-    String /*{:  :}*/ |
-    Numero:v {: RESULT = new Symbols.LITERAL(v);  :}
+    Op_booleano     {: RESULT = new Symbols.LITERAL(Tipo.tBool) :} |
+    String          {: RESULT = new Symbols.LITERAL(Tipo.tString) :} |
+    Numero          {: RESULT = new Symbols.LITERAL(Tipo.tInt);  :}
 ;
 EXPRS ::= 
     EXPRP Coma EXPRS /*{:  :}*/ |

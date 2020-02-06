@@ -11,10 +11,18 @@ package Symbols;
  */
 public class EXPRP extends SimboloBase {
 
-    public String expresion;
+    EXPRP expresionP;
+    OPERADOR operador;
+    EXPR expresion;
+    
+    public String expr;
     public EXPRP(EXPR exp) {
-        super("EXPRP", exp.expresion);
-        this.expresion = exp.expresion;
 
+        super("EXPRP", exp.expr);
+        this.expr = exp.expr;
+        
+        g.addVertex("EXPRP");
+        g.addVertex("EXPR");
+        g.addEdge("EXPRP", "EXPR");
     }
 }

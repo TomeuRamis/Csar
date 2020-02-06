@@ -11,6 +11,10 @@ package Symbols;
  */
 public class FUNC {
 
+    DEFINICION definicion;
+    PARAMS parametros;
+    INSTS instrucciones;
+    
     public FUNC() {
     }
     

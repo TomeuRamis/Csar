@@ -23,6 +23,9 @@ public class TablaSimbolos {
     public enum Mvp{
         dproc, dconst, dvar
     }
+    public enum Tipo{
+        tBool, tString, tInt, tNull
+    }
     
     public TablaSimbolos(){
         td = new ArrayList<>();
@@ -52,8 +55,8 @@ public class TablaSimbolos {
         return (i > td.size()-1) ? null : td.get(i);
     }
     
-    public void add(Symbol s, Mvp mvp){
-        FilaTD filatd = consulta((String)s.value);
+    public void add(String nombre,Tipo t, Mvp mvp){
+        FilaTD filatd = consulta(nombre);
         if(filatd != null){
             if(filatd.np != n){
                 ta[n]++;
@@ -63,11 +66,11 @@ public class TablaSimbolos {
                 te.get(ta[n]).mvp = filatd.mvp;
             }
         }
-        FilaTD nuevaFila = new FilaTD(s,n,mvp);
+        FilaTD nuevaFila = new FilaTD(nombre, t, n,mvp);
         td.add(nuevaFila);
     }
     
-    public void ponerParam(String idproc, String idparam, int d){
+    public void ponerParam(String idproc, String idparam, Tipo tipo){
         FilaTD fproc = consulta(idproc);
         if(fproc.mvp != Mvp.dproc){
             System.out.println("ERROR");//Error
@@ -86,7 +89,7 @@ public class TablaSimbolos {
         ta[n] = ta[n+1];
         te.get(nou).nombre = idparam;
         te.get(nou).np = -1;
-        te.get(nou).tipo = d;
+        te.get(nou).tipo = tipo;
         te.get(nou).first = -1;
         te.get(nou).mvp = null;
         if(pp == -1){
@@ -122,16 +125,16 @@ public class TablaSimbolos {
     }
     
     public class FilaTD{
-        String nombre;
-        int tipo;
+        public String nombre;
+        public Tipo tipo;
         //Object valor;
-        int np;
-        int first;
-        Mvp mvp;
+        public int np;
+        public int first;
+        public Mvp mvp;
         
-        public FilaTD(Symbol s, int amb, Mvp mvp){
-            nombre = (String)s.value;
-            tipo = s.sym;
+        public FilaTD(String n, Tipo t, int amb, Mvp mvp){
+            nombre = n;
+            tipo = t;
             //valor = s.value;
             np = amb;
             this.mvp = mvp;

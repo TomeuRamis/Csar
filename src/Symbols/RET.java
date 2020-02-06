@@ -10,7 +10,7 @@ package Symbols;
  * @author Juan
  */
 public class RET {
-    EXPRP exprp;
+    EXPRP expresionP;
     public RET() {
     }
     

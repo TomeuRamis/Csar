@@ -4,14 +4,21 @@
  * and open the template in the editor.
  */
 package Symbols;
+
+import codigo.TablaSimbolos;
+
 /*
  * @author Juan
  */
-public class LITERAL {
-
-    public String literal;
-    public LITERAL(String lit) {
-        this.literal = lit;
+public class LITERAL extends SimboloBase {
+    TablaSimbolos.Tipo tipo;
+    
+    public LITERAL(TablaSimbolos.Tipo t) {
+       super("LITERAL");
+       this.tipo = t;
+       
+       SimboloBase tip = new SimboloBase(tipo.toString());
+       g.addEdge(this, tip);
     }
     
 }

@@ -11,6 +11,8 @@ package Symbols;
  */
 public class PARAMS {
 
+    PARAM parametro;
+    PARAMSP parametrosP;
     public PARAMS() {
     }
     

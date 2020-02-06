@@ -9,7 +9,7 @@ package Symbols;
  *
  * @author Juan
  */
-public class CALL {
+public class CALL  {
 
     public CALL() {
     }
