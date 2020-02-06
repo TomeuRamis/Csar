@@ -23,10 +23,13 @@ import org.jgrapht.io.*;
 public class SimboloBase extends ComplexSymbol {
 
     private static int idAutoIncrement = 0;
-    static Graph<String, DefaultEdge> g = new DefaultDirectedGraph<>(DefaultEdge.class);
+    static Graph<SimboloBase, DefaultEdge> g = new DefaultDirectedGraph<>(DefaultEdge.class);
+    
+    String etiqueta;
 
     public SimboloBase(String variable, String valor) {
         super(variable, idAutoIncrement, valor);
+        etiqueta = variable;
         idAutoIncrement++;
     }
 
@@ -34,9 +37,16 @@ public class SimboloBase extends ComplexSymbol {
         
         ComponentNameProvider<String> vertexIdProvider = new ComponentNameProvider<String>()
         {
-            public String getName(String uri)
+            public String getName(String verId)
             {
-                return uri;
+                return verId;
+            }
+        };
+        ComponentNameProvider<String> vertexLabelProvider = new ComponentNameProvider<String>()
+        {
+            public String getName(String verLab)
+            {
+                return verLab;
             }
         };
        

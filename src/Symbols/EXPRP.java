@@ -15,9 +15,6 @@ public class EXPRP extends SimboloBase {
     public EXPRP(EXPR exp) {
         super("EXPRP", exp.expresion);
         this.expresion = exp.expresion;
-        
-        g.addVertex("EXPRP");
-        g.addVertex("EXPR");
-        g.addEdge("EXPRP", "EXPR");
+
     }
 }

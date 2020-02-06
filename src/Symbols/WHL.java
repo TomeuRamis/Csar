@@ -10,6 +10,10 @@ package Symbols;
  * @author Juan
  */
 public class WHL {
+    
+    EXPR expresion;
+    INST instruccion;
+    
     public WHL(){
         
     }
