@@ -10,9 +10,26 @@ package Symbols;
  * @author Juan
  */
 public class TYPE extends SimboloBase {
-    public String valor;
-    public TYPE(String valor){
-        super("TYPE", valor);
-        this.valor = valor;
+    codigo.TablaSimbolos.Tipo tipo;
+    
+    //Comprovamos la cadena t y la convertimos al enumerado Tipo
+    public TYPE(String t){
+        super("TYPE");
+        
+        switch(t){
+            case("bool"):
+                tipo = codigo.TablaSimbolos.Tipo.tBool;
+                break;
+            case ("int"):
+                tipo = codigo.TablaSimbolos.Tipo.tInt;
+                break;
+            case ("string"):
+                tipo = codigo.TablaSimbolos.Tipo.tString;
+                break;
+            default:
+                //ERROR
+                System.out.println("ERROR: el tipo "+t+" no exsiste.");
+                break;
+        }
     }
 }

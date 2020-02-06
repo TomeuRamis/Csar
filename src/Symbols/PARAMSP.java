@@ -5,15 +5,29 @@
  */
 package Symbols;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Juan
  */
-public class PARAMSP {
+public class PARAMSP extends SimboloBase{
 
     PARAM parametro;
     PARAMSP parametrosP;
-    public PARAMSP() {
+    
+    ArrayList<codigo.TablaSimbolos.Tipo> tipos;
+    ArrayList<String> idParams;
+    
+    public PARAMSP(PARAM param, PARAMSP paramsp) {
+        super("PARAMSP");
+        
+        tipos.add(param.tipo);
+        tipos.addAll(paramsp.tipos);
+        
+        idParams.add(param.idParam);
+        idParams.addAll(paramsp.idParams);
+        
     }
     
 }

@@ -9,12 +9,13 @@ package Symbols;
  *
  * @author Juan
  */
-public class FUNCS {
+public class FUNCS extends SimboloBase{
 
     FUNC funcion;
     FUNCS funciones;
            
-    public FUNCS() {
+    public FUNCS(FUNC func, FUNCS funcs) {
+        super("FUNCS");
     }
     
 }

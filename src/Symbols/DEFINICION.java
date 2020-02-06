@@ -9,9 +9,19 @@ package Symbols;
  *
  * @author Juan
  */
-public class DEFINICION {
-    TYPE tipo;
-    public DEFINICION() {
+public class DEFINICION extends SimboloBase{
+    TYPE type;
+    codigo.TablaSimbolos.Tipo tipo;
+    
+    public DEFINICION(TYPE ty) {
+        super("DEFINICION");
+        tipo = ty.tipo;
+    }
+    
+    //Se trata de un procedimiento
+    public DEFINICION(){
+        super("DEFINICION");
+        tipo = codigo.TablaSimbolos.Tipo.tNull;
     }
     
 }

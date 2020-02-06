@@ -26,19 +26,25 @@ terminal String Numero;
 terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String, ERROR;
 non terminal P,  DECLS, DECL, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO,
-    RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRS, OPERADOR, LAMBDA;
+    RET, DEFINICION, EXPRS, OPERADOR, LAMBDA;
 non terminal Symbols.TYPE TYPE;
 non terminal Symbols.EXPR EXPR;
 non terminal Symbols.EXPRP EXPRP;
 non terminal Symbols.EXPRS EXPRS;
 non terminal Symbols.ASIGNACION ASIGNACION;
 non terminal Symbols.LITERAL LITERAL;
+non terminal Symbols.DEFINICION DEFINICION;
+non terminal Symbols.FUNC FUNC;
+non terminal Symbols.FUNCS FUNCS;
 non terminal Symbols.CALL CALL;
+non terminal Symbols.PARAM PARAM;
+non terminal Symbols.PARAMS PARAMS;
+non terminal Symbols.PARAMSP PARAMSP;
 
 start with P;
 
 P ::=
-    DECLS:a Main A_llave INSTS C_llave FUNCS:r {: //Symbol main = new Symbol(sym.Main, "main"); RESULT = main; System.out.println(main.sym); :}
+    DECLS:v1 Main A_llave INSTS:v2 C_llave FUNCS:v3     {: RESULT = new Symbols.P(v1, v2, v3); :}
 ;
 DECLS ::= 
     DECL PuntoYComa:v DECLS  {: // :} |
@@ -49,7 +55,7 @@ DECL ::=
     TYPE:v1 Id:v2 ASIGNACION:v3  {: Symbols.DECL decl = new Symbols.DECL(v1.valor, v2, v3.asignacion); RESULT = decl;  :}
 ;
 TYPE ::=
-    Tipo:v {: Symbols.TYPE t = new Symbols.TYPE((v)); RESULT = t;:}
+    Tipo:v                      {: RESULT = new Symbols.TYPE(v):}
 ;
 ASIGNACION ::=
     Igual EXPRP:v {:Symbols.ASIGNACION asig = new Symbols.ASIGNACION(v); RESULT = asig;  :} |
@@ -98,26 +104,26 @@ RET ::=
     Return EXPRP /*{:  :}*/
 ;
 FUNCS ::= 
-    FUNC FUNCS /*{:  :}*/ |
-    LAMBDA /*{:  :}*/
+    FUNC:v1 FUNCS:v2        {: RESULTS = new Symbols.FUNCS(v1, v2); :} |
+    LAMBDA                  {:  :}
 ;
 FUNC ::= 
-    DEFINICION Id A_par PARAMS C_par A_llave INSTS C_llave /*{:  :}*/
+    DEFINICION:v1 Id:v2 A_par PARAMS:v3 C_par A_llave INSTS:v4 C_llave {: RESULT = new Symbols.FUNC(v1,v2,v3,v4,ts); :}
 ;
 DEFINICION ::= 
-    Def TYPE |  /*{:  :}*/
-    Def Void /*{:  :}*/
+    Def TYPE:v |            {: RESULT = new Symbols.DEFINICION(v);  :}
+    Def Void                {: RESULT = new Symbols.DEFINICION(); :}
 ;
 PARAMS ::= 
-    PARAM PARAMSP |  /*{:  :}*/
-    LAMBDA /*{:  :}*/
+    PARAM:v1 PARAMSP:v2 |       {: RESULT = new Symbols.PARAMS(v1,v2); :}
+    LAMBDA                      {:  :}
 ;
 PARAMSP ::= 
-    Coma PARAM PARAMSP /*{:  :}*/ |
-    LAMBDA /*{:  :}*/
+    Coma PARAM:v1 PARAMSP:v2    {: RESULT = new Symbols.PARAMSP(v1, v2) :} |
+    LAMBDA                      {:  :}
 ;
 PARAM ::= 
-    TYPE Id /*{:  :}*/
+    TYPE:v1 Id:v2           {: RESULT = new Symbols.PARAM(v1, v2); :}
 ;
 EXPRP ::=  
     EXPRP OPERADOR EXPR /*{:  :}*/ |

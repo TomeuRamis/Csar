@@ -9,10 +9,17 @@ package Symbols;
  *
  * @author Juan
  */
-public class PARAM {
+public class PARAM extends SimboloBase{
 
-    TYPE tipo;
-    public PARAM() {
+    TYPE type;
+    codigo.TablaSimbolos.Tipo tipo;
+    String idParam;
+    
+    //Guardamos el tipo y el id para poder añadirlo más arriba
+    public PARAM(TYPE t, String id) {
+        super("PARAM");
+        tipo = t.tipo;
+        idParam = id;      
     }
     
 }
