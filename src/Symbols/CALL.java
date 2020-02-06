@@ -10,10 +10,63 @@ package Symbols;
  * @author Juan
  */
 
-public class CALL {
+public class CALL extends SimboloBase {
     EXPRS expresiones;
+    codigo.TablaSimbolos.Tipo tipo;
     
-    public CALL() {
+    public CALL(String id, codigo.TablaSimbolos ts) {
+        super("CALL");
+        
+        codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
+        if(d == null){
+            //ERROR
+            System.out.println("ERROR: el subprograma "+id+" no ha sido definicdo.");
+        } else if(d.mvp != codigo.TablaSimbolos.Mvp.dproc ){
+            //ERROR
+            System.out.println("ERROR: "+id+" no es un subprograma.");
+        } else if(d.first !=-1){
+            //ERROR
+            System.out.println("ERROR: "+id+" debe tener parámetros.");         
+        } else{
+            tipo = d.tipo;
+        }
+    }
+    
+    public CALL(String id, EXPRS exprs, codigo.TablaSimbolos ts) {
+        super("CALL");
+
+        codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
+        if(d == null){
+            //ERROR
+            System.out.println("ERROR: el subprograma "+id+" no ha sido definicdo.");
+        } else if(d.mvp != codigo.TablaSimbolos.Mvp.dproc ){
+            //ERROR
+            System.out.println("ERROR: "+id+" no es un subprograma.");
+        } else if(d.first == -1){
+            //ERROR
+            System.out.println("ERROR: "+id+" no debe tener parámetros.");
+        } else{
+            codigo.TablaSimbolos.FilaTE fTe = ts.getFilaTE(d.first);
+            for(int i =0; i < exprs.tipos.size(); i++){
+                
+                if(fTe != null){
+                    if(fTe.tipo != exprs.tipos.get(i)){
+                        //ERROR
+                        System.out.println("ERROR: tipo incorrecto del parámetro "+(i+1)+" en la llamda al subprograma "+id);
+                        break;
+                    }
+                } else {
+                    //ERROR
+                    System.out.println("ERROR: hay demasiados parámetros en "+id);
+                    break;
+                }
+                fTe = ts.getFilaTE(fTe.first);
+            }
+            if(fTe != null){
+                //ERROR
+                System.out.println("ERROR: faltan parámetros en la llamda a "+id);
+            }
+        }
     }
     
 }

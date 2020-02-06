@@ -30,6 +30,7 @@ non terminal P,  DECLS, DECL, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO,
 non terminal Symbols.TYPE TYPE;
 non terminal Symbols.EXPR EXPR;
 non terminal Symbols.EXPRP EXPRP;
+non terminal Symbols.EXPRS EXPRS;
 non terminal Symbols.ASIGNACION ASIGNACION;
 non terminal Symbols.LITERAL LITERAL;
 non terminal Symbols.CALL CALL;
@@ -90,8 +91,8 @@ IO ::=
     Out A_par EXPRP C_par /*{:  :}*/
 ;
 CALL ::=  
-    Id A_par EXPRS C_par /*{:  :}*/ |
-    Id A_par C_par /*{:  :}*/
+    Id:v1 A_par EXPRS:v2 C_par  {: RESULT = new CALL(v1, v2, ts);  :} |
+    Id:v A_par C_par            {: RESULT = new CALL(v, ts); :}
 ;
 RET ::= 
     Return EXPRP /*{:  :}*/
@@ -134,8 +135,8 @@ LITERAL ::=
     Numero          {: RESULT = new Symbols.LITERAL(Tipo.tInt);  :}
 ;
 EXPRS ::= 
-    EXPRP Coma EXPRS /*{:  :}*/ |
-    EXPRP /*{:  :}*/
+    EXPRP:v1 Coma EXPRS:v2  {: RESULTADO = new EXPRS(v1, v2); :} |
+    EXPRP:v                 {: RESULTADO = new EXPRS(v); :}
 ;
 OPERADOR ::=
     Op_aritmetico | {: //RESULT = new OPERADOR(v2.type, v2.value); :}

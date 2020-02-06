@@ -40,7 +40,11 @@ public class EXPR extends SimboloBase{
             System.out.println("ERROR: error semantico. Variable "+id+" no declarada.");
         } else{
             tipo = d.tipo;
+            
+            SimboloBase i = new SimboloBase(id); 
+            g.addEdge(this, i);
         }
+        
         
     }
     

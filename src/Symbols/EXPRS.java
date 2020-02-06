@@ -5,16 +5,30 @@
  */
 package Symbols;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Juan
  */
-public class EXPRS {
+public class EXPRS extends SimboloBase{
 
     EXPRP expresionP;
     EXPRS expresiones;
+    
+    ArrayList<codigo.TablaSimbolos.Tipo> tipos = new ArrayList<>();
          
-    public EXPRS() {
+    public EXPRS(EXPRP exprp) {
+        super("EXPRS");
+        
+        tipos.add(exprp.tipo);       
+    }
+    
+    public EXPRS(EXPRP exprp, EXPRS exprs){
+        super("EXPRS");
+        
+        tipos.add(exprp.tipo);
+        tipos.addAll(exprs.tipos); //Cuidado, es muy importante el orden en que se añaden
     }
     
 }

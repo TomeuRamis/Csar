@@ -124,6 +124,10 @@ public class TablaSimbolos {
         }
     }
     
+    public FilaTE getFilaTE(int index){
+        return (index>te.size()-1) ? null : te.get(index);
+    }
+    
     public class FilaTD{
         public String nombre;
         public Tipo tipo;
@@ -155,6 +159,7 @@ public class TablaSimbolos {
             super(f);
             refTD = ref;
         }
+       
     }
    
 }
