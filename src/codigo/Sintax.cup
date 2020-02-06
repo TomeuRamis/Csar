@@ -54,17 +54,17 @@ ASIGNACION ::=
     LAMBDA /*{:  :}*/
 ;
 INSTS ::=
-    INST PuntoYComa INSTS /*{:  :}*/ |
+    INST INSTS /*{:  :}*/ |
     LAMBDA {: :}
 ;
 INST ::=
-    ASIG /*{:  :}*/ |
+    ASIG PuntoYComa /*{:  :}*/ |
     WHL /*{:  :}*/ |
-    DCL /*{:  :}*/ |
+    DCL PuntoYComa /*{:  :}*/ |
     CND /*{:  :}*/ |
-    IO /*{:  :}*/ |
-    CALL /*{:  :}*/ |
-    RET /*{:  :}*/
+    IO PuntoYComa /*{:  :}*/ |
+    CALL PuntoYComa /*{:  :}*/ |
+    RET PuntoYComa /*{:  :}*/
 ;
 ASIG ::=
     Id Igual EXPRP /*{:  :}*/
@@ -133,8 +133,8 @@ LITERAL ::=
     Numero:v {: RESULT = new Symbols.LITERAL(v);  :}
 ;
 EXPRS ::= 
-    EXPR Coma EXPRS /*{:  :}*/ |
-    EXPR /*{:  :}*/
+    EXPRP Coma EXPRS /*{:  :}*/ |
+    EXPRP /*{:  :}*/
 ;
 OPERADOR ::=
     Op_aritmetico | {: //RESULT = new OPERADOR(v2.type, v2.value); :}
