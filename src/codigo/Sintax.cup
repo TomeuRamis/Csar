@@ -1,7 +1,9 @@
 package codigo;
 
 import java_cup.runtime.Symbol;
-
+action code {:
+    TablaSimbolos ts = new TablaSimbolos();
+:}
 parser code
 {:
     private Symbol s;
@@ -16,7 +18,7 @@ parser code
 :};
 
 init with {:
-    TablaSimbolos ts = new TablaSimbolos();
+    
     
 
 :}
@@ -62,7 +64,7 @@ DECLS ::=
     LAMBDA /*{:  :}*/
 ;
 DECL ::=
-    Const DCL:v         {: RESULT = new Symbols.DECL(v,true,ts); :} |
+    Const DCL:v         {: RESULT = new Symbols.DECL(v, true, ts); :} |
     DCL:v               {: RESULT = new Symbols.DECL(v,false,null); :}
 ;
 TYPE ::=
@@ -104,60 +106,60 @@ ELS ::=
     LAMBDA /*{:  :}*/
 ;
 IO ::= 
-    In A_par Id:v C_par         {: RESULT = new Symbols.IO(v, ts) :} |
-    Out A_par EXPRP C_par       {: RESULT = new Symbols.IO() :}
+    In A_par Id:v C_par         {: RESULT = new Symbols.IO(v, ts); :} |
+    Out A_par EXPRP C_par       {: RESULT = new Symbols.IO(); :}
 ;
 CALL ::=  
-    Id:v1 A_par EXPRS:v2 C_par  {: RESULT = new CALL(v1, v2, ts);  :} |
-    Id:v A_par C_par            {: RESULT = new CALL(v, ts); :}
+    Id:v1 A_par EXPRS:v2 C_par  {: RESULT = new Symbols.CALL(v1, v2, ts);  :} |
+    Id:v A_par C_par            {: RESULT = new Symbols.CALL(v, ts); :}
 ;
 RET ::= 
     Return EXPRP:v {: RESULT = new Symbols.RET(v); :}
 ;
 FUNCS ::= 
-    FUNC:v1 FUNCS:v2        {: RESULTS = new Symbols.FUNCS(v1, v2); :} |
+    FUNC:v1 FUNCS:v2        {: RESULT = new Symbols.FUNCS(v1, v2); :} |
     LAMBDA
 ;
 FUNC ::= 
     DEFINICION:v1 Id:v2 A_par PARAMS:v3 C_par A_llave INSTS:v4 C_llave {: RESULT = new Symbols.FUNC(v1,v2,v3,v4,ts); :}
 ;
 DEFINICION ::= 
-    Def TYPE:v |            {: RESULT = new Symbols.DEFINICION(v);  :}
+    Def TYPE:v              {: RESULT = new Symbols.DEFINICION(v);  :} |
     Def Void                {: RESULT = new Symbols.DEFINICION(); :}
 ;
 PARAMS ::= 
-    PARAM:v1 PARAMSP:v2 |       {: RESULT = new Symbols.PARAMS(v1,v2); :}
+    PARAM:v1 PARAMSP:v2         {: RESULT = new Symbols.PARAMS(v1,v2); :} |
     LAMBDA 
 ;
 PARAMSP ::= 
-    Coma PARAM:v1 PARAMSP:v2    {: RESULT = new Symbols.PARAMSP(v1, v2) :} |
+    Coma PARAM:v1 PARAMSP:v2    {: RESULT = new Symbols.PARAMSP(v1, v2); :} |
     LAMBDA  
 ;
 PARAM ::= 
     TYPE:v1 Id:v2               {: RESULT = new Symbols.PARAM(v1, v2); :}
 ;
 EXPRP ::=  
-    EXPRP OPERADOR EXPR /*{:  :}*/ |
-    EXPR:v                      {: RESULT =? new Symbols.EXPRP(v); :}
+    EXPRP:v1 OPERADOR:v2 EXPR:v3         {: RESULT = new Symbols.EXPRP(v1,v2,v3); :} |
+    EXPR:v                      {: RESULT = new Symbols.EXPRP(v); :}
 ;
 EXPR ::= 
-    CALL:v                      {: RESULT = new Symbol.EXPR(v); :} |
-    Id:v                        {: RESULT = new Symbol.EXPR(v, ts); :} |
+    CALL:v                      {: RESULT = new Symbols.EXPR(v); :} |
+    Id:v                        {: RESULT = new Symbols.EXPR(v, ts); :} |
     LITERAL:v                   {: RESULT = new Symbols.EXPR(v); :}
 ;
 
 LITERAL ::= 
-    Op_booleano     {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tBool) :} |
-    String          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tString) :} |
+    Op_booleano     {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tBool); :} |
+    String          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tString); :} |
     Numero          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tInt);  :}
 ;
 EXPRS ::= 
-    EXPRP:v1 Coma EXPRS:v2  {: RESULT = new EXPRS(v1, v2); :} |
-    EXPRP:v                 {: RESULT = new EXPRS(v); :}
+    EXPRP:v1 Coma EXPRS:v2  {: RESULT = new Symbols.EXPRS(v1, v2); :} |
+    EXPRP:v                 {: RESULT = new Symbols.EXPRS(v); :}
 ;
 OPERADOR ::=
-    Op_aritmetico:v {: RESULT = new Symbols.OPERADOR(v); :}| 
-    Op_relacional   {: RESULT = new Symbols.OPERADOR(v); :}| 
-    Op_logico       {: RESULT = new Symbols.OPERADOR(v); :}
+    Op_aritmetico:v     {: RESULT = new Symbols.OPERADOR(v,1); :}| 
+    Op_relacional:v     {: RESULT = new Symbols.OPERADOR(v,2); :}| 
+    Op_logico:v         {: RESULT = new Symbols.OPERADOR(v,3); :}
 ;
 LAMBDA ::= /* empty */;

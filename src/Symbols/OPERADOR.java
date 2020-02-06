@@ -5,21 +5,30 @@
  */
 package Symbols;
 
-import java_cup.runtime.Symbol;
 
 /**
  *
  * @author Juan
  */
-public class OPERADOR {
+public class OPERADOR extends SimboloBase{
+    String operador;
+    tOperador tOp;
     
-    public OPERADOR(Symbol s) {
-        
-        System.out.println(s.value);
-        System.out.println(s.sym);
+    public OPERADOR(String v, int i) {
+        super("OPERADOR");
+        operador = v;
+        switch(i){
+            case 1:
+                tOp = tOperador.tAritmetico;
+                break;
+            case 2:
+                tOp = tOperador.tRelacional;
+                break;
+            case 3:
+                tOp = tOperador.tLogico;
+                break;
+        }
     }
     
-    public enum Operadores{
-        OPSuma
-    }
+    public enum tOperador{tAritmetico, tRelacional,tLogico}
 }
