@@ -25,13 +25,9 @@ terminal String Id;
 terminal String Numero;
 terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String, ERROR;
-<<<<<<< HEAD
-non terminal P,  DECLS, DECL, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO,
-    RET, DEFINICION, EXPRS, OPERADOR, LAMBDA;
-=======
-non terminal P,  DECLS, DECL,
-    FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRS, OPERADOR, LAMBDA;
->>>>>>> a1500bc6ac614e3441be088ecc3f347bdac6aea9
+
+non terminal LAMBDA;
+non terminal Symbols.P P;
 non terminal Symbols.TYPE TYPE;
 non terminal Symbols.EXPR EXPR;
 non terminal Symbols.EXPRP EXPRP;
@@ -42,11 +38,9 @@ non terminal Symbols.DEFINICION DEFINICION;
 non terminal Symbols.FUNC FUNC;
 non terminal Symbols.FUNCS FUNCS;
 non terminal Symbols.CALL CALL;
-<<<<<<< HEAD
 non terminal Symbols.PARAM PARAM;
 non terminal Symbols.PARAMS PARAMS;
 non terminal Symbols.PARAMSP PARAMSP;
-=======
 non terminal Symbols.INSTS INSTS;
 non terminal Symbols.INST INST;
 non terminal Symbols.ASIG ASIG;
@@ -56,7 +50,6 @@ non terminal Symbols.CND CND;
 non terminal Symbols.ELS ELS;
 non terminal Symbols.IO IO;
 non terminal Symbols.RET RET;
->>>>>>> a1500bc6ac614e3441be088ecc3f347bdac6aea9
 
 start with P;
 

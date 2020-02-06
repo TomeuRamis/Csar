@@ -35,22 +35,22 @@ public class SimboloBase{
 
     public void imprimirArbol() {
         
-        ComponentNameProvider<String> vertexIdProvider = new ComponentNameProvider<String>()
+        ComponentNameProvider<SimboloBase> vertexIdProvider = new ComponentNameProvider<SimboloBase>()
         {
-            public String getName(String verId)
+            public String getName(SimboloBase sb)
             {
-                return verId;
+                return sb.etiqueta+" "+sb.id;
             }
         };
-        ComponentNameProvider<String> vertexLabelProvider = new ComponentNameProvider<String>()
+        ComponentNameProvider<SimboloBase> vertexLabelProvider = new ComponentNameProvider<SimboloBase>()
         {
-            public String getName(String verLab)
+            public String getName(SimboloBase sb)
             {
-                return verLab;
+                return sb.etiqueta;
             }
         };
        
-        GraphExporter<String, DefaultEdge> exporter
+        GraphExporter<SimboloBase, DefaultEdge> exporter
                 = new DOTExporter<>(vertexIdProvider,null,null );
         Writer writer;
         try {
