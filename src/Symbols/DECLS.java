@@ -9,10 +9,10 @@ package Symbols;
  *
  * @author Juan
  */
-public class DECLS {
+public class DECLS extends SimboloBase{
     DECL declaracion;
     DECLS declaraciones;
     public DECLS(){
-        
+        super("DECLS");
     }
 }

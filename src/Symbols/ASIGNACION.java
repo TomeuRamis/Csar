@@ -9,11 +9,13 @@ package Symbols;
  *
  * @author Juan
  */
-public class ASIGNACION {
+public class ASIGNACION extends SimboloBase{
     EXPRP expresionp;
     
-    public String asignacion;
+    codigo.TablaSimbolos.Tipo tipo;
     public ASIGNACION(EXPRP exprp){
-        this.asignacion = exprp.expresion;
+        super("ASIGNACION");
+        
+        tipo = exprp.tipo;
     }
 }

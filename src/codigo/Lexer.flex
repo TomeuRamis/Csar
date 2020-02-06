@@ -34,7 +34,7 @@ out { return new Symbol(sym.Out, yychar, yyline, yytext());}
 "return" {return new Symbol(sym.Return, yychar, yyline, yytext());}
 "=" {return new Symbol(sym.Igual, yychar, yyline, yytext());}
 ( "+" | "-" | "*" | "/" | "%" ) {return new Symbol(sym.Op_aritmetico, yychar, yyline, yytext());}
-( "&&" | "||" | "!" | "&" | "|" ) {return new Symbol(sym.Op_logico, yychar, yyline, yytext());}
+( "&&" | "||" | "!") {return new Symbol(sym.Op_logico, yychar, yyline, yytext());}
 ( ">" | "<" | "==" | "!=" | "=>" | "=<" ) {return new Symbol(sym.Op_relacional, yychar, yyline, yytext());}
 (true | false) {return new Symbol(sym.Op_booleano, yychar, yyline, yytext());}
 ";" {return new Symbol(sym.PuntoYComa, yychar, yyline, yytext());}

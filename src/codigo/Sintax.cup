@@ -20,14 +20,22 @@ init with {:
     
 
 :}
-terminal String Tipo;
-terminal String Id;
-terminal String Numero;
+terminal String Tipo, Id, Numero, Op_aritmetico, Op_logico, Op_relacional;
 terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
+<<<<<<< HEAD
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String, ERROR;
 
 non terminal LAMBDA;
 non terminal Symbols.P P;
+=======
+    PuntoYComa, A_par, C_par, A_llave, C_llave, Op_booleano, String, ERROR;
+
+non terminal Symbols.P P;
+non terminal Symbols.DECLS DECLS;
+non terminal Symbols.OPERADOR OPERADOR;
+non terminal Symbols.LAMBDA LAMBDA;
+non terminal Symbols.DECL DECL;
+>>>>>>> a6675e438b7f2960ddfd8bdc220a52b9a62467b7
 non terminal Symbols.TYPE TYPE;
 non terminal Symbols.EXPR EXPR;
 non terminal Symbols.EXPRP EXPRP;
@@ -57,18 +65,18 @@ P ::=
     DECLS:v1 Main A_llave INSTS:v2 C_llave FUNCS:v3     {: RESULT = new Symbols.P(v1, v2, v3); :}
 ;
 DECLS ::= 
-    DECL PuntoYComa:v DECLS  {: // :} |
+    DECL PuntoYComa:v DECLS  {: RESULT = new Symbols.DECLS(); :} |
     LAMBDA /*{:  :}*/
 ;
 DECL ::=
-    Const TYPE Id ASIGNACION /*{:  :}*/ |
-    TYPE:v1 Id:v2 ASIGNACION:v3  {: RESULT = new Symbols.DECL(v1.valor, v2, v3.asignacion); RESULT = decl;  :}
+    Const DCL:v         {: RESULT = new Symbols.DECL(v,true,ts); :} |
+    DCL:v               {: RESULT = new Symbols.DECL(v,false,null); :}
 ;
 TYPE ::=
-    Tipo:v                      {: RESULT = new Symbols.TYPE(v):}
+    Tipo:v              {: RESULT = new Symbols.TYPE(v); :}
 ;
 ASIGNACION ::=
-    Igual EXPRP:v {:Symbols.ASIGNACION asig = new Symbols.ASIGNACION(v); RESULT = asig;  :} |
+    Igual EXPRP:v       {: RESULT = new Symbols.ASIGNACION(v); :} |
     LAMBDA /*{:  :}*/
 ;
 INSTS ::=
@@ -98,13 +106,13 @@ CND ::=
     If A_par EXPRP:v C_par A_llave INSTS C_llave ELS {: RESULT = new Symbols.CND(v);  :}
 ;
 ELS ::=
-    Else CND {: RESULT = new Symbols.ELS(); :} |
-    Else A_llave INSTS C_llave {: RESULT = new Symbols.ELS(); :} |
+    Else CND                    {: RESULT = new Symbols.ELS(); :} |
+    Else A_llave INSTS C_llave  {: RESULT = new Symbols.ELS(); :} |
     LAMBDA /*{:  :}*/
 ;
 IO ::= 
-    In A_par Id:v C_par {: RESULT = new Symbols.IO(v, ts) :} |
-    Out A_par EXPRP C_par {: RESULT = new Symbols.IO() :}
+    In A_par Id:v C_par         {: RESULT = new Symbols.IO(v, ts) :} |
+    Out A_par EXPRP C_par       {: RESULT = new Symbols.IO() :}
 ;
 CALL ::=  
     Id:v1 A_par EXPRS:v2 C_par  {: RESULT = new CALL(v1, v2, ts);  :} |
@@ -115,7 +123,7 @@ RET ::=
 ;
 FUNCS ::= 
     FUNC:v1 FUNCS:v2        {: RESULTS = new Symbols.FUNCS(v1, v2); :} |
-    LAMBDA                  {:  :}
+    LAMBDA
 ;
 FUNC ::= 
     DEFINICION:v1 Id:v2 A_par PARAMS:v3 C_par A_llave INSTS:v4 C_llave {: RESULT = new Symbols.FUNC(v1,v2,v3,v4,ts); :}
@@ -126,37 +134,37 @@ DEFINICION ::=
 ;
 PARAMS ::= 
     PARAM:v1 PARAMSP:v2 |       {: RESULT = new Symbols.PARAMS(v1,v2); :}
-    LAMBDA                      {:  :}
+    LAMBDA 
 ;
 PARAMSP ::= 
     Coma PARAM:v1 PARAMSP:v2    {: RESULT = new Symbols.PARAMSP(v1, v2) :} |
-    LAMBDA                      {:  :}
+    LAMBDA  
 ;
 PARAM ::= 
-    TYPE:v1 Id:v2           {: RESULT = new Symbols.PARAM(v1, v2); :}
+    TYPE:v1 Id:v2               {: RESULT = new Symbols.PARAM(v1, v2); :}
 ;
 EXPRP ::=  
     EXPRP OPERADOR EXPR /*{:  :}*/ |
-    EXPR:v {:Symbols.EXPRP exprp = new Symbols.EXPRP(v); RESULT = exprp;  :}
+    EXPR:v                      {: RESULT =? new Symbols.EXPRP(v); :}
 ;
 EXPR ::= 
-    CALL:v          {: RESULT = new Symbol.EXPR(v); :} |
-    Id:v            {: RESULT = new Symbol.EXPR(v, ts); :} |
-    LITERAL:v       {: RESULT = new Symbols.EXPR(v); :}
+    CALL:v                      {: RESULT = new Symbol.EXPR(v); :} |
+    Id:v                        {: RESULT = new Symbol.EXPR(v, ts); :} |
+    LITERAL:v                   {: RESULT = new Symbols.EXPR(v); :}
 ;
 
 LITERAL ::= 
-    Op_booleano     {: RESULT = new Symbols.LITERAL(Tipo.tBool) :} |
-    String          {: RESULT = new Symbols.LITERAL(Tipo.tString) :} |
-    Numero          {: RESULT = new Symbols.LITERAL(Tipo.tInt);  :}
+    Op_booleano     {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tBool) :} |
+    String          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tString) :} |
+    Numero          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tInt);  :}
 ;
 EXPRS ::= 
-    EXPRP:v1 Coma EXPRS:v2  {: RESULTADO = new EXPRS(v1, v2); :} |
-    EXPRP:v                 {: RESULTADO = new EXPRS(v); :}
+    EXPRP:v1 Coma EXPRS:v2  {: RESULT = new EXPRS(v1, v2); :} |
+    EXPRP:v                 {: RESULT = new EXPRS(v); :}
 ;
 OPERADOR ::=
-    Op_aritmetico | {: //RESULT = new OPERADOR(v2.type, v2.value); :}
-    Op_relacional | 
-    Op_logico 
+    Op_aritmetico:v {: RESULT = new Symbols.OPERADOR(v); :}| 
+    Op_relacional   {: RESULT = new Symbols.OPERADOR(v); :}| 
+    Op_logico       {: RESULT = new Symbols.OPERADOR(v); :}
 ;
 LAMBDA ::= /* empty */;

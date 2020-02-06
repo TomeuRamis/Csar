@@ -10,11 +10,14 @@ package Symbols;
  * @author Juan
  */
 public class DECL extends SimboloBase {
-    TYPE tipo;
-    ASIGNACION asignacion;
-    public DECL(String type, String id, String asig){
-        super("DECL", id);
-        System.out.println("Objeto de tipo "+type+" con identificador "+id+" con valor asignado "+asig);
-        imprimirArbol();
+    DCL declaracion;
+    
+    public DECL(DCL dcl, boolean con, codigo.TablaSimbolos ts){
+        super("DECL");
+        
+        if(con){
+            codigo.TablaSimbolos.FilaTD f = ts.consulta(dcl.id);
+            f.mvp = codigo.TablaSimbolos.Mvp.dconst;
+        }
     }
 }

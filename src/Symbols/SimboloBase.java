@@ -55,11 +55,11 @@ public class SimboloBase{
         Writer writer;
         try {
             writer = new FileWriter("Arbol sintactico.dot");
-            try {
+            /*try {
                 exporter.exportGraph(g, writer);
             } catch (ExportException ex) {
                 Logger.getLogger(SimboloBase.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
             System.out.println(writer.toString());
         } catch (IOException ex) {
             Logger.getLogger(SimboloBase.class.getName()).log(Level.SEVERE, null, ex);
