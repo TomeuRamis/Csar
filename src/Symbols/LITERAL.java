@@ -9,7 +9,9 @@ package Symbols;
  */
 public class LITERAL {
 
-    public LITERAL() {
+    public String literal;
+    public LITERAL(String lit) {
+        this.literal = lit;
     }
     
 }

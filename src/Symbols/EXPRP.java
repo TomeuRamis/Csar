@@ -11,7 +11,9 @@ package Symbols;
  */
 public class EXPRP {
 
-    public EXPRP() {
+    public String expresion;
+    public EXPRP(EXPR exp) {
+        this.expresion = exp.expresion;
     }
     
 }

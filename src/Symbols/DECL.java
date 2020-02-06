@@ -10,7 +10,7 @@ package Symbols;
  * @author Juan
  */
 public class DECL {
-    public DECL(){
-        
+    public DECL(String type, String id, String asig){
+        System.out.println("Objeto de tipo "+type+" con identificador "+id+" con valor asignado "+asig);
     }
 }

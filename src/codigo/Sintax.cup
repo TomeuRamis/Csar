@@ -21,11 +21,17 @@ init with {:
 
 :}
 terminal String Tipo;
-terminal While, Igual, Id, Else, Numero,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
+terminal String Id;
+terminal String Numero;
+terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave, Op_aritmetico, Op_logico, Op_relacional, Op_booleano, String, ERROR;
-non terminal P,  DECLS, DECL, ASIGNACION, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO, CALL, 
-    RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRP, EXPR, EXPRS, OPERADOR, LAMBDA, LITERAL;
+non terminal P,  DECLS, DECL, INSTS, INST, ASIG, WHL, DCL, CND, ELS, IO, CALL, 
+    RET, FUNCS, FUNC, DEFINICION, PARAMS, PARAMSP, PARAM, EXPRS, OPERADOR, LAMBDA;
 non terminal Symbols.TYPE TYPE;
+non terminal Symbols.EXPR EXPR;
+non terminal Symbols.EXPRP EXPRP;
+non terminal Symbols.ASIGNACION ASIGNACION;
+non terminal Symbols.LITERAL LITERAL;
 
 start with P;
 
@@ -38,13 +44,13 @@ DECLS ::=
 ;
 DECL ::=
     Const TYPE Id ASIGNACION /*{:  :}*/ |
-    TYPE:v Id ASIGNACION  {: System.out.println(v.valor); :}
+    TYPE:v1 Id:v2 ASIGNACION:v3  {: Symbols.DECL decl = new Symbols.DECL(v1.valor, v2, v3.asignacion); RESULT = decl;  :}
 ;
 TYPE ::=
     Tipo:v {: Symbols.TYPE t = new Symbols.TYPE((v)); RESULT = t;:}
 ;
 ASIGNACION ::=
-    Igual EXPRP /*{:  :}*/ |
+    Igual EXPRP:v {:Symbols.ASIGNACION asig = new Symbols.ASIGNACION(v); RESULT = asig;  :} |
     LAMBDA /*{:  :}*/
 ;
 INSTS ::=
@@ -113,18 +119,18 @@ PARAM ::=
 ;
 EXPRP ::=  
     EXPRP OPERADOR EXPR /*{:  :}*/ |
-    EXPR /*{:  :}*/
+    EXPR:v {:Symbols.EXPRP exprp = new Symbols.EXPRP(v); RESULT = exprp;  :}
 ;
 EXPR ::= 
     CALL /*{:  :}*/ |
-    Id /*{:  :}*/ |
-    LITERAL /*{:  :}*/
+    Id:v {: Symbols.EXPR id = new Symbols.EXPR(v); RESULT = id; :} |
+    LITERAL:v {: Symbols.EXPR id = new Symbols.EXPR(v.literal); RESULT = id; :}
 ;
 
 LITERAL ::= 
     Op_booleano |  /*{:  :}*/
     String /*{:  :}*/ |
-    Numero /*{:  :}*/
+    Numero:v {: RESULT = new Symbols.LITERAL(v);  :}
 ;
 EXPRS ::= 
     EXPR Coma EXPRS /*{:  :}*/ |
