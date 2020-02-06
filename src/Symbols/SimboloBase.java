@@ -20,7 +20,7 @@ import org.jgrapht.io.*;
  *
  * @author Juan
  */
-public class SimboloBase{
+public class SimboloBase extends ComplexSymbol{
 
     private static int id = 0;
     static Graph<SimboloBase, DefaultEdge> g = new DefaultDirectedGraph<>(DefaultEdge.class);
@@ -28,6 +28,7 @@ public class SimboloBase{
     String etiqueta;
 
     public SimboloBase(String variable) {
+        super(variable,id);
         etiqueta = variable;
         id++;
         g.addVertex(this);

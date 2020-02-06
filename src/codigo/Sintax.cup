@@ -144,7 +144,7 @@ PARAM ::=
     TYPE:v1 Id:v2               {: RESULT = new Symbols.PARAM(v1, v2); :}
 ;
 EXPRP ::=  
-    EXPRP OPERADOR EXPR /*{:  :}*/ |
+    EXPR OPERADOR EXPRP /*{:  :}*/ |
     EXPR:v                      {: RESULT =? new Symbols.EXPRP(v); :}
 ;
 EXPR ::= 
@@ -164,7 +164,7 @@ EXPRS ::=
 ;
 OPERADOR ::=
     Op_aritmetico:v {: RESULT = new Symbols.OPERADOR(v); :}| 
-    Op_relacional   {: RESULT = new Symbols.OPERADOR(v); :}| 
-    Op_logico       {: RESULT = new Symbols.OPERADOR(v); :}
+    Op_relacional:v {: RESULT = new Symbols.OPERADOR(v); :}| 
+    Op_logico:v     {: RESULT = new Symbols.OPERADOR(v); :}
 ;
 LAMBDA ::= /* empty */;
