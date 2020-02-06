@@ -10,7 +10,7 @@ package Symbols;
  * @author Juan
  */
 public class ASIG {
-    EXPRP expresion;
+    EXPRP expresionp;
     public ASIG(){
         
     }

@@ -10,7 +10,7 @@ package Symbols;
  * @author Juan
  */
 public class CND {
-
+    EXPRP expresionp;
     public CND() {
     }
     

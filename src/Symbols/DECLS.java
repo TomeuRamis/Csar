@@ -10,6 +10,8 @@ package Symbols;
  * @author Juan
  */
 public class DECLS {
+    DECL declaracion;
+    DECLS declaraciones;
     public DECLS(){
         
     }

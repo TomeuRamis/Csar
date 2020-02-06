@@ -10,7 +10,7 @@ package Symbols;
  * @author Juan
  */
 public class ASIGNACION {
-    EXPRP expresion;
+    EXPRP expresionp;
     
     public String asignacion;
     public ASIGNACION(EXPRP exprp){
