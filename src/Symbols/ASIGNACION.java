@@ -10,6 +10,8 @@ package Symbols;
  * @author Juan
  */
 public class ASIGNACION {
+    EXPRP expresion;
+    
     public String asignacion;
     public ASIGNACION(EXPRP exprp){
         this.asignacion = exprp.expresion;
