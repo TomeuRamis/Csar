@@ -35,7 +35,7 @@ out { return symbol(sym.Out, yytext());}
 "return" {return symbol(sym.Return, yytext());}
 "=" {return symbol(sym.Igual, yytext());}
 ( "+" | "-" | "*" | "/" | "%" ) {return symbol(sym.Op_aritmetico, yytext());}
-( "&&" | "||" | "!") {return symbol(sym.Op_logico, yytext());}
+( "&&" | "||" ) {return symbol(sym.Op_logico, yytext());}
 ( ">" | "<" | "==" | "!=" | "=>" | "=<" ) {return symbol(sym.Op_relacional, yytext());}
 (true | false) {return symbol(sym.Op_booleano, yytext());}
 ";" {return symbol(sym.PuntoYComa, yytext());}
