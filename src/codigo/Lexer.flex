@@ -6,17 +6,16 @@ import java_cup.runtime.Symbol;
 %cup
 %full
 %line
-%char
 %column
 L=[a-zA-Z_ÑñÇçüÜ]+
 D=[0-9]+
 espacio=[ \t\r\n]+
 %{
     private Symbol symbol (int type, Object value){
-        return new Symbol (type, yycolumn+1, yyline+1, value);
+        return new Symbol (type, yyline, yycolumn, value);
     }
     private Symbol symbol (int type){
-        return new Symbol (type, yycolumn+1, yyline+1);
+        return new Symbol (type, yyline, yycolumn);
     }
 %}
 %%
@@ -47,5 +46,5 @@ out { return symbol(sym.Out, yytext());}
 {L}({L}|{D})* {return symbol(sym.Id, yytext());}
 \"([^\\\"]|\\.)*\" {return symbol(sym.String, yytext());}
 ("(-"{D}+")")|{D}+ {return symbol(sym.Numero, yytext());}
- . {return symbol(sym.error,yytext());}
+ . {FrmPrincipal1.notificarError("Error léxico: "+yytext()+" en linea: "+(yyline+1)+" columna: "+(yycolumn+1));}
 

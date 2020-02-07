@@ -19,7 +19,6 @@ public class P extends SimboloBase{
     public P(DECLS decls, INSTS insts, FUNCS funcs){
         super("P");
         
-        System.out.println("Fin del análisis");
         
         g.addEdge(this, decls);
         g.addEdge(this, insts);

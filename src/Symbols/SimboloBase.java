@@ -62,7 +62,6 @@ public class SimboloBase {
             } catch (ExportException ex) {
                 Logger.getLogger(SimboloBase.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(writer.toString());
         } catch (IOException ex) {
             Logger.getLogger(SimboloBase.class.getName()).log(Level.SEVERE, null, ex);
         }

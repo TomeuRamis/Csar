@@ -27,9 +27,17 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
     /**
      * Creates new form FrmPrincipal
      */
+    private static String errores = "";
+    
+    
     public FrmPrincipal1() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public static void notificarError(String msg){
+        System.out.println(msg);
+        errores += msg + "\n";
     }
     
     private void analizarLexico() throws IOException{
@@ -263,18 +271,21 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
         Lexer lexico = new codigo.Lexer(new StringReader(ST));
         Cooper s = new Cooper(lexico);
         
+        //Limpiar consola
+        for (int i = 0; i < 50; ++i) System.out.print("\b"); 
         
         try {
             s.parse();
-            txtAnalizarSin.setText("Analisis realizado correctamente");
-            txtAnalizarSin.setForeground(new Color(25, 111, 61));
-        } catch (Exception ex) {
-            Symbol sym = s.getS();
-            //if(sym != null){
-            System.out.println(ex);
-                txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
+            txtAnalizarSin.setText(errores+"Analisis finalizado");
+            if(errores.equals(""))
+                txtAnalizarSin.setForeground(new Color(25, 111, 61));
+            else
                 txtAnalizarSin.setForeground(Color.red);
-            //}
+        } catch (Exception ex) {
+            /*Symbol sym = s.getS();
+            txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
+            txtAnalizarSin.setForeground(Color.red);*/
+            System.out.println("lol");
         }
     }//GEN-LAST:event_btnAnalizarSinActionPerformed
 
