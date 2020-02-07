@@ -16,8 +16,8 @@ public class PARAMSP extends SimboloBase{
     PARAM parametro;
     PARAMSP parametrosP;
     
-    ArrayList<codigo.TablaSimbolos.Tipo> tipos;
-    ArrayList<String> idParams;
+    ArrayList<codigo.TablaSimbolos.Tipo> tipos = new ArrayList<>();
+    ArrayList<String> idParams = new ArrayList<>();
     
     public PARAMSP(PARAM param, PARAMSP paramsp) {
         super("PARAMSP");

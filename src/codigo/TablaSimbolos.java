@@ -97,7 +97,11 @@ public class TablaSimbolos {
             return false;
         }
         int nou = ta[n];
-        ta[n] = ta[n+1];
+        ta[n]++;
+        FilaTE fTE = new FilaTE();
+        if(nou > te.size()-1){
+            te.add(nou, fTE);
+        }
         te.get(nou).nombre = idparam;
         te.get(nou).np = -1;
         te.get(nou).tipo = tipo;
@@ -154,6 +158,7 @@ public class TablaSimbolos {
             //valor = s.value;
             np = amb;
             this.mvp = mvp;
+            first = -1;
         }
         public FilaTD(FilaTD f){
             nombre = f.nombre;
@@ -161,8 +166,10 @@ public class TablaSimbolos {
             //valor = f.valor;
             np = f.np;
             mvp = f.mvp;
+            first = f.first;
         }
-        
+        public FilaTD(){
+        }
     }
     public class FilaTE extends FilaTD{
         int refTD;
@@ -170,6 +177,9 @@ public class TablaSimbolos {
         public FilaTE(FilaTD f, int ref){
             super(f);
             refTD = ref;
+        }
+        public FilaTE(){
+            super();
         }
        
     }

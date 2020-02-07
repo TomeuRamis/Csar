@@ -5,7 +5,7 @@ const int h = 2 + 8 / 4;
 
 main{
 	comer();
-	if(cierto(); || a < h ){
+	if(cierto() || a < h ){
 		a = h;
 	} else if (3 == 3 ){
 		int p;
