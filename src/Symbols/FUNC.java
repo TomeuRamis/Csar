@@ -19,7 +19,7 @@ public class FUNC extends SimboloBase {
 
     public FUNC(FUNC1 func1, FUNC2 func2 ) {
         super("FUNC");
-        
+
         g.addEdge(this, func1);
         g.addEdge(this, func2);          
 

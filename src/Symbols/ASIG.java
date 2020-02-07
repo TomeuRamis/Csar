@@ -19,10 +19,10 @@ public class ASIG extends SimboloBase{
         codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
         if(fTd == null){
             //ERROR
-            System.out.println("Error: " + id + "no existe");
+            codigo.FrmPrincipal.notificarError("Error: " + id + "no existe");
         } else if(fTd.tipo != exprp.tipo){
             //ERROR
-            System.out.println("ERROR:" + id +" los tipos son inconpatibles");
+            codigo.FrmPrincipal.notificarError("ERROR:" + id +" los tipos son inconpatibles");
         }
         
         g.addEdge(this, new SimboloBase(id));

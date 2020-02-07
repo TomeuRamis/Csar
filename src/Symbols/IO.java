@@ -19,7 +19,7 @@ public class IO extends SimboloBase{
         codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
         if(fTd == null){
             //ERROR
-            System.out.println("ERROR: " + id + " no esta definido");
+            codigo.FrmPrincipal.notificarError("ERROR: " + id + " no esta definido");
         }
         
         g.addEdge(this, new SimboloBase("in"));

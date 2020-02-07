@@ -20,13 +20,13 @@ public class CALL extends SimboloBase {
         codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
         if(d == null){
             //ERROR
-            System.out.println("ERROR: el subprograma "+id+" no ha sido definicdo.");
+            codigo.FrmPrincipal.notificarError("ERROR: el subprograma "+id+" no ha sido definicdo.");
         } else if(d.mvp != codigo.TablaSimbolos.Mvp.dproc ){
             //ERROR
-            System.out.println("ERROR: "+id+" no es un subprograma.");
+            codigo.FrmPrincipal.notificarError("ERROR: "+id+" no es un subprograma.");
         } else if(d.first !=-1){
             //ERROR
-            System.out.println("ERROR: "+id+" debe tener parámetros.");         
+            codigo.FrmPrincipal.notificarError("ERROR: "+id+" debe tener parámetros.");         
         } else{
             tipo = d.tipo;
             

@@ -23,5 +23,6 @@ public class FUNCS extends SimboloBase{
     
     public FUNCS(){
         super("λ");
+
     }
 }

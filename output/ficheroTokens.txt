@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+<tipo><id><igual><numero><p_coma>
+<tipo><id><igual><numero><p_coma>
+>>>>>>> f7ad261dbada2006d1d44232d7c752adef6bb58c
 <main><a_llave>
 <tipo><id><igual><numero><p_coma>
 <<<<<<< HEAD

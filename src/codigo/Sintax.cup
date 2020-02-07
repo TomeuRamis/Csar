@@ -7,14 +7,18 @@ action code {:
 parser code
 {:
     private Symbol s;
-    
     public void syntax_error(Symbol s){
+        FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1));
         this.s = s;
     }
-
     public Symbol getS(){
-        return this.s;
-}
+        return s;
+    }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+        //FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1)+" No se pudo recuperar");
+        FrmPrincipal.notificarError("No se pudo recuperar el error");
+    }
 :};
 
 init with {:
@@ -95,13 +99,15 @@ INSTS ::=
     LAMBDA              {: RESULT = new Symbols.INSTS(); :} 
 ;
 INST ::=
-    ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v, true ); :} |
-    WHL:v                 {: RESULT = new Symbols.INST(v, false); :} |
-    DCL:v PuntoYComa      {: RESULT = new Symbols.INST(v, true ); :} |
-    CND:v                 {: RESULT = new Symbols.INST(v, false); :} |
-    IO:v PuntoYComa       {: RESULT = new Symbols.INST(v, true ); :} |
-    CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v, true ); :} |
-    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v, true ); :}
+    ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v,true); :} |
+    WHL:v                 {: RESULT = new Symbols.INST(v,false); :} |
+    DCL:v PuntoYComa      {: RESULT = new Symbols.INST(v,true); :} |
+    CND:v                 {: RESULT = new Symbols.INST(v,false); :} |
+    IO:v PuntoYComa       {: RESULT = new Symbols.INST(v,true); :} |
+    CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v,true); :} |
+    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v,true); :} |
+    error PuntoYComa    |
+    error C_llave
 ;
 ASIG ::=
     Id:v1 Igual EXPRP:v2            {: RESULT = new Symbols.ASIG(v1,v2,ts); :}

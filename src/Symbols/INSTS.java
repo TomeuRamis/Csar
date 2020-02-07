@@ -22,6 +22,7 @@ public class INSTS extends SimboloBase{
     }
     
     public INSTS(){
-        super("λ");
+        super("INSTS");
+        g.addEdge(this, new SimboloBase("λ"));
     }
 }

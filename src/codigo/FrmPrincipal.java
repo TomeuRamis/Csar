@@ -5,6 +5,7 @@
  */
 package codigo;
 
+import Symbols.SimboloBase;
 import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,9 +28,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FrmPrincipal
      */
+    private static String errores = "";
+    
     public FrmPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public static void notificarError(String msg){
+        errores += msg + "\n";
     }
     
     private void analizarLexico() throws IOException{
@@ -101,7 +108,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         txtResultado.setColumns(20);
         txtResultado.setRows(5);
-        txtResultado.setText("int i = 3;\nmain{\nint a = 2;\nint c = true;\nint a  = 4;\nint b = 2;\nstring f = \"alcahofa\";\nstring x = 3;\nif(true){}\nif(3){}\n}");
+        txtResultado.setText("int i = 3;\nint z = 2;\nmain{\nint a = 2;\nint c = true;\nint a  = 4;\nint b = 2;\nstring f = \"alcahofa\";\nstring x = 3;\nif(true){}\nif(3){}\n}");
         jScrollPane1.setViewportView(txtResultado);
 
         txtAnalizarLex.setEditable(false);
@@ -262,19 +269,35 @@ public class FrmPrincipal extends javax.swing.JFrame {
         String ST = txtResultado.getText();
         Lexer lexico = new codigo.Lexer(new StringReader(ST));
         Cooper s = new Cooper(lexico);
-        
+        errores = "";
+        SimboloBase.resetArbol();
         
         try {
             s.parse();
-            txtAnalizarSin.setText("Analisis realizado correctamente");
-            txtAnalizarSin.setForeground(new Color(25, 111, 61));
+            if(errores.equals(""))
+                txtAnalizarSin.setForeground(new Color(25, 111, 61));
+            else
+                txtAnalizarSin.setForeground(Color.red);
         } catch (Exception ex) {
             Symbol sym = s.getS();
-            //if(sym != null){
-            System.out.println(ex);
-                txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
-                txtAnalizarSin.setForeground(Color.red);
-            //}
+            txtAnalizarSin.setForeground(Color.red);
+        }finally{
+            BufferedWriter writer = null;
+            try {
+                errores += "Analisis finalizado";
+                txtAnalizarSin.setText(errores);
+                writer = new BufferedWriter(new FileWriter("output/ficheroErrores.txt"));
+                writer.write(errores);
+                writer.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    writer.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }//GEN-LAST:event_btnAnalizarSinActionPerformed
 
