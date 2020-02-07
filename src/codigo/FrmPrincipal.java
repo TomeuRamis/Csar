@@ -22,12 +22,12 @@ import javax.swing.JFileChooser;
  *
  * @author Charly Ponce
  */
-public class FrmPrincipal1 extends javax.swing.JFrame {
+public class FrmPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmPrincipal
      */
-    public FrmPrincipal1() {
+    public FrmPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -59,7 +59,7 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
         }
         txtAnalizarLex.setText(resultado);
         
-        BufferedWriter writer = new BufferedWriter(new FileWriter("ficheroTokens.txt"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("output/ficheroTokens.txt"));
         writer.write(resultado);
         writer.close();
     }
@@ -233,9 +233,9 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
             String ST = new String(Files.readAllBytes(archivo.toPath()));
             txtResultado.setText(ST);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(FrmPrincipal1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(FrmPrincipal1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnArchivoActionPerformed
 
@@ -253,7 +253,7 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
         try {
             analizarLexico();
         } catch (IOException ex) {
-            Logger.getLogger(FrmPrincipal1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAnalizarLexActionPerformed
 
@@ -295,21 +295,23 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmPrincipal1().setVisible(true);
+                new FrmPrincipal().setVisible(true);
             }
         });
     }
@@ -321,28 +323,28 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
             case 2: res = "tipo"; break;
             case 3: res = "id"; break;
             case 4: res = "numero"; break;
-            case 5: res = "op_aritmetico"; break;
-            case 6: res = "op_logico"; break;
-            case 7: res = "op_relacional"; break;
-            case 8: res = "while"; break;
-            case 9: res = "igual"; break;
-            case 10: res = "else"; break;
-            case 11: res = "const"; break;
-            case 12: res = "if"; break;
-            case 13: res = "in"; break;
-            case 14: res = "out"; break;
-            case 15: res = "main"; break;
-            case 16: res = "def"; break;
-            case 17: res = "return"; break;
-            case 18: res = "coma"; break;
-            case 19: res = "void"; break;
-            case 20: res = "p_coma"; break;
-            case 21: res = "a_par"; break;
-            case 22: res = "c_par"; break;
-            case 23: res = "a_llave"; break;
-            case 24: res = "c_llave"; break;
-            case 25: res = "op_booleano"; break;
-            case 26: res = "string"; break;
+            case 5: res = "op_booleano"; break;
+            case 6: res = "string"; break;
+            case 7: res = "op_aritmetico"; break;
+            case 8: res = "op_logico"; break;
+            case 9: res = "op_relacional"; break;
+            case 10: res = "while"; break;
+            case 11: res = "igual"; break;
+            case 12: res = "else"; break;
+            case 13: res = "const"; break;
+            case 14: res = "if"; break;
+            case 15: res = "in"; break;
+            case 16: res = "out"; break;
+            case 17: res = "main"; break;
+            case 18: res = "def"; break;
+            case 19: res = "return"; break;
+            case 20: res = "coma"; break;
+            case 21: res = "void"; break;
+            case 22: res = "p_coma"; break;
+            case 23: res = "a_par"; break;
+            case 24: res = "c_par"; break;
+            case 25: res = "a_llave"; break;
+            case 26: res = "c_llave"; break;
             default: res = "simbolo desconocido"; break;
         }
         return res;

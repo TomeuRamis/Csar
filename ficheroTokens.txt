@@ -1,3 +1,0 @@
-<tipo><id><const><op_aritmetico><c_par>
-<return><op_booleano>
-<id><const><numero><string>

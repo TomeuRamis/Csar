@@ -56,7 +56,7 @@ public class SimboloBase {
         Writer writer;
 
         try {
-            writer = new FileWriter("Arbol sintactico.dot");
+            writer = new FileWriter("output/Arbol sintactico.dot");
             try {
                 exporter.exportGraph(g, writer);
             } catch (ExportException ex) {

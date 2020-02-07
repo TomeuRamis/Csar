@@ -76,7 +76,7 @@ ASIGNACION ::=
 ;
 INSTS ::=
     INST:v1 INSTS:v2    {: RESULT = new Symbols.INSTS(v1, v2); :} |
-    LAMBDA              {: RESULT = new Symbols.INSTS(); :}
+    LAMBDA              {: RESULT = new Symbols.INSTS(); :} 
 ;
 INST ::=
     ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v); :} |
@@ -85,7 +85,8 @@ INST ::=
     CND:v                 {: RESULT = new Symbols.INST(v); :} |
     IO:v PuntoYComa       {: RESULT = new Symbols.INST(v); :} |
     CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v); :} |
-    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v); :}
+    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v); :} |
+    error PuntoYComa    
 ;
 ASIG ::=
     Id:v1 Igual EXPRP:v2            {: RESULT = new Symbols.ASIG(v1,v2,ts); :}
@@ -163,3 +164,4 @@ OPERADOR ::=
     Op_logico:v                     {: RESULT = new Symbols.OPERADOR(v,3); :}
 ;
 LAMBDA ::= /* empty */;
+
