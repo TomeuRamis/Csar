@@ -23,5 +23,6 @@ public class FUNCS extends SimboloBase{
     
     public FUNCS(){
         super("λ");
+        g.addEdge(this, new SimboloBase("λ"));
     }
 }

@@ -17,6 +17,7 @@ public class DEFINICION extends SimboloBase{
         super("DEFINICION");
         tipo = ty.tipo;
         
+        g.addEdge(this, new SimboloBase("Def"));
         g.addEdge(this, ty);
     }
     
@@ -25,8 +26,8 @@ public class DEFINICION extends SimboloBase{
         super("DEFINICION");
         tipo = codigo.TablaSimbolos.Tipo.tNull;
         
-        SimboloBase d = new SimboloBase("void");
-        g.addEdge(this, d);
+        g.addEdge(this, new SimboloBase("Def"));
+        g.addEdge(this, new SimboloBase("void"));
     }
     
 }

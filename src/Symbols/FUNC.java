@@ -34,8 +34,7 @@ public class FUNC extends SimboloBase {
             }
             
             g.addEdge(this, def);
-            SimboloBase i = new SimboloBase(id);
-            g.addEdge(this, i);
+            g.addEdge(this, new SimboloBase(id));
             g.addEdge(this, params);
             g.addEdge(this, insts);
         }

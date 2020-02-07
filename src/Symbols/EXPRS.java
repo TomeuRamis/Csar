@@ -33,6 +33,7 @@ public class EXPRS extends SimboloBase{
         tipos.addAll(exprs.tipos); //Cuidado, es muy importante el orden en que se añaden
     
         g.addEdge(this, exprp);
+        g.addEdge(this,new SimboloBase(","));
         g.addEdge(this, exprs);
     }
     

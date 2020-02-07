@@ -41,8 +41,7 @@ public class EXPR extends SimboloBase{
         } else{
             tipo = d.tipo;
             
-            SimboloBase i = new SimboloBase(id); 
-            g.addEdge(this, i);
+            g.addEdge(this, new SimboloBase(id));
         }
         
         
