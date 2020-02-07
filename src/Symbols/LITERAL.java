@@ -17,8 +17,7 @@ public class LITERAL extends SimboloBase {
        super("LITERAL");
        this.tipo = t;
        
-       SimboloBase literal = new SimboloBase(l);
-       g.addEdge(this, literal);
+       g.addEdge(this, new SimboloBase(l));
     }
     
 }

@@ -19,9 +19,12 @@ public class INST extends SimboloBase {
     CALL llamada;
     RET retorno;
     
-    public INST(Object o){
+    public INST(Object o, boolean pyc){
         super("INST");
         
         g.addEdge(this, (SimboloBase) o); //Ojo que esto es un poco cutre
+        if(pyc){
+            g.addEdge(this, new SimboloBase(";"));
+        }
     }
 }

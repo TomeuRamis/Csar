@@ -31,6 +31,8 @@ public class CALL extends SimboloBase {
             tipo = d.tipo;
             
             g.addEdge(this, new SimboloBase(id));
+            g.addEdge(this, new SimboloBase("("));
+            g.addEdge(this, new SimboloBase(")"));
         }
     }
     
@@ -71,7 +73,9 @@ public class CALL extends SimboloBase {
             tipo = d.tipo;
             
             g.addEdge(this, new SimboloBase(id));
+            g.addEdge(this, new SimboloBase("("));
             g.addEdge(this, exprs);
+            g.addEdge(this, new SimboloBase(")"));
         }
     }
     

@@ -34,6 +34,7 @@ public class PARAMS extends SimboloBase{
     
     public PARAMS(){
         super("λ");
+        g.addEdge(this, new SimboloBase("λ"));
     }
     
 }

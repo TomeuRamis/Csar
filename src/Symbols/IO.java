@@ -22,14 +22,20 @@ public class IO extends SimboloBase{
             System.out.println("ERROR: " + id + " no esta definido");
         }
         
+        g.addEdge(this, new SimboloBase("in"));
+        g.addEdge(this, new SimboloBase("("));
         SimboloBase i = new SimboloBase(id);
+        g.addEdge(this, new SimboloBase(")"));
         g.addEdge(this, i);
     }
     
     public IO(EXPRP exprp){
         super("IO");
         
+        g.addEdge(this, new SimboloBase("out"));
+        g.addEdge(this, new SimboloBase("("));
         g.addEdge(this, exprp);
+        g.addEdge(this, new SimboloBase(")"));
     }
     
 }

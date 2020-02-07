@@ -18,6 +18,7 @@ public class ASIGNACION extends SimboloBase{
         
         tipo = exprp.tipo;
         
+        g.addEdge(this, new SimboloBase("="));
         g.addEdge(this, exprp);
     }
     

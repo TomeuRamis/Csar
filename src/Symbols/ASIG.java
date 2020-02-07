@@ -26,6 +26,7 @@ public class ASIG extends SimboloBase{
         }
         
         g.addEdge(this, new SimboloBase(id));
+        g.addEdge(this, new SimboloBase("="));
         g.addEdge(this, exprp);
         
         

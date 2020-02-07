@@ -16,13 +16,17 @@ public class ELS extends SimboloBase{
     public ELS(CND cnd) {
         super("ELS");
         
+        g.addEdge(this, new SimboloBase("else"));
         g.addEdge(this, cnd);
     }
     
     public ELS(INSTS insts){
         super("ELS");
         
+        g.addEdge(this, new SimboloBase("else"));
+        g.addEdge(this, new SimboloBase("{"));
         g.addEdge(this, insts);
+        g.addEdge(this, new SimboloBase("}"));
     }
     
     public ELS(){

@@ -1,0 +1,8 @@
+
+main{
+int colonoscopia;
+if(true){
+cagar();
+}
+;
+}

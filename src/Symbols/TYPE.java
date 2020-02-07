@@ -32,7 +32,6 @@ public class TYPE extends SimboloBase {
                 break;
         }
         
-        SimboloBase tp = new SimboloBase(t);
-        g.addEdge(this, tp);
+        g.addEdge(this, new SimboloBase(t));
     }
 }

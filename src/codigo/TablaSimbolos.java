@@ -48,7 +48,7 @@ public class TablaSimbolos {
         if(td.isEmpty()){
             return null;
         }
-        while(!id.equals(td.get(i).nombre)){
+        while(i < td.size() && !id.equals(td.get(i).nombre)){
             i++;
         }
         /*if(i > td.size()-1){

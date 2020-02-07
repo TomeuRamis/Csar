@@ -20,8 +20,13 @@ public class CND extends SimboloBase{
             System.out.println("ERROR: La condicion no es booleana");
         }
         
+        g.addEdge(this, new SimboloBase("if"));
+        g.addEdge(this, new SimboloBase("("));
         g.addEdge(this, exprp);
+        g.addEdge(this, new SimboloBase(")"));
+        g.addEdge(this, new SimboloBase("{"));
         g.addEdge(this, insts);
+        g.addEdge(this, new SimboloBase("}"));
         g.addEdge(this, els);
     }
     
