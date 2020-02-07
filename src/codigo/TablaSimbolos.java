@@ -62,7 +62,7 @@ public class TablaSimbolos {
 
     public boolean add(String nombre, Tipo t, Mvp mvp) {
         FilaTD filatd = consulta(nombre);
-
+        
         if (filatd != null) {
             int posAnterior;
             if (filatd.np != n) {
@@ -70,15 +70,16 @@ public class TablaSimbolos {
                 posAnterior = td.indexOf(filatd);
                 FilaTE nuevaFilaTE = new FilaTE(filatd, posAnterior);
                 te.add(nuevaFilaTE);
-                td.remove(filatd);
+                td.remove(posAnterior);
+                System.out.println(posAnterior);
             } else {
                 return false;
             }
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
-            td.add(posAnterior, filatd);
+            td.add(posAnterior, nuevaFila);
         } else {
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
-            td.add(filatd);
+            td.add(nuevaFila);
         }
         return true;
 
@@ -142,10 +143,13 @@ public class TablaSimbolos {
                 filatd.np = filate.np;
                 filatd.first = filate.first;
                 filatd.mvp = filate.mvp;
+                te.remove(filate);
                 //CREO QUE AQUI FALTA UN te.remove(filate); AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                 //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
                 //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                 //HAGANME CASOOOOOOOOOOOOOOOOO
+                
+                //pos hasta puede ser, ya veremos
             }
             lini--;
         }
@@ -182,6 +186,11 @@ public class TablaSimbolos {
             first = f.first;
         }
         public FilaTD(){
+        }
+        
+        @Override
+        public boolean equals(Object f){
+            return this.nombre.equals(((FilaTD)f).nombre);
         }
     }
 
