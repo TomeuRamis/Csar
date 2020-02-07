@@ -20,6 +20,10 @@ public class PARAM extends SimboloBase{
         super("PARAM");
         tipo = t.tipo;
         idParam = id;      
+        
+        SimboloBase i = new SimboloBase(id);
+        g.addEdge(this, t);
+        g.addEdge(this, i);
     }
     
 }

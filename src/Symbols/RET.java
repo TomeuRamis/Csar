@@ -15,6 +15,9 @@ public class RET extends SimboloBase{
     public RET(EXPRP exprp) {
         super("RET");
         tipo = exprp.tipo;
+        
+        g.addEdge(this, exprp);
     }
+    
     
 }

@@ -28,6 +28,12 @@ public class PARAMSP extends SimboloBase{
         idParams.add(param.idParam);
         idParams.addAll(paramsp.idParams);
         
+        g.addEdge(this, param);
+        g.addEdge(this, paramsp);
+    }
+    
+    public PARAMSP(){
+        super("λ");
     }
     
 }

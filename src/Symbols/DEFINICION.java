@@ -16,12 +16,17 @@ public class DEFINICION extends SimboloBase{
     public DEFINICION(TYPE ty) {
         super("DEFINICION");
         tipo = ty.tipo;
+        
+        g.addEdge(this, ty);
     }
     
     //Se trata de un procedimiento
     public DEFINICION(){
         super("DEFINICION");
         tipo = codigo.TablaSimbolos.Tipo.tNull;
+        
+        SimboloBase d = new SimboloBase("void");
+        g.addEdge(this, d);
     }
     
 }

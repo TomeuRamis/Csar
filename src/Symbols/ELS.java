@@ -13,8 +13,20 @@ public class ELS extends SimboloBase{
     CND condicion;
     INSTS instrucciones;
     
-    public ELS() {
+    public ELS(CND cnd) {
         super("ELS");
+        
+        g.addEdge(this, cnd);
+    }
+    
+    public ELS(INSTS insts){
+        super("ELS");
+        
+        g.addEdge(this, insts);
+    }
+    
+    public ELS(){
+        super("λ");
     }
     
 }

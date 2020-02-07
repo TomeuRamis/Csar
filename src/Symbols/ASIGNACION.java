@@ -17,5 +17,11 @@ public class ASIGNACION extends SimboloBase{
         super("ASIGNACION");
         
         tipo = exprp.tipo;
+        
+        g.addEdge(this, exprp);
+    }
+    
+    public ASIGNACION(){
+        super("λ");
     }
 }

@@ -31,7 +31,9 @@ public class DCL extends SimboloBase{
             this.id = id;
         }
         
-        
+        g.addEdge(this, tipo);
+        g.addEdge(this, new SimboloBase(id));
+        g.addEdge(this, asignacion);
     }
     
 }

@@ -27,6 +27,13 @@ public class PARAMS extends SimboloBase{
         
         idParams.add(param.idParam);
         idParams.addAll(paramsp.idParams);
+        
+        g.addEdge(this, param);
+        g.addEdge(this, paramsp);
+    }
+    
+    public PARAMS(){
+        super("λ");
     }
     
 }

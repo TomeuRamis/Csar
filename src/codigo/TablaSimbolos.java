@@ -44,6 +44,10 @@ public class TablaSimbolos {
     
     public FilaTD consulta(String id){
         int i = 0;
+        
+        if(td.isEmpty()){
+            return null;
+        }
         while(!id.equals(td.get(i).nombre)){
             i++;
         }

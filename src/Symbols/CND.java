@@ -13,12 +13,16 @@ public class CND extends SimboloBase{
     EXPRP expresionp;
     
     //Comprueba que la condicion sea booleana
-    public CND(EXPRP exprp) {
+    public CND(EXPRP exprp, INSTS insts, ELS els) {
         super("CND");
         if(exprp.tipo != codigo.TablaSimbolos.Tipo.tBool){
             //ERROR
             System.out.println("ERROR: La condicion no es booleana");
         }
+        
+        g.addEdge(this, exprp);
+        g.addEdge(this, insts);
+        g.addEdge(this, els);
     }
     
 }

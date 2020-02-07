@@ -19,7 +19,9 @@ public class INST extends SimboloBase {
     CALL llamada;
     RET retorno;
     
-    public INST(){
+    public INST(Object o){
         super("INST");
+        
+        g.addEdge(this, (SimboloBase) o); //Ojo que esto es un poco cutre
     }
 }

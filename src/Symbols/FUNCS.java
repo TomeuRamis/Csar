@@ -16,6 +16,12 @@ public class FUNCS extends SimboloBase{
            
     public FUNCS(FUNC func, FUNCS funcs) {
         super("FUNCS");
+        
+        g.addEdge(this, func);
+        g.addEdge(this, funcs);
     }
     
+    public FUNCS(){
+        super("λ");
+    }
 }

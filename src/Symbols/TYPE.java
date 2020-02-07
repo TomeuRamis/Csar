@@ -31,5 +31,8 @@ public class TYPE extends SimboloBase {
                 System.out.println("ERROR: el tipo "+t+" no exsiste.");
                 break;
         }
+        
+        SimboloBase tp = new SimboloBase(t);
+        g.addEdge(this, tp);
     }
 }

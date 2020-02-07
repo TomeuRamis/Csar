@@ -13,12 +13,12 @@ import codigo.TablaSimbolos;
 public class LITERAL extends SimboloBase {
     TablaSimbolos.Tipo tipo;
     
-    public LITERAL(TablaSimbolos.Tipo t) {
+    public LITERAL(TablaSimbolos.Tipo t, String l) {
        super("LITERAL");
        this.tipo = t;
        
-       SimboloBase tip = new SimboloBase(tipo.toString());
-       g.addEdge(this, tip);
+       SimboloBase literal = new SimboloBase(l);
+       g.addEdge(this, literal);
     }
     
 }
