@@ -5,6 +5,11 @@
  */
 package Symbols;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
 
 /**
@@ -13,14 +18,28 @@ import java_cup.runtime.Symbol;
  */
 public class P extends SimboloBase{
     
-    public P(P1 p1, P2 p2){
+    public P(P1 p1, P2 p2, codigo.TablaSimbolos ts){
         super("P");
         
-        System.out.println("Fin del análisis");
-
-        g.addEdge(this, p1);
-        g.addEdge(this, p2);
         
-        this.imprimirArbol();
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("output/tablaSimbolos.txt"));
+            writer.write(ts.toString());
+            writer.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(P.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException ex) {
+                Logger.getLogger(P.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        System.out.println("Fin del análisis");
+            g.addEdge(this, p1);
+            g.addEdge(this, p2);
+            this.imprimirArbol();
     }
 }

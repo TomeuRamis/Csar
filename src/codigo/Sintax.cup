@@ -14,7 +14,6 @@ parser code
     public Symbol getS(){
         return s;
     }
-
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
         //FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1)+" No se pudo recuperar");
         FrmPrincipal.notificarError("No se pudo recuperar el error");
@@ -71,7 +70,7 @@ non terminal Symbols.RET RET;
 start with P;
 
 P ::=
-    P1:v1 P2:v2                     {: RESULT = new Symbols.P(v1, v2); :}
+    P1:v1 P2:v2                     {: RESULT = new Symbols.P(v1, v2,ts); :}
 ;
 P1 ::=
     DECLS:v Main A_llave            {: RESULT = new Symbols.P1(v, ts); :}

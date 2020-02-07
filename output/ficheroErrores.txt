@@ -1,5 +1,1 @@
-Error sintactico: ; en linea: 3 y columna: 11
-ERROR: error semantico. Variable j no declarada.
-ERROR: Operacion entre los tipos incompatibles null y tInt
-ERROR: La condicion no es booleana
 Analisis finalizado
