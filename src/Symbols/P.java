@@ -12,21 +12,14 @@ import java_cup.runtime.Symbol;
  * @author Juan
  */
 public class P extends SimboloBase{
-    DECL declaraciones;
-    INSTS instrucciones;
-    FUNCS funciones;
     
-    public P(DECLS decls, INSTS insts, FUNCS funcs){
+    public P(P1 p1, P2 p2){
         super("P");
         
         System.out.println("Fin del análisis");
-        
-        g.addEdge(this, decls);
-        g.addEdge(this, new SimboloBase("main"));
-        g.addEdge(this, new SimboloBase("{"));
-        g.addEdge(this, insts);
-        g.addEdge(this, new SimboloBase("}"));
-        g.addEdge(this, funcs);
+
+        g.addEdge(this, p1);
+        g.addEdge(this, p2);
         
         this.imprimirArbol();
     }
