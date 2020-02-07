@@ -21,6 +21,8 @@ public class EXPRP extends SimboloBase {
         super("EXPRP");
         
         tipo = exp.tipo;
+        
+        g.addEdge(this, exp);
     }
     
     public EXPRP(EXPRP exprp, OPERADOR operador, EXPR expr){
@@ -70,5 +72,9 @@ public class EXPRP extends SimboloBase {
                 }
             }
         }
+        
+        g.addEdge(this, exprp);
+        g.addEdge(this, operador);
+        g.addEdge(this, expr);
     }
 }

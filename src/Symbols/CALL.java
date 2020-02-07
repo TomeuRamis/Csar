@@ -29,6 +29,8 @@ public class CALL extends SimboloBase {
             System.out.println("ERROR: "+id+" debe tener parámetros.");         
         } else{
             tipo = d.tipo;
+            
+            g.addEdge(this, new SimboloBase(id));
         }
     }
     
@@ -67,6 +69,9 @@ public class CALL extends SimboloBase {
                 System.out.println("ERROR: faltan parámetros en la llamda a "+id);
             }
             tipo = d.tipo;
+            
+            g.addEdge(this, new SimboloBase(id));
+            g.addEdge(this, exprs);
         }
     }
     

@@ -12,7 +12,14 @@ package Symbols;
 public class DECLS extends SimboloBase{
     DECL declaracion;
     DECLS declaraciones;
-    public DECLS(){
+    public DECLS(DECL decl, DECLS decls){
         super("DECLS");
+        
+        g.addEdge(this, decl);
+        g.addEdge(this, decls);
+    }
+    
+    public DECLS(){
+        super("λ");
     }
 }

@@ -32,6 +32,12 @@ public class FUNC extends SimboloBase {
             for (int i = 0; i < params.idParams.size(); i++) {
                 ts.ponerParam(id, params.idParams.get(i), params.tipos.get(i));
             }
+            
+            g.addEdge(this, def);
+            SimboloBase i = new SimboloBase(id);
+            g.addEdge(this, i);
+            g.addEdge(this, params);
+            g.addEdge(this, insts);
         }
 
     }

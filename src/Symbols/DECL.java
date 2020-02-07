@@ -18,6 +18,11 @@ public class DECL extends SimboloBase {
         if(con){
             codigo.TablaSimbolos.FilaTD f = ts.consulta(dcl.id);
             f.mvp = codigo.TablaSimbolos.Mvp.dconst;
+            
+            SimboloBase c = new SimboloBase("const");
+            g.addEdge(this, c);
         }
+        
+        g.addEdge(this, dcl);
     }
 }

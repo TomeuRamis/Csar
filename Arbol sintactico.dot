@@ -1,5 +1,31 @@
 strict digraph G {
-  EXPRP;
-  EXPR;
-  EXPRP -> EXPR;
+  TYPE0 [ label="TYPE" ];
+  int1 [ label="int" ];
+  LITERAL2 [ label="LITERAL" ];
+  33 [ label="3" ];
+  EXPR4 [ label="EXPR" ];
+  EXPRP5 [ label="EXPRP" ];
+  ASIGNACION6 [ label="ASIGNACION" ];
+  DCL7 [ label="DCL" ];
+  i8 [ label="i" ];
+  DECL9 [ label="DECL" ];
+  lambda10 [ label="λ" ];
+  DECLS11 [ label="DECLS" ];
+  lambda12 [ label="λ" ];
+  lambda13 [ label="λ" ];
+  P14 [ label="P" ];
+  TYPE0 -> int1;
+  LITERAL2 -> 33;
+  EXPR4 -> LITERAL2;
+  EXPRP5 -> EXPR4;
+  ASIGNACION6 -> EXPRP5;
+  DCL7 -> TYPE0;
+  DCL7 -> i8;
+  DCL7 -> ASIGNACION6;
+  DECL9 -> DCL7;
+  DECLS11 -> DECL9;
+  DECLS11 -> lambda10;
+  P14 -> DECLS11;
+  P14 -> lambda12;
+  P14 -> lambda13;
 }

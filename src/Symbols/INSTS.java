@@ -14,8 +14,14 @@ public class INSTS extends SimboloBase{
     INST instruccion;
     INSTS instrucciones;
     
-    public INSTS(){
+    public INSTS(INST inst, INSTS insts){
         super("INSTS");
-        
+
+        g.addEdge(this, inst);
+        g.addEdge(this, insts);
+    }
+    
+    public INSTS(){
+        super("λ");
     }
 }

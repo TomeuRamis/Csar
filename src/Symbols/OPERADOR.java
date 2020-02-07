@@ -28,6 +28,9 @@ public class OPERADOR extends SimboloBase{
                 tOp = tOperador.tLogico;
                 break;
         }
+        
+        SimboloBase s = new SimboloBase(v);
+        g.addEdge(this, s);
     }
     
     public enum tOperador{tAritmetico, tRelacional,tLogico}

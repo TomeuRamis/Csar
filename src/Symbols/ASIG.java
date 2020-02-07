@@ -25,6 +25,8 @@ public class ASIG extends SimboloBase{
             System.out.println("ERROR:" + id +" los tipos son inconpatibles");
         }
         
+        g.addEdge(this, new SimboloBase(id));
+        g.addEdge(this, exprp);
         
         
     }

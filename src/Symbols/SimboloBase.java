@@ -19,46 +19,49 @@ import org.jgrapht.io.*;
  *
  * @author Juan
  */
-public class SimboloBase{
+public class SimboloBase {
 
-    private static int id = 0;
+    private static int contador = 0;
+    private int id;
     static Graph<SimboloBase, DefaultEdge> g = new DefaultDirectedGraph<>(DefaultEdge.class);
-    
+
     String etiqueta;
 
     public SimboloBase(String variable) {
         etiqueta = variable;
-        id++;
+        id = contador++;
         g.addVertex(this);
     }
 
     public void imprimirArbol() {
-        
-        ComponentNameProvider<SimboloBase> vertexIdProvider = new ComponentNameProvider<SimboloBase>()
-        {
-            public String getName(SimboloBase sb)
-            {
-                return sb.etiqueta+" "+sb.id;
+
+        ComponentNameProvider<SimboloBase> vertexIdProvider = new ComponentNameProvider<SimboloBase>() {
+            public String getName(SimboloBase sb) {
+                if (sb.etiqueta.equals("λ")) {
+                    return "lambda"+sb.id;
+                } else {
+                    return sb.etiqueta + sb.id;
+                }
             }
         };
-        ComponentNameProvider<SimboloBase> vertexLabelProvider = new ComponentNameProvider<SimboloBase>()
-        {
-            public String getName(SimboloBase sb)
-            {
+
+        ComponentNameProvider<SimboloBase> vertexLabelProvider = new ComponentNameProvider<SimboloBase>() {
+            public String getName(SimboloBase sb) {
                 return sb.etiqueta;
             }
         };
-       
+
         GraphExporter<SimboloBase, DefaultEdge> exporter
-                = new DOTExporter<>(vertexIdProvider,null,null );
+                = new DOTExporter<>(vertexIdProvider, vertexLabelProvider, null);
         Writer writer;
+
         try {
             writer = new FileWriter("Arbol sintactico.dot");
-            /*try {
+            try {
                 exporter.exportGraph(g, writer);
             } catch (ExportException ex) {
                 Logger.getLogger(SimboloBase.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
             System.out.println(writer.toString());
         } catch (IOException ex) {
             Logger.getLogger(SimboloBase.class.getName()).log(Level.SEVERE, null, ex);

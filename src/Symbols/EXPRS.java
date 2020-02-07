@@ -21,7 +21,9 @@ public class EXPRS extends SimboloBase{
     public EXPRS(EXPRP exprp) {
         super("EXPRS");
         
-        tipos.add(exprp.tipo);       
+        tipos.add(exprp.tipo);  
+        
+        g.addEdge(this, exprp);
     }
     
     public EXPRS(EXPRP exprp, EXPRS exprs){
@@ -29,6 +31,9 @@ public class EXPRS extends SimboloBase{
         
         tipos.add(exprp.tipo);
         tipos.addAll(exprs.tipos); //Cuidado, es muy importante el orden en que se añaden
+    
+        g.addEdge(this, exprp);
+        g.addEdge(this, exprs);
     }
     
 }

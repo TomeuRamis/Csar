@@ -11,9 +11,9 @@ package Symbols;
  * @author tomeu
  */
 
-public class LAMBDA {
+public class LAMBDA extends SimboloBase{
     public LAMBDA(){
-        
+        super("λ");
     }
 
 }

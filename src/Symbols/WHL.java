@@ -15,11 +15,18 @@ public class WHL extends SimboloBase{
     INSTS instruccion;
     
     //Comprueba expr sea un booleano
-    public WHL(EXPRP exprp){
+    public WHL(EXPRP exprp, INSTS instruccion){
        super("WHL");
        if(exprp.tipo != codigo.TablaSimbolos.Tipo.tBool){
            //ERROR
            System.out.println("ERROR: La condicion no es booleana");
        }
+       
+       g.addEdge(this, new SimboloBase("while"));
+       g.addEdge(this, new SimboloBase("("));
+       g.addEdge(this, exprp);
+       g.
+       g.addEdge(this, new SimboloBase(")"));
+       g.addEdge(this, instruccion);
     }
 }

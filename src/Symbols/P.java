@@ -20,5 +20,11 @@ public class P extends SimboloBase{
         super("P");
         
         System.out.println("Fin del análisis");
+        
+        g.addEdge(this, decls);
+        g.addEdge(this, insts);
+        g.addEdge(this, funcs);
+        
+        this.imprimirArbol();
     }
 }
