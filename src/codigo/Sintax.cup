@@ -24,7 +24,7 @@ init with {:
 :}
 terminal String Tipo, Id, Numero, Op_aritmetico, Op_logico, Op_relacional;
 terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
-    PuntoYComa, A_par, C_par, A_llave, C_llave, Op_booleano, String, ERROR;
+    PuntoYComa, A_par, C_par, A_llave, C_llave, Op_booleano, String;
 
 non terminal Symbols.P P;
 non terminal Symbols.DECLS DECLS;

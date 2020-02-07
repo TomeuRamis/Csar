@@ -7,44 +7,45 @@ import java_cup.runtime.Symbol;
 %full
 %line
 %char
+%column
 L=[a-zA-Z_ÑñÇçüÜ]+
 D=[0-9]+
 espacio=[ \t\r\n]+
 %{
     private Symbol symbol (int type, Object value){
-        return new Symbol (type, yyline, yycolumn, value);
+        return new Symbol (type, yycolumn+1, yyline+1, value);
     }
     private Symbol symbol (int type){
-        return new Symbol (type, yyline, yycolumn);
+        return new Symbol (type, yycolumn+1, yyline+1);
     }
 %}
 %%
-int | bool | string { return new Symbol(sym.Tipo, yychar, yyline, yytext());}
-const {return new Symbol(sym.Const, yychar, yyline, yytext());}
-if { return new Symbol(sym.If, yychar, yyline, yytext());}
-else { return new Symbol(sym.Else, yychar, yyline, yytext());} 
-while { return new Symbol(sym.While, yychar, yyline, yytext());}
-void { return new Symbol(sym.Void, yychar, yyline, yytext());}
-in { return new Symbol(sym.In, yychar, yyline, yytext());} 
-out { return new Symbol(sym.Out, yychar, yyline, yytext());}
+int | bool | string { return symbol(sym.Tipo, yytext());}
+const {return symbol(sym.Const, yytext());}
+if { return symbol(sym.If, yytext());}
+else { return symbol(sym.Else, yytext());} 
+while { return symbol(sym.While, yytext());}
+void { return symbol(sym.Void, yytext());}
+in { return symbol(sym.In, yytext());} 
+out { return symbol(sym.Out, yytext());}
 {espacio} {/*Ignore*/}
 "//".* {/*Ignore*/}
-"main" {return new Symbol(sym.Main, yychar, yyline, yytext());}
-"def" {return new Symbol(sym.Def, yychar, yyline, yytext());}
-"return" {return new Symbol(sym.Return, yychar, yyline, yytext());}
-"=" {return new Symbol(sym.Igual, yychar, yyline, yytext());}
-( "+" | "-" | "*" | "/" | "%" ) {return new Symbol(sym.Op_aritmetico, yychar, yyline, yytext());}
-( "&&" | "||" | "!") {return new Symbol(sym.Op_logico, yychar, yyline, yytext());}
-( ">" | "<" | "==" | "!=" | "=>" | "=<" ) {return new Symbol(sym.Op_relacional, yychar, yyline, yytext());}
-(true | false) {return new Symbol(sym.Op_booleano, yychar, yyline, yytext());}
-";" {return new Symbol(sym.PuntoYComa, yychar, yyline, yytext());}
-"," {return new Symbol(sym.Coma, yychar, yyline, yytext());}
-"(" {return new Symbol(sym.A_par, yychar, yyline, yytext());}
-")" {return new Symbol(sym.C_par, yychar, yyline, yytext());}
-"{" {return new Symbol(sym.A_llave, yychar, yyline, yytext());}
-"}" {return new Symbol(sym.C_llave, yychar, yyline, yytext());}
-{L}({L}|{D})* {return new Symbol(sym.Id, yychar, yyline, yytext());}
-\"([^\\\"]|\\.)*\" {return new Symbol(sym.String, yychar, yyline, yytext());}
-("(-"{D}+")")|{D}+ {return new Symbol(sym.Numero, yychar, yyline, yytext());}
- . {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
+"main" {return symbol(sym.Main, yytext());}
+"def" {return symbol(sym.Def, yytext());}
+"return" {return symbol(sym.Return, yytext());}
+"=" {return symbol(sym.Igual, yytext());}
+( "+" | "-" | "*" | "/" | "%" ) {return symbol(sym.Op_aritmetico, yytext());}
+( "&&" | "||" | "!") {return symbol(sym.Op_logico, yytext());}
+( ">" | "<" | "==" | "!=" | "=>" | "=<" ) {return symbol(sym.Op_relacional, yytext());}
+(true | false) {return symbol(sym.Op_booleano, yytext());}
+";" {return symbol(sym.PuntoYComa, yytext());}
+"," {return symbol(sym.Coma, yytext());}
+"(" {return symbol(sym.A_par, yytext());}
+")" {return symbol(sym.C_par, yytext());}
+"{" {return symbol(sym.A_llave, yytext());}
+"}" {return symbol(sym.C_llave, yytext());}
+{L}({L}|{D})* {return symbol(sym.Id, yytext());}
+\"([^\\\"]|\\.)*\" {return symbol(sym.String, yytext());}
+("(-"{D}+")")|{D}+ {return symbol(sym.Numero, yytext());}
+ . {return symbol(sym.error,yytext());}
 

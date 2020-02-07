@@ -46,13 +46,12 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
             switch (simbolo.sym) {
                 case sym.PuntoYComa:
                 case sym.A_llave:
-                    resultado += "<" + simbolo.value + ">\n";
+                    resultado += "<" + traduce(simbolo.sym) + ">\n";
                     break;
-                case ERROR:
-                    resultado += "<Simbolo no definido>\n";
-                    break;
+                case sym.error:
+                    System.out.print("ERROR léxico: Símbolo no definido '"+simbolo.value+"' en Linea: "+simbolo.right+", Carácter: "+simbolo.left+"\n");
                 default:
-                    resultado += "<" + simbolo.value + ">";
+                    resultado += "<" + traduce(simbolo.sym) + ">";
                     break;
             }
             simbolo = lexico.next_token();
@@ -313,6 +312,40 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
                 new FrmPrincipal1().setVisible(true);
             }
         });
+    }
+    
+    private String traduce(int simbolo){
+        String res = null;
+        switch (simbolo){
+            case 1: res = "error"; break;
+            case 2: res = "tipo"; break;
+            case 3: res = "id"; break;
+            case 4: res = "numero"; break;
+            case 5: res = "op_aritmetico"; break;
+            case 6: res = "op_logico"; break;
+            case 7: res = "op_relacional"; break;
+            case 8: res = "while"; break;
+            case 9: res = "igual"; break;
+            case 10: res = "else"; break;
+            case 11: res = "const"; break;
+            case 12: res = "if"; break;
+            case 13: res = "in"; break;
+            case 14: res = "out"; break;
+            case 15: res = "main"; break;
+            case 16: res = "def"; break;
+            case 17: res = "return"; break;
+            case 18: res = "coma"; break;
+            case 19: res = "void"; break;
+            case 20: res = "p_coma"; break;
+            case 21: res = "a_par"; break;
+            case 22: res = "c_par"; break;
+            case 23: res = "a_llave"; break;
+            case 24: res = "c_llave"; break;
+            case 25: res = "op_booleano"; break;
+            case 26: res = "string"; break;
+            default: res = "simbolo desconocido"; break;
+        }
+        return res;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
