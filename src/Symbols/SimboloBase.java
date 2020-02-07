@@ -37,11 +37,7 @@ public class SimboloBase {
 
         ComponentNameProvider<SimboloBase> vertexIdProvider = new ComponentNameProvider<SimboloBase>() {
             public String getName(SimboloBase sb) {
-                if (sb.etiqueta.equals("λ")) {
-                    return "lambda"+sb.id;
-                } else {
-                    return sb.etiqueta + sb.id;
-                }
+                return "s"+sb.id;
             }
         };
 

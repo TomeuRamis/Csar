@@ -101,7 +101,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         txtResultado.setColumns(20);
         txtResultado.setRows(5);
-        txtResultado.setText("int i = 3;\nmain{}");
+        txtResultado.setText("int i = 3;\nmain{\nint a = 2;\nint c = true;\nint a  = 4;\nint b = 2;\nstring f = \"alcahofa\";\nstring x = 3;\nif(true){}\nif(3){}\n}");
         jScrollPane1.setViewportView(txtResultado);
 
         txtAnalizarLex.setEditable(false);

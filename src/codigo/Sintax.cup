@@ -79,14 +79,13 @@ INSTS ::=
     LAMBDA              {: RESULT = new Symbols.INSTS(); :} 
 ;
 INST ::=
-    ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v); :} |
-    WHL:v                 {: RESULT = new Symbols.INST(v); :} |
-    DCL:v PuntoYComa      {: RESULT = new Symbols.INST(v); :} |
-    CND:v                 {: RESULT = new Symbols.INST(v); :} |
-    IO:v PuntoYComa       {: RESULT = new Symbols.INST(v); :} |
-    CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v); :} |
-    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v); :} |
-    error PuntoYComa    
+    ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v, true ); :} |
+    WHL:v                 {: RESULT = new Symbols.INST(v, false); :} |
+    DCL:v PuntoYComa      {: RESULT = new Symbols.INST(v, true ); :} |
+    CND:v                 {: RESULT = new Symbols.INST(v, false); :} |
+    IO:v PuntoYComa       {: RESULT = new Symbols.INST(v, true ); :} |
+    CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v, true ); :} |
+    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v, true ); :}
 ;
 ASIG ::=
     Id:v1 Igual EXPRP:v2            {: RESULT = new Symbols.ASIG(v1,v2,ts); :}
