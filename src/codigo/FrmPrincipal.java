@@ -279,6 +279,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             else
                 txtAnalizarSin.setForeground(Color.red);
         } catch (Exception ex) {
+            System.out.println(ex);
             Symbol sym = s.getS();
             txtAnalizarSin.setForeground(Color.red);
         }finally{
