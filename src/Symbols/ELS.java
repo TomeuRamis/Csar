@@ -20,13 +20,12 @@ public class ELS extends SimboloBase{
         g.addEdge(this, cnd);
     }
     
-    public ELS(INSTS insts){
+    public ELS(ELS1 els1, ELS2 els2){
         super("ELS");
         
-        g.addEdge(this, new SimboloBase("else"));
-        g.addEdge(this, new SimboloBase("{"));
-        g.addEdge(this, insts);
-        g.addEdge(this, new SimboloBase("}"));
+        g.addEdge(this, els1);
+        g.addEdge(this, els2);
+        
     }
     
     public ELS(){

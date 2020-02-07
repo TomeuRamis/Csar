@@ -28,7 +28,7 @@ public class TYPE extends SimboloBase {
                 break;
             default:
                 //ERROR
-                System.out.println("ERROR: el tipo "+t+" no exsiste.");
+                codigo.FrmPrincipal.notificarError("ERROR: el tipo "+t+" no exsiste.");
                 break;
         }
         

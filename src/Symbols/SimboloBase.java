@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 
 import org.jgrapht.*;
 import org.jgrapht.graph.*;
@@ -19,7 +20,7 @@ import org.jgrapht.io.*;
  *
  * @author Juan
  */
-public class SimboloBase {
+public class SimboloBase{
 
     private static int contador = 0;
     private int id;
@@ -31,6 +32,10 @@ public class SimboloBase {
         etiqueta = variable;
         id = contador++;
         g.addVertex(this);
+    }
+    
+    public static void resetArbol(){
+        g = new DefaultDirectedGraph<>(DefaultEdge.class);
     }
 
     public void imprimirArbol() {
@@ -58,7 +63,6 @@ public class SimboloBase {
             } catch (ExportException ex) {
                 Logger.getLogger(SimboloBase.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(writer.toString());
         } catch (IOException ex) {
             Logger.getLogger(SimboloBase.class.getName()).log(Level.SEVERE, null, ex);
         }

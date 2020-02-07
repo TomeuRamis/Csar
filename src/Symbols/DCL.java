@@ -20,13 +20,14 @@ public class DCL extends SimboloBase{
     public DCL(TYPE tipo, String id, ASIGNACION asignacion, codigo.TablaSimbolos ts) {
         super("DCL");
         
-        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
-        if(tipo.tipo != asignacion.tipo) {
+        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);    
+        
+        if(tipo.tipo != asignacion.tipo && asignacion.tipo != codigo.TablaSimbolos.Tipo.tNull) {
             //ERROR
-            System.out.println("ERROR: " + id + " los tipos no coinciden");
+            codigo.FrmPrincipal.notificarError("ERROR: " + id + " los tipos no coinciden");
         } else if(!ts.add(id, tipo.tipo, codigo.TablaSimbolos.Mvp.dvar)){
             //ERROR
-            System.out.println("ERROR: " + id + "Ya esta definido");
+            codigo.FrmPrincipal.notificarError("ERROR: " + id + " ya esta definido");
         } else{
             this.id = id;
         }

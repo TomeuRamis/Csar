@@ -7,14 +7,17 @@ action code {:
 parser code
 {:
     private Symbol s;
-    
     public void syntax_error(Symbol s){
+        FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1));
         this.s = s;
     }
-
     public Symbol getS(){
-        return this.s;
-}
+        return s;
+    }
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+        //FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1)+" No se pudo recuperar");
+        FrmPrincipal.notificarError("No se pudo recuperar el error");
+    }
 :};
 
 init with {:
@@ -27,6 +30,8 @@ terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void
     PuntoYComa, A_par, C_par, A_llave, C_llave;
 
 non terminal Symbols.P P;
+non terminal Symbols.P1 P1;
+non terminal Symbols.P2 P2;
 non terminal Symbols.DECLS DECLS;
 non terminal Symbols.OPERADOR OPERADOR;
 non terminal Symbols.LAMBDA LAMBDA;
@@ -39,6 +44,8 @@ non terminal Symbols.ASIGNACION ASIGNACION;
 non terminal Symbols.LITERAL LITERAL;
 non terminal Symbols.DEFINICION DEFINICION;
 non terminal Symbols.FUNC FUNC;
+non terminal Symbols.FUNC1 FUNC1;
+non terminal Symbols.FUNC2 FUNC2;
 non terminal Symbols.FUNCS FUNCS;
 non terminal Symbols.CALL CALL;
 non terminal Symbols.PARAM PARAM;
@@ -48,16 +55,28 @@ non terminal Symbols.INSTS INSTS;
 non terminal Symbols.INST INST;
 non terminal Symbols.ASIG ASIG;
 non terminal Symbols.WHL WHL;
+non terminal Symbols.WHL1 WHL1;
+non terminal Symbols.WHL2 WHL2;
 non terminal Symbols.DCL DCL;
 non terminal Symbols.CND CND;
+non terminal Symbols.CND1 CND1;
+non terminal Symbols.CND2 CND2;
 non terminal Symbols.ELS ELS;
+non terminal Symbols.ELS1 ELS1;
+non terminal Symbols.ELS2 ELS2;
 non terminal Symbols.IO IO;
 non terminal Symbols.RET RET;
 
 start with P;
 
 P ::=
-    DECLS:v1 Main A_llave INSTS:v2 C_llave FUNCS:v3     {: RESULT = new Symbols.P(v1, v2, v3); :}
+    P1:v1 P2:v2                     {: RESULT = new Symbols.P(v1, v2,ts); :}
+;
+P1 ::=
+    DECLS:v Main A_llave            {: RESULT = new Symbols.P1(v, ts); :}
+;
+P2 ::=
+    INSTS:v1 C_llave FUNCS:v2         {: RESULT = new Symbols.P2(v1, v2, ts); :}
 ;
 DECLS ::= 
     DECL:v1 PuntoYComa:v DECLS:v2   {: RESULT = new Symbols.DECLS(v1, v2); :} |
@@ -79,31 +98,51 @@ INSTS ::=
     LAMBDA              {: RESULT = new Symbols.INSTS(); :} 
 ;
 INST ::=
-    ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v, true ); :} |
-    WHL:v                 {: RESULT = new Symbols.INST(v, false); :} |
-    DCL:v PuntoYComa      {: RESULT = new Symbols.INST(v, true ); :} |
-    CND:v                 {: RESULT = new Symbols.INST(v, false); :} |
-    IO:v PuntoYComa       {: RESULT = new Symbols.INST(v, true ); :} |
-    CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v, true ); :} |
-    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v, true ); :}
+    ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v,true); :} |
+    WHL:v                 {: RESULT = new Symbols.INST(v,false); :} |
+    DCL:v PuntoYComa      {: RESULT = new Symbols.INST(v,true); :} |
+    CND:v                 {: RESULT = new Symbols.INST(v,false); :} |
+    IO:v PuntoYComa       {: RESULT = new Symbols.INST(v,true); :} |
+    CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v,true); :} |
+    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v,true); :} |
+    error PuntoYComa    |
+    error C_llave
 ;
 ASIG ::=
     Id:v1 Igual EXPRP:v2            {: RESULT = new Symbols.ASIG(v1,v2,ts); :}
 ;
 WHL ::=
-    While A_par EXPRP:v1 C_par A_llave INSTS:v2 C_llave {: RESULT = new Symbols.WHL(v1, v2);  :}
+    WHL1:v1 WHL2:v2                       {: RESULT = new Symbols.WHL(v1, v2); :}
+;
+WHL1 ::=
+    While A_par EXPRP:v C_par A_llave   {: RESULT = new Symbols.WHL1(v, ts);  :}
+;
+WHL2 ::=
+    INSTS:v C_llave                 {: RESULT = new Symbols.WHL2(v, ts);  :}
 ;
 
 DCL ::= 
     TYPE:v1 Id:v2 ASIGNACION:v3     {: RESULT = new Symbols.DCL(v1,v2, v3, ts); :}
 ;
 CND ::= 
-    If A_par EXPRP:v1 C_par A_llave INSTS:v2 C_llave ELS:v3 {: RESULT = new Symbols.CND(v1, v2, v3);  :}
+    CND1:v1 CND2:v2                 {: RESULT = new Symbols.CND(v1, v2); :}
+;
+CND1 ::=
+    If A_par EXPRP:v C_par A_llave  {: RESULT = new Symbols.CND1(v, ts); :}
+;
+CND2 ::=
+    INSTS:v1 C_llave ELS:v2           {: RESULT = new Symbols.CND2(v1, v2, ts); :}
 ;
 ELS ::=
     Else CND:v                      {: RESULT = new Symbols.ELS(v); :} |
-    Else A_llave INSTS:v C_llave    {: RESULT = new Symbols.ELS(v); :} |
+    ELS1:v1 ELS2:v2                       {: RESULT = new Symbols.ELS(v1, v2); :} |
     LAMBDA                          {: RESULT = new Symbols.ELS(); :}
+;
+ELS1 ::= 
+    Else A_llave                    {: RESULT = new Symbols.ELS1(ts); :}
+;
+ELS2 ::=
+    INSTS:v C_llave                 {: RESULT = new Symbols.ELS2(v, ts); :} 
 ;
 IO ::= 
     In A_par Id:v C_par             {: RESULT = new Symbols.IO(v, ts); :} |
@@ -121,7 +160,13 @@ FUNCS ::=
     LAMBDA                          {: RESULT = new Symbols.FUNCS(); :}
 ;
 FUNC ::= 
-    DEFINICION:v1 Id:v2 A_par PARAMS:v3 C_par A_llave INSTS:v4 C_llave {: RESULT = new Symbols.FUNC(v1,v2,v3,v4,ts); :}
+    FUNC1:v1 FUNC2:v2               {: RESULT = new Symbols.FUNC(v1, v2); :}
+;
+FUNC1 ::=
+    DEFINICION:v1 Id:v2 A_par PARAMS:v3 C_par A_llave {: RESULT = new Symbols.FUNC1(v1, v2, v3, ts); :}
+;
+FUNC2 ::=
+    INSTS:v C_llave                 {: RESULT = new Symbols.FUNC2(v,ts); :}
 ;
 DEFINICION ::= 
     Def TYPE:v                      {: RESULT = new Symbols.DEFINICION(v);  :} |

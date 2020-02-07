@@ -7,16 +7,15 @@ package Symbols;
 
 /**
  *
- * @author Juan
+ * @author tomeu
  */
-public class CND extends SimboloBase{
+public class FUNC2 extends SimboloBase{
     
-    public CND(CND1 cnd1, CND2 cnd2){
-        super("CND");
+    public FUNC2(INSTS insts, codigo.TablaSimbolos ts){
+        super("FUNC2");
         
-        g.addEdge(this, cnd1);
-        g.addEdge(this, cnd2);
-     
+        g.addEdge(this, insts);
+        g.addEdge(this, new SimboloBase("}"));
     }
     
 }

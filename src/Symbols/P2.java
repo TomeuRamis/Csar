@@ -7,22 +7,18 @@ package Symbols;
 
 /**
  *
- * @author Juan
+ * @author tomeu
  */
-public class FUNCS extends SimboloBase{
-
-    FUNC funcion;
-    FUNCS funciones;
-           
-    public FUNCS(FUNC func, FUNCS funcs) {
-        super("FUNCS");
+public class P2 extends SimboloBase{
+    
+    public P2(INSTS insts, FUNCS funcs, codigo.TablaSimbolos ts){
+        super("P2");
         
-        g.addEdge(this, func);
+        ts.salBloque();
+        
+        g.addEdge(this, insts);
+        g.addEdge(this, new SimboloBase("}"));
         g.addEdge(this, funcs);
     }
     
-    public FUNCS(){
-        super("λ");
-
-    }
 }

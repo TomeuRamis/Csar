@@ -13,6 +13,7 @@ public class ASIGNACION extends SimboloBase{
     EXPRP expresionp;
     
     codigo.TablaSimbolos.Tipo tipo;
+    
     public ASIGNACION(EXPRP exprp){
         super("ASIGNACION");
         
@@ -24,5 +25,7 @@ public class ASIGNACION extends SimboloBase{
     
     public ASIGNACION(){
         super("λ");
+        
+        tipo = codigo.TablaSimbolos.Tipo.tNull;
     }
 }
