@@ -19,7 +19,7 @@ public class WHL extends SimboloBase{
        super("WHL");
        if(exprp.tipo != codigo.TablaSimbolos.Tipo.tBool){
            //ERROR
-           System.out.println("ERROR: La condicion no es booleana");
+           codigo.FrmPrincipal.notificarError("ERROR: La condicion no es booleana");
        }
        
        g.addEdge(this, new SimboloBase("while"));

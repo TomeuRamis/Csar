@@ -1,4 +1,5 @@
 <tipo><id><igual><numero><p_coma>
+<tipo><id><igual><numero><p_coma>
 <main><a_llave>
 <tipo><id><igual><numero><p_coma>
 <tipo><id><igual><op_booleano><p_coma>

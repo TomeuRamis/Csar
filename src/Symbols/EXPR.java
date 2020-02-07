@@ -37,7 +37,7 @@ public class EXPR extends SimboloBase{
         codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
         if (d == null){
             //ERROR
-            System.out.println("ERROR: error semantico. Variable "+id+" no declarada.");
+            codigo.FrmPrincipal.notificarError("ERROR: error semantico. Variable "+id+" no declarada.");
         } else{
             tipo = d.tipo;
             

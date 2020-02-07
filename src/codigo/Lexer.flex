@@ -46,5 +46,5 @@ out { return symbol(sym.Out, yytext());}
 {L}({L}|{D})* {return symbol(sym.Id, yytext());}
 \"([^\\\"]|\\.)*\" {return symbol(sym.String, yytext());}
 ("(-"{D}+")")|{D}+ {return symbol(sym.Numero, yytext());}
- . {FrmPrincipal1.notificarError("Error léxico: "+yytext()+" en linea: "+(yyline+1)+" columna: "+(yycolumn+1));}
+ . {FrmPrincipal.notificarError("Error léxico: "+yytext()+" en linea: "+(yyline+1)+" columna: "+(yycolumn+1));}
 

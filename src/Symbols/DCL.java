@@ -23,10 +23,10 @@ public class DCL extends SimboloBase{
         codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
         if(tipo.tipo != asignacion.tipo) {
             //ERROR
-            System.out.println("ERROR: " + id + " los tipos no coinciden");
+            codigo.FrmPrincipal.notificarError("ERROR: " + id + " los tipos no coinciden");
         } else if(!ts.add(id, tipo.tipo, codigo.TablaSimbolos.Mvp.dvar)){
             //ERROR
-            System.out.println("ERROR: " + id + "Ya esta definido");
+            codigo.FrmPrincipal.notificarError("ERROR: " + id + "Ya esta definido");
         } else{
             this.id = id;
         }

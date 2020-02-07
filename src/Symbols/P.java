@@ -18,8 +18,6 @@ public class P extends SimboloBase{
     
     public P(DECLS decls, INSTS insts, FUNCS funcs){
         super("P");
-        
-        
         g.addEdge(this, decls);
         g.addEdge(this, new SimboloBase("main"));
         g.addEdge(this, new SimboloBase("{"));

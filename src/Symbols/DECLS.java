@@ -21,6 +21,7 @@ public class DECLS extends SimboloBase{
     }
     
     public DECLS(){
-        super("λ");
+        super("DECLS");
+        g.addEdge(this, new SimboloBase("λ"));
     }
 }

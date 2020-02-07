@@ -8,7 +8,7 @@ parser code
 {:
     private Symbol s;
     public void syntax_error(Symbol s){
-        FrmPrincipal1.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1));
+        FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1));
         this.s = s;
     }
     public Symbol getS(){
@@ -16,8 +16,8 @@ parser code
     }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
-        //FrmPrincipal1.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1)+" No se pudo recuperar");
-        FrmPrincipal1.notificarError("No se pudo recuperar el error");
+        //FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1)+" No se pudo recuperar");
+        FrmPrincipal.notificarError("No se pudo recuperar el error");
     }
 :};
 
@@ -83,13 +83,13 @@ INSTS ::=
     LAMBDA              {: RESULT = new Symbols.INSTS(); :} 
 ;
 INST ::=
-    ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v); :} |
-    WHL:v                 {: RESULT = new Symbols.INST(v); :} |
-    DCL:v PuntoYComa      {: RESULT = new Symbols.INST(v); :} |
-    CND:v                 {: RESULT = new Symbols.INST(v); :} |
-    IO:v PuntoYComa       {: RESULT = new Symbols.INST(v); :} |
-    CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v); :} |
-    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v); :} |
+    ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v,true); :} |
+    WHL:v                 {: RESULT = new Symbols.INST(v,false); :} |
+    DCL:v PuntoYComa      {: RESULT = new Symbols.INST(v,true); :} |
+    CND:v                 {: RESULT = new Symbols.INST(v,false); :} |
+    IO:v PuntoYComa       {: RESULT = new Symbols.INST(v,true); :} |
+    CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v,true); :} |
+    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v,true); :} |
     error PuntoYComa    |
     error C_llave
 ;

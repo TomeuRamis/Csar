@@ -35,7 +35,7 @@ public class EXPRP extends SimboloBase {
         if(exprp.tipo != expr.tipo){ //Los tipos no coinciden
             this.tipo = codigo.TablaSimbolos.Tipo.tNull;
             //ERROR
-            System.out.println("ERROR: Operacion entre los tipos incompatibles "+exprp.tipo+" y "+expr.tipo);
+            codigo.FrmPrincipal.notificarError("ERROR: Operacion entre los tipos incompatibles "+exprp.tipo+" y "+expr.tipo);
         }else{
             if(exprp.tipo == codigo.TablaSimbolos.Tipo.tInt){ //Son numeros
                 //Operadores relacionales
