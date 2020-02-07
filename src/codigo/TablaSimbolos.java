@@ -64,10 +64,9 @@ public class TablaSimbolos {
         if(filatd != null){
             if(filatd.np != n){
                 ta[n]++;
-                te.get(ta[n]).nombre = filatd.nombre;
-                te.get(ta[n]).tipo = filatd.tipo;
-                te.get(ta[n]).np = filatd.np;
-                te.get(ta[n]).mvp = filatd.mvp;
+                FilaTE nuevaFilaTE = new FilaTE(filatd, td.indexOf(filatd));
+                te.add(nuevaFilaTE);
+                td.remove(filatd);
             } else{
                 return false;
             }
@@ -123,7 +122,7 @@ public class TablaSimbolos {
         n--;
         lfin = ta[n];
         while(lini > lfin){
-            FilaTE filate = te.get(lini);
+            FilaTE filate = te.get(lini-1);
             if(filate.np != -1){
                 String id = filate.nombre;
                 FilaTD filatd = consulta(id);
@@ -131,6 +130,10 @@ public class TablaSimbolos {
                 filatd.np = filate.np;
                 filatd.first = filate.first;
                 filatd.mvp = filate.mvp;
+                //CREO QUE AQUI FALTA UN te.remove(filate); AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
+                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                //HAGANME CASOOOOOOOOOOOOOOOOO
             }
             lini--;
         }
@@ -144,9 +147,9 @@ public class TablaSimbolos {
         public String nombre;
         public Tipo tipo;
         //Object valor;
-        public int np;
+        public int np; //Ambito
         public int first;
-        public Mvp mvp;
+        public Mvp mvp; //Indica si es una constante, una variable o un subprograma
         
         public FilaTD(String n, Tipo t, int amb, Mvp mvp){
             nombre = n;
