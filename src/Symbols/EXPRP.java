@@ -38,13 +38,36 @@ public class EXPRP extends SimboloBase {
             if(exprp.tipo == codigo.TablaSimbolos.Tipo.tInt){ //Son numeros
                 //Operadores relacionales
                 //Operadores aritmeticos
+                if(operador.tOp == OPERADOR.tOperador.tLogico){
+                    //ERROR
+                    System.out.println("ERROR: Operador incompatible");
+                } else if(operador.tOp == OPERADOR.tOperador.tRelacional){
+                    tipo = codigo.TablaSimbolos.Tipo.tBool;
+                } else {
+                    tipo = codigo.TablaSimbolos.Tipo.tInt;
+                }
             }
             if(exprp.tipo == codigo.TablaSimbolos.Tipo.tString){ //Son strings
                 //Operadores relacionales (Comparacion y diferencia)
+                if(!operador.operador.equals("==") && !operador.operador.equals("!=") && !operador.operador.equals("+")){
+                    //ERROR
+                    System.out.println("ERROR: Operador incompatible");
+                } else if(operador.tOp == OPERADOR.tOperador.tRelacional){
+                    tipo = codigo.TablaSimbolos.Tipo.tBool;
+                } else {
+                    tipo = codigo.TablaSimbolos.Tipo.tString;
+                }
             }
+                
             if(exprp.tipo == codigo.TablaSimbolos.Tipo.tBool){ //Son booleanos
                 //Operadores relacionales (Comparacion y diferencia)
                 //Operadores logicos
+                if(operador.tOp != OPERADOR.tOperador.tLogico && !operador.operador.equals("==") && !operador.operador.equals("!=")){
+                    //ERROR
+                    System.out.println("ERROR: Operador incompatible");
+                }else {
+                    tipo = codigo.TablaSimbolos.Tipo.tBool;
+                }
             }
         }
     }
