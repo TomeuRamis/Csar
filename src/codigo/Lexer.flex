@@ -12,10 +12,10 @@ D=[0-9]+
 espacio=[ \t\r\n]+
 %{
     private Symbol symbol (int type, Object value){
-        return new Symbol (type, yyline, yycolumn, value);
+        return new Symbol (type, yycolumn, yyline, value);
     }
     private Symbol symbol (int type){
-        return new Symbol (type, yyline, yycolumn);
+        return new Symbol (type, yycolumn, yyline);
     }
 %}
 %%
@@ -34,7 +34,7 @@ out { return symbol(sym.Out, yytext());}
 "return" {return symbol(sym.Return, yytext());}
 "=" {return symbol(sym.Igual, yytext());}
 ( "+" | "-" | "*" | "/" | "%" ) {return symbol(sym.Op_aritmetico, yytext());}
-( "&&" | "||" | "!") {return symbol(sym.Op_logico, yytext());}
+( "&&" | "||" ) {return symbol(sym.Op_logico, yytext());}
 ( ">" | "<" | "==" | "!=" | "=>" | "=<" ) {return symbol(sym.Op_relacional, yytext());}
 (true | false) {return symbol(sym.Op_booleano, yytext());}
 ";" {return symbol(sym.PuntoYComa, yytext());}

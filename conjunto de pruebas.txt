@@ -1,0 +1,36 @@
+int a = 2;
+bool b = true;
+string saludo = "saludar";
+const int h = 2 + 8 / 4;
+
+main{
+	comer();
+	if(cierto(); || a < h ){
+		a = h;
+	} else if (3 == 3 ){
+		int p;
+		in(p);
+	} else {
+		out(saludo);
+	}
+
+	int i = 0;
+	while(a != h && true){
+		i = i + 1;
+		a = h * 3;
+	}
+}
+
+def void comer(){
+	int s = 3;
+	s = s+2;
+	s = beber(s, 5);
+}
+
+def int beber(int f, int k){
+	return f + k - 3;
+}
+
+def bool cierto(){
+	return true;
+}
