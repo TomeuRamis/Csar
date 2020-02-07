@@ -1,6 +1,0 @@
-<main><a_llave>
-<tipo><id><igual><numero><p_coma>
-<if><a_par><op_booleano><c_par><a_llave>
-<tipo><id><igual><numero><p_coma>
-<tipo><id><igual><numero><p_coma>
-<c_llave><c_llave>
