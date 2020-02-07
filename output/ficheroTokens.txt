@@ -1,5 +1,14 @@
 <main><a_llave>
 <tipo><id><igual><numero><p_coma>
+<<<<<<< HEAD
+=======
+<tipo><id><igual><op_booleano><p_coma>
+<tipo><id><igual><numero><p_coma>
+<tipo><id><igual><numero><p_coma>
+<tipo><id><igual><string><p_coma>
+<tipo><id><igual><numero><p_coma>
+<tipo><id><igual><string><p_coma>
+>>>>>>> 32a818d1028e032daad591b0397ccacfb92fa3b5
 <if><a_par><op_booleano><c_par><a_llave>
 <tipo><id><igual><numero><p_coma>
 <c_llave><c_llave>
