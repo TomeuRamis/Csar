@@ -9,7 +9,7 @@ package codigo;
 import java_cup.runtime.Symbol;
 
 /** CUP v0.11a beta 20060608 generated parser.
-  * @version Fri Feb 07 19:34:24 CET 2020
+  * @version Fri Feb 07 19:07:29 CET 2020
   */
 public class Cooper extends java_cup.runtime.lr_parser {
 
@@ -797,7 +797,7 @@ class CUP$Cooper$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).right;
 		Symbols.RET v = (Symbols.RET)((java_cup.runtime.Symbol) CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).value;
-		 RESULT = new Symbols.INST(v); 
+		 RESULT = new Symbols.INST(v, true ); 
               CUP$Cooper$result = parser.getSymbolFactory().newSymbol("INST",19, ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)), ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()), RESULT);
             }
           return CUP$Cooper$result;
@@ -809,7 +809,7 @@ class CUP$Cooper$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).right;
 		Symbols.CALL v = (Symbols.CALL)((java_cup.runtime.Symbol) CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).value;
-		 RESULT = new Symbols.INST(v); 
+		 RESULT = new Symbols.INST(v, true ); 
               CUP$Cooper$result = parser.getSymbolFactory().newSymbol("INST",19, ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)), ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()), RESULT);
             }
           return CUP$Cooper$result;
@@ -821,7 +821,7 @@ class CUP$Cooper$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).right;
 		Symbols.IO v = (Symbols.IO)((java_cup.runtime.Symbol) CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).value;
-		 RESULT = new Symbols.INST(v); 
+		 RESULT = new Symbols.INST(v, true ); 
               CUP$Cooper$result = parser.getSymbolFactory().newSymbol("INST",19, ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)), ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()), RESULT);
             }
           return CUP$Cooper$result;
@@ -833,7 +833,7 @@ class CUP$Cooper$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()).right;
 		Symbols.CND v = (Symbols.CND)((java_cup.runtime.Symbol) CUP$Cooper$stack.peek()).value;
-		 RESULT = new Symbols.INST(v); 
+		 RESULT = new Symbols.INST(v, false); 
               CUP$Cooper$result = parser.getSymbolFactory().newSymbol("INST",19, ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()), ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()), RESULT);
             }
           return CUP$Cooper$result;
@@ -845,7 +845,7 @@ class CUP$Cooper$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).right;
 		Symbols.DCL v = (Symbols.DCL)((java_cup.runtime.Symbol) CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).value;
-		 RESULT = new Symbols.INST(v); 
+		 RESULT = new Symbols.INST(v, true ); 
               CUP$Cooper$result = parser.getSymbolFactory().newSymbol("INST",19, ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)), ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()), RESULT);
             }
           return CUP$Cooper$result;
@@ -857,7 +857,7 @@ class CUP$Cooper$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()).right;
 		Symbols.WHL v = (Symbols.WHL)((java_cup.runtime.Symbol) CUP$Cooper$stack.peek()).value;
-		 RESULT = new Symbols.INST(v); 
+		 RESULT = new Symbols.INST(v, false); 
               CUP$Cooper$result = parser.getSymbolFactory().newSymbol("INST",19, ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()), ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()), RESULT);
             }
           return CUP$Cooper$result;
@@ -869,7 +869,7 @@ class CUP$Cooper$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).right;
 		Symbols.ASIG v = (Symbols.ASIG)((java_cup.runtime.Symbol) CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)).value;
-		 RESULT = new Symbols.INST(v); 
+		 RESULT = new Symbols.INST(v, true ); 
               CUP$Cooper$result = parser.getSymbolFactory().newSymbol("INST",19, ((java_cup.runtime.Symbol)CUP$Cooper$stack.elementAt(CUP$Cooper$top-1)), ((java_cup.runtime.Symbol)CUP$Cooper$stack.peek()), RESULT);
             }
           return CUP$Cooper$result;

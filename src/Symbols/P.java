@@ -21,7 +21,10 @@ public class P extends SimboloBase{
         
         
         g.addEdge(this, decls);
+        g.addEdge(this, new SimboloBase("main"));
+        g.addEdge(this, new SimboloBase("{"));
         g.addEdge(this, insts);
+        g.addEdge(this, new SimboloBase("}"));
         g.addEdge(this, funcs);
         
         this.imprimirArbol();

@@ -80,7 +80,7 @@ ASIGNACION ::=
 ;
 INSTS ::=
     INST:v1 INSTS:v2    {: RESULT = new Symbols.INSTS(v1, v2); :} |
-    LAMBDA              {: RESULT = new Symbols.INSTS(); :}
+    LAMBDA              {: RESULT = new Symbols.INSTS(); :} 
 ;
 INST ::=
     ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v); :} |
@@ -169,3 +169,4 @@ OPERADOR ::=
     Op_logico:v                     {: RESULT = new Symbols.OPERADOR(v,3); :}
 ;
 LAMBDA ::= /* empty */;
+

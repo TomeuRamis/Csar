@@ -1,3 +1,0 @@
-<tipo><id><igual><numero><p_coma>
-<main><a_llave>
-<c_llave>
