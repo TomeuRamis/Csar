@@ -223,27 +223,27 @@ public class TablaSimbolos {
         String res = "";
         res += "n = " + n + "\n";
         //res += "=======================================================================================\n";
-        res += "TD;;;;;||;TE;;;;;;||;TA\n";
-        res += "nombre ; tipo ; np ; first ; mvp ;||; nombre ; tipo ; np ; first ; mvp ; refTD ;||;\n";
+        res += "TD\t\t\t\t\t||\tTE\t\t\t\t\t\t||\tTA\n";
+        res += "nombre \t tipo \t np \t first \t mvp \t||\t nombre \t tipo \t np \t first \t mvp \t refTD \t||\t\n";
         //res += "||---------------------------------||------------------------------------------------||\n";
         int i;
         for (i = 0; i < td.size() || i < te.size() || i < ta.length; i++) {
             if (i < td.size()) {
                 FilaTD ftd = td.get(i);
-                res += "" + ftd.nombre + ";" + ftd.tipo + ";" + ftd.np + ";" + ftd.first + ";" + ftd.mvp + ";||";
+                res += "" + ftd.nombre + "\t" + ftd.tipo + "\t" + ftd.np + "\t" + ftd.first + "\t" + ftd.mvp + "\t||";
             } else {
-                res += ";;;;;||";
+                res += "\t\t\t\t\t||";
             }
             if (i < te.size()) {
                 FilaTE fte = te.get(i);
-                res += ";" + fte.nombre + "; " + fte.tipo + ";" + fte.np + ";" + fte.first + ";" + fte.mvp + ";" + fte.refTD + ";||";
+                res += "\t" + fte.nombre + "\t " + fte.tipo + "\t" + fte.np + "\t" + fte.first + "\t" + fte.mvp + "\t" + fte.refTD + "\t||";
             } else {
-                res += ";;;;;;;||";
+                res += "\t\t\t\t\t\t\t||";
             }
             if (i < ta.length) {
-                res += ";" + ta[i] + "\n";
+                res += "\t" + ta[i] + "\n";
             } else {
-                res += ";";
+                res += "\t";
             }
         }
         //res += "=======================================================================================";

@@ -24,7 +24,7 @@ public class P extends SimboloBase{
         
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter("output/tablaSimbolos.csv"));
+            writer = new BufferedWriter(new FileWriter("output/tablaSimbolos.xls"));
             writer.write(ts.toString());
             writer.close();
             
