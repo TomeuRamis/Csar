@@ -12,11 +12,13 @@ package Symbols;
 public class FUNC1 extends SimboloBase {
 
     codigo.TablaSimbolos.Tipo tipo;
+    String id;
 
     public FUNC1(DEFINICION def, String id, PARAMS params, codigo.TablaSimbolos ts) {
         super("FUNC1");
 
         tipo = def.tipo;
+        this.id = id;
 
         if (!ts.add(id, def.tipo, codigo.TablaSimbolos.Mvp.dproc)) {
             //ERROR

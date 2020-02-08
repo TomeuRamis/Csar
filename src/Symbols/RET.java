@@ -10,8 +10,10 @@ package Symbols;
  * @author Juan
  */
 public class RET extends SimboloBase{
+    
     EXPRP expresionP;
     codigo.TablaSimbolos.Tipo tipo;
+    
     public RET(EXPRP exprp) {
         super("RET");
         tipo = exprp.tipo;

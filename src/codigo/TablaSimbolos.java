@@ -89,10 +89,15 @@ public class TablaSimbolos {
             while(i < td.size() && td.get(i).np != -1){              
                 i++;
             }
-            if(i> td.size()){
+            if(i> td.size()-1){
                 td.add(nuevaFila);
             } else{
-                td.add(i, nuevaFila);
+                //Sustituimos la posicion de la TD con la nueva fila
+                td.get(i).nombre = nuevaFila.nombre;
+                td.get(i).tipo = nuevaFila.tipo;
+                td.get(i).np = nuevaFila.np;
+                td.get(i).first = nuevaFila.first;
+                td.get(i).mvp = nuevaFila.mvp;
             }
             
         }
@@ -214,9 +219,7 @@ public class TablaSimbolos {
         @Override
 
         public boolean equals(Object f){
-            if(this.nombre.equals(((FilaTD)f).nombre) && this.np == ((FilaTD)f).np){
-                return true;
-            } else return false;
+            return this.nombre.equals(((FilaTD)f).nombre) && this.np == ((FilaTD)f).np;
         }
     }
 
