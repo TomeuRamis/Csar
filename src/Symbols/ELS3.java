@@ -9,15 +9,13 @@ package Symbols;
  *
  * @author tomeu
  */
-public class ELS1 extends SimboloBase{
+public class ELS3 extends SimboloBase{
     
-    public ELS1(codigo.TablaSimbolos ts){
-        super("ELS1");
+    public ELS3(codigo.TablaSimbolos ts){
+        super("ELS3");
         
         ts.salBloque();
-        ts.entraBloque();
         
-        g.addEdge(this, new SimboloBase("else"));
-        g.addEdge(this, new SimboloBase("{"));
     }
+    
 }

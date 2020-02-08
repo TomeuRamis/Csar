@@ -49,7 +49,7 @@ public class TablaSimbolos {
         if (td.isEmpty()) {
             return null;
         }
-        while (i < td.size() && !id.equals(td.get(i).nombre)) {
+        while (i < td.size() && (!id.equals(td.get(i).nombre) || td.get(i).np == -1)) {
             i++;
         }
         /*if(i > td.size()-1){
@@ -106,6 +106,7 @@ public class TablaSimbolos {
         }
         int nou = ta[n];
         ta[n]++;
+        ta[n-1]++;
         FilaTE fTE = new FilaTE();
         if(nou > te.size()-1){
             te.add(nou, fTE);
@@ -115,6 +116,7 @@ public class TablaSimbolos {
         te.get(nou).tipo = tipo;
         te.get(nou).first = -1;
         te.get(nou).mvp = null;
+        te.get(nou).refTD = - 1;
         if (pp == -1) {
             fproc.first = nou;
 
@@ -146,19 +148,22 @@ public class TablaSimbolos {
                 filatd.first = filate.first;
                 filatd.mvp = filate.mvp;
                 te.remove(filate);
-                //CREO QUE AQUI FALTA UN te.remove(filate); AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
-                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                //HAGANME CASOOOOOOOOOOOOOOOOO
                 
-                //pos hasta puede ser, ya veremos
             }
             lini--;
+        }
+        
+        FilaTD filatd;
+        for(int i  =0;i<td.size();i++){
+            filatd = td.get(i);
+            if(filatd.np > n){
+                td.get(i).np = -1;
+            }
         }
     }
 
     public FilaTE getFilaTE(int index) {
-        return (index > te.size() - 1) ? null : te.get(index);
+        return (index > te.size() - 1 || index == -1) ? null : te.get(index);
     }
 
     public class FilaTD {

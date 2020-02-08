@@ -43,8 +43,15 @@ public class EXPR extends SimboloBase{
             
             g.addEdge(this, new SimboloBase(id));
         }
+    }
+    
+    public EXPR(EXPRP exprp){
+        super("EXPR");
+        tipo = exprp.tipo;
         
-        
+        g.addEdge(this, new SimboloBase("("));
+        g.addEdge(this, exprp);
+        g.addEdge(this, new SimboloBase(")"));
     }
     
 }
