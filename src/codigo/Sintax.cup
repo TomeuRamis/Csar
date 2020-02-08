@@ -20,11 +20,6 @@ parser code
     }
 :};
 
-init with {:
-    
-    
-
-:}
 terminal String Tipo, Id, Numero, Op_booleano, String, Op_aritmetico, Op_logico, Op_relacional;
 terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave;
@@ -132,11 +127,11 @@ CND1 ::=
     If A_par EXPRP:v C_par A_llave  {: RESULT = new Symbols.CND1(v, ts); :}
 ;
 CND2 ::=
-    INSTS:v1 C_llave ELS:v2           {: RESULT = new Symbols.CND2(v1, v2, ts); :}
+    INSTS:v1 C_llave ELS:v2         {: RESULT = new Symbols.CND2(v1, v2, ts); :}
 ;
 ELS ::=
     ELS3 CND:v                      {: RESULT = new Symbols.ELS(v, ts); :} |
-    ELS1:v1 ELS2:v2                       {: RESULT = new Symbols.ELS(v1, v2); :} |
+    ELS1:v1 ELS2:v2                 {: RESULT = new Symbols.ELS(v1, v2); :} |
     LAMBDA                          {: RESULT = new Symbols.ELS(ts); :}
 ;
 ELS1 ::= 
@@ -199,9 +194,9 @@ EXPR ::=
 ;
 
 LITERAL ::= 
-    Op_booleano:v                     {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tBool,v); :} |
-    String:v                          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tString, v); :} |
-    Numero:v                          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tInt, v);  :}
+    Op_booleano:v                   {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tBool,v); :} |
+    String:v                        {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tString, v); :} |
+    Numero:v                        {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tInt, v);  :}
 ;
 EXPRS ::= 
     EXPRP:v1 Coma EXPRS:v2          {: RESULT = new Symbols.EXPRS(v1, v2); :} |
