@@ -78,8 +78,23 @@ public class TablaSimbolos {
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
             td.add(posAnterior, nuevaFila);
         } else {
+            
+            /*
+            Añade la nuevaFila a la TD en la primera posición con ámbito -1 o al final
+            del array list.
+            */
+            
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
-            td.add(nuevaFila);
+            int i = 0;
+            while(i < td.size() && td.get(i).np != -1){              
+                i++;
+            }
+            if(i> td.size()){
+                td.add(nuevaFila);
+            } else{
+                td.add(i, nuevaFila);
+            }
+            
         }
         return true;
 
@@ -197,12 +212,11 @@ public class TablaSimbolos {
         }
 
         @Override
-        public boolean equals(Object f) {
-            if (this.nombre.equals(((FilaTD) f).nombre) && this.np == ((FilaTD) f).np) {
+
+        public boolean equals(Object f){
+            if(this.nombre.equals(((FilaTD)f).nombre) && this.np == ((FilaTD)f).np){
                 return true;
-            } else {
-                return false;
-            }
+            } else return false;
         }
     }
 
