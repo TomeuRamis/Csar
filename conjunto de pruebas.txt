@@ -3,6 +3,20 @@ bool b = true;
 string saludo = "saludar";
 const int h = 2 + 8 / 4;
 
+def int beber(int f, int k){
+	return f + k - 3;
+}
+
+def void comer(){
+	int s = 3;
+	s = s+2;
+	s = beber(s, 5);
+}
+
+def bool cierto(){
+	return true;
+}
+
 main{
 	comer();
 	if(cierto() || a < h ){
@@ -19,18 +33,4 @@ main{
 		i = i + 1;
 		a = h * 3;
 	}
-}
-
-def void comer(){
-	int s = 3;
-	s = s+2;
-	s = beber(s, 5);
-}
-
-def int beber(int f, int k){
-	return f + k - 3;
-}
-
-def bool cierto(){
-	return true;
 }
