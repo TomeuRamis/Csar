@@ -30,6 +30,7 @@ public class P extends SimboloBase{
             
         } catch (IOException ex) {
             Logger.getLogger(P.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("ERROR: problema al escribir la tabla de simbolos");
         } finally {
             try {
                 writer.close();

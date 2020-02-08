@@ -115,12 +115,15 @@ public class TablaSimbolos {
         te.get(nou).tipo = tipo;
         te.get(nou).first = -1;
         te.get(nou).mvp = null;
+        te.get(nou).refTD = - 1;
         if (pp == -1) {
             fproc.first = nou;
 
         } else {
             te.get(pp).first = nou;
         }
+        
+        this.add(idparam, tipo, Mvp.dvar);
         return true;
     }
 
@@ -144,19 +147,22 @@ public class TablaSimbolos {
                 filatd.first = filate.first;
                 filatd.mvp = filate.mvp;
                 te.remove(filate);
-                //CREO QUE AQUI FALTA UN te.remove(filate); AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
-                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                //HAGANME CASOOOOOOOOOOOOOOOOO
-                
-                //pos hasta puede ser, ya veremos
+                ta[n]--;
             }
             lini--;
+        }
+        
+        FilaTD filatd;
+        for(int i  =0;i<td.size();i++){
+            filatd = td.get(i);
+            if(filatd.np > n){
+                td.remove(i);
+            }
         }
     }
 
     public FilaTE getFilaTE(int index) {
-        return (index > te.size() - 1) ? null : te.get(index);
+        return (index > te.size() - 1 || index == -1) ? null : te.get(index);
     }
 
     public class FilaTD {

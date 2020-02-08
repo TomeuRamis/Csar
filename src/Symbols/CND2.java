@@ -14,7 +14,7 @@ public class CND2 extends SimboloBase{
     public CND2(INSTS insts, ELS els, codigo.TablaSimbolos ts){
         super("CND2");
         
-        ts.salBloque();
+        
         
         g.addEdge(this, insts);
         g.addEdge(this, new SimboloBase("}"));

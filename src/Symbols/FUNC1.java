@@ -25,11 +25,12 @@ public class FUNC1 extends SimboloBase {
             //ERROR
             System.out.println("ERROR: el numero de ids de parametros y el numeor de tipos no coinciden para la función " + id);
         } else {
+            
+            ts.entraBloque();
+            
             for (int i = 0; i < params.idParams.size(); i++) {
                 ts.ponerParam(id, params.idParams.get(i), params.tipos.get(i));
             }
-
-            ts.entraBloque();
 
             g.addEdge(this, def);
             g.addEdge(this, new SimboloBase(id));

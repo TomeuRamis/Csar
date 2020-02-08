@@ -11,12 +11,13 @@ package Symbols;
  */
 public class P1 extends SimboloBase{
     
-    public P1 (DECLS decls, codigo.TablaSimbolos ts){
+    public P1 (DECLS decls, FUNCS funcs, codigo.TablaSimbolos ts){
         super("P1");
         
         ts.entraBloque();
         
         g.addEdge(this, decls);
+        g.addEdge(this, funcs);
         g.addEdge(this, new SimboloBase("main"));
         g.addEdge(this, new SimboloBase("{"));
     }

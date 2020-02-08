@@ -14,6 +14,8 @@ public class FUNC2 extends SimboloBase{
     public FUNC2(INSTS insts, codigo.TablaSimbolos ts){
         super("FUNC2");
         
+        ts.salBloque();
+        
         g.addEdge(this, insts);
         g.addEdge(this, new SimboloBase("}"));
     }

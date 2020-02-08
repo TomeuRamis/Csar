@@ -64,6 +64,7 @@ non terminal Symbols.CND2 CND2;
 non terminal Symbols.ELS ELS;
 non terminal Symbols.ELS1 ELS1;
 non terminal Symbols.ELS2 ELS2;
+non terminal Symbols.ELS3 ELS3;
 non terminal Symbols.IO IO;
 non terminal Symbols.RET RET;
 
@@ -73,10 +74,10 @@ P ::=
     P1:v1 P2:v2                     {: RESULT = new Symbols.P(v1, v2,ts); :}
 ;
 P1 ::=
-    DECLS:v Main A_llave            {: RESULT = new Symbols.P1(v, ts); :}
+    DECLS:v FUNCS:v2 Main A_llave    {: RESULT = new Symbols.P1(v,v2, ts); :}
 ;
 P2 ::=
-    INSTS:v1 C_llave FUNCS:v2         {: RESULT = new Symbols.P2(v1, v2, ts); :}
+    INSTS:v C_llave                {: RESULT = new Symbols.P2(v, ts); :}
 ;
 DECLS ::= 
     DECL:v1 PuntoYComa:v DECLS:v2   {: RESULT = new Symbols.DECLS(v1, v2); :} |
@@ -134,15 +135,18 @@ CND2 ::=
     INSTS:v1 C_llave ELS:v2           {: RESULT = new Symbols.CND2(v1, v2, ts); :}
 ;
 ELS ::=
-    Else CND:v                      {: RESULT = new Symbols.ELS(v); :} |
+    ELS3 CND:v                      {: RESULT = new Symbols.ELS(v, ts); :} |
     ELS1:v1 ELS2:v2                       {: RESULT = new Symbols.ELS(v1, v2); :} |
-    LAMBDA                          {: RESULT = new Symbols.ELS(); :}
+    LAMBDA                          {: RESULT = new Symbols.ELS(ts); :}
 ;
 ELS1 ::= 
     Else A_llave                    {: RESULT = new Symbols.ELS1(ts); :}
 ;
 ELS2 ::=
     INSTS:v C_llave                 {: RESULT = new Symbols.ELS2(v, ts); :} 
+;
+ELS3 ::=
+    Else                            {: RESULT = new Symbols.ELS3(ts); :}
 ;
 IO ::= 
     In A_par Id:v C_par             {: RESULT = new Symbols.IO(v, ts); :} |
@@ -188,6 +192,7 @@ EXPRP ::=
     EXPR:v                          {: RESULT = new Symbols.EXPRP(v); :}
 ;
 EXPR ::= 
+    A_par EXPRP:v C_par             {: RESULT = new Symbols.EXPR(v); :} |
     CALL:v                          {: RESULT = new Symbols.EXPR(v); :} |
     Id:v                            {: RESULT = new Symbols.EXPR(v, ts); :} |
     LITERAL:v                       {: RESULT = new Symbols.EXPR(v); :}

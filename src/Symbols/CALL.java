@@ -64,7 +64,9 @@ public class CALL extends SimboloBase {
                     System.out.println("ERROR: hay demasiados parámetros en "+id);
                     break;
                 }
+                
                 fTe = ts.getFilaTE(fTe.first);
+                
             }
             if(fTe != null){
                 //ERROR
