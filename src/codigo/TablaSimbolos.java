@@ -197,7 +197,9 @@ public class TablaSimbolos {
         
         @Override
         public boolean equals(Object f){
-            return this.nombre.equals(((FilaTD)f).nombre);
+            if(this.nombre.equals(((FilaTD)f).nombre) && this.np == ((FilaTD)f).np){
+                return true;
+            } else return false;
         }
     }
 
