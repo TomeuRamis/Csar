@@ -13,8 +13,8 @@ import codigo.TablaSimbolos;
 public class LITERAL extends SimboloBase {
     TablaSimbolos.Tipo tipo;
     
-    public LITERAL(TablaSimbolos.Tipo t, String l) {
-       super("LITERAL");
+    public LITERAL(TablaSimbolos.Tipo t, String l,int left,int right) {
+       super("LITERAL",left,right);
        this.tipo = t;
        
        g.addEdge(this, new SimboloBase(l));

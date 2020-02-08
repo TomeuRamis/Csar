@@ -87,7 +87,7 @@ DECL ::=
     DCL:v               {: RESULT = new Symbols.DECL(v,false,null); :}
 ;
 TYPE ::=
-    Tipo:v              {: RESULT = new Symbols.TYPE(v); :}
+    Tipo:v              {: RESULT = new Symbols.TYPE(v,vleft,vright); :}
 ;
 ASIGNACION ::=
     Igual EXPRP:v       {: RESULT = new Symbols.ASIGNACION(v); :} |
@@ -145,12 +145,12 @@ ELS2 ::=
     INSTS:v C_llave                 {: RESULT = new Symbols.ELS2(v, ts); :} 
 ;
 IO ::= 
-    In A_par Id:v C_par             {: RESULT = new Symbols.IO(v, ts); :} |
+    In A_par Id:v C_par             {: RESULT = new Symbols.IO(v, ts,vleft,vright); :} |
     Out A_par EXPRP:v C_par         {: RESULT = new Symbols.IO(v); :}
 ;
 CALL ::=  
-    Id:v1 A_par EXPRS:v2 C_par      {: RESULT = new Symbols.CALL(v1, v2, ts);  :} |
-    Id:v A_par C_par                {: RESULT = new Symbols.CALL(v, ts); :}
+    Id:v1 A_par EXPRS:v2 C_par      {: RESULT = new Symbols.CALL(v1, v2, ts,v1left,v1right);  :} |
+    Id:v A_par C_par                {: RESULT = new Symbols.CALL(v, ts,vleft,vright); :}
 ;
 RET ::= 
     Return EXPRP:v                  {: RESULT = new Symbols.RET(v); :}
@@ -170,7 +170,7 @@ FUNC2 ::=
 ;
 DEFINICION ::= 
     Def TYPE:v                      {: RESULT = new Symbols.DEFINICION(v);  :} |
-    Def Void                        {: RESULT = new Symbols.DEFINICION(); :}
+    Def Void:v                        {: RESULT = new Symbols.DEFINICION(vleft,vright); :}
 ;
 PARAMS ::= 
     PARAM:v1 PARAMSP:v2             {: RESULT = new Symbols.PARAMS(v1,v2); :} |
@@ -189,23 +189,23 @@ EXPRP ::=
 ;
 EXPR ::= 
     CALL:v                          {: RESULT = new Symbols.EXPR(v); :} |
-    Id:v                            {: RESULT = new Symbols.EXPR(v, ts); :} |
+    Id:v                            {: RESULT = new Symbols.EXPR(v, ts,vleft,vright); :} |
     LITERAL:v                       {: RESULT = new Symbols.EXPR(v); :}
 ;
 
 LITERAL ::= 
-    Op_booleano:v                     {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tBool,v); :} |
-    String:v                          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tString, v); :} |
-    Numero:v                          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tInt, v);  :}
+    Op_booleano:v                     {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tBool,v,vleft,vright); :} |
+    String:v                          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tString, v,vleft,vright); :} |
+    Numero:v                          {: RESULT = new Symbols.LITERAL(codigo.TablaSimbolos.Tipo.tInt, v,vleft,vright);  :}
 ;
 EXPRS ::= 
     EXPRP:v1 Coma EXPRS:v2          {: RESULT = new Symbols.EXPRS(v1, v2); :} |
     EXPRP:v                         {: RESULT = new Symbols.EXPRS(v); :}
 ;
 OPERADOR ::=
-    Op_aritmetico:v                 {: RESULT = new Symbols.OPERADOR(v,1); :}| 
-    Op_relacional:v                 {: RESULT = new Symbols.OPERADOR(v,2); :}| 
-    Op_logico:v                     {: RESULT = new Symbols.OPERADOR(v,3); :}
+    Op_aritmetico:v                 {: RESULT = new Symbols.OPERADOR(v,1,vleft,vright); :}| 
+    Op_relacional:v                 {: RESULT = new Symbols.OPERADOR(v,2,vleft,vright); :}| 
+    Op_logico:v                     {: RESULT = new Symbols.OPERADOR(v,3,vleft,vright); :}
 ;
 LAMBDA ::= /* empty */;
 

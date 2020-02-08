@@ -12,7 +12,7 @@ package Symbols;
 public class CND extends SimboloBase{
     
     public CND(CND1 cnd1, CND2 cnd2){
-        super("CND");
+        super("CND",cnd1.fila,cnd1.columna);
         
         g.addEdge(this, cnd1);
         g.addEdge(this, cnd2);

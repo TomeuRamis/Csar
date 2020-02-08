@@ -13,7 +13,7 @@ public class RET extends SimboloBase{
     EXPRP expresionP;
     codigo.TablaSimbolos.Tipo tipo;
     public RET(EXPRP exprp) {
-        super("RET");
+        super("RET",exprp.fila,exprp.columna);
         tipo = exprp.tipo;
         
         g.addEdge(this, new SimboloBase("return"));

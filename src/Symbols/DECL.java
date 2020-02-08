@@ -13,7 +13,7 @@ public class DECL extends SimboloBase {
     DCL declaracion;
     
     public DECL(DCL dcl, boolean con, codigo.TablaSimbolos ts){
-        super("DECL");
+        super("DECL",dcl.fila,dcl.columna);
         
         if(con){
             codigo.TablaSimbolos.FilaTD f = ts.consulta(dcl.id);

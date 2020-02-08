@@ -14,15 +14,15 @@ public class ASIG extends SimboloBase{
     
     //Consulta si existe id y compara los tipos de id y exprp
     public ASIG(String id, EXPRP exprp, codigo.TablaSimbolos ts){
-        super("ASIG");
+        super("ASIG",exprp.fila,exprp.columna);
         
         codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
         if(fTd == null){
             //ERROR
-            codigo.FrmPrincipal.notificarError("Error: " + id + "no existe");
+            codigo.FrmPrincipal.notificarError("Error semántico: " + id + "no existe. Linea: "+(exprp.fila+1));
         } else if(fTd.tipo != exprp.tipo){
             //ERROR
-            codigo.FrmPrincipal.notificarError("ERROR:" + id +" los tipos son inconpatibles");
+            codigo.FrmPrincipal.notificarError("Error semántico: " + id +" los tipos son inconpatibles. Linea: "+(exprp.fila+1));
         }
         
         g.addEdge(this, new SimboloBase(id));

@@ -20,7 +20,7 @@ public class PARAMSP extends SimboloBase{
     ArrayList<String> idParams = new ArrayList<>();
     
     public PARAMSP(PARAM param, PARAMSP paramsp) {
-        super("PARAMSP");
+        super("PARAMSP",param.fila,param.columna);
         
         tipos.add(param.tipo);
         tipos.addAll(paramsp.tipos);

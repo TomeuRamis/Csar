@@ -12,7 +12,7 @@ package Symbols;
 public class ELS2 extends SimboloBase{
     
     public ELS2(INSTS insts, codigo.TablaSimbolos ts){
-        super("ELS2");
+        super("ELS2",insts.fila,insts.columna);
         
         ts.salBloque();
         

@@ -15,7 +15,7 @@ public class FUNCS extends SimboloBase{
     FUNCS funciones;
            
     public FUNCS(FUNC func, FUNCS funcs) {
-        super("FUNCS");
+        super("FUNCS",func.fila,func.columna);
         
         g.addEdge(this, func);
         g.addEdge(this, funcs);

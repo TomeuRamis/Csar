@@ -14,14 +14,14 @@ public class ELS extends SimboloBase{
     INSTS instrucciones;
     
     public ELS(CND cnd) {
-        super("ELS");
+        super("ELS",cnd.fila,cnd.columna);
         
         g.addEdge(this, new SimboloBase("else"));
         g.addEdge(this, cnd);
     }
     
     public ELS(ELS1 els1, ELS2 els2){
-        super("ELS");
+        super("ELS",els2.fila,els2.columna);
         
         g.addEdge(this, els1);
         g.addEdge(this, els2);

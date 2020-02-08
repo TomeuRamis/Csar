@@ -14,7 +14,7 @@ public class DEFINICION extends SimboloBase{
     codigo.TablaSimbolos.Tipo tipo;
     
     public DEFINICION(TYPE ty) {
-        super("DEFINICION");
+        super("DEFINICION",ty.fila,ty.columna);
         tipo = ty.tipo;
         
         g.addEdge(this, new SimboloBase("Def"));
@@ -22,8 +22,8 @@ public class DEFINICION extends SimboloBase{
     }
     
     //Se trata de un procedimiento
-    public DEFINICION(){
-        super("DEFINICION");
+    public DEFINICION(int left, int right){
+        super("DEFINICION",left,right);
         tipo = codigo.TablaSimbolos.Tipo.tNull;
         
         g.addEdge(this, new SimboloBase("Def"));

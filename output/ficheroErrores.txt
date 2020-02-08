@@ -1,1 +1,2 @@
+Error semántico: z los tipos no coinciden. Linea: 2
 Analisis finalizado

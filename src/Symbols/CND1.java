@@ -12,11 +12,11 @@ package Symbols;
 public class CND1 extends SimboloBase{
     
     public CND1(EXPRP exprp, codigo.TablaSimbolos ts) {
-        super("CND1");
+        super("CND1",exprp.fila,exprp.columna);
         
         if(exprp.tipo != codigo.TablaSimbolos.Tipo.tBool){
             //ERROR
-            System.out.println("ERROR: La condicion no es booleana");
+            System.out.println("Error semántico: La condicion no es booleana. Linea: "+(exprp.fila+1));
         }
         
         ts.entraBloque();

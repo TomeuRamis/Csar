@@ -18,7 +18,7 @@ public class FUNC extends SimboloBase {
     codigo.TablaSimbolos.Tipo tipo;
 
     public FUNC(FUNC1 func1, FUNC2 func2 ) {
-        super("FUNC");
+        super("FUNC",func1.fila,func1.columna);
 
         g.addEdge(this, func1);
         g.addEdge(this, func2);          

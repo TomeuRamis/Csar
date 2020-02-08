@@ -18,16 +18,16 @@ public class DCL extends SimboloBase{
     
     //Comprueba si existe id y compara los tipos de type y asignacion
     public DCL(TYPE tipo, String id, ASIGNACION asignacion, codigo.TablaSimbolos ts) {
-        super("DCL");
+        super("DCL",tipo.fila,tipo.columna);
         
         codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);    
         
         if(tipo.tipo != asignacion.tipo && asignacion.tipo != codigo.TablaSimbolos.Tipo.tNull) {
             //ERROR
-            codigo.FrmPrincipal.notificarError("ERROR: " + id + " los tipos no coinciden");
+            codigo.FrmPrincipal.notificarError("Error semántico: " + id + " los tipos no coinciden. Linea: "+(tipo.fila+1));
         } else if(!ts.add(id, tipo.tipo, codigo.TablaSimbolos.Mvp.dvar)){
             //ERROR
-            codigo.FrmPrincipal.notificarError("ERROR: " + id + " ya esta definido");
+            codigo.FrmPrincipal.notificarError("Error semántico: " + id + " ya esta definido  Linea: "+(tipo.fila+1));
         } else{
             this.id = id;
         }

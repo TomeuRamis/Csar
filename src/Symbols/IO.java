@@ -13,13 +13,13 @@ public class IO extends SimboloBase{
     
     EXPRP expresion;
     
-    public IO(String id, codigo.TablaSimbolos ts) {
-        super("IO");
+    public IO(String id, codigo.TablaSimbolos ts,int left, int right) {
+        super("IO",left,right);
         
         codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
         if(fTd == null){
             //ERROR
-            codigo.FrmPrincipal.notificarError("ERROR: " + id + " no esta definido");
+            codigo.FrmPrincipal.notificarError("Error semántico: " + id + " no esta definido. Linea: "+(left+1));
         }
         
         g.addEdge(this, new SimboloBase("in"));
@@ -30,7 +30,7 @@ public class IO extends SimboloBase{
     }
     
     public IO(EXPRP exprp){
-        super("IO");
+        super("IO",exprp.fila,exprp.columna);
         
         g.addEdge(this, new SimboloBase("out"));
         g.addEdge(this, new SimboloBase("("));

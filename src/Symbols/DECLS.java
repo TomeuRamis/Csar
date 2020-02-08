@@ -13,7 +13,7 @@ public class DECLS extends SimboloBase{
     DECL declaracion;
     DECLS declaraciones;
     public DECLS(DECL decl, DECLS decls){
-        super("DECLS");
+        super("DECLS",decl.fila,decl.columna);
         
         g.addEdge(this, decl);
         g.addEdge(this, new SimboloBase(";"));

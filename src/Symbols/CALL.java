@@ -14,19 +14,19 @@ public class CALL extends SimboloBase {
     EXPRS expresiones;
     codigo.TablaSimbolos.Tipo tipo;
     
-    public CALL(String id, codigo.TablaSimbolos ts) {
-        super("CALL");
+    public CALL(String id, codigo.TablaSimbolos ts,int left, int right) {
+        super("CALL",left,right);
         
         codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
         if(d == null){
             //ERROR
-            codigo.FrmPrincipal.notificarError("ERROR: el subprograma "+id+" no ha sido definicdo.");
+            codigo.FrmPrincipal.notificarError("Error semántico: el subprograma "+id+" no ha sido definicdo. Linea "+(left+1));
         } else if(d.mvp != codigo.TablaSimbolos.Mvp.dproc ){
             //ERROR
-            codigo.FrmPrincipal.notificarError("ERROR: "+id+" no es un subprograma.");
+            codigo.FrmPrincipal.notificarError("Error semántico: "+id+" no es un subprograma. Linea "+(left+1));
         } else if(d.first !=-1){
             //ERROR
-            codigo.FrmPrincipal.notificarError("ERROR: "+id+" debe tener parámetros.");         
+            codigo.FrmPrincipal.notificarError("Error semántico: "+id+" debe tener parámetros. Linea "+(left+1));         
         } else{
             tipo = d.tipo;
             
@@ -36,19 +36,19 @@ public class CALL extends SimboloBase {
         }
     }
     
-    public CALL(String id, EXPRS exprs, codigo.TablaSimbolos ts) {
-        super("CALL");
+    public CALL(String id, EXPRS exprs, codigo.TablaSimbolos ts, int left, int right) {
+        super("CALL", left, right);
 
         codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
         if(d == null){
             //ERROR
-            System.out.println("ERROR: el subprograma "+id+" no ha sido definicdo.");
+            System.out.println("Error semántico: el subprograma "+id+" no ha sido definicdo. Linea: "+left);
         } else if(d.mvp != codigo.TablaSimbolos.Mvp.dproc ){
             //ERROR
-            System.out.println("ERROR: "+id+" no es un subprograma.");
+            System.out.println("Error semántico: "+id+" no es un subprograma. Linea: "+left);
         } else if(d.first == -1){
             //ERROR
-            System.out.println("ERROR: "+id+" no debe tener parámetros.");
+            System.out.println("Error semántico: "+id+" no debe tener parámetros. Linea: "+left);
         } else{
             codigo.TablaSimbolos.FilaTE fTe = ts.getFilaTE(d.first);
             for(int i =0; i < exprs.tipos.size(); i++){
@@ -56,19 +56,19 @@ public class CALL extends SimboloBase {
                 if(fTe != null){
                     if(fTe.tipo != exprs.tipos.get(i)){
                         //ERROR
-                        System.out.println("ERROR: tipo incorrecto del parámetro "+(i+1)+" en la llamda al subprograma "+id);
+                        System.out.println("Error semántico: tipo incorrecto del parámetro "+(i+1)+" en la llamda al subprograma "+id+" Linea: "+left);
                         break;
                     }
                 } else {
                     //ERROR
-                    System.out.println("ERROR: hay demasiados parámetros en "+id);
+                    System.out.println("Error semántico: hay demasiados parámetros en "+id+" Linea: "+left);
                     break;
                 }
                 fTe = ts.getFilaTE(fTe.first);
             }
             if(fTe != null){
                 //ERROR
-                System.out.println("ERROR: faltan parámetros en la llamda a "+id);
+                System.out.println("Error semántico: faltan parámetros en la llamda a "+id+" Linea: "+left);
             }
             tipo = d.tipo;
             

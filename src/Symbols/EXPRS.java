@@ -19,7 +19,7 @@ public class EXPRS extends SimboloBase{
     ArrayList<codigo.TablaSimbolos.Tipo> tipos = new ArrayList<>();
          
     public EXPRS(EXPRP exprp) {
-        super("EXPRS");
+        super("EXPRS",exprp.fila,exprp.columna);
         
         tipos.add(exprp.tipo);  
         
@@ -27,7 +27,7 @@ public class EXPRS extends SimboloBase{
     }
     
     public EXPRS(EXPRP exprp, EXPRS exprs){
-        super("EXPRS");
+        super("EXPRS",exprp.fila,exprp.columna);
         
         tipos.add(exprp.tipo);
         tipos.addAll(exprs.tipos); //Cuidado, es muy importante el orden en que se añaden

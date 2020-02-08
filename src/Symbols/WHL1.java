@@ -12,11 +12,11 @@ package Symbols;
 public class WHL1 extends SimboloBase {
 
     public WHL1(EXPRP exprp, codigo.TablaSimbolos ts) {
-        super("WHL1");
+        super("WHL1",exprp.fila,exprp.columna);
 
         if (exprp.tipo != codigo.TablaSimbolos.Tipo.tBool) {
             //ERROR
-            System.out.println("ERROR: La condicion no es booleana");
+            System.out.println("Error semántico: La condicion no es booleana. Linea: "+(this.fila+1));
         }
         
         ts.entraBloque();

@@ -18,7 +18,7 @@ public class EXPRP extends SimboloBase {
     codigo.TablaSimbolos.Tipo tipo;
 
     public EXPRP(EXPR exp) {
-        super("EXPRP");
+        super("EXPRP",exp.fila,exp.columna);
         
         tipo = exp.tipo;
         
@@ -26,7 +26,7 @@ public class EXPRP extends SimboloBase {
     }
     
     public EXPRP(EXPRP exprp, OPERADOR operador, EXPR expr){
-        super("EXPRP");
+        super("EXPRP",exprp.fila,exprp.columna);
         /*
           El tipo de la expresion será el tipo de las expresiones
           Se debe comprobar que ambas expresiones tengan tipos compatibles y que
@@ -35,14 +35,14 @@ public class EXPRP extends SimboloBase {
         if(exprp.tipo != expr.tipo){ //Los tipos no coinciden
             this.tipo = codigo.TablaSimbolos.Tipo.tNull;
             //ERROR
-            codigo.FrmPrincipal.notificarError("ERROR: Operacion entre los tipos incompatibles "+exprp.tipo+" y "+expr.tipo);
+            codigo.FrmPrincipal.notificarError("Error semántico: Operacion entre los tipos incompatibles "+exprp.tipo+" y "+expr.tipo+" en linea: "+(exprp.fila+1));
         }else{
             if(exprp.tipo == codigo.TablaSimbolos.Tipo.tInt){ //Son numeros
                 //Operadores relacionales
                 //Operadores aritmeticos
                 if(operador.tOp == OPERADOR.tOperador.tLogico){
                     //ERROR
-                    System.out.println("ERROR: Operador incompatible");
+                    codigo.FrmPrincipal.notificarError("Error semántico: Operador incompatible en linea: "+(exprp.fila+1));
                 } else if(operador.tOp == OPERADOR.tOperador.tRelacional){
                     tipo = codigo.TablaSimbolos.Tipo.tBool;
                 } else {
@@ -53,7 +53,7 @@ public class EXPRP extends SimboloBase {
                 //Operadores relacionales (Comparacion y diferencia)
                 if(!operador.operador.equals("==") && !operador.operador.equals("!=") && !operador.operador.equals("+")){
                     //ERROR
-                    System.out.println("ERROR: Operador incompatible");
+                    codigo.FrmPrincipal.notificarError("Error semántico: Operador incompatible en linea: "+(exprp.fila+1));
                 } else if(operador.tOp == OPERADOR.tOperador.tRelacional){
                     tipo = codigo.TablaSimbolos.Tipo.tBool;
                 } else {
@@ -66,7 +66,7 @@ public class EXPRP extends SimboloBase {
                 //Operadores logicos
                 if(operador.tOp != OPERADOR.tOperador.tLogico && !operador.operador.equals("==") && !operador.operador.equals("!=")){
                     //ERROR
-                    System.out.println("ERROR: Operador incompatible");
+                    codigo.FrmPrincipal.notificarError("Error semántico: Operador incompatible en linea: "+(exprp.fila+1));
                 }else {
                     tipo = codigo.TablaSimbolos.Tipo.tBool;
                 }

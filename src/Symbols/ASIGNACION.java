@@ -15,7 +15,7 @@ public class ASIGNACION extends SimboloBase{
     codigo.TablaSimbolos.Tipo tipo;
     
     public ASIGNACION(EXPRP exprp){
-        super("ASIGNACION");
+        super("ASIGNACION",exprp.fila,exprp.columna);
         
         tipo = exprp.tipo;
         

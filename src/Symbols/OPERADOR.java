@@ -14,8 +14,8 @@ public class OPERADOR extends SimboloBase{
     String operador;
     tOperador tOp;
     
-    public OPERADOR(String v, int i) {
-        super("OPERADOR");
+    public OPERADOR(String v, int i,int left, int right) {
+        super("OPERADOR",left,right);
         operador = v;
         switch(i){
             case 1:

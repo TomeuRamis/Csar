@@ -16,7 +16,7 @@ public class EXPR extends SimboloBase{
     codigo.TablaSimbolos.Tipo tipo;
     
     public EXPR(LITERAL l) {
-        super("EXPR");
+        super("EXPR",l.fila,l.columna);
         literal = l;
         tipo = l.tipo;
         
@@ -24,20 +24,20 @@ public class EXPR extends SimboloBase{
     }
     
     public EXPR(CALL c){
-        super("EXPR");
+        super("EXPR",c.fila,c.columna);
         llamada = c;
         tipo = c.tipo;
         
         g.addEdge(this, c);
     }
     
-    public EXPR(String id, codigo.TablaSimbolos ts){
-        super("EXPR");
+    public EXPR(String id, codigo.TablaSimbolos ts,int left, int right){
+        super("EXPR",left,right);
         
         codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
         if (d == null){
             //ERROR
-            codigo.FrmPrincipal.notificarError("ERROR: error semantico. Variable "+id+" no declarada.");
+            codigo.FrmPrincipal.notificarError("Error semantico: Variable "+id+" no declarada. Linea: "+(left+1));
         } else{
             tipo = d.tipo;
             

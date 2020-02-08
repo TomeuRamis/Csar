@@ -5,6 +5,8 @@
  */
 package Symbols;
 
+import java_cup.runtime.Symbol;
+
 /**
  *
  * @author Juan
@@ -13,8 +15,8 @@ public class TYPE extends SimboloBase {
     codigo.TablaSimbolos.Tipo tipo;
     
     //Comprovamos la cadena t y la convertimos al enumerado Tipo
-    public TYPE(String t){
-        super("TYPE");
+    public TYPE(String t, int left, int right){
+        super("TYPE",left,right);
         
         switch(t){
             case("bool"):
@@ -28,7 +30,7 @@ public class TYPE extends SimboloBase {
                 break;
             default:
                 //ERROR
-                codigo.FrmPrincipal.notificarError("ERROR: el tipo "+t+" no exsiste.");
+                codigo.FrmPrincipal.notificarError("Error semántico: el tipo "+t+" no exsiste. Linea: "+(left+1));
                 break;
         }
         

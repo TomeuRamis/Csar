@@ -16,7 +16,7 @@ public class WHL extends SimboloBase{
     
     //Comprueba expr sea un booleano
     public WHL(WHL1 whl1, WHL2 whl2){
-       super("WHL");
+       super("WHL",whl1.fila,whl1.columna);
        
        g.addEdge(this, whl1);
        g.addEdge(this, whl2);

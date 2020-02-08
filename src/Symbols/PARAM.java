@@ -17,7 +17,7 @@ public class PARAM extends SimboloBase{
     
     //Guardamos el tipo y el id para poder añadirlo más arriba
     public PARAM(TYPE t, String id) {
-        super("PARAM");
+        super("PARAM",t.fila,t.columna);
         tipo = t.tipo;
         idParam = id;      
         
