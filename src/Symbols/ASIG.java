@@ -16,7 +16,7 @@ public class ASIG extends SimboloBase{
     public ASIG(String id, EXPRP exprp, codigo.TablaSimbolos ts){
         super("ASIG");
         
-        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
+        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id, codigo.TablaSimbolos.Mvp.dvar);
         if(fTd == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error: " + id + "no existe");

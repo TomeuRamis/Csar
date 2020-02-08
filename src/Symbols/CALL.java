@@ -17,7 +17,7 @@ public class CALL extends SimboloBase {
     public CALL(String id, codigo.TablaSimbolos ts) {
         super("CALL");
         
-        codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
+        codigo.TablaSimbolos.FilaTD d = ts.consulta(id, codigo.TablaSimbolos.Mvp.dproc);
         if(d == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("ERROR: el subprograma "+id+" no ha sido definicdo.");
@@ -39,7 +39,7 @@ public class CALL extends SimboloBase {
     public CALL(String id, EXPRS exprs, codigo.TablaSimbolos ts) {
         super("CALL");
 
-        codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
+        codigo.TablaSimbolos.FilaTD d = ts.consulta(id, codigo.TablaSimbolos.Mvp.dproc);
         if(d == null){
             //ERROR
             System.out.println("ERROR: el subprograma "+id+" no ha sido definicdo.");

@@ -43,15 +43,33 @@ public class TablaSimbolos {
         ta[n] = 0;
     }
 
-    public FilaTD consulta(String id) {
+    /*
+    Consulta el id en la tabla de simbolos. Devuelve solo un objeto FilaTD si coincide tanto en ID como en MVP
+    */
+    public FilaTD consulta(String id, Mvp mvp) {
         int i = 0;
 
         if (td.isEmpty()) {
             return null;
         }
-        while (i < td.size() && (!id.equals(td.get(i).nombre) || td.get(i).np == -1)) {
-            i++;
+        while(i < td.size()){
+            if(td.get(i).nombre.equals(id) && td.get(i).np != -1){
+                if(mvp == Mvp.dproc && td.get(i).mvp != Mvp.dproc){
+                    i++;
+                } else if(mvp != Mvp.dproc && td.get(i).mvp == Mvp.dproc){
+                    i++;
+                } else {
+                    break;
+                } 
+            } else{
+                i++;
+            }
         }
+        /*while (i < td.size() && (!id.equals(td.get(i).nombre) || td.get(i).np == -1)) {
+            
+            i++;
+        }*/
+        
         /*if(i > td.size()-1){
             return null;
         }else{
@@ -61,7 +79,7 @@ public class TablaSimbolos {
     }
 
     public boolean add(String nombre, Tipo t, Mvp mvp) {
-        FilaTD filatd = consulta(nombre);
+        FilaTD filatd = consulta(nombre, mvp);
 
         if (filatd != null) {
             int posAnterior;
@@ -106,7 +124,7 @@ public class TablaSimbolos {
     }
 
     public boolean ponerParam(String idproc, String idparam, Tipo tipo) {
-        FilaTD fproc = consulta(idproc);
+        FilaTD fproc = consulta(idproc, Mvp.dproc);
         if (fproc.mvp != Mvp.dproc) {
             //Error
             System.out.println("ERROR: solo se pueden añadir paràmetros a subprogramas");
@@ -162,7 +180,7 @@ public class TablaSimbolos {
             FilaTE filate = te.get(lini - 1);
             if (filate.np != -1) {
                 String id = filate.nombre;
-                FilaTD filatd = consulta(id);
+                FilaTD filatd = consulta(id, Mvp.dvar);
                 filatd.tipo = filate.tipo;
                 filatd.np = filate.np;
                 filatd.first = filate.first;
@@ -244,27 +262,27 @@ public class TablaSimbolos {
         String res = "";
         res += "n = " + n + "\n";
         //res += "=======================================================================================\n";
-        res += "TD;;;;;||;TE;;;;;;||;TA\n";
-        res += "nombre ; tipo ; np ; first ; mvp ;||; nombre ; tipo ; np ; first ; mvp ; refTD ;||;\n";
+        res += "TD\t\t\t\t\t||\tTE\t\t\t\t\t\t||\tTA\n";
+        res += "nombre \t tipo \t np \t first \t mvp \t||\t nombre \t tipo \t np \t first \t mvp \t refTD \t||\t\n";
         //res += "||---------------------------------||------------------------------------------------||\n";
         int i;
         for (i = 0; i < td.size() || i < te.size() || i < ta.length; i++) {
             if (i < td.size()) {
                 FilaTD ftd = td.get(i);
-                res += "" + ftd.nombre + ";" + ftd.tipo + ";" + ftd.np + ";" + ftd.first + ";" + ftd.mvp + ";||";
+                res += "" + ftd.nombre + "\t" + ftd.tipo + "\t" + ftd.np + "\t" + ftd.first + "\t" + ftd.mvp + "\t||";
             } else {
-                res += ";;;;;||";
+                res += "\t\t\t\t\t||";
             }
             if (i < te.size()) {
                 FilaTE fte = te.get(i);
-                res += ";" + fte.nombre + "; " + fte.tipo + ";" + fte.np + ";" + fte.first + ";" + fte.mvp + ";" + fte.refTD + ";||";
+                res += "\t" + fte.nombre + "\t " + fte.tipo + "\t" + fte.np + "\t" + fte.first + "\t" + fte.mvp + "\t" + fte.refTD + "\t||";
             } else {
-                res += ";;;;;;;||";
+                res += "\t\t\t\t\t\t\t||";
             }
             if (i < ta.length) {
-                res += ";" + ta[i] + "\n";
+                res += "\t" + ta[i] + "\n";
             } else {
-                res += ";";
+                res += "\t";
             }
         }
         //res += "=======================================================================================";

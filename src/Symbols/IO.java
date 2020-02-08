@@ -16,7 +16,7 @@ public class IO extends SimboloBase{
     public IO(String id, codigo.TablaSimbolos ts) {
         super("IO");
         
-        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
+        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id, codigo.TablaSimbolos.Mvp.dvar);
         if(fTd == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("ERROR: " + id + " no esta definido");

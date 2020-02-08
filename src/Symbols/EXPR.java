@@ -34,7 +34,7 @@ public class EXPR extends SimboloBase{
     public EXPR(String id, codigo.TablaSimbolos ts){
         super("EXPR");
         
-        codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
+        codigo.TablaSimbolos.FilaTD d = ts.consulta(id, codigo.TablaSimbolos.Mvp.dvar);
         if (d == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("ERROR: error semantico. Variable "+id+" no declarada.");
