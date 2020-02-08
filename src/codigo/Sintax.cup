@@ -73,10 +73,10 @@ P ::=
     P1:v1 P2:v2                     {: RESULT = new Symbols.P(v1, v2,ts); :}
 ;
 P1 ::=
-    DECLS:v Main A_llave            {: RESULT = new Symbols.P1(v, ts); :}
+    DECLS:v FUNCS:v2 Main A_llave    {: RESULT = new Symbols.P1(v,v2, ts); :}
 ;
 P2 ::=
-    INSTS:v1 C_llave FUNCS:v2         {: RESULT = new Symbols.P2(v1, v2, ts); :}
+    INSTS:v C_llave                {: RESULT = new Symbols.P2(v, ts); :}
 ;
 DECLS ::= 
     DECL:v1 PuntoYComa:v DECLS:v2   {: RESULT = new Symbols.DECLS(v1, v2); :} |

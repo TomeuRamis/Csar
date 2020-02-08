@@ -121,6 +121,8 @@ public class TablaSimbolos {
         } else {
             te.get(pp).first = nou;
         }
+        
+        this.add(idparam, tipo, Mvp.dvar);
         return true;
     }
 

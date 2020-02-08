@@ -11,14 +11,14 @@ package Symbols;
  */
 public class P2 extends SimboloBase{
     
-    public P2(INSTS insts, FUNCS funcs, codigo.TablaSimbolos ts){
+    public P2(INSTS insts, codigo.TablaSimbolos ts){
         super("P2");
         
         ts.salBloque();
         
         g.addEdge(this, insts);
         g.addEdge(this, new SimboloBase("}"));
-        g.addEdge(this, funcs);
+        
     }
     
 }
