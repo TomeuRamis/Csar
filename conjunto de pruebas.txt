@@ -8,6 +8,7 @@ def int beber(int f, int k){
 }
 
 def void comer(){
+<<<<<<< HEAD
 	int b = 700;
 	int s = 3;
 	s = s+2;
@@ -16,6 +17,13 @@ def void comer(){
 
 
 
+=======
+	int s = 3;
+	s = s+2;
+	s = beber(s, 5);
+}
+
+>>>>>>> 4d8da199a60fc6615008f71c41918dac5f79e4d6
 def bool cierto(){
 	return true;
 }
@@ -36,5 +44,9 @@ main{
 		i = i + 1;
 		a = h * 3;
 	}
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 4d8da199a60fc6615008f71c41918dac5f79e4d6
