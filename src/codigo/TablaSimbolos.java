@@ -49,7 +49,7 @@ public class TablaSimbolos {
         if (td.isEmpty()) {
             return null;
         }
-        while (i < td.size() && !id.equals(td.get(i).nombre)) {
+        while (i < td.size() && (!id.equals(td.get(i).nombre) || td.get(i).np == -1)) {
             i++;
         }
         /*if(i > td.size()-1){
@@ -106,6 +106,7 @@ public class TablaSimbolos {
         }
         int nou = ta[n];
         ta[n]++;
+        ta[n-1]++;
         FilaTE fTE = new FilaTE();
         if(nou > te.size()-1){
             te.add(nou, fTE);
@@ -147,7 +148,7 @@ public class TablaSimbolos {
                 filatd.first = filate.first;
                 filatd.mvp = filate.mvp;
                 te.remove(filate);
-                ta[n]--;
+                
             }
             lini--;
         }
@@ -156,7 +157,7 @@ public class TablaSimbolos {
         for(int i  =0;i<td.size();i++){
             filatd = td.get(i);
             if(filatd.np > n){
-                td.remove(i);
+                td.get(i).np = -1;
             }
         }
     }
