@@ -214,30 +214,30 @@ public class TablaSimbolos {
         String res = "";
         res += "n = " + n + "\n";
         //res += "=======================================================================================\n";
-        res += ";;TD;;;;TE;;;;TA\n";
-        res += ";nombre ; tipo ; np ; first ; mvp ; nombre ; tipo ; np ; first ; mvp ; refTD ;    ;\n";
+        res += "TD;;;;;||;TE;;;;;;||;TA\n";
+        res += "nombre ; tipo ; np ; first ; mvp ;||; nombre ; tipo ; np ; first ; mvp ; refTD ;||;\n";
         //res += "||---------------------------------||------------------------------------------------||\n";
         int i;
         for (i = 0; i < td.size() || i < te.size() || i < ta.length; i++) {
             if (i < td.size()) {
                 FilaTD ftd = td.get(i);
-                res += "||" + ftd.nombre + "      | " + ftd.tipo + " | " + ftd.np + "  | " + ftd.first + "     | " + ftd.mvp + "";
+                res += "" + ftd.nombre + ";" + ftd.tipo + ";" + ftd.np + ";" + ftd.first + ";" + ftd.mvp + ";||";
             } else {
-                res += "||  --   |  --  | -- |  --   | --- ";
+                res += ";;;;;||";
             }
             if (i < te.size()) {
                 FilaTE fte = te.get(i);
-                res += "||" + fte.nombre + "      | " + fte.tipo + " | " + fte.np + "  | " + fte.first + "     | " + fte.mvp + " | " + fte.refTD;
+                res += ";" + fte.nombre + "; " + fte.tipo + ";" + fte.np + ";" + fte.first + ";" + fte.mvp + ";" + fte.refTD + ";||";
             } else {
-                res += "||  --   |  --  | -- |  --   | -- |   --  ";
+                res += ";;;;;;;||";
             }
             if (i < ta.length) {
-                res += " || " + ta[i] + "  ||\n";
+                res += ";" + ta[i] + "\n";
             } else {
-                res += " || -- ||";
+                res += ";";
             }
         }
-        res += "=======================================================================================";
+        //res += "=======================================================================================";
         return res;
     }
 }
