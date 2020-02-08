@@ -62,7 +62,7 @@ public class TablaSimbolos {
 
     public boolean add(String nombre, Tipo t, Mvp mvp) {
         FilaTD filatd = consulta(nombre);
-        
+
         if (filatd != null) {
             int posAnterior;
             if (filatd.np != n) {
@@ -106,9 +106,9 @@ public class TablaSimbolos {
         }
         int nou = ta[n];
         ta[n]++;
-        ta[n-1]++;
+        ta[n - 1]++;
         FilaTE fTE = new FilaTE();
-        if(nou > te.size()-1){
+        if (nou > te.size() - 1) {
             te.add(nou, fTE);
         }
         te.get(nou).nombre = idparam;
@@ -123,7 +123,7 @@ public class TablaSimbolos {
         } else {
             te.get(pp).first = nou;
         }
-        
+
         this.add(idparam, tipo, Mvp.dvar);
         return true;
     }
@@ -148,15 +148,15 @@ public class TablaSimbolos {
                 filatd.first = filate.first;
                 filatd.mvp = filate.mvp;
                 te.remove(filate);
-                
+
             }
             lini--;
         }
-        
+
         FilaTD filatd;
-        for(int i  =0;i<td.size();i++){
+        for (int i = 0; i < td.size(); i++) {
             filatd = td.get(i);
-            if(filatd.np > n){
+            if (filatd.np > n) {
                 td.get(i).np = -1;
             }
         }
@@ -192,12 +192,17 @@ public class TablaSimbolos {
             mvp = f.mvp;
             first = f.first;
         }
-        public FilaTD(){
+
+        public FilaTD() {
         }
-        
+
         @Override
-        public boolean equals(Object f){
-            return this.nombre.equals(((FilaTD)f).nombre);
+        public boolean equals(Object f) {
+            if (this.nombre.equals(((FilaTD) f).nombre) && this.np == ((FilaTD) f).np) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -210,10 +215,11 @@ public class TablaSimbolos {
             super(f);
             refTD = ref;
         }
-        public FilaTE(){
+
+        public FilaTE() {
             super();
         }
-       
+
     }
 
     @Override
@@ -248,6 +254,3 @@ public class TablaSimbolos {
         return res;
     }
 }
-
-
-
