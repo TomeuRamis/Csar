@@ -8,10 +8,12 @@ def int beber(int f, int k){
 }
 
 def void comer(){
+	int b = 700;
 	int s = 3;
 	s = s+2;
-	s = beber(s, 5);
+	s = beber(s, b);
 }
+
 
 def bool cierto(){
 	return true;
@@ -19,7 +21,7 @@ def bool cierto(){
 
 main{
 	comer();
-	if(cierto() || a < h ){
+	if(cierto() || (a < h) ){
 		a = h;
 	} else if (3 == 3 ){
 		int p;
@@ -29,7 +31,7 @@ main{
 	}
 
 	int i = 0;
-	while(a != h && true){
+	while((a != h) && true){
 		i = i + 1;
 		a = h * 3;
 	}

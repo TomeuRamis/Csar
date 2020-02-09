@@ -11,8 +11,13 @@ package Symbols;
  */
 public class FUNC2 extends SimboloBase{
     
+    INSTS insts;
+    
     public FUNC2(INSTS insts, codigo.TablaSimbolos ts){
         super("FUNC2");
+        this.insts = insts;
+        
+        ts.salBloque();
         
         g.addEdge(this, insts);
         g.addEdge(this, new SimboloBase("}"));

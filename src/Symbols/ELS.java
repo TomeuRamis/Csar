@@ -13,8 +13,9 @@ public class ELS extends SimboloBase{
     CND condicion;
     INSTS instrucciones;
     
-    public ELS(CND cnd) {
+    public ELS(CND cnd, codigo.TablaSimbolos ts) {
         super("ELS",cnd.fila,cnd.columna);
+        
         
         g.addEdge(this, new SimboloBase("else"));
         g.addEdge(this, cnd);
@@ -28,8 +29,9 @@ public class ELS extends SimboloBase{
         
     }
     
-    public ELS(){
+    public ELS(codigo.TablaSimbolos ts){
         super("λ");
+        ts.salBloque();
     }
     
 }

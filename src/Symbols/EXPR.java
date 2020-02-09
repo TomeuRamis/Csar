@@ -34,7 +34,7 @@ public class EXPR extends SimboloBase{
     public EXPR(String id, codigo.TablaSimbolos ts,int left, int right){
         super("EXPR",left,right);
         
-        codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
+        codigo.TablaSimbolos.FilaTD d = ts.consulta(id, codigo.TablaSimbolos.Mvp.dvar);
         if (d == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semantico: Variable "+id+" no declarada. Linea: "+(left+1));
@@ -43,8 +43,15 @@ public class EXPR extends SimboloBase{
             
             g.addEdge(this, new SimboloBase(id));
         }
+    }
+    
+    public EXPR(EXPRP exprp){
+        super("EXPR");
+        tipo = exprp.tipo;
         
-        
+        g.addEdge(this, new SimboloBase("("));
+        g.addEdge(this, exprp);
+        g.addEdge(this, new SimboloBase(")"));
     }
     
 }

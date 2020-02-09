@@ -20,11 +20,6 @@ parser code
     }
 :};
 
-init with {:
-    
-    
-
-:}
 terminal String Tipo, Id, Numero, Op_booleano, String, Op_aritmetico, Op_logico, Op_relacional;
 terminal While, Igual, Else,  Const, If, In,  Out, Main, Def, Return, Coma, Void,
     PuntoYComa, A_par, C_par, A_llave, C_llave;
@@ -64,6 +59,7 @@ non terminal Symbols.CND2 CND2;
 non terminal Symbols.ELS ELS;
 non terminal Symbols.ELS1 ELS1;
 non terminal Symbols.ELS2 ELS2;
+non terminal Symbols.ELS3 ELS3;
 non terminal Symbols.IO IO;
 non terminal Symbols.RET RET;
 
@@ -104,7 +100,7 @@ INST ::=
     CND:v                 {: RESULT = new Symbols.INST(v,false); :} |
     IO:v PuntoYComa       {: RESULT = new Symbols.INST(v,true); :} |
     CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v,true); :} |
-    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v,true); :} |
+    RET:v PuntoYComa      {: RESULT = new Symbols.INST(v); :} |
     error PuntoYComa    |
     error C_llave
 ;
@@ -131,18 +127,21 @@ CND1 ::=
     If A_par EXPRP:v C_par A_llave  {: RESULT = new Symbols.CND1(v, ts); :}
 ;
 CND2 ::=
-    INSTS:v1 C_llave ELS:v2           {: RESULT = new Symbols.CND2(v1, v2, ts); :}
+    INSTS:v1 C_llave ELS:v2         {: RESULT = new Symbols.CND2(v1, v2, ts); :}
 ;
 ELS ::=
-    Else CND:v                      {: RESULT = new Symbols.ELS(v); :} |
-    ELS1:v1 ELS2:v2                       {: RESULT = new Symbols.ELS(v1, v2); :} |
-    LAMBDA                          {: RESULT = new Symbols.ELS(); :}
+    ELS3 CND:v                      {: RESULT = new Symbols.ELS(v, ts); :} |
+    ELS1:v1 ELS2:v2                 {: RESULT = new Symbols.ELS(v1, v2); :} |
+    LAMBDA                          {: RESULT = new Symbols.ELS(ts); :}
 ;
 ELS1 ::= 
     Else A_llave                    {: RESULT = new Symbols.ELS1(ts); :}
 ;
 ELS2 ::=
     INSTS:v C_llave                 {: RESULT = new Symbols.ELS2(v, ts); :} 
+;
+ELS3 ::=
+    Else                            {: RESULT = new Symbols.ELS3(ts); :}
 ;
 IO ::= 
     In A_par Id:v C_par             {: RESULT = new Symbols.IO(v, ts,vleft,vright); :} |
@@ -188,6 +187,7 @@ EXPRP ::=
     EXPR:v                          {: RESULT = new Symbols.EXPRP(v); :}
 ;
 EXPR ::= 
+    A_par EXPRP:v C_par             {: RESULT = new Symbols.EXPR(v); :} |
     CALL:v                          {: RESULT = new Symbols.EXPR(v); :} |
     Id:v                            {: RESULT = new Symbols.EXPR(v, ts,vleft,vright); :} |
     LITERAL:v                       {: RESULT = new Symbols.EXPR(v); :}

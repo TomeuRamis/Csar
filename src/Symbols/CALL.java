@@ -17,7 +17,7 @@ public class CALL extends SimboloBase {
     public CALL(String id, codigo.TablaSimbolos ts,int left, int right) {
         super("CALL",left,right);
         
-        codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
+        codigo.TablaSimbolos.FilaTD d = ts.consulta(id, codigo.TablaSimbolos.Mvp.dproc);
         if(d == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: el subprograma "+id+" no ha sido definicdo. Linea "+(left+1));
@@ -39,7 +39,7 @@ public class CALL extends SimboloBase {
     public CALL(String id, EXPRS exprs, codigo.TablaSimbolos ts, int left, int right) {
         super("CALL", left, right);
 
-        codigo.TablaSimbolos.FilaTD d = ts.consulta(id);
+        codigo.TablaSimbolos.FilaTD d = ts.consulta(id, codigo.TablaSimbolos.Mvp.dproc);
         if(d == null){
             //ERROR
             System.out.println("Error semántico: el subprograma "+id+" no ha sido definicdo. Linea: "+left);
@@ -64,7 +64,9 @@ public class CALL extends SimboloBase {
                     System.out.println("Error semántico: hay demasiados parámetros en "+id+" Linea: "+left);
                     break;
                 }
+                
                 fTe = ts.getFilaTE(fTe.first);
+                
             }
             if(fTe != null){
                 //ERROR

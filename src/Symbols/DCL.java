@@ -20,7 +20,7 @@ public class DCL extends SimboloBase{
     public DCL(TYPE tipo, String id, ASIGNACION asignacion, codigo.TablaSimbolos ts) {
         super("DCL",tipo.fila,tipo.columna);
         
-        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);    
+        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id, codigo.TablaSimbolos.Mvp.dvar);    
         
         if(tipo.tipo != asignacion.tipo && asignacion.tipo != codigo.TablaSimbolos.Tipo.tNull) {
             //ERROR

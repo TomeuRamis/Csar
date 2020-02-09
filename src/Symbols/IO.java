@@ -16,7 +16,7 @@ public class IO extends SimboloBase{
     public IO(String id, codigo.TablaSimbolos ts,int left, int right) {
         super("IO",left,right);
         
-        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id);
+        codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id, codigo.TablaSimbolos.Mvp.dvar);
         if(fTd == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: " + id + " no esta definido. Linea: "+(left+1));

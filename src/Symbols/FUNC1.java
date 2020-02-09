@@ -12,11 +12,13 @@ package Symbols;
 public class FUNC1 extends SimboloBase {
 
     codigo.TablaSimbolos.Tipo tipo;
+    String id;
 
     public FUNC1(DEFINICION def, String id, PARAMS params, codigo.TablaSimbolos ts) {
         super("FUNC1",def.fila,def.columna);
 
         tipo = def.tipo;
+        this.id = id;
 
         if (!ts.add(id, def.tipo, codigo.TablaSimbolos.Mvp.dproc)) {
             //ERROR
@@ -25,11 +27,12 @@ public class FUNC1 extends SimboloBase {
             //ERROR
             System.out.println("Error semántico: el numero de ids de parametros y el numeor de tipos no coinciden para la función " + id+". Linea: "+(this.fila+1));
         } else {
+
+            ts.entraBloque();
+            
             for (int i = 0; i < params.idParams.size(); i++) {
                 ts.ponerParam(id, params.idParams.get(i), params.tipos.get(i));
             }
-
-            ts.entraBloque();
 
             g.addEdge(this, def);
             g.addEdge(this, new SimboloBase(id));

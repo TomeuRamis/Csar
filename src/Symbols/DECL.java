@@ -16,7 +16,7 @@ public class DECL extends SimboloBase {
         super("DECL",dcl.fila,dcl.columna);
         
         if(con){
-            codigo.TablaSimbolos.FilaTD f = ts.consulta(dcl.id);
+            codigo.TablaSimbolos.FilaTD f = ts.consulta(dcl.id, codigo.TablaSimbolos.Mvp.dvar);
             f.mvp = codigo.TablaSimbolos.Mvp.dconst;
             
             g.addEdge(this, new SimboloBase("const"));

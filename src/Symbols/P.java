@@ -24,12 +24,13 @@ public class P extends SimboloBase{
         
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter("output/tablaSimbolos.csv"));
+            writer = new BufferedWriter(new FileWriter("output/tablaSimbolos.xls"));
             writer.write(ts.toString());
             writer.close();
             
         } catch (IOException ex) {
             Logger.getLogger(P.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("ERROR: problema al escribir la tabla de simbolos");
         } finally {
             try {
                 writer.close();
