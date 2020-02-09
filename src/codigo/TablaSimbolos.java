@@ -18,6 +18,7 @@ public class TablaSimbolos {
 
     ArrayList<FilaTD> td;
     ArrayList<FilaTE> te;
+    ArrayList<FilaTP> tp;
     int[] ta;
     int n;
 
@@ -32,6 +33,7 @@ public class TablaSimbolos {
     public TablaSimbolos() {
         td = new ArrayList<>();
         te = new ArrayList<>();
+        tp = new ArrayList<>();
         ta = new int[profMax];
         n = 0;
     }
@@ -87,7 +89,7 @@ public class TablaSimbolos {
                 ta[n]++;
                 posAnterior = td.indexOf(filatd);
                 FilaTE nuevaFilaTE = new FilaTE(filatd, posAnterior);
-                te.add(nuevaFilaTE);
+                te.add(nuevaFilaTE);              
                 td.remove(posAnterior);
                 //System.out.println(posAnterior);
             } else {
@@ -127,40 +129,43 @@ public class TablaSimbolos {
         FilaTD fproc = consulta(idproc, Mvp.dproc);
         if (fproc.mvp != Mvp.dproc) {
             //Error
-            System.out.println("ERROR: solo se pueden añadir paràmetros a subprogramas");
+            FrmPrincipal.notificarError("ERROR semántico: '"+idproc+"' no es un subprograma.");
+            //System.out.println("ERROR: solo se pueden añadir paràmetros a subprogramas");
             return false;
         }
 
         int i = fproc.first;
         int pp = -1;
-        while (i != -1 && !te.get(i).nombre.equals(idparam)) {
+        while (i != -1 && !tp.get(i).nombre.equals(idparam)) {
             pp = i;
-            i = te.get(i).first;
+            i = tp.get(i).first;
         }
         if (i != -1) {
             //ERROR
-            System.out.println("ERROR en ponerParam de " + idproc);
+            FrmPrincipal.notificarError("ERROR semántico: nombre de parámetro '"+idparam+"' repetido en " + idproc);
             return false;
         }
-        int nou = ta[n];
-        ta[n]++;
-        //ta[n - 1]++;
-        FilaTE fTE = new FilaTE();
-        if (nou > te.size() - 1) {
-            te.add(nou, fTE);
-        }
-        te.get(nou).nombre = idparam;
-        te.get(nou).np = -1;
-        te.get(nou).tipo = tipo;
-        te.get(nou).first = -1;
-        te.get(nou).mvp = null;
-        te.get(nou).refTD = - 1;
+//        int nou = ta[n];
+//        ta[n]++;
+//        ta[n - 1]++;
+//        FilaTE fTE = new FilaTE();
+//        if (nou > te.size() - 1) {
+//            te.add(nou, fTE);
+//        }
+//        te.get(nou).nombre = idparam;
+//        te.get(nou).np = -1;
+//        te.get(nou).tipo = tipo;
+//        te.get(nou).first = -1;
+//        te.get(nou).mvp = null;
+//        te.get(nou).refTD = - 1;
         if (pp == -1) {
-            fproc.first = nou;
+            fproc.first = tp.size();
 
         } else {
-            te.get(pp).first = nou;
+            tp.get(pp).first = tp.size();
         }
+        FilaTP ftp = new FilaTP(idparam, tipo);
+        tp.add(ftp);
 
         this.add(idparam, tipo, Mvp.dvar);
         return true;
@@ -185,8 +190,8 @@ public class TablaSimbolos {
                 filatd.np = filate.np;
                 filatd.first = filate.first;
                 filatd.mvp = filate.mvp;
+                //En vez de eliminar la fila, y hacer que filaTE.first se rompa, cambiaré el nombre a ""
                 te.remove(filate);
-
             }
             lini--;
         }
@@ -199,7 +204,7 @@ public class TablaSimbolos {
             }
         }
     }
-
+    
     public FilaTE getFilaTE(int index) {
         return (index > te.size() - 1 || index == -1) ? null : te.get(index);
     }
@@ -256,17 +261,30 @@ public class TablaSimbolos {
         }
 
     }
+    
+    public class FilaTP {
+        
+        public String nombre;
+        public Tipo tipo;
+        public int first;
+        
+        public FilaTP(String nombre, Tipo t){
+            this.nombre = nombre;
+            this.tipo = t;
+            this.first = -1;
+        }
+    }
 
     @Override
     public String toString() {
         String res = "";
         res += "n = " + n + "\n";
         //res += "=======================================================================================\n";
-        res += "TD\t\t\t\t\t||\tTE\t\t\t\t\t\t||\tTA\n";
-        res += "nombre \t tipo \t np \t first \t mvp \t||\t nombre \t tipo \t np \t first \t mvp \t refTD \t||\t\n";
+        res += "TD\t\t\t\t\t||\tTE\t\t\t\t\t\t||\tTA\t||\tTP\n";
+        res += "nombre \t tipo \t np \t first \t mvp \t||\t nombre \t tipo \t np \t first \t mvp \t refTD \t||\t\t||\tnombre \t tipo \t np \t first \t mvp\n";
         //res += "||---------------------------------||------------------------------------------------||\n";
         int i;
-        for (i = 0; i < td.size() || i < te.size() || i < ta.length; i++) {
+        for (i = 0; i < td.size() || i < te.size() || i < ta.length || i < tp.size(); i++) {
             if (i < td.size()) {
                 FilaTD ftd = td.get(i);
                 res += "" + ftd.nombre + "\t" + ftd.tipo + "\t" + ftd.np + "\t" + ftd.first + "\t" + ftd.mvp + "\t||";
@@ -280,9 +298,15 @@ public class TablaSimbolos {
                 res += "\t\t\t\t\t\t\t||";
             }
             if (i < ta.length) {
-                res += "\t" + ta[i] + "\n";
+                res += "\t" + ta[i] ;
             } else {
                 res += "\t";
+            }
+            if (i < tp.size()) {
+                FilaTP ftp = tp.get(i);
+                res += "\t||\t" + ftp.nombre + "\t" + ftp.tipo + "\t" + ftp.first + "\t\n";
+            } else {
+                res += "\t||\t\t\t\t\n";
             }
         }
         //res += "=======================================================================================";

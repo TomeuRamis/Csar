@@ -1,2 +1,1 @@
-Error semantico: Variable numero1 no declarada. Linea: 11
 Analisis finalizado

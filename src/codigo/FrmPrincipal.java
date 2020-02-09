@@ -266,6 +266,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnAnalizarSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarSinActionPerformed
         // TODO add your handling code here:
+        try{
+            this.analizarLexico();
+        } catch(Exception ex){
+            System.err.println("ERROR en el análisis léxico");
+        }
+        
         String ST = txtResultado.getText();
         Lexer lexico = new codigo.Lexer(new StringReader(ST));
         Cooper s = new Cooper(lexico);
