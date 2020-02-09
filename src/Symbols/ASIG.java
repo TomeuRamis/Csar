@@ -20,6 +20,9 @@ public class ASIG extends SimboloBase{
         if(fTd == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: " + id + "no existe. Linea: "+(exprp.fila+1));
+        } else if (fTd.mvp == codigo.TablaSimbolos.Mvp.dconst){
+            //ERROR
+            codigo.FrmPrincipal.notificarError("Error semántico: Asignación a constante " + id + " en linea: "+(exprp.fila+1));
         } else if(fTd.tipo != exprp.tipo){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: " + id +" los tipos son inconpatibles. Linea: "+(exprp.fila+1));
