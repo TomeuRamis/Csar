@@ -89,7 +89,7 @@ public class TablaSimbolos {
                 FilaTE nuevaFilaTE = new FilaTE(filatd, posAnterior);
                 te.add(nuevaFilaTE);
                 td.remove(posAnterior);
-                System.out.println(posAnterior);
+                //System.out.println(posAnterior);
             } else {
                 return false;
             }
@@ -144,7 +144,7 @@ public class TablaSimbolos {
         }
         int nou = ta[n];
         ta[n]++;
-        ta[n - 1]++;
+        //ta[n - 1]++;
         FilaTE fTE = new FilaTE();
         if (nou > te.size() - 1) {
             te.add(nou, fTE);
