@@ -98,7 +98,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         txtInput.setColumns(20);
         txtInput.setRows(5);
-        txtInput.setText("int i = 3;\nint z = 2;\nmain{\nint a = 2;\nint c = true;\nint a  = 4;\nint b = 2;\nstring f = \"alcahofa\";\nstring x = 3;\nif(true){}\nif(3){}\n}");
+        txtInput.setText("//Code here");
         jScrollPane1.setViewportView(txtInput);
 
         btnLimpiarIn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -197,8 +197,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("Codigo a compilar");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -210,14 +208,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         try {
             archivo = new File(chooser.getSelectedFile().getAbsolutePath());
         } catch (Exception ex) {
-            System.err.println("No se ha seleccionado ningún archivo.");
+            notificarError("No se ha seleccionado ningún archivo.");
         }
         if (archivo != null) {
             try {
                 String ST = new String(Files.readAllBytes(archivo.toPath()));
                 txtInput.setText(ST);
             }catch (IOException ex) {
-                System.err.println("Error en la lectura del fichero");
+                notificarError("Error en la lectura del fichero");
             }
         }
     }//GEN-LAST:event_btnArchivoActionPerformed
@@ -237,7 +235,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         try {
             this.analizarLexico();
         } catch (Exception ex) {
-            System.err.println("ERROR en el análisis léxico");
+            //System.err.println("ERROR en el análisis léxico");
         }
 
         String ST = txtInput.getText();
@@ -254,7 +252,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 txtOutput.setForeground(Color.red);
             }
         } catch (Exception ex) {
-            System.err.println(ex);
+            //System.err.println(ex);
             Symbol sym = s.getS();
             txtOutput.setForeground(Color.red);
         } finally {

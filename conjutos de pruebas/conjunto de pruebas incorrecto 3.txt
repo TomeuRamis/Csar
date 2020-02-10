@@ -1,0 +1,24 @@
+int a = "hola";
+string b = 3;
+
+def int suma(int a, int b){
+	int c = a+b;
+}
+
+def void resta(int a, int b){
+	int c = a-b;
+	return c;
+}
+
+main{
+	while(1){
+		if("Hola"){
+		}else if(suma(3,5)){
+		} else{
+			suma("hola", true);
+		}
+	in(id);
+	in(true);
+	out(65);
+	out("adios");
+}

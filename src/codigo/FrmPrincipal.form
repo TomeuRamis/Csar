@@ -48,9 +48,6 @@
           </Border>
         </Property>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Codigo a compilar"/>
-      </AccessibilityProperties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -106,7 +103,7 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="int i = 3;&#xa;int z = 2;&#xa;main{&#xa;int a = 2;&#xa;int c = true;&#xa;int a  = 4;&#xa;int b = 2;&#xa;string f = &quot;alcahofa&quot;;&#xa;string x = 3;&#xa;if(true){}&#xa;if(3){}&#xa;}"/>
+                <Property name="text" type="java.lang.String" value="//Code here"/>
               </Properties>
             </Component>
           </SubComponents>

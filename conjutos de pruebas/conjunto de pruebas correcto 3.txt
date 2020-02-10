@@ -1,0 +1,39 @@
+const int a = 10;
+int b = 9;
+
+main{
+	while(true){
+		int a = 8;
+		int b = 7;
+			if(false){
+				int a = 6;
+				int b = 5;
+			} else if(1>0){
+				if(true){
+					if(true){
+						if(true){
+							if(false){
+								int a = 100;
+								int b = a*a;
+							}
+						}
+					}
+				}	 
+			}else {
+				int a = 4;
+				int b = 3;
+			}
+		while(a > b){
+			int a = 2;
+			int b = 1;
+			int c = 0;
+		}
+	}
+	string a = "ñañaña";
+	if(a == "ÜüçÇ"){
+		out("cadena incorrecta");
+		int a = -1;
+		int b = -2;
+		int c = 5-7;
+	}
+}

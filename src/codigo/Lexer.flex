@@ -7,7 +7,8 @@ import java_cup.runtime.Symbol;
 %full
 %line
 %column
-L=[a-zA-Z_ÑñÇçüÜ]+
+T = [áàéèíìóòúùÁÀÉÈÍÌÓÒÚÙñçüÑÇÜ]
+L=[a-zA-Z_]+
 D=[0-9]+
 espacio=[ \t\r\n]+
 %{
@@ -43,7 +44,7 @@ out { return symbol(sym.Out, yytext());}
 ")" {return symbol(sym.C_par, yytext());}
 "{" {return symbol(sym.A_llave, yytext());}
 "}" {return symbol(sym.C_llave, yytext());}
-{L}({L}|{D})* {return symbol(sym.Id, yytext());}
+({L}|{T})({L}|{D}|{T})* {return symbol(sym.Id, yytext());}
 \"([^\\\"]|\\.)*\" {return symbol(sym.String, yytext());}
 ("(-"{D}+")")|{D}+ {return symbol(sym.Numero, yytext());}
  . {FrmPrincipal.notificarError("Error léxico: "+yytext()+" en linea: "+(yyline+1)+" columna: "+(yycolumn+1));}
