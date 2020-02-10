@@ -19,53 +19,46 @@ import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 
-/**
- *
- * @author Charly Ponce
- */
 public class FrmPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmPrincipal
      */
     private static String errores = "";
-    
+
     public FrmPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-    public static void notificarError(String msg){
+
+    public static void notificarError(String msg) {
         errores += msg + "\n";
     }
-    
-    private void analizarLexico() throws IOException{
+
+    private void analizarLexico() throws IOException {
         int cont = 1;
-        String ST = txtResultado.getText();
+        String ST = txtInput.getText();
         Lexer lexico = new codigo.Lexer(new StringReader(ST));
-        
-        
+
         String resultado = "";
         Symbol simbolo = lexico.next_token();
         while (simbolo.value != null) {
-            
-            
+
             switch (simbolo.sym) {
                 case sym.PuntoYComa:
                 case sym.A_llave:
                     resultado += "<" + traduce(simbolo.sym) + ">\n";
                     break;
                 case sym.error:
-                    System.out.print("ERROR léxico: Símbolo no definido '"+simbolo.value+"' en Linea: "+simbolo.right+", Carácter: "+simbolo.left+"\n");
+                    System.out.print("ERROR léxico: Símbolo no definido '" + simbolo.value + "' en Linea: " + simbolo.right + ", Carácter: " + simbolo.left + "\n");
                 default:
                     resultado += "<" + traduce(simbolo.sym) + ">";
                     break;
             }
             simbolo = lexico.next_token();
-        
+
         }
-        txtAnalizarLex.setText(resultado);
-        
+
         BufferedWriter writer = new BufferedWriter(new FileWriter("output/ficheroTokens.txt"));
         writer.write(resultado);
         writer.close();
@@ -83,20 +76,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnArchivo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtResultado = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtAnalizarLex = new javax.swing.JTextArea();
-        btnAnalizarLex = new javax.swing.JButton();
-        btnLimpiarLex = new javax.swing.JButton();
+        txtInput = new javax.swing.JTextArea();
+        btnLimpiarIn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        txtAnalizarSin = new javax.swing.JTextArea();
-        btnAnalizarSin = new javax.swing.JButton();
-        btnLimpiarSin = new javax.swing.JButton();
+        txtOutput = new javax.swing.JTextArea();
+        btnAnalizar = new javax.swing.JButton();
+        btnLimpiarOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Analizador Lexico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Codigo a compilar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
         btnArchivo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnArchivo.setText("Abrir archivo");
@@ -106,29 +96,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        txtResultado.setColumns(20);
-        txtResultado.setRows(5);
-        txtResultado.setText("int i = 3;\nint z = 2;\nmain{\nint a = 2;\nint c = true;\nint a  = 4;\nint b = 2;\nstring f = \"alcahofa\";\nstring x = 3;\nif(true){}\nif(3){}\n}");
-        jScrollPane1.setViewportView(txtResultado);
+        txtInput.setColumns(20);
+        txtInput.setRows(5);
+        txtInput.setText("int i = 3;\nint z = 2;\nmain{\nint a = 2;\nint c = true;\nint a  = 4;\nint b = 2;\nstring f = \"alcahofa\";\nstring x = 3;\nif(true){}\nif(3){}\n}");
+        jScrollPane1.setViewportView(txtInput);
 
-        txtAnalizarLex.setEditable(false);
-        txtAnalizarLex.setColumns(20);
-        txtAnalizarLex.setRows(5);
-        jScrollPane2.setViewportView(txtAnalizarLex);
-
-        btnAnalizarLex.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnAnalizarLex.setText("Analizar");
-        btnAnalizarLex.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiarIn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnLimpiarIn.setText("Limpiar");
+        btnLimpiarIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnalizarLexActionPerformed(evt);
-            }
-        });
-
-        btnLimpiarLex.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnLimpiarLex.setText("Limpiar");
-        btnLimpiarLex.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarLexActionPerformed(evt);
+                btnLimpiarInActionPerformed(evt);
             }
         });
 
@@ -139,51 +116,44 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAnalizarLex)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLimpiarLex))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 462, Short.MAX_VALUE)
+                        .addComponent(btnLimpiarIn))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnArchivo)
-                    .addComponent(btnAnalizarLex)
-                    .addComponent(btnLimpiarLex))
+                    .addComponent(btnLimpiarIn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 11, Short.MAX_VALUE))))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Analizador Sintactico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
-        txtAnalizarSin.setEditable(false);
-        txtAnalizarSin.setColumns(20);
-        txtAnalizarSin.setRows(5);
-        jScrollPane3.setViewportView(txtAnalizarSin);
+        txtOutput.setEditable(false);
+        txtOutput.setColumns(20);
+        txtOutput.setRows(5);
+        jScrollPane3.setViewportView(txtOutput);
 
-        btnAnalizarSin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnAnalizarSin.setText("Analizar");
-        btnAnalizarSin.addActionListener(new java.awt.event.ActionListener() {
+        btnAnalizar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnAnalizar.setText("Analizar");
+        btnAnalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnalizarSinActionPerformed(evt);
+                btnAnalizarActionPerformed(evt);
             }
         });
 
-        btnLimpiarSin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnLimpiarSin.setText("Limpiar");
-        btnLimpiarSin.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiarOut.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnLimpiarOut.setText("Limpiar");
+        btnLimpiarOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarSinActionPerformed(evt);
+                btnLimpiarOutActionPerformed(evt);
             }
         });
 
@@ -196,17 +166,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnAnalizarSin)
+                        .addComponent(btnAnalizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLimpiarSin))))
+                        .addComponent(btnLimpiarOut))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnalizarSin)
-                    .addComponent(btnLimpiarSin))
+                    .addComponent(btnAnalizar)
+                    .addComponent(btnLimpiarOut))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -227,6 +197,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.getAccessibleContext().setAccessibleName("Codigo a compilar");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -234,65 +206,62 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        File archivo = new File(chooser.getSelectedFile().getAbsolutePath());
-        
+        File archivo = null;
         try {
-            String ST = new String(Files.readAllBytes(archivo.toPath()));
-            txtResultado.setText(ST);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            archivo = new File(chooser.getSelectedFile().getAbsolutePath());
+        } catch (Exception ex) {
+            System.err.println("No se ha seleccionado ningún archivo.");
+        }
+        if (archivo != null) {
+            try {
+                String ST = new String(Files.readAllBytes(archivo.toPath()));
+                txtInput.setText(ST);
+            }catch (IOException ex) {
+                System.err.println("Error en la lectura del fichero");
+            }
         }
     }//GEN-LAST:event_btnArchivoActionPerformed
 
-    private void btnLimpiarLexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarLexActionPerformed
+    private void btnLimpiarInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarInActionPerformed
         // TODO add your handling code here:
-        txtAnalizarLex.setText(null);
-    }//GEN-LAST:event_btnLimpiarLexActionPerformed
+        this.txtInput.setText(null);
+    }//GEN-LAST:event_btnLimpiarInActionPerformed
 
-    private void btnLimpiarSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarSinActionPerformed
+    private void btnLimpiarOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarOutActionPerformed
         // TODO add your handling code here:
-        txtAnalizarSin.setText(null);
-    }//GEN-LAST:event_btnLimpiarSinActionPerformed
+        txtOutput.setText(null);
+    }//GEN-LAST:event_btnLimpiarOutActionPerformed
 
-    private void btnAnalizarLexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarLexActionPerformed
+    private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
+        // TODO add your handling code here:
         try {
-            analizarLexico();
-        } catch (IOException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnAnalizarLexActionPerformed
-
-    private void btnAnalizarSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarSinActionPerformed
-        // TODO add your handling code here:
-        try{
             this.analizarLexico();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             System.err.println("ERROR en el análisis léxico");
         }
-        
-        String ST = txtResultado.getText();
+
+        String ST = txtInput.getText();
         Lexer lexico = new codigo.Lexer(new StringReader(ST));
         Cooper s = new Cooper(lexico);
         errores = "";
         SimboloBase.resetArbol();
-        
+
         try {
             s.parse();
-            if(errores.equals(""))
-                txtAnalizarSin.setForeground(new Color(25, 111, 61));
-            else
-                txtAnalizarSin.setForeground(Color.red);
+            if (errores.equals("")) {
+                txtOutput.setForeground(new Color(25, 111, 61));
+            } else {
+                txtOutput.setForeground(Color.red);
+            }
         } catch (Exception ex) {
             System.err.println(ex);
             Symbol sym = s.getS();
-            txtAnalizarSin.setForeground(Color.red);
-        }finally{
+            txtOutput.setForeground(Color.red);
+        } finally {
             BufferedWriter writer = null;
             try {
                 errores += "Analisis finalizado";
-                txtAnalizarSin.setText(errores);
+                txtOutput.setText(errores);
                 writer = new BufferedWriter(new FileWriter("output/ficheroErrores.txt"));
                 writer.write(errores);
                 writer.close();
@@ -306,7 +275,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_btnAnalizarSinActionPerformed
+    }//GEN-LAST:event_btnAnalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,54 +314,107 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
-    private String traduce(int simbolo){
+
+    private String traduce(int simbolo) {
         String res = null;
-        switch (simbolo){
-            case 1: res = "error"; break;
-            case 2: res = "tipo"; break;
-            case 3: res = "id"; break;
-            case 4: res = "numero"; break;
-            case 5: res = "op_booleano"; break;
-            case 6: res = "string"; break;
-            case 7: res = "op_aritmetico"; break;
-            case 8: res = "op_logico"; break;
-            case 9: res = "op_relacional"; break;
-            case 10: res = "while"; break;
-            case 11: res = "igual"; break;
-            case 12: res = "else"; break;
-            case 13: res = "const"; break;
-            case 14: res = "if"; break;
-            case 15: res = "in"; break;
-            case 16: res = "out"; break;
-            case 17: res = "main"; break;
-            case 18: res = "def"; break;
-            case 19: res = "return"; break;
-            case 20: res = "coma"; break;
-            case 21: res = "void"; break;
-            case 22: res = "p_coma"; break;
-            case 23: res = "a_par"; break;
-            case 24: res = "c_par"; break;
-            case 25: res = "a_llave"; break;
-            case 26: res = "c_llave"; break;
-            default: res = "simbolo desconocido"; break;
+        switch (simbolo) {
+            case 0:
+                break;
+            case 1:
+                res = "error";
+                break;
+            case 2:
+                res = "tipo";
+                break;
+            case 3:
+                res = "id";
+                break;
+            case 4:
+                res = "numero";
+                break;
+            case 5:
+                res = "op_booleano";
+                break;
+            case 6:
+                res = "string";
+                break;
+            case 7:
+                res = "op_aritmetico";
+                break;
+            case 8:
+                res = "op_logico";
+                break;
+            case 9:
+                res = "op_relacional";
+                break;
+            case 10:
+                res = "while";
+                break;
+            case 11:
+                res = "igual";
+                break;
+            case 12:
+                res = "else";
+                break;
+            case 13:
+                res = "const";
+                break;
+            case 14:
+                res = "if";
+                break;
+            case 15:
+                res = "in";
+                break;
+            case 16:
+                res = "out";
+                break;
+            case 17:
+                res = "main";
+                break;
+            case 18:
+                res = "def";
+                break;
+            case 19:
+                res = "return";
+                break;
+            case 20:
+                res = "coma";
+                break;
+            case 21:
+                res = "void";
+                break;
+            case 22:
+                res = "p_coma";
+                break;
+            case 23:
+                res = "a_par";
+                break;
+            case 24:
+                res = "c_par";
+                break;
+            case 25:
+                res = "a_llave";
+                break;
+            case 26:
+                res = "c_llave";
+                break;
+            default:
+                res = "simbolo desconocido";
+                break;
         }
         return res;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnalizarLex;
-    private javax.swing.JButton btnAnalizarSin;
+    private javax.swing.JButton btnAnalizar;
     private javax.swing.JButton btnArchivo;
-    private javax.swing.JButton btnLimpiarLex;
-    private javax.swing.JButton btnLimpiarSin;
+    private javax.swing.JButton btnLimpiarIn;
+    private javax.swing.JButton btnLimpiarOut;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea txtAnalizarLex;
-    private javax.swing.JTextArea txtAnalizarSin;
-    private javax.swing.JTextArea txtResultado;
+    private javax.swing.JTextArea txtInput;
+    private javax.swing.JTextArea txtOutput;
     // End of variables declaration//GEN-END:variables
 }

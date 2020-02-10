@@ -11,10 +11,12 @@ package Symbols;
  */
 public class CND2 extends SimboloBase{
     
+    INSTS insts;
+    
     public CND2(INSTS insts, ELS els, codigo.TablaSimbolos ts){
         super("CND2",insts.fila,insts.columna);
         
-        
+        this.insts = insts;
         
         g.addEdge(this, insts);
         g.addEdge(this, new SimboloBase("}"));

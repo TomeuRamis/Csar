@@ -11,8 +11,12 @@ package Symbols;
  */
 public class CND extends SimboloBase{
     
+    INSTS insts;
+    
     public CND(CND1 cnd1, CND2 cnd2){
         super("CND",cnd1.fila,cnd1.columna);
+        
+        this.insts = cnd2.insts;
         
         g.addEdge(this, cnd1);
         g.addEdge(this, cnd2);
