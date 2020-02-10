@@ -208,6 +208,10 @@ public class TablaSimbolos {
     public FilaTE getFilaTE(int index) {
         return (index > te.size() - 1 || index == -1) ? null : te.get(index);
     }
+    
+    public FilaTP getFilaTP(int index){
+        return (index > tp.size()-1 || index == -1) ? null : tp.get(index);
+    }
 
     public class FilaTD {
 

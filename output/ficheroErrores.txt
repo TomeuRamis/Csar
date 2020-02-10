@@ -1,7 +1,1 @@
-Error semántico: hay demasiados parámetros en suma Linea: 35
-Error semántico: hay demasiados parámetros en resta Linea: 36
-Error semántico: hay demasiados parámetros en presentacion Linea: 37
-Error semántico: hay demasiados parámetros en output Linea: 37
-Error semántico: hay demasiados parámetros en frase Linea: 38
-Error semántico: hay demasiados parámetros en operacion Linea: 39
 Analisis finalizado

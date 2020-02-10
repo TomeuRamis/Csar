@@ -50,11 +50,11 @@ public class CALL extends SimboloBase {
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: "+id+" no debe tener parámetros. Linea: "+left);
         } else{
-            codigo.TablaSimbolos.FilaTE fTe = ts.getFilaTE(d.first);
+            codigo.TablaSimbolos.FilaTP fTp = ts.getFilaTP(d.first);
             for(int i =0; i < exprs.tipos.size(); i++){
                 
-                if(fTe != null){
-                    if(fTe.tipo != exprs.tipos.get(i)){
+                if(fTp != null){
+                    if(fTp.tipo != exprs.tipos.get(i)){
                         //ERROR
                         codigo.FrmPrincipal.notificarError("Error semántico: tipo incorrecto del parámetro "+(i+1)+" en la llamda al subprograma "+id+" Linea: "+left);
                         break;
@@ -65,10 +65,10 @@ public class CALL extends SimboloBase {
                     break;
                 }
                 
-                fTe = ts.getFilaTE(fTe.first);
+                fTp = ts.getFilaTP(fTp.first);
                 
             }
-            if(fTe != null){
+            if(fTp != null){
                 //ERROR
                 codigo.FrmPrincipal.notificarError("Error semántico: faltan parámetros en la llamda a "+id+" Linea: "+left);
             }
