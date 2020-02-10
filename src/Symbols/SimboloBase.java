@@ -68,7 +68,7 @@ public class SimboloBase{
         Writer writer;
 
         try {
-            writer = new FileWriter("output/Arbol sintactico.dot");
+            writer = new FileWriter("output/arbolSintactico.dot");
             try {
                 exporter.exportGraph(g, writer);
             } catch (ExportException ex) {
