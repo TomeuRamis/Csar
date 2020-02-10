@@ -11,7 +11,6 @@ package Symbols;
  */
 public class RET extends SimboloBase{
     
-    EXPRP expresionP;
     codigo.TablaSimbolos.Tipo tipo;
     
     public RET(EXPRP exprp) {

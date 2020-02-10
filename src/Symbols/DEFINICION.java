@@ -10,7 +10,6 @@ package Symbols;
  * @author Juan
  */
 public class DEFINICION extends SimboloBase{
-    TYPE type;
     codigo.TablaSimbolos.Tipo tipo;
     
     public DEFINICION(TYPE ty) {

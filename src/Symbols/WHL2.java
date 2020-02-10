@@ -11,9 +11,13 @@ package Symbols;
  */
 public class WHL2 extends SimboloBase {
 
+    INSTS insts;
+    
     public WHL2(INSTS instruccion, codigo.TablaSimbolos ts) {
         super("WHL2");
 
+        this.insts = instruccion;
+        
         ts.salBloque();
         
         g.addEdge(this, instruccion);

@@ -38,11 +38,11 @@ public class EXPR extends SimboloBase{
         if (d == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semantico: Variable "+id+" no declarada. Linea: "+(left+1));
-        } else{
-            tipo = d.tipo;
-            
-            g.addEdge(this, new SimboloBase(id));
         }
+        tipo = d.tipo;
+
+        g.addEdge(this, new SimboloBase(id));
+        
     }
     
     public EXPR(EXPRP exprp){

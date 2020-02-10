@@ -12,12 +12,13 @@ package Symbols;
 public class WHL extends SimboloBase{
     
     EXPR expresion;
-    INSTS instruccion;
+    INSTS instrucciones;
     
     //Comprueba expr sea un booleano
     public WHL(WHL1 whl1, WHL2 whl2){
        super("WHL",whl1.fila,whl1.columna);
        
+       this.instrucciones = whl2.insts;
        g.addEdge(this, whl1);
        g.addEdge(this, whl2);
 

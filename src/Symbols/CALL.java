@@ -42,13 +42,13 @@ public class CALL extends SimboloBase {
         codigo.TablaSimbolos.FilaTD d = ts.consulta(id, codigo.TablaSimbolos.Mvp.dproc);
         if(d == null){
             //ERROR
-            System.out.println("Error semántico: el subprograma "+id+" no ha sido definicdo. Linea: "+left);
+            codigo.FrmPrincipal.notificarError("Error semántico: el subprograma "+id+" no ha sido definicdo. Linea: "+left);
         } else if(d.mvp != codigo.TablaSimbolos.Mvp.dproc ){
             //ERROR
-            System.out.println("Error semántico: "+id+" no es un subprograma. Linea: "+left);
+            codigo.FrmPrincipal.notificarError("Error semántico: "+id+" no es un subprograma. Linea: "+left);
         } else if(d.first == -1){
             //ERROR
-            System.out.println("Error semántico: "+id+" no debe tener parámetros. Linea: "+left);
+            codigo.FrmPrincipal.notificarError("Error semántico: "+id+" no debe tener parámetros. Linea: "+left);
         } else{
             codigo.TablaSimbolos.FilaTE fTe = ts.getFilaTE(d.first);
             for(int i =0; i < exprs.tipos.size(); i++){
@@ -56,12 +56,12 @@ public class CALL extends SimboloBase {
                 if(fTe != null){
                     if(fTe.tipo != exprs.tipos.get(i)){
                         //ERROR
-                        System.out.println("Error semántico: tipo incorrecto del parámetro "+(i+1)+" en la llamda al subprograma "+id+" Linea: "+left);
+                        codigo.FrmPrincipal.notificarError("Error semántico: tipo incorrecto del parámetro "+(i+1)+" en la llamda al subprograma "+id+" Linea: "+left);
                         break;
                     }
                 } else {
                     //ERROR
-                    System.out.println("Error semántico: hay demasiados parámetros en "+id+" Linea: "+left);
+                    codigo.FrmPrincipal.notificarError("Error semántico: hay demasiados parámetros en "+id+" Linea: "+left);
                     break;
                 }
                 
@@ -70,7 +70,7 @@ public class CALL extends SimboloBase {
             }
             if(fTe != null){
                 //ERROR
-                System.out.println("Error semántico: faltan parámetros en la llamda a "+id+" Linea: "+left);
+                codigo.FrmPrincipal.notificarError("Error semántico: faltan parámetros en la llamda a "+id+" Linea: "+left);
             }
             tipo = d.tipo;
             

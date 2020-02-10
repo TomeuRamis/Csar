@@ -16,7 +16,8 @@ public class WHL1 extends SimboloBase {
 
         if (exprp.tipo != codigo.TablaSimbolos.Tipo.tBool) {
             //ERROR
-            System.out.println("Error semántico: La condicion no es booleana. Linea: "+(this.fila+1));
+            codigo.FrmPrincipal.notificarError("Error semántico: La condicion no es booleana. Linea: "+(this.fila+1));
+            //System.out.println("Error semántico: La condicion no es booleana. Linea: "+(this.fila+1));
         }
         
         ts.entraBloque();

@@ -29,8 +29,9 @@ public class P extends SimboloBase{
             writer.close();
             
         } catch (IOException ex) {
-            Logger.getLogger(P.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println("ERROR: problema al escribir la tabla de simbolos");
+            //Logger.getLogger(P.class.getName()).log(Level.SEVERE, null, ex);
+            codigo.FrmPrincipal.notificarError("ERROR: asegurate de cerrar el archivo de la tabla de simbolos.");
+            //System.err.println("ERROR: problema al escribir la tabla de simbolos");
         } finally {
             try {
                 writer.close();

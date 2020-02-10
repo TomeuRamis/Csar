@@ -10,12 +10,12 @@ package Symbols;
  * @author Juan
  */
 public class ELS extends SimboloBase{
-    CND condicion;
     INSTS instrucciones;
     
     public ELS(CND cnd, codigo.TablaSimbolos ts) {
         super("ELS",cnd.fila,cnd.columna);
         
+        this.instrucciones = cnd.insts;
         
         g.addEdge(this, new SimboloBase("else"));
         g.addEdge(this, cnd);
@@ -23,6 +23,8 @@ public class ELS extends SimboloBase{
     
     public ELS(ELS1 els1, ELS2 els2){
         super("ELS",els2.fila,els2.columna);
+        
+        this.instrucciones = els2.insts;
         
         g.addEdge(this, els1);
         g.addEdge(this, els2);

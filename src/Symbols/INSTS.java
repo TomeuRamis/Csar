@@ -21,7 +21,7 @@ public class INSTS extends SimboloBase{
         if(inst.retorno != null && insts.retorno != null){
             if(inst.retorno.tipo != insts.retorno.tipo){
                 //ERROR
-                System.out.println("ERROR: los tipos de dos returns no coinciden. ");
+                codigo.FrmPrincipal.notificarError("Error semántico: los tipos de dos returns no coinciden. Linea: "+inst.retorno.fila+1);
             } else{
                 this.retorno = inst.retorno ;
             }

@@ -16,7 +16,7 @@ public class CND1 extends SimboloBase{
         
         if(exprp.tipo != codigo.TablaSimbolos.Tipo.tBool){
             //ERROR
-            System.out.println("Error semántico: La condicion no es booleana. Linea: "+(exprp.fila+1));
+            codigo.FrmPrincipal.notificarError("Error semántico: La condicion no es booleana. Linea: "+(exprp.fila+1));
         }
         
         ts.entraBloque();

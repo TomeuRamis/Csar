@@ -22,10 +22,12 @@ public class FUNC1 extends SimboloBase {
 
         if (!ts.add(id, def.tipo, codigo.TablaSimbolos.Mvp.dproc)) {
             //ERROR
-            System.out.println("Error semántico: " + id + " ya ha sido definido en este ámbito. Linea: "+(this.fila+1));
+            codigo.FrmPrincipal.notificarError("Error semántico: " + id + " ya ha sido definido en este ámbito. Linea: "+(this.fila+1));
+            //System.out.println("Error semántico: " + id + " ya ha sido definido en este ámbito. Linea: "+(this.fila+1));
         } else if (params.idParams.size() != params.tipos.size()) {
             //ERROR
-            System.out.println("Error semántico: el numero de ids de parametros y el numeor de tipos no coinciden para la función " + id+". Linea: "+(this.fila+1));
+            codigo.FrmPrincipal.notificarError("Error semántico: el número de ids de parametros y el númeor de tipos no coinciden para la función " + id+". Linea: "+(this.fila+1));
+            //System.out.println("Error semántico: el numero de ids de parametros y el numeor de tipos no coinciden para la función " + id+". Linea: "+(this.fila+1));
         } else {
 
             ts.entraBloque();

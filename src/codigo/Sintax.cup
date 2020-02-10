@@ -95,9 +95,9 @@ INSTS ::=
 ;
 INST ::=
     ASIG:v PuntoYComa     {: RESULT = new Symbols.INST(v,true); :} |
-    WHL:v                 {: RESULT = new Symbols.INST(v,false); :} |
+    WHL:v                 {: RESULT = new Symbols.INST(v); :} |
     DCL:v PuntoYComa      {: RESULT = new Symbols.INST(v,true); :} |
-    CND:v                 {: RESULT = new Symbols.INST(v,false); :} |
+    CND:v                 {: RESULT = new Symbols.INST(v); :} |
     IO:v PuntoYComa       {: RESULT = new Symbols.INST(v,true); :} |
     CALL:v PuntoYComa     {: RESULT = new Symbols.INST(v,true); :} |
     RET:v PuntoYComa      {: RESULT = new Symbols.INST(v); :} |
