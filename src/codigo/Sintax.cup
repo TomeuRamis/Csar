@@ -6,13 +6,8 @@ action code {:
 :}
 parser code
 {:
-    private Symbol s;
     public void syntax_error(Symbol s){
         FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1));
-        this.s = s;
-    }
-    public Symbol getS(){
-        return s;
     }
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
         //FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1)+" No se pudo recuperar");

@@ -38,35 +38,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         errores += msg + "\n";
     }
 
-    private void analizarLexico() throws IOException {
-        int cont = 1;
-        String ST = txtInput.getText();
-        Lexer lexico = new codigo.Lexer(new StringReader(ST));
-
-        String resultado = "";
-        Symbol simbolo = lexico.next_token();
-        while (simbolo.value != null) {
-
-            switch (simbolo.sym) {
-                case sym.PuntoYComa:
-                case sym.A_llave:
-                    resultado += "<" + traduce(simbolo.sym) + ">\n";
-                    break;
-                case sym.error:
-                    System.out.print("ERROR léxico: Símbolo no definido '" + simbolo.value + "' en Linea: " + simbolo.right + ", Carácter: " + simbolo.left + "\n");
-                default:
-                    resultado += "<" + traduce(simbolo.sym) + ">";
-                    break;
-            }
-            simbolo = lexico.next_token();
-
-        }
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter("output/ficheroTokens.txt"));
-        writer.write(resultado);
-        writer.close();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -235,11 +206,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
         // TODO add your handling code here:
-        try {
-            this.analizarLexico();
-        } catch (Exception ex) {
-            //System.err.println("ERROR en el análisis léxico");
-        }
 
         String ST = txtInput.getText();
         Lexer lexico = new codigo.Lexer(new StringReader(ST));
@@ -255,8 +221,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 txtOutput.setForeground(Color.red);
             }
         } catch (Exception ex) {
-            //System.err.println(ex);
-            Symbol sym = s.getS();
             txtOutput.setForeground(Color.red);
         } finally {
             BufferedWriter writer = null;
@@ -265,6 +229,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 txtOutput.setText(errores);
                 writer = new BufferedWriter(new FileWriter("output/ficheroErrores.txt"));
                 writer.write(errores);
+                writer.close();
+                writer = new BufferedWriter(new FileWriter("output/ficheroTokens.txt"));
+                writer.write(lexico.getTokens());
                 writer.close();
             } catch (IOException ex) {
                 Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -314,96 +281,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 new FrmPrincipal().setVisible(true);
             }
         });
-    }
-
-    private String traduce(int simbolo) {
-        String res = null;
-        switch (simbolo) {
-            case 0:
-                break;
-            case 1:
-                res = "error";
-                break;
-            case 2:
-                res = "tipo";
-                break;
-            case 3:
-                res = "id";
-                break;
-            case 4:
-                res = "numero";
-                break;
-            case 5:
-                res = "op_booleano";
-                break;
-            case 6:
-                res = "string";
-                break;
-            case 7:
-                res = "op_aritmetico";
-                break;
-            case 8:
-                res = "op_logico";
-                break;
-            case 9:
-                res = "op_relacional";
-                break;
-            case 10:
-                res = "while";
-                break;
-            case 11:
-                res = "igual";
-                break;
-            case 12:
-                res = "else";
-                break;
-            case 13:
-                res = "const";
-                break;
-            case 14:
-                res = "if";
-                break;
-            case 15:
-                res = "in";
-                break;
-            case 16:
-                res = "out";
-                break;
-            case 17:
-                res = "main";
-                break;
-            case 18:
-                res = "def";
-                break;
-            case 19:
-                res = "return";
-                break;
-            case 20:
-                res = "coma";
-                break;
-            case 21:
-                res = "void";
-                break;
-            case 22:
-                res = "p_coma";
-                break;
-            case 23:
-                res = "a_par";
-                break;
-            case 24:
-                res = "c_par";
-                break;
-            case 25:
-                res = "a_llave";
-                break;
-            case 26:
-                res = "c_llave";
-                break;
-            default:
-                res = "simbolo desconocido";
-                break;
-        }
-        return res;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
