@@ -14,15 +14,15 @@ public class Principal {
         
         generarArchivos();
         try {
-            if (Files.exists(Paths.get("src/codigo/Cooper.java"))) {
-                Files.delete(Paths.get("src/codigo/Cooper.java"));
+            if (Files.exists(Paths.get("src/codigo/Sintax.java"))) {
+                Files.delete(Paths.get("src/codigo/Sintax.java"));
             }
             if (Files.exists(Paths.get("src/codigo/sym.java"))) {
                 Files.delete(Paths.get("src/codigo/sym.java"));
             }
             Files.move(
-                    Paths.get("Cooper.java"),
-                    Paths.get("src/codigo/Cooper.java")
+                    Paths.get("Sintax.java"),
+                    Paths.get("src/codigo/Sintax.java")
             );
             Files.move(
                     Paths.get("sym.java"),
@@ -37,7 +37,7 @@ public class Principal {
         String rutaSintax = "src/codigo/Sintax.cup";
 
         JFlex.Main.generate(new File(rutaLexico));
-        String[] sintax = {"-parser", "Cooper", rutaSintax};
+        String[] sintax = {"-parser", "Sintax", rutaSintax};
         
         try {
             java_cup.Main.main(sintax);

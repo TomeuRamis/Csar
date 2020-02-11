@@ -209,7 +209,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         String ST = txtInput.getText();
         Lexer lexico = new codigo.Lexer(new StringReader(ST));
-        Cooper s = new Cooper(lexico);
+        Sintax s = new Sintax(lexico);
         errores = "";
         SimboloBase.resetArbol();
 

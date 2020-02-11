@@ -126,7 +126,7 @@ CND2 ::=
     INSTS:v1 C_llave ELS:v2         {: RESULT = new Symbols.CND2(v1, v2, ts); :}
 ;
 ELS ::=
-    ELS3 CND:v                      {: RESULT = new Symbols.ELS(v, ts); :} |
+    ELS3:v1 CND:v2                  {: RESULT = new Symbols.ELS(v1, v2, ts); :} |
     ELS1:v1 ELS2:v2                 {: RESULT = new Symbols.ELS(v1, v2); :} |
     LAMBDA                          {: RESULT = new Symbols.ELS(ts); :}
 ;

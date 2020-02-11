@@ -47,6 +47,7 @@ public class SimboloBase{
     
     public static void resetArbol(){
         g = new DefaultDirectedGraph<>(DefaultEdge.class);
+        contador = 0;
     }
 
     public void imprimirArbol() {
