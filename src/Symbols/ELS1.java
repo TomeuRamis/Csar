@@ -11,11 +11,16 @@ package Symbols;
  */
 public class ELS1 extends SimboloBase{
     
-    public ELS1(codigo.TablaSimbolos ts){
+    public ELS1(codigo.TablaSimbolos ts, int left) throws Exception{
         super("ELS1");
         
         ts.salBloque();
-        ts.entraBloque();
+        try {
+            ts.entraBloque();
+        } catch (Exception ex) {
+            codigo.FrmPrincipal.notificarError("Error: Profundidad de ámbito máxima excedida, overflow de la tabla de símbolos en linea "+left);
+            throw new Exception();
+        }
         
         g.addEdge(this, new SimboloBase("else"));
         g.addEdge(this, new SimboloBase("{"));

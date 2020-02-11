@@ -145,19 +145,6 @@ public class TablaSimbolos {
             FrmPrincipal.notificarError("ERROR semántico: nombre de parámetro '"+idparam+"' repetido en " + idproc);
             return false;
         }
-//        int nou = ta[n];
-//        ta[n]++;
-//        ta[n - 1]++;
-//        FilaTE fTE = new FilaTE();
-//        if (nou > te.size() - 1) {
-//            te.add(nou, fTE);
-//        }
-//        te.get(nou).nombre = idparam;
-//        te.get(nou).np = -1;
-//        te.get(nou).tipo = tipo;
-//        te.get(nou).first = -1;
-//        te.get(nou).mvp = null;
-//        te.get(nou).refTD = - 1;
         if (pp == -1) {
             fproc.first = tp.size();
 
@@ -171,8 +158,11 @@ public class TablaSimbolos {
         return true;
     }
 
-    public void entraBloque() {
+    public void entraBloque() throws Exception {
         n++;
+        if(n == profMax){
+            throw new Exception();
+        }
         ta[n] = ta[n - 1];
     }
 
@@ -190,7 +180,6 @@ public class TablaSimbolos {
                 filatd.np = filate.np;
                 filatd.first = filate.first;
                 filatd.mvp = filate.mvp;
-                //En vez de eliminar la fila, y hacer que filaTE.first se rompa, cambiaré el nombre a ""
                 te.remove(filate);
             }
             lini--;

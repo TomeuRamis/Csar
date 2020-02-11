@@ -5,6 +5,9 @@
  */
 package Symbols;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author tomeu
@@ -30,7 +33,11 @@ public class FUNC1 extends SimboloBase {
             //System.out.println("Error semántico: el numero de ids de parametros y el numeor de tipos no coinciden para la función " + id+". Linea: "+(this.fila+1));
         } else {
 
-            ts.entraBloque();
+            try {
+                ts.entraBloque();
+            } catch (Exception ex) {
+                codigo.FrmPrincipal.notificarError("Profundidad de ámbito máxima excedida, overflow de la tabla de símbolos en linea "+this.fila);
+            }
             
             for (int i = 0; i < params.idParams.size(); i++) {
                 ts.ponerParam(id, params.idParams.get(i), params.tipos.get(i));

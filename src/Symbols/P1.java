@@ -11,10 +11,15 @@ package Symbols;
  */
 public class P1 extends SimboloBase{
     
-    public P1 (DECLS decls, FUNCS funcs, codigo.TablaSimbolos ts){
+    public P1 (DECLS decls, FUNCS funcs, codigo.TablaSimbolos ts, int mainleft) throws Exception{
         super("P1");
         
-        ts.entraBloque();
+        try {
+            ts.entraBloque();
+        } catch (Exception ex) {
+            codigo.FrmPrincipal.notificarError("Error: Profundidad de ámbito máxima excedida, overflow de la tabla de símbolos en linea "+mainleft);
+            throw new Exception();
+        }
         
         g.addEdge(this, decls);
         g.addEdge(this, funcs);

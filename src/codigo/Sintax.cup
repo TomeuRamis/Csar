@@ -2,17 +2,17 @@ package codigo;
 
 import java_cup.runtime.Symbol;
 action code {:
-    TablaSimbolos ts = new TablaSimbolos();
+TablaSimbolos ts = new TablaSimbolos();
 :}
 parser code
 {:
-    public void syntax_error(Symbol s){
-        FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1));
-    }
-    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
-        //FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1)+" No se pudo recuperar");
-        FrmPrincipal.notificarError("No se pudo recuperar el error");
-    }
+public void syntax_error(Symbol s){
+    FrmPrincipal.notificarError("Error sintactico: "+s.value+" en linea: "+(s.left+1)+" y columna: "+(s.right+1));
+}
+public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+    FrmPrincipal.notificarError("No se pudo recuperar el error");
+throw new Exception();
+}
 :};
 
 terminal String Tipo, Id, Numero, Op_booleano, String, Op_aritmetico, Op_logico, Op_relacional;
@@ -64,7 +64,7 @@ P ::=
     P1:v1 P2:v2                     {: RESULT = new Symbols.P(v1, v2,ts); :}
 ;
 P1 ::=
-    DECLS:v FUNCS:v2 Main A_llave    {: RESULT = new Symbols.P1(v,v2, ts); :}
+    DECLS:v FUNCS:v2 Main:m A_llave    {: RESULT = new Symbols.P1(v,v2,ts,mleft); :}
 ;
 P2 ::=
     INSTS:v C_llave                {: RESULT = new Symbols.P2(v, ts); :}
@@ -131,7 +131,7 @@ ELS ::=
     LAMBDA                          {: RESULT = new Symbols.ELS(ts); :}
 ;
 ELS1 ::= 
-    Else A_llave                    {: RESULT = new Symbols.ELS1(ts); :}
+    Else:v A_llave                    {: RESULT = new Symbols.ELS1(ts,vleft); :}
 ;
 ELS2 ::=
     INSTS:v C_llave                 {: RESULT = new Symbols.ELS2(v, ts); :} 

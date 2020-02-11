@@ -11,16 +11,20 @@ package Symbols;
  */
 public class WHL1 extends SimboloBase {
 
-    public WHL1(EXPRP exprp, codigo.TablaSimbolos ts) {
+    public WHL1(EXPRP exprp, codigo.TablaSimbolos ts) throws Exception {
         super("WHL1",exprp.fila,exprp.columna);
 
         if (exprp.tipo != codigo.TablaSimbolos.Tipo.tBool) {
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: La condicion no es booleana. Linea: "+(this.fila+1));
-            //System.out.println("Error semántico: La condicion no es booleana. Linea: "+(this.fila+1));
         }
         
-        ts.entraBloque();
+        try {
+            ts.entraBloque();
+        } catch (Exception ex) {
+            codigo.FrmPrincipal.notificarError("Error: Profundidad de ámbito máxima excedida, overflow de la tabla de símbolos en linea "+this.fila);
+            throw new Exception();
+        }
 
         g.addEdge(this, new SimboloBase("while"));
         g.addEdge(this, new SimboloBase("("));

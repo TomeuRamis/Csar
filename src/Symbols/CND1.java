@@ -11,7 +11,7 @@ package Symbols;
  */
 public class CND1 extends SimboloBase{
     
-    public CND1(EXPRP exprp, codigo.TablaSimbolos ts) {
+    public CND1(EXPRP exprp, codigo.TablaSimbolos ts) throws Exception {
         super("CND1",exprp.fila,exprp.columna);
         
         if(exprp.tipo != codigo.TablaSimbolos.Tipo.tBool){
@@ -19,7 +19,12 @@ public class CND1 extends SimboloBase{
             codigo.FrmPrincipal.notificarError("Error semántico: La condicion no es booleana. Linea: "+(exprp.fila+1));
         }
         
-        ts.entraBloque();
+        try {
+            ts.entraBloque();
+        } catch (Exception ex) {
+            codigo.FrmPrincipal.notificarError("Error: Profundidad de ámbito máxima excedida, overflow de la tabla de símbolos en linea "+this.fila);
+            throw new Exception();
+        }
         
         g.addEdge(this, new SimboloBase("if"));
         g.addEdge(this, new SimboloBase("("));
