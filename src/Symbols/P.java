@@ -38,9 +38,8 @@ public class P extends SimboloBase{
                 Logger.getLogger(P.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("Fin del análisis");
-            g.addEdge(this, p1);
-            g.addEdge(this, p2);
-            this.imprimirArbol();
+        g.addEdge(this, p1);
+        g.addEdge(this, p2);
+        this.imprimirArbol();
     }
 }

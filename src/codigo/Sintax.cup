@@ -75,7 +75,8 @@ DECLS ::=
 ;
 DECL ::=
     Const DCL:v         {: RESULT = new Symbols.DECL(v, true, ts); :} |
-    DCL:v               {: RESULT = new Symbols.DECL(v,false,null); :}
+    DCL:v               {: RESULT = new Symbols.DECL(v,false,null); :} |
+    error
 ;
 TYPE ::=
     Tipo:v              {: RESULT = new Symbols.TYPE(v,vleft,vright); :}

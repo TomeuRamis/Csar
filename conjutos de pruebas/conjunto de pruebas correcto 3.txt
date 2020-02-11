@@ -32,8 +32,8 @@ main{
    string a = "ñañaña";
    if(a == "ÜüçÇ"){
       out("cadena incorrecta");
-      int a = -1;
-      int b = -2;
+      int a = (-1);
+      int b = (-2);
       int c = 5-7;
    }
 }
