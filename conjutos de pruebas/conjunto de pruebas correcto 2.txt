@@ -4,39 +4,39 @@ int numero3;
 string frase = "hola";
 
 def int suma(int numero1, int numero2){
-	return numero1+numero2;
+   return numero1+numero2;
 }
 
 def int resta(int numero1, int numero2){
-	return numero1-numero2;
+   return numero1-numero2;
 }
 
 def string presentacion(string presentacion){
-	string frase = "adios";
-	return frase;
+   string frase = "adios";
+   return frase;
 }
 
 def void output(string a){
-	out(a);
+   out(a);
 }
 
 def bool frase(string frase){
-	if(frase == "adios"){
-		return true;
-	} else{
-		return false;
-	}
+   if(frase == "adios"){
+      return true;
+   } else{
+      return false;
+   }
 }
 
 def int operacion(int a, int b, string c, bool d, int e, bool f){
-	return 0;
+   return 0;
 }
 
 main{
-	int resultado = suma(numero1, numero2);
-	int result = resta(numero1, numero2);
-	output( presentacion("saludar"));
-	if (frase("adios")){
-		int operacion = operacion(1, 2, "suma", false, 3, true);
-	}
+   int resultado = suma(numero1, numero2);
+   int result = resta(numero1, numero2);
+   output( presentacion("saludar"));
+   if (frase("adios")){
+      int operacion = operacion(1, 2, "suma", false, 3, true);
+   }
 }

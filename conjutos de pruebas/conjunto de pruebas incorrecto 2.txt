@@ -2,18 +2,18 @@ const a = 8;
 int = 9;
 
 def b(a, string){
-	return ;
+   return ;
 }
 
 main{
-	while( ) {
-		string a = ;
-	}
+   while( ) {
+      string a = ;
+   }
 
-	if {
-	else{
-		out();
-	}
+   if {
+   else{
+      out();
+   }
 ;
 int b = 99*;
 in( ;);

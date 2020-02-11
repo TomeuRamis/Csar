@@ -3,13 +3,13 @@ iint b;
 conststring c = "ä$%&";
 
 definicion void a(boolean a){
-	@
+   @
 }
 main {
-	wile ( true ){
-		si(fls){
-		}
-	}
-	input();
-	int d = 9-4^6;
+   wile ( true ){
+      si(fls){
+      }
+   }
+   input();
+   int d = 9-4^6;
 }

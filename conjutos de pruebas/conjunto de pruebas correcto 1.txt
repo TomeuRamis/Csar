@@ -4,35 +4,35 @@ string saludo = "saludar";
 const int h = 2 + 8 / 4;
 
 def int beber(int f, int k){
-	return f + k - 3;
+   return f + k - 3;
 }
 
 def void comer(){
-	int b = 700;
-	int s = 3;
-	s = s+2;
-	s = beber(s, b);
+   int b = 700;
+   int s = 3;
+   s = s+2;
+   s = beber(s, b);
 }
 
 
 def bool cierto(){
-	return true;
+   return true;
 }
 
 main{
-	comer();
-	if(cierto() || (a < h) ){
-		a = h;
-	} else if (3 == 3 ){
-		int p;
-		in(p);
-	} else {
-		out(saludo);
-	}
+   comer();
+   if(cierto() || (a < h) ){
+      a = h;
+   } else if (3 == 3 ){
+      int p;
+      in(p);
+   } else {
+      out(saludo);
+   }
 
-	int i = 0;
-	while((a != h) && true){
-		i = i + 1;
-		a = h * 3;
-	}
+   int i = 0;
+   while((a != h) && true){
+      i = i + 1;
+      a = h * 3;
+   }
 }
