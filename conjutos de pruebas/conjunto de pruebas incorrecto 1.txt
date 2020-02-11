@@ -1,4 +1,4 @@
-int a = -1;
+int a = ?;
 iint b;
 conststring c = "ä$%&";
 

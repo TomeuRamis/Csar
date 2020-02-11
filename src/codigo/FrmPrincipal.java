@@ -33,7 +33,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     public static void notificarError(String msg) {
         if(msg.equals("Error sintactico: null en linea: 0 y columna: 0")){
-            msg = "Error: el código debe tener un main.";
+            msg = "Error sintactico: No se ha encontrado el bloque 'main'.";
         }
         errores += msg + "\n";
     }
