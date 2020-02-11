@@ -12,6 +12,8 @@ L=[a-zA-Z_]+
 D=[0-9]+
 espacio=[ \t\r\n]+
 %{
+    private string tokens = "";
+    
     private Symbol symbol (int type, Object value){
         return new Symbol (type, yyline, yycolumn, value);
     }
@@ -20,32 +22,32 @@ espacio=[ \t\r\n]+
     }
 %}
 %%
-int | bool | string { return symbol(sym.Tipo, yytext());}
-const {return symbol(sym.Const, yytext());}
-if { return symbol(sym.If, yytext());}
-else { return symbol(sym.Else, yytext());} 
-while { return symbol(sym.While, yytext());}
-void { return symbol(sym.Void, yytext());}
-in { return symbol(sym.In, yytext());} 
-out { return symbol(sym.Out, yytext());}
+int | bool | string {tokens+="<tipo>"; return symbol(sym.Tipo, yytext());}
+const { tokens+="<tipo>"; return symbol(sym.Const, yytext());}
+if { tokens+="<tipo>"; return symbol(sym.If, yytext());}
+else { tokens+="<tipo>"; return symbol(sym.Else, yytext());} 
+while { tokens+="<tipo>"; return symbol(sym.While, yytext());}
+void { tokens+="<tipo>"; return symbol(sym.Void, yytext());}
+in { tokens+="<tipo>"; return symbol(sym.In, yytext());} 
+out { tokens+="<tipo>"; return symbol(sym.Out, yytext());}
 {espacio} {/*Ignore*/}
 "//".* {/*Ignore*/}
-"main" {return symbol(sym.Main, yytext());}
-"def" {return symbol(sym.Def, yytext());}
-"return" {return symbol(sym.Return, yytext());}
-"=" {return symbol(sym.Igual, yytext());}
-( "+" | "-" | "*" | "/" | "%" ) {return symbol(sym.Op_aritmetico, yytext());}
-( "&&" | "||" ) {return symbol(sym.Op_logico, yytext());}
-( ">" | "<" | "==" | "!=" | "=>" | "=<" ) {return symbol(sym.Op_relacional, yytext());}
-(true | false) {return symbol(sym.Op_booleano, yytext());}
-";" {return symbol(sym.PuntoYComa, yytext());}
-"," {return symbol(sym.Coma, yytext());}
-"(" {return symbol(sym.A_par, yytext());}
-")" {return symbol(sym.C_par, yytext());}
-"{" {return symbol(sym.A_llave, yytext());}
-"}" {return symbol(sym.C_llave, yytext());}
-({L}|{T})({L}|{D}|{T})* {return symbol(sym.Id, yytext());}
-\"([^\\\"]|\\.)*\" {return symbol(sym.String, yytext());}
-("(-"{D}+")")|{D}+ {return symbol(sym.Numero, yytext());}
+"main" { tokens+="<tipo>"; return symbol(sym.Main, yytext());}
+"def" { tokens+="<tipo>"; return symbol(sym.Def, yytext());}
+"return" { tokens+="<tipo>"; return symbol(sym.Return, yytext());}
+"=" { tokens+="<tipo>"; return symbol(sym.Igual, yytext());}
+( "+" | "-" | "*" | "/" | "%" ) { tokens+="<tipo>"; return symbol(sym.Op_aritmetico, yytext());}
+( "&&" | "||" ) { tokens+="<tipo>"; return symbol(sym.Op_logico, yytext());}
+( ">" | "<" | "==" | "!=" | "=>" | "=<" ) { tokens+="<tipo>"; return symbol(sym.Op_relacional, yytext());}
+(true | false) { tokens+="<tipo>"; return symbol(sym.Op_booleano, yytext());}
+";" { tokens+="<tipo>"; return symbol(sym.PuntoYComa, yytext());}
+"," { tokens+="<tipo>"; return symbol(sym.Coma, yytext());}
+"(" { tokens+="<tipo>"; return symbol(sym.A_par, yytext());}
+")" { tokens+="<tipo>"; return symbol(sym.C_par, yytext());}
+"{" { tokens+="<tipo>"; return symbol(sym.A_llave, yytext());}
+"}" { tokens+="<tipo>"; return symbol(sym.C_llave, yytext());}
+({L}|{T})({L}|{D}|{T})* { tokens+="<tipo>"; return symbol(sym.Id, yytext());}
+\"([^\\\"]|\\.)*\" { tokens+="<tipo>"; return symbol(sym.String, yytext());}
+("(-"{D}+")")|{D}+ { tokens+="<tipo>"; return symbol(sym.Numero, yytext());}
  . {FrmPrincipal.notificarError("Error léxico: "+yytext()+" en linea: "+(yyline+1)+" columna: "+(yycolumn+1));}
 
