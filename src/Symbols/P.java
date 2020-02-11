@@ -21,7 +21,6 @@ public class P extends SimboloBase{
     public P(P1 p1, P2 p2, codigo.TablaSimbolos ts){
         super("P");
         
-        
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter("output/tablaSimbolos.xls"));
