@@ -1,7 +1,9 @@
-int a = 2;
+int a = (-2);
 bool b = true;
 string saludo = "saludar";
 const int h = 2 + 8 / 4;
+const bool tr = true;
+const string ey = "buenas"; 
 
 def int beber(int f, int k){
    return f + k - 3;

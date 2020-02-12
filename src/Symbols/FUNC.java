@@ -24,12 +24,12 @@ public class FUNC extends SimboloBase {
         if(this.tipo != codigo.TablaSimbolos.Tipo.tNull && func2.insts.retorno != null){
             if(this.tipo != func2.insts.retorno.tipo){
                 //ERROR
-                codigo.FrmPrincipal.notificarError("Error semántico: el tipo de retorno en la funcion "+func1.id+" no es correcto. Linea: "+this.fila+1 );
+                codigo.FrmPrincipal.notificarError("Error semántico: el tipo de retorno en la funcion "+func1.id+" no es correcto." );
                 //System.out.println("ERROR: el tipo de retorno en la funcion "+func1.id+" no es correcto. ");
             }
         } else if(this.tipo == codigo.TablaSimbolos.Tipo.tNull && func2.insts.retorno != null){
             //ERROR
-            codigo.FrmPrincipal.notificarError("Error semántico: el procedimiento "+func1.id+" no debe tener 'return's. Linea: "+this.fila+1);
+            codigo.FrmPrincipal.notificarError("Error semántico: el procedimiento "+func1.id+" no debe tener 'return's.");
         } else if(this.tipo != codigo.TablaSimbolos.Tipo.tNull && func2.insts.retorno == null){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: la función '"+func1.id+"' debe tener una instrucción 'return'.");

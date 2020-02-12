@@ -1,8 +1,14 @@
+//Code here
 int a = "hola";
 string b = 3;
 
 def int suma(int a, int b){
    int c = a+b;
+}
+
+def string mult(int a, int b){
+   int c = 3;
+   return c;
 }
 
 def void resta(int a, int b){
@@ -15,10 +21,11 @@ main{
       if("Hola"){
       }else if(suma(3,5)){
       } else{
-         suma("hola", true);
+         suma("Hola", true);
       }
+         suma(2,3,7);
+   }
    in(id);
-   in(true);
    out(65);
    out("adios");
 }

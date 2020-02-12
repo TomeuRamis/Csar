@@ -1,11 +1,5 @@
-const a = 8;
-int = 9;
-
-def b(a, string){
-   return ;
-}
-
 main{
+int = 8;
    while( ) {
       string a = ;
    }
@@ -18,5 +12,5 @@ main{
 int b = 99*;
 in( ;);
 in("hola");
-in(d(4,"hola");
+in(true);
 }
