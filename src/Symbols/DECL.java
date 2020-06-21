@@ -11,10 +11,11 @@ package Symbols;
  */
 public class DECL extends SimboloBase {
     DCL declaracion;
-    
+    boolean con;
     public DECL(DCL dcl, boolean con, codigo.TablaSimbolos ts){
         super("DECL",dcl.fila,dcl.columna);
-        
+        this.con = con;
+        declaracion = dcl;
         if(con){
             codigo.TablaSimbolos.FilaTD f = ts.consulta(dcl.id, codigo.TablaSimbolos.Mvp.dvar);
             f.mvp = codigo.TablaSimbolos.Mvp.dconst;
@@ -23,5 +24,12 @@ public class DECL extends SimboloBase {
         }
         
         g.addEdge(this, dcl);
+    }
+    
+    public void gest(){
+        if(con){
+            //generar CONSTANTE
+        }
+        //declaracion.gest();
     }
 }

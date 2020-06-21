@@ -1,0 +1,4 @@
+//(igual ya no)Generar constantes DECL.java
+
+generar Strings LITERAL.java
+generar CALLS EXPR.java

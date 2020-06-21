@@ -21,6 +21,8 @@ import org.jgrapht.io.*;
  * @author Juan
  */
 public class SimboloBase{
+    
+    public static codigo.Codigo3D C3D = new codigo.Codigo3D();
 
     private static int contador = 0;
     private int id;

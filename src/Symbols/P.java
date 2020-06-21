@@ -40,6 +40,9 @@ public class P extends SimboloBase{
         }
         g.addEdge(this, p1);
         g.addEdge(this, p2);
+        
+        //p1.gest();
+        //p2.gest();
         this.imprimirArbol();
     }
 }

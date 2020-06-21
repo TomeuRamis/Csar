@@ -12,11 +12,26 @@ import codigo.TablaSimbolos;
  */
 public class LITERAL extends SimboloBase {
     TablaSimbolos.Tipo tipo;
+    int valor;
     
     public LITERAL(TablaSimbolos.Tipo t, String l,int left,int right) {
-       super("LITERAL",left,right);
-       this.tipo = t;
-       
+        super("LITERAL",left,right);
+        this.tipo = t;
+        switch(t.ordinal()){
+            case 0://tBool
+                if(l.equals("true")){
+                    valor = -1;
+                } else {
+                    valor = 0;
+                }
+                break;
+            case 1://tString
+                //Jaja Lol
+                break;
+            case 2://tInt
+                valor = Integer.parseInt(l);
+                break;     
+       }
        g.addEdge(this, new SimboloBase(l));
     }
     

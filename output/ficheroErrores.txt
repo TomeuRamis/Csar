@@ -1,7 +1,3 @@
-Error léxico: ? en linea: 1 columna: 9
-Error sintactico: ; en linea: 1 y columna: 10
-Error léxico: @ en linea: 6 columna: 4
-Error léxico: ^ en linea: 14 columna: 15
-Error sintactico: 6 en linea: 14 y columna: 16
+Error sintactico: etrh en linea: 2 y columna: 1
 No se pudo recuperar el error
 Analisis finalizado

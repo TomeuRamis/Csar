@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Symbols;
-
+import static codigo.idInstrucciones.*;
 /**
  *
  * @author Juan
@@ -13,6 +13,7 @@ public class EXPR extends SimboloBase{
 
     CALL llamada;
     LITERAL literal;
+    int r;
     codigo.TablaSimbolos.Tipo tipo;
     
     public EXPR(LITERAL l) {
@@ -20,7 +21,12 @@ public class EXPR extends SimboloBase{
         literal = l;
         tipo = l.tipo;
         
+        
+        
         g.addEdge(this, literal);
+        
+        int t = C3D.nuevaVar();
+        C3D.genera(COPY.ordinal(), l.valor, -1, t);
     }
     
     public EXPR(CALL c){
@@ -29,6 +35,8 @@ public class EXPR extends SimboloBase{
         tipo = c.tipo;
         
         g.addEdge(this, c);
+        
+        
     }
     
     public EXPR(String id, codigo.TablaSimbolos ts,int left, int right){
@@ -43,6 +51,7 @@ public class EXPR extends SimboloBase{
 
         g.addEdge(this, new SimboloBase(id));
         
+        
     }
     
     public EXPR(EXPRP exprp){
@@ -54,4 +63,7 @@ public class EXPR extends SimboloBase{
         g.addEdge(this, new SimboloBase(")"));
     }
     
+    public void gest(){
+        
+    }
 }

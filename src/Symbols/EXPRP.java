@@ -14,15 +14,18 @@ public class EXPRP extends SimboloBase {
     EXPRP expresionP;
     OPERADOR operador;
     EXPR expresion;
+    int r;
     
     codigo.TablaSimbolos.Tipo tipo;
 
     public EXPRP(EXPR exp) {
         super("EXPRP",exp.fila,exp.columna);
-        
+        r = exp.r;
         tipo = exp.tipo;
         
         g.addEdge(this, exp);
+        
+        //no genera (creo)
     }
     
     public EXPRP(EXPRP exprp, OPERADOR operador, EXPR expr){
@@ -47,6 +50,27 @@ public class EXPRP extends SimboloBase {
                     tipo = codigo.TablaSimbolos.Tipo.tBool;
                 } else {
                     tipo = codigo.TablaSimbolos.Tipo.tInt;
+                    int op = -1;
+                    switch(operador.operador){
+                        case "+":
+                            op = 1; //ADD
+                            break;
+                        case "-":
+                            op = 2; //SUB
+                            break;
+                        case "*":
+                            op = 3; //PROD
+                            break;
+                        case "/":
+                            op = 4; //DIV
+                            break;
+                        case "%":
+                            op = 5; //MOD
+                            break;
+                    }
+                    int t = C3D.nuevaVar();
+                    C3D.genera(op, exprp.r, expr.r, t);
+                    exprp.r = t;
                 }
             }
             if(exprp.tipo == codigo.TablaSimbolos.Tipo.tString){ //Son strings
@@ -69,7 +93,13 @@ public class EXPRP extends SimboloBase {
                     codigo.FrmPrincipal.notificarError("Error semántico: Operador incompatible en linea: "+(exprp.fila+1));
                 }else {
                     tipo = codigo.TablaSimbolos.Tipo.tBool;
-                }
+                    int op;
+                    switch(operador.operador){
+                        case "":
+                    }
+                    C3D.genera(0, r, r, fila);
+                }               
+                
             }
         }
         

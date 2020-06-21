@@ -14,7 +14,8 @@ public class DECLS extends SimboloBase{
     DECLS declaraciones;
     public DECLS(DECL decl, DECLS decls){
         super("DECLS",decl.fila,decl.columna);
-        
+        declaracion = decl;
+        declaraciones = decls;
         g.addEdge(this, decl);
         g.addEdge(this, new SimboloBase(";"));
         g.addEdge(this, decls);
@@ -24,4 +25,11 @@ public class DECLS extends SimboloBase{
         super("DECLS");
         g.addEdge(this, new SimboloBase("λ"));
     }
+    public void gest(){
+        if(declaraciones != null){
+            declaracion.gest();
+            declaraciones.gest();
+        }
+    }
 }
+

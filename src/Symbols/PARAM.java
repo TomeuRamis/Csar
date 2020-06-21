@@ -23,6 +23,8 @@ public class PARAM extends SimboloBase{
         
         g.addEdge(this, t);
         g.addEdge(this, new SimboloBase(id));
+        
+        
     }
     
 }

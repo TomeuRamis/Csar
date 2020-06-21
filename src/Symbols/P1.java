@@ -10,10 +10,12 @@ package Symbols;
  * @author tomeu
  */
 public class P1 extends SimboloBase{
-    
+    DECLS decls;
+    FUNCS funcs;
     public P1 (DECLS decls, FUNCS funcs, codigo.TablaSimbolos ts, int mainleft) throws Exception{
         super("P1");
-        
+        this.decls = decls;
+        this.funcs = funcs;
         try {
             ts.entraBloque();
         } catch (Exception ex) {
@@ -25,6 +27,11 @@ public class P1 extends SimboloBase{
         g.addEdge(this, funcs);
         g.addEdge(this, new SimboloBase("main"));
         g.addEdge(this, new SimboloBase("{"));
+    }
+    
+    public void gest(){
+        decls.gest();
+        //funcs.gest();
     }
     
 }
