@@ -56,7 +56,74 @@ class Instruccion3D {
     
     @Override
     public String toString(){
-        return idInstrucciones.values()[cod] + "\t" + op1 + "\t" + op2 + "\t" + dest;
+        String res = "";
+        switch(cod){
+            case 0://COPY
+                res = dest + " = " + op1;
+                break;
+            case 1://ADD
+                res = dest + " = " + op1 + " + " + op2;
+                break;
+            case 2://SUB
+                res = dest + " = " + op1 + " - " + op2;
+                break;
+            case 3://PROD
+                res = dest + " = " + op1 + " * " + op2;
+                break;
+            case 4://DIV
+                res = dest + " = " + op1 + " / " + op2;
+                break;
+            case 5://MOD
+                res = dest + " = " + op1 + " % " + op2;
+                break;
+            case 6://AND
+                res = dest + " = " + op1 + " && " + op2;
+                break;
+            case 7://OR
+                res = dest + " = " + op1 + " || " + op2;
+                break;
+            case 8://SKIP
+                res = dest + " : skip";
+                break;
+            case 9://IFEQ
+                res = "if " + op1 + "=" + op2 + " goto " + dest;
+                break;
+            case 10://IFNE
+                res = "if " + op1 + "!=" + op2 + " goto " + dest;
+                break;
+            case 11://IFLT
+                res = "if " + op1 + "<" + op2 + " goto " + dest;
+                break;
+            case 12://IFLE
+                res = "if " + op1 + "<=" + op2 + " goto " + dest;
+                break;
+            case 13://IFGE
+                res = "if " + op1 + ">=" + op2 + " goto " + dest;
+                break;
+            case 14://IFGT
+                res = "if " + op1 + ">" + op2 + " goto " + dest;
+                break;
+            case 15://PMB
+                res = "pmb " + dest;
+                break;
+            case 16://CALL
+                res = "call " + dest;
+                break;
+            case 17://RTN
+                res = "pmb " + dest;
+                break;
+            case 18://PARAM_S
+                res = "param_s" + dest;
+                break;
+            case 19://GOTO
+                res = "goto " + dest;
+                break;
+            case 20://NEG
+                res = dest + " = -" + op1;
+                break;
+        }
+        return res;
+        //return idInstrucciones.values()[cod] + "\t" + op1 + "\t" + op2 + "\t" + dest;
     }
     
 }
