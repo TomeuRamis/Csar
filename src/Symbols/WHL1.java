@@ -5,13 +5,18 @@
  */
 package Symbols;
 
+import codigo.idInstrucciones;
+
 /**
  *
  * @author tomeu
  */
 public class WHL1 extends SimboloBase {
+    
+    int e;
+    int efi;
 
-    public WHL1(EXPRP exprp, codigo.TablaSimbolos ts) throws Exception {
+    public WHL1(EXPRP exprp, M m, codigo.TablaSimbolos ts) throws Exception {
         super("WHL1",exprp.fila,exprp.columna);
 
         if (exprp.tipo != codigo.TablaSimbolos.Tipo.tBool) {
@@ -27,9 +32,15 @@ public class WHL1 extends SimboloBase {
         }
 
         g.addEdge(this, new SimboloBase("while"));
+        g.addEdge(this, m);
         g.addEdge(this, new SimboloBase("("));
         g.addEdge(this, exprp);
         g.addEdge(this, new SimboloBase(")"));
         g.addEdge(this, new SimboloBase("{"));
+        
+        this.efi = C3D.nuevaEtiqueta();
+        C3D.genera(idInstrucciones.IFEQ.ordinal(), exprp.r, 0, efi);
+        this.e = m.e;
+        
     }
 }

@@ -11,7 +11,7 @@ package Symbols;
  */
 public class ASIGNACION extends SimboloBase{
     EXPRP expresionp;
-    
+    int r;
     codigo.TablaSimbolos.Tipo tipo;
     
     public ASIGNACION(EXPRP exprp){
@@ -21,6 +21,8 @@ public class ASIGNACION extends SimboloBase{
         
         g.addEdge(this, new SimboloBase("="));
         g.addEdge(this, exprp);
+        
+        r = exprp.r;
     }
     
     public ASIGNACION(){

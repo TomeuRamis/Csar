@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Codigo3D {
     int ne = 0;
-    TablaVariables TV = new TablaVariables();
+    public TablaVariables TV = new TablaVariables();
     TablaProcedimientos TP = new TablaProcedimientos();
     ArrayList<Instruccion3D> codigo;
     
@@ -32,6 +32,13 @@ public class Codigo3D {
     
     public int nuevoProcedimiento(){
         return TP.nuevoProcedimiento();
+    }
+    
+    public void reset(){
+        ne = 0;
+        TV = new TablaVariables();
+        TP = new TablaProcedimientos();
+        codigo = new ArrayList<>();
     }
     
     @Override

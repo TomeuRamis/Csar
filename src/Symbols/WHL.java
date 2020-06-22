@@ -5,6 +5,8 @@
  */
 package Symbols;
 
+import codigo.idInstrucciones;
+
 /**
  *
  * @author Juan
@@ -22,5 +24,7 @@ public class WHL extends SimboloBase{
        g.addEdge(this, whl1);
        g.addEdge(this, whl2);
 
+       C3D.genera(idInstrucciones.GOTO.ordinal(),-1, -1, whl1.e);
+       C3D.genera(idInstrucciones.SKIP.ordinal(),-1, -1, whl1.efi);
     }
 }

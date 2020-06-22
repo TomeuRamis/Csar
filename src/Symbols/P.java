@@ -45,5 +45,7 @@ public class P extends SimboloBase{
         //p2.gest();
         this.imprimirArbol();
         System.out.println(C3D.toString());
+        System.out.println("\nNV: " +C3D.TV.nv);
+        C3D.reset();
     }
 }

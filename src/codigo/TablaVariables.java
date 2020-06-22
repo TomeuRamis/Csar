@@ -9,8 +9,9 @@ import java.util.ArrayList;
  */
 public class TablaVariables {
     
-    int nv = -1;
+    public int nv = -1;
     ArrayList<Variable> TV = new ArrayList<>();
+    
     public int nuevaVar(){
         nv = nv + 1;
         TV.add(new Variable());
@@ -29,8 +30,7 @@ public class TablaVariables {
 
 class Variable{
     
-    Variable(){
-        
+    public Variable(){
     }
     
     @Override

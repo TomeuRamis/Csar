@@ -57,6 +57,7 @@ non terminal Symbols.ELS2 ELS2;
 non terminal Symbols.ELS3 ELS3;
 non terminal Symbols.IO IO;
 non terminal Symbols.RET RET;
+non terminal Symbols.M M1;
 
 start with P;
 
@@ -107,7 +108,7 @@ WHL ::=
     WHL1:v1 WHL2:v2                       {: RESULT = new Symbols.WHL(v1, v2); :}
 ;
 WHL1 ::=
-    While A_par EXPRP:v C_par A_llave   {: RESULT = new Symbols.WHL1(v, ts);  :}
+    While M1:m A_par EXPRP:v C_par A_llave   {: RESULT = new Symbols.WHL1(v, m, ts);  :}
 ;
 WHL2 ::=
     INSTS:v C_llave                 {: RESULT = new Symbols.WHL2(v, ts);  :}
@@ -203,5 +204,10 @@ OPERADOR ::=
     Op_relacional:v                 {: RESULT = new Symbols.OPERADOR(v,2,vleft,vright); :}| 
     Op_logico:v                     {: RESULT = new Symbols.OPERADOR(v,3,vleft,vright); :}
 ;
+
+M1 ::= LAMBDA                        {: RESULT = new Symbols.M(1); :}
+;
+
 LAMBDA ::= /* empty */;
+
 

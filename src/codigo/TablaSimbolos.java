@@ -289,19 +289,19 @@ public class TablaSimbolos {
         res += "n = " + n + "\n";
         //res += "=======================================================================================\n";
         res += "TD\t\t\t\t\t||\tTE\t\t\t\t\t\t||\tTA\t||\tTP\n";
-        res += "nombre \t tipo \t np \t first \t mvp \t||\t nombre \t tipo \t np \t first \t mvp \t refTD \t||\t\t||\tnombre \t tipo \t np \t first \t mvp\n";
+        res += "nombre \t tipo \t np \t first \t mvp \t nv \t||\t nombre \t tipo \t np \t first \t mvp \t nv \t refTD \t||\t\t||\tnombre \t tipo \t np \t first \t mvp\n";
         //res += "||---------------------------------||------------------------------------------------||\n";
         int i;
         for (i = 0; i < td.size() || i < te.size() || i < ta.length || i < tp.size(); i++) {
             if (i < td.size()) {
                 FilaTD ftd = td.get(i);
-                res += "" + ftd.nombre + "\t" + ftd.tipo + "\t" + ftd.np + "\t" + ftd.first + "\t" + ftd.mvp + "\t||";
+                res += "" + ftd.nombre + "\t" + ftd.tipo + "\t" + ftd.np + "\t" + ftd.first + "\t" + ftd.mvp + "\t" + ftd.nv + "\t||";
             } else {
                 res += "\t\t\t\t\t||";
             }
             if (i < te.size()) {
                 FilaTE fte = te.get(i);
-                res += "\t" + fte.nombre + "\t " + fte.tipo + "\t" + fte.np + "\t" + fte.first + "\t" + fte.mvp + "\t" + fte.refTD + "\t||";
+                res += "\t" + fte.nombre + "\t " + fte.tipo + "\t" + fte.np + "\t" + fte.first + "\t" + fte.mvp + "\t" + fte.nv + "\t" + fte.refTD + "\t||";
             } else {
                 res += "\t\t\t\t\t\t\t||";
             }
