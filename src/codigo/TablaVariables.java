@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class TablaVariables {
     
     int nv = -1;
-    ArrayList<Variable> TV;
+    ArrayList<Variable> TV = new ArrayList<>();
     public int nuevaVar(){
         nv = nv + 1;
         TV.add(new Variable());

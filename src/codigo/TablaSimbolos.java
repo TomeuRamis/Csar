@@ -80,7 +80,7 @@ public class TablaSimbolos {
         return (i > td.size() - 1) ? null : td.get(i);
     }
 
-    public boolean add(String nombre, Tipo t, Mvp mvp) {
+    public boolean add(String nombre, Tipo t, Mvp mvp, Codigo3D c3d) {
         FilaTD filatd = consulta(nombre, mvp);
 
         if (filatd != null) {
@@ -96,7 +96,13 @@ public class TablaSimbolos {
                 return false;
             }
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
+            
+            if(mvp != Mvp.dproc){ //si no es un procedimiento lo añadimos a la tabla de variables
+                nuevaFila.setNv(c3d.nuevaVar());
+            }
+            
             td.add(posAnterior, nuevaFila);
+            
         } else {
             
             /*
@@ -105,6 +111,9 @@ public class TablaSimbolos {
             */
             
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
+            if(mvp != Mvp.dproc){ //si no es un procedimiento lo añadimos a la tabla de variables
+                nuevaFila.setNv(c3d.nuevaVar());
+            }
             int i = 0;
             while(i < td.size() && td.get(i).np != -1){              
                 i++;
@@ -118,6 +127,7 @@ public class TablaSimbolos {
                 td.get(i).np = nuevaFila.np;
                 td.get(i).first = nuevaFila.first;
                 td.get(i).mvp = nuevaFila.mvp;
+                td.get(i).nv = nuevaFila.nv;
             }
             
         }
@@ -125,7 +135,7 @@ public class TablaSimbolos {
 
     }
 
-    public boolean ponerParam(String idproc, String idparam, Tipo tipo) {
+    public boolean ponerParam(String idproc, String idparam, Tipo tipo, Codigo3D c3d) {
         FilaTD fproc = consulta(idproc, Mvp.dproc);
         if (fproc.mvp != Mvp.dproc) {
             //Error
@@ -154,7 +164,7 @@ public class TablaSimbolos {
         FilaTP ftp = new FilaTP(idparam, tipo);
         tp.add(ftp);
 
-        this.add(idparam, tipo, Mvp.dvar);
+        this.add(idparam, tipo, Mvp.dvar, c3d);
         return true;
     }
 
@@ -210,6 +220,7 @@ public class TablaSimbolos {
         public int np; //Ambito
         public int first;
         public Mvp mvp; //Indica si es una constante, una variable o un subprograma
+        public int nv; //Referencia a la tabla de variables
 
         public FilaTD(String n, Tipo t, int amb, Mvp mvp) {
             nombre = n;
@@ -232,6 +243,10 @@ public class TablaSimbolos {
         public FilaTD() {
         }
 
+        public void setNv(int nv) {
+            this.nv = nv;
+        }
+        
         @Override
 
         public boolean equals(Object f){

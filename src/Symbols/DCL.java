@@ -25,7 +25,7 @@ public class DCL extends SimboloBase{
         if(tipo.tipo != asignacion.tipo && asignacion.tipo != codigo.TablaSimbolos.Tipo.tNull) {
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: " + id + " los tipos no coinciden. Linea: "+(tipo.fila+1));
-        } else if(!ts.add(id, tipo.tipo, codigo.TablaSimbolos.Mvp.dvar)){
+        } else if(!ts.add(id, tipo.tipo, codigo.TablaSimbolos.Mvp.dvar, C3D)){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: " + id + " ya esta definido  Linea: "+(tipo.fila+1));
         } else{

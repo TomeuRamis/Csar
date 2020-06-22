@@ -1,3 +1,1 @@
-Error sintactico: etrh en linea: 2 y columna: 1
-No se pudo recuperar el error
 Analisis finalizado

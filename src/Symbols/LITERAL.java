@@ -29,6 +29,9 @@ public class LITERAL extends SimboloBase {
                 //Jaja Lol
                 break;
             case 2://tInt
+                if(l.charAt(0) == '('){
+                    l = l.substring(1, l.length()-1);
+                }
                 valor = Integer.parseInt(l);
                 break;     
        }

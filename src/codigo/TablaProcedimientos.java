@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class TablaProcedimientos {
     int np = -1;
-    ArrayList<Procedimiento> TP;
+    ArrayList<Procedimiento> TP = new ArrayList<>();
     public int nuevoProcedimiento(){
         np = np + 1;
         TP.add(new Procedimiento());

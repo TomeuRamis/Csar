@@ -23,7 +23,7 @@ public class FUNC1 extends SimboloBase {
         tipo = def.tipo;
         this.id = id;
 
-        if (!ts.add(id, def.tipo, codigo.TablaSimbolos.Mvp.dproc)) {
+        if (!ts.add(id, def.tipo, codigo.TablaSimbolos.Mvp.dproc, C3D)) {
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: " + id + " ya ha sido definido en este ámbito. Linea: "+(this.fila+1));
             //System.out.println("Error semántico: " + id + " ya ha sido definido en este ámbito. Linea: "+(this.fila+1));
@@ -40,7 +40,7 @@ public class FUNC1 extends SimboloBase {
             }
             
             for (int i = 0; i < params.idParams.size(); i++) {
-                ts.ponerParam(id, params.idParams.get(i), params.tipos.get(i));
+                ts.ponerParam(id, params.idParams.get(i), params.tipos.get(i), C3D);
             }
 
             g.addEdge(this, def);
