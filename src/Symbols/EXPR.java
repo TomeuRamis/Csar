@@ -52,7 +52,7 @@ public class EXPR extends SimboloBase{
         g.addEdge(this, new SimboloBase(id));
         
         //ganemos
-        if(d.mvp.ordinal() != 0){ //MVP.dproc = 0 (debería ser siempre true, pero por si ácà)
+        if(d.mvp.ordinal() != 0){ //MVP.dproc = 0 (debería ser siempre true, pero porsiácà)
             r = d.nv;
         }
     }
@@ -64,6 +64,8 @@ public class EXPR extends SimboloBase{
         g.addEdge(this, new SimboloBase("("));
         g.addEdge(this, exprp);
         g.addEdge(this, new SimboloBase(")"));
+        
+        r = exprp.r;
     }
     
     public void gest(){

@@ -5,6 +5,8 @@
  */
 package Symbols;
 
+import codigo.idInstrucciones;
+
 /**
  *
  * @author Juan
@@ -15,6 +17,8 @@ public class ASIG extends SimboloBase{
     //Consulta si existe id y compara los tipos de id y exprp
     public ASIG(String id, EXPRP exprp, codigo.TablaSimbolos ts){
         super("ASIG",exprp.fila,exprp.columna);
+        
+        this.expresionp = exprp;
         
         codigo.TablaSimbolos.FilaTD fTd = ts.consulta(id, codigo.TablaSimbolos.Mvp.dvar);
         if(fTd == null){
@@ -32,6 +36,6 @@ public class ASIG extends SimboloBase{
         g.addEdge(this, new SimboloBase("="));
         g.addEdge(this, exprp);
         
-        
+        C3D.genera(idInstrucciones.COPY.ordinal(),expresionp.r , -1,fTd.nv);
     }
 }
