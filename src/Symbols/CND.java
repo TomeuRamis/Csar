@@ -23,7 +23,7 @@ public class CND extends SimboloBase {
         g.addEdge(this, cnd1);
         g.addEdge(this, cnd2);
 
-        C3D.genera(idInstrucciones.SKIP.ordinal(), -1, -1, cnd1.e);
+        C3D.genera(idInstrucciones.SKIP.ordinal(), -1, -1, cnd2.e);
     }
 
 }

@@ -12,6 +12,7 @@ package Symbols;
 public class CND2 extends SimboloBase{
     
     INSTS insts;
+    int e; 
     
     public CND2(INSTS insts, ELS els, codigo.TablaSimbolos ts){
         super("CND2",insts.fila,insts.columna);
