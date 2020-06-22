@@ -2,4 +2,4 @@
 
 generar Strings LITERAL.java
 generar CALLS EXPR.java
-no sabemos hacer nada EXPR.java
+no sabemos hacer nada EXPR.java (el caso de una varibale y constante ya esta (creo))
