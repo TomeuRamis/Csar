@@ -44,5 +44,6 @@ public class P extends SimboloBase{
         //p1.gest();
         //p2.gest();
         this.imprimirArbol();
+        System.out.println(C3D.toString());
     }
 }

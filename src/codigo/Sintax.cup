@@ -117,13 +117,13 @@ DCL ::=
     TYPE:v1 Id:v2 ASIGNACION:v3     {: RESULT = new Symbols.DCL(v1,v2, v3, ts); :}
 ;
 CND ::= 
-    CND1:v1 CND2:v2                 {: RESULT = new Symbols.CND(v1, v2); :}
+    CND2:v1 ELS:v2                 {: RESULT = new Symbols.CND(v1, v2); :}
 ;
 CND1 ::=
     If A_par EXPRP:v C_par A_llave  {: RESULT = new Symbols.CND1(v, ts); :}
 ;
 CND2 ::=
-    INSTS:v1 C_llave ELS:v2         {: RESULT = new Symbols.CND2(v1, v2, ts); :}
+    CND1:v1 INSTS:v2 C_llave         {: RESULT = new Symbols.CND2(v1, v2, ts); :}
 ;
 ELS ::=
     ELS3:v1 CND:v2                  {: RESULT = new Symbols.ELS(v1, v2, ts); :} |

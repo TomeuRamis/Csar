@@ -5,6 +5,8 @@
  */
 package Symbols;
 
+import codigo.idInstrucciones;
+
 /**
  *
  * @author tomeu
@@ -12,15 +14,22 @@ package Symbols;
 public class CND2 extends SimboloBase{
     
     INSTS insts;
-    int e; 
+    CND1 cnd1;
+    int efi; 
     
-    public CND2(INSTS insts, ELS els, codigo.TablaSimbolos ts){
+    public CND2(CND1 cnd1, INSTS insts, codigo.TablaSimbolos ts){
         super("CND2",insts.fila,insts.columna);
         
+        this.cnd1 = cnd1;
         this.insts = insts;
         
+        g.addEdge(this, cnd1);
         g.addEdge(this, insts);
         g.addEdge(this, new SimboloBase("}"));
-        g.addEdge(this, els);
+        
+        this.efi = C3D.nuevaEtiqueta();
+        C3D.genera(idInstrucciones.GOTO.ordinal(), -1, -1, efi);
+        C3D.genera(idInstrucciones.SKIP.ordinal(), -1 , -1, cnd1.e);
+        
     }
 }

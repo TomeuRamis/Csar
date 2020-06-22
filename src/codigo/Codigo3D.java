@@ -56,7 +56,7 @@ class Instruccion3D {
     
     @Override
     public String toString(){
-        return cod + "\t" + op1 + "\t" + op2 + "\t" + dest;
+        return idInstrucciones.values()[cod] + "\t" + op1 + "\t" + op2 + "\t" + dest;
     }
     
 }

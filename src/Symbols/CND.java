@@ -15,15 +15,15 @@ public class CND extends SimboloBase {
 
     INSTS insts;
 
-    public CND(CND1 cnd1, CND2 cnd2) {
-        super("CND", cnd1.fila, cnd1.columna);
+    public CND(CND2 cnd2, ELS els) {
+        super("CND", cnd2.fila, cnd2.columna);
 
         this.insts = cnd2.insts;
 
-        g.addEdge(this, cnd1);
         g.addEdge(this, cnd2);
+        g.addEdge(this, els);
 
-        C3D.genera(idInstrucciones.SKIP.ordinal(), -1, -1, cnd2.e);
+        C3D.genera(idInstrucciones.SKIP.ordinal(), -1, -1, cnd2.efi);
     }
 
 }
