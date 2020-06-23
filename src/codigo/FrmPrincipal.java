@@ -222,7 +222,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         } catch (Exception ex) {
             txtOutput.setForeground(Color.red);
-            errores += ex.getLocalizedMessage();
         } finally {
             BufferedWriter writer = null;
             try {

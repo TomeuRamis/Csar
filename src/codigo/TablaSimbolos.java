@@ -99,7 +99,10 @@ public class TablaSimbolos {
             
             if(mvp != Mvp.dproc){ //si no es un procedimiento lo añadimos a la tabla de variables
                 nuevaFila.setNv(c3d.nuevaVar());
+            } else {
+                nuevaFila.setNv(c3d.nuevoProcedimiento());
             }
+            
             
             td.add(posAnterior, nuevaFila);
             
@@ -113,6 +116,8 @@ public class TablaSimbolos {
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
             if(mvp != Mvp.dproc){ //si no es un procedimiento lo añadimos a la tabla de variables
                 nuevaFila.setNv(c3d.nuevaVar());
+            }else { //si lo es, lo añadimos a la tabla de procedimientos
+                nuevaFila.setNv(c3d.nuevoProcedimiento());
             }
             int i = 0;
             while(i < td.size() && td.get(i).np != -1){              
@@ -220,7 +225,7 @@ public class TablaSimbolos {
         public int np; //Ambito
         public int first;
         public Mvp mvp; //Indica si es una constante, una variable o un subprograma
-        public int nv; //Referencia a la tabla de variables
+        public int nv; //Referencia a la tabla de variables o en el caso de procedimientos a la tabla de procedimientos
 
         public FilaTD(String n, Tipo t, int amb, Mvp mvp) {
             nombre = n;

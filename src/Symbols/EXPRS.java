@@ -16,6 +16,8 @@ public class EXPRS extends SimboloBase{
     EXPRP expresionP;
     EXPRS expresiones;
     
+    ArrayList<Integer> pparams;
+    
     ArrayList<codigo.TablaSimbolos.Tipo> tipos = new ArrayList<>();
          
     public EXPRS(EXPRP exprp) {
@@ -24,6 +26,9 @@ public class EXPRS extends SimboloBase{
         tipos.add(exprp.tipo);  
         
         g.addEdge(this, exprp);
+        
+        pparams = new ArrayList<>();
+        pparams.add(exprp.r);
     }
     
     public EXPRS(EXPRP exprp, EXPRS exprs){
@@ -35,6 +40,9 @@ public class EXPRS extends SimboloBase{
         g.addEdge(this, exprp);
         g.addEdge(this,new SimboloBase(","));
         g.addEdge(this, exprs);
+        
+        this.pparams = exprs.pparams;
+        this.pparams.add(exprp.r);
     }
     
 }

@@ -34,6 +34,14 @@ public class Codigo3D {
         return TP.nuevoProcedimiento();
     }
     
+    public void setEtiquetaP(int n, int e){
+        TP.setEtiquetaP(n, e);
+    }
+    
+    public void incrementarNParam(int n){
+        TP.incrementarNParams(n);
+    }
+    
     public void reset(){
         ne = 0;
         TV = new TablaVariables();
@@ -47,6 +55,10 @@ public class Codigo3D {
         for(int i = 0; i < codigo.size(); i++){
             res += "\n" + codigo.get(i).toString();
         }        
+        
+        res += "\n\nNV: "+TV.nv+"\n";
+        res += "NP: "+TP.np+"\n";
+        res += TP.toString();
         return res;
     }
 }
@@ -117,7 +129,7 @@ class Instruccion3D {
                 res = "call " + dest;
                 break;
             case 17://RTN
-                res = "pmb " + dest;
+                res = "rtn " + dest;
                 break;
             case 18://PARAM_S
                 res = "param_s" + dest;

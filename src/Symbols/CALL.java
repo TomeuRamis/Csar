@@ -5,6 +5,8 @@
  */
 package Symbols;
 
+import codigo.idInstrucciones;
+
 /**
  *
  * @author Juan
@@ -33,6 +35,8 @@ public class CALL extends SimboloBase {
             g.addEdge(this, new SimboloBase(id));
             g.addEdge(this, new SimboloBase("("));
             g.addEdge(this, new SimboloBase(")"));
+            
+            C3D.genera(idInstrucciones.CALL.ordinal(), -1, -1, d.nv); //pone nv pero es np (porque es un dproc)
         }
     }
     
@@ -81,6 +85,13 @@ public class CALL extends SimboloBase {
             g.addEdge(this, new SimboloBase("("));
             g.addEdge(this, exprs);
             g.addEdge(this, new SimboloBase(")"));
+            
+            int p;
+            while(!exprs.pparams.isEmpty()){
+                p = exprs.pparams.remove(0);
+                C3D.genera(idInstrucciones.PARAM_S.ordinal(), -1, -1, p);
+            }
+            C3D.genera(idInstrucciones.CALL.ordinal(), -1, -1, d.nv);
         }
     }
     
