@@ -77,7 +77,7 @@ public class EXPRP extends SimboloBase {
                     }
                     int e1 = C3D.nuevaEtiqueta();
                     int e2 = C3D.nuevaEtiqueta();
-                    int t = C3D.nuevaVar();
+                    int t = C3D.nuevaVar(tipo);
                     C3D.genera(op.ordinal(), exprp.r, expr.r, e1);
                     C3D.genera(idInstrucciones.COPY.ordinal(), 0, true, -1, t);
                     C3D.genera(idInstrucciones.GOTO.ordinal(), -1, -1, e2);
@@ -109,7 +109,7 @@ public class EXPRP extends SimboloBase {
                             codigo.FrmPrincipal.notificarError("Error semántico: algo esta roto en EXPRP.java");
                             break;
                     }
-                    int t = C3D.nuevaVar();
+                    int t = C3D.nuevaVar(tipo);
                     C3D.genera(op, exprp.r, expr.r, t);
                     this.r = t;
                 }
@@ -150,7 +150,7 @@ public class EXPRP extends SimboloBase {
                     }
                     int e1 = C3D.nuevaEtiqueta();
                     int e2 = C3D.nuevaEtiqueta();
-                    int t = C3D.nuevaVar();
+                    int t = C3D.nuevaVar(tipo);
                     C3D.genera(op.ordinal(), exprp.r, expr.r, e1);
                     C3D.genera(idInstrucciones.COPY.ordinal(), 0, true, -1, t);
                     C3D.genera(idInstrucciones.GOTO.ordinal(), -1, -1, e2);
@@ -173,7 +173,7 @@ public class EXPRP extends SimboloBase {
                             codigo.FrmPrincipal.notificarError("Error semántico: algo esta roto en EXPRP.java");
                             break;
                     }
-                    int t = C3D.nuevaVar();
+                    int t = C3D.nuevaVar(tipo);
                     C3D.genera(op.ordinal(), exprp.r, expr.r, t);
                     this.r = t;
                 }

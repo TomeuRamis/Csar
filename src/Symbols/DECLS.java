@@ -12,6 +12,7 @@ package Symbols;
 public class DECLS extends SimboloBase{
     DECL declaracion;
     DECLS declaraciones;
+    int e;
     public DECLS(DECL decl, DECLS decls){
         super("DECLS",decl.fila,decl.columna);
         declaracion = decl;
@@ -19,17 +20,14 @@ public class DECLS extends SimboloBase{
         g.addEdge(this, decl);
         g.addEdge(this, new SimboloBase(";"));
         g.addEdge(this, decls);
+        e = decls.e;
     }
     
     public DECLS(){
         super("DECLS");
         g.addEdge(this, new SimboloBase("λ"));
-    }
-    public void gest(){
-        if(declaraciones != null){
-            declaracion.gest();
-            declaraciones.gest();
-        }
+        e = C3D.nuevaEtiqueta();
+        C3D.genera(codigo.idInstrucciones.GOTO.ordinal(), -1, -1, e);
     }
 }
 

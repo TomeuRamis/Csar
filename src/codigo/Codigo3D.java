@@ -31,13 +31,16 @@ public class Codigo3D {
         codigo.add(new Instruccion3D(cod, op1, literal,  op2, dest));
     }
     
+    public ArrayList<Instruccion3D> getCodigo(){
+        return codigo;
+    }
     
     public int nuevaEtiqueta(){
         return ne++;
     }
     
-    public int nuevaVar(){
-        return TV.nuevaVar();
+    public int nuevaVar(codigo.TablaSimbolos.Tipo tipo){
+        return TV.nuevaVar(tipo);
     }
     
     public int nuevoProcedimiento(){
@@ -78,8 +81,9 @@ public class Codigo3D {
             res += "\n" + codigo.get(i).toString();
         }        
         
-        res += "\n\nNV: "+TV.nv+"\n";
-        res += "NP: "+TP.np+"\n";
+        res += "\n\n-----------------------------\nNV: "+TV.nv+"\n";
+        res += TV.toString();
+        res += "------------------------------\nNP: "+TP.np+"\n";
         res += TP.toString();
         return res;
     }

@@ -12,6 +12,7 @@ package Symbols;
 public class P1 extends SimboloBase{
     DECLS decls;
     FUNCS funcs;
+    int e;
     public P1 (DECLS decls, FUNCS funcs, codigo.TablaSimbolos ts, int mainleft) throws Exception{
         super("P1");
         this.decls = decls;
@@ -27,11 +28,8 @@ public class P1 extends SimboloBase{
         g.addEdge(this, funcs);
         g.addEdge(this, new SimboloBase("main"));
         g.addEdge(this, new SimboloBase("{"));
+        
+        e = decls.e;
+        C3D.genera(codigo.idInstrucciones.SKIP.ordinal(), -1, -1, e);
     }
-    
-    public void gest(){
-        decls.gest();
-        //funcs.gest();
-    }
-    
 }

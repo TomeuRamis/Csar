@@ -6,6 +6,7 @@
 package Symbols;
 
 import codigo.TablaSimbolos;
+import codigo.idInstrucciones;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,7 +45,7 @@ public class FUNC1 extends SimboloBase {
             e = def.e;
             nv = (ts.consulta(id, TablaSimbolos.Mvp.dproc)).nv;
             C3D.setEtiquetaP(nv, e);
-            
+            C3D.genera(idInstrucciones.PMB.ordinal(),-1,-1,nv);
             for (int i = 0; i < params.idParams.size(); i++) {
                 ts.ponerParam(id, params.idParams.get(i), params.tipos.get(i), C3D);
                 C3D.incrementarNParam(nv);

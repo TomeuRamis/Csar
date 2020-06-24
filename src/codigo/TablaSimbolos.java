@@ -98,7 +98,7 @@ public class TablaSimbolos {
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
             
             if(mvp != Mvp.dproc){ //si no es un procedimiento lo añadimos a la tabla de variables
-                nuevaFila.setNv(c3d.nuevaVar());
+                nuevaFila.setNv(c3d.nuevaVar(t));
             } else {
                 nuevaFila.setNv(c3d.nuevoProcedimiento());
             }
@@ -115,7 +115,7 @@ public class TablaSimbolos {
             
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
             if(mvp != Mvp.dproc){ //si no es un procedimiento lo añadimos a la tabla de variables
-                nuevaFila.setNv(c3d.nuevaVar());
+                nuevaFila.setNv(c3d.nuevaVar(t));
             }else { //si lo es, lo añadimos a la tabla de procedimientos
                 nuevaFila.setNv(c3d.nuevoProcedimiento());
             }

@@ -12,9 +12,9 @@ public class TablaVariables {
     public int nv = -1;
     ArrayList<Variable> TV = new ArrayList<>();
     
-    public int nuevaVar(){
+    public int nuevaVar(codigo.TablaSimbolos.Tipo tipo){
         nv = nv + 1;
-        TV.add(new Variable());
+        TV.add(new Variable(tipo));
         return nv;
     }
     
@@ -22,7 +22,7 @@ public class TablaVariables {
     public String toString(){
         String res = "";
         for(int i = 0; i < TV.size(); i++){
-            res += "\n" + TV.get(i).toString();
+            res += "\n" + i + ": " + TV.get(i).toString();
         }
         return res;
     }
@@ -30,11 +30,14 @@ public class TablaVariables {
 
 class Variable{
     
-    public Variable(){
+    codigo.TablaSimbolos.Tipo tipo;
+    
+    public Variable(codigo.TablaSimbolos.Tipo tipo){
+        this.tipo = tipo;
     }
     
     @Override
     public String toString(){
-        return "";
+        return "Tipo: "+tipo;
     }
 }
