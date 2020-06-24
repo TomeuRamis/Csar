@@ -43,6 +43,7 @@ public class P extends SimboloBase{
         
         this.imprimirArbol();
         System.out.println(C3D);
+        C3D.imprimir("output/Codigo3Direcciones.txt");
         C3D.reset();
     }
 }

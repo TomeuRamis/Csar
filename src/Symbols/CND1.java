@@ -14,7 +14,7 @@ import codigo.idInstrucciones;
 public class CND1 extends SimboloBase {
 
     int e; //etiqueta
-    
+
     public CND1(EXPRP exprp, codigo.TablaSimbolos ts) throws Exception {
         super("CND1", exprp.fila, exprp.columna);
 
@@ -35,8 +35,8 @@ public class CND1 extends SimboloBase {
         g.addEdge(this, exprp);
         g.addEdge(this, new SimboloBase(")"));
         g.addEdge(this, new SimboloBase("{"));
-        
+
         this.e = C3D.nuevaEtiqueta();
-        C3D.genera(idInstrucciones.IFEQ.ordinal(),exprp.r, 0, e);
+        C3D.genera(idInstrucciones.IFEQ.ordinal(), 0, true, exprp.r, e);
     }
 }

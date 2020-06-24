@@ -2,7 +2,12 @@
 package codigo;
 
 import codigo.idInstrucciones.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,6 +59,18 @@ public class Codigo3D {
         codigo = new ArrayList<>();
     }
     
+    public void imprimir(String path){
+        
+        String c3d = toString();
+        Writer writer;
+        try {
+            writer = new FileWriter(path);         
+            writer.write(c3d);
+            writer.close();
+        } catch (IOException ex) {
+        }
+    } 
+     
     @Override
     public String toString(){
         String res = "Codigo \t Operando 1 \t Operando 2 \t Destino";
@@ -86,6 +103,7 @@ class Instruccion3D {
         this.dest = dest;
         this.literal1 = literal;
     }
+    
     
     @Override
     public String toString(){
