@@ -17,7 +17,7 @@ public class FUNC1 extends SimboloBase {
 
     codigo.TablaSimbolos.Tipo tipo;
     String id;
-    int e;
+    int e, nv;
 
     public FUNC1(DEFINICION def, String id, PARAMS params, codigo.TablaSimbolos ts) {
         super("FUNC1", def.fila, def.columna);
@@ -42,7 +42,7 @@ public class FUNC1 extends SimboloBase {
             }
             
             e = def.e;
-            int nv = (ts.consulta(id, TablaSimbolos.Mvp.dproc)).nv;
+            nv = (ts.consulta(id, TablaSimbolos.Mvp.dproc)).nv;
             C3D.setEtiquetaP(nv, e);
             
             for (int i = 0; i < params.idParams.size(); i++) {

@@ -22,6 +22,11 @@ public class Codigo3D {
         codigo.add(new Instruccion3D(cod, op1, op2, dest));
     }
     
+    public void genera(int cod, int op1, boolean literal, int op2, int dest){
+        codigo.add(new Instruccion3D(cod, op1, literal,  op2, dest));
+    }
+    
+    
     public int nuevaEtiqueta(){
         return ne++;
     }
@@ -65,7 +70,8 @@ public class Codigo3D {
 
 class Instruccion3D {
     int cod, op1, op2, dest;
-
+    boolean literal1 = false;
+    
     public Instruccion3D(int cod, int op1, int op2, int dest) {
         this.cod = cod;
         this.op1 = op1;
@@ -73,69 +79,82 @@ class Instruccion3D {
         this.dest = dest;
     }
     
+     public Instruccion3D(int cod, int op1, boolean literal, int op2, int dest) {
+        this.cod = cod;
+        this.op1 = op1;
+        this.op2 = op2;
+        this.dest = dest;
+        this.literal1 = literal;
+    }
+    
     @Override
     public String toString(){
+        String op1 = "", op2="v"+this.op2;
+        if(!literal1){
+            op1 += "v";
+        }
+        op1 += this.op1;
         String res = "";
         switch(cod){
             case 0://COPY
-                res = dest + " = " + op1;
+                res = "v"+dest + " = " + op1;
                 break;
             case 1://ADD
-                res = dest + " = " + op1 + " + " + op2;
+                res = "v"+dest + " = " + op1 + " + " + op2;
                 break;
             case 2://SUB
-                res = dest + " = " + op1 + " - " + op2;
+                res = "v"+dest + " = " + op1 + " - " + op2;
                 break;
             case 3://PROD
-                res = dest + " = " + op1 + " * " + op2;
+                res = "v"+dest + " = " + op1 + " * " + op2;
                 break;
             case 4://DIV
-                res = dest + " = " + op1 + " / " + op2;
+                res = "v"+dest + " = " + op1 + " / " + op2;
                 break;
             case 5://MOD
-                res = dest + " = " + op1 + " % " + op2;
+                res = "v"+dest + " = " + op1 + " % " + op2;
                 break;
             case 6://AND
-                res = dest + " = " + op1 + " && " + op2;
+                res = "v"+dest + " = " + op1 + " && " + op2;
                 break;
             case 7://OR
-                res = dest + " = " + op1 + " || " + op2;
+                res = "v"+dest + " = " + op1 + " || " + op2;
                 break;
             case 8://SKIP
-                res = dest + " : skip";
+                res = "et"+dest + " : skip";
                 break;
             case 9://IFEQ
-                res = "if " + op1 + "=" + op2 + " goto " + dest;
+                res = "if " + op1 + "=" + op2 + " goto et"+dest;
                 break;
             case 10://IFNE
-                res = "if " + op1 + "!=" + op2 + " goto " + dest;
+                res = "if " + op1 + "!=" + op2 + " goto et" + dest;
                 break;
             case 11://IFLT
-                res = "if " + op1 + "<" + op2 + " goto " + dest;
+                res = "if " + op1 + "<" + op2 + " goto et" + dest;
                 break;
             case 12://IFLE
-                res = "if " + op1 + "<=" + op2 + " goto " + dest;
+                res = "if " + op1 + "<=" + op2 + " goto et" + dest;
                 break;
             case 13://IFGE
-                res = "if " + op1 + ">=" + op2 + " goto " + dest;
+                res = "if " + op1 + ">=" + op2 + " goto et" + dest;
                 break;
             case 14://IFGT
-                res = "if " + op1 + ">" + op2 + " goto " + dest;
+                res = "if " + op1 + ">" + op2 + " goto et" + dest;
                 break;
             case 15://PMB
-                res = "pmb " + dest;
+                res = "pmb p" + dest;
                 break;
             case 16://CALL
-                res = "call " + dest;
+                res = "call p" + dest;
                 break;
             case 17://RTN
-                res = "rtn " + dest;
+                res = "rtn p" + dest;
                 break;
             case 18://PARAM_S
-                res = "param_s" + dest;
+                res = "param_s v" + dest;
                 break;
             case 19://GOTO
-                res = "goto " + dest;
+                res = "goto et" + dest;
                 break;
             case 20://NEG
                 res = dest + " = -" + op1;

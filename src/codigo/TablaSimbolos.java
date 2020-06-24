@@ -195,6 +195,7 @@ public class TablaSimbolos {
                 filatd.np = filate.np;
                 filatd.first = filate.first;
                 filatd.mvp = filate.mvp;
+                filatd.nv = filate.nv;
                 te.remove(filate);
             }
             lini--;
@@ -243,6 +244,7 @@ public class TablaSimbolos {
             np = f.np;
             mvp = f.mvp;
             first = f.first;
+            nv = f.nv;
         }
 
         public FilaTD() {

@@ -40,7 +40,7 @@ public class FUNC extends SimboloBase {
         g.addEdge(this, func1);
         g.addEdge(this, func2);          
 
-        C3D.genera(idInstrucciones.RTN.ordinal(),-1,-1,-1);
+        C3D.genera(idInstrucciones.RTN.ordinal(),-1,-1, func1.nv);
     }
 
 }
