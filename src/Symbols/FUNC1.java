@@ -26,7 +26,7 @@ public class FUNC1 extends SimboloBase {
         tipo = def.tipo;
         this.id = id;
 
-        if (!ts.add(id, def.tipo, codigo.TablaSimbolos.Mvp.dproc, C3D)) {
+        if (!ts.add(id, def.tipo, codigo.TablaSimbolos.Mvp.dproc, C3D, false)) {
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: " + id + " ya ha sido definido en este ámbito. Linea: " + (this.fila + 1));
             //System.out.println("Error semántico: " + id + " ya ha sido definido en este ámbito. Linea: "+(this.fila+1));

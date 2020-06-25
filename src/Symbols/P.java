@@ -42,6 +42,7 @@ public class P extends SimboloBase{
         g.addEdge(this, p2);
         
         this.imprimirArbol();
+        C3D.llenaTP();
         System.out.println(C3D);
         C3D.imprimir("output/Codigo3Direcciones.txt");
         C3D.reset();

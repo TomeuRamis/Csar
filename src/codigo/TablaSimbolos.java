@@ -67,20 +67,11 @@ public class TablaSimbolos {
                 i++;
             }
         }
-        /*while (i < td.size() && (!id.equals(td.get(i).nombre) || td.get(i).np == -1)) {
-            
-            i++;
-        }*/
         
-        /*if(i > td.size()-1){
-            return null;
-        }else{
-            return td.get(i);
-        }*/
         return (i > td.size() - 1) ? null : td.get(i);
     }
 
-    public boolean add(String nombre, Tipo t, Mvp mvp, Codigo3D c3d) {
+    public boolean add(String nombre, Tipo t, Mvp mvp, Codigo3D c3d, boolean isp) {
         FilaTD filatd = consulta(nombre, mvp);
 
         if (filatd != null) {
@@ -98,7 +89,8 @@ public class TablaSimbolos {
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
             
             if(mvp != Mvp.dproc){ //si no es un procedimiento lo añadimos a la tabla de variables
-                nuevaFila.setNv(c3d.nuevaVar(t));
+                int np = c3d.TP.np;
+                nuevaFila.setNv(c3d.nuevaVar(t,np,isp));
             } else {
                 nuevaFila.setNv(c3d.nuevoProcedimiento());
             }
@@ -115,7 +107,8 @@ public class TablaSimbolos {
             
             FilaTD nuevaFila = new FilaTD(nombre, t, n, mvp);
             if(mvp != Mvp.dproc){ //si no es un procedimiento lo añadimos a la tabla de variables
-                nuevaFila.setNv(c3d.nuevaVar(t));
+                int np = c3d.TP.np;
+                nuevaFila.setNv(c3d.nuevaVar(t,np,isp));
             }else { //si lo es, lo añadimos a la tabla de procedimientos
                 nuevaFila.setNv(c3d.nuevoProcedimiento());
             }
@@ -169,7 +162,7 @@ public class TablaSimbolos {
         FilaTP ftp = new FilaTP(idparam, tipo);
         tp.add(ftp);
 
-        this.add(idparam, tipo, Mvp.dvar, c3d);
+        this.add(idparam, tipo, Mvp.dvar, c3d, true);
         return true;
     }
 

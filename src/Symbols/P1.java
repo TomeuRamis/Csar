@@ -31,5 +31,6 @@ public class P1 extends SimboloBase{
         
         e = decls.e;
         C3D.genera(codigo.idInstrucciones.SKIP.ordinal(), -1, -1, e);
+        C3D.nuevoProcedimiento();
     }
 }

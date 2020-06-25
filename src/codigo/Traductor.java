@@ -16,6 +16,8 @@ import java.util.ArrayList;
  */
 public class Traductor {
     
+    private Codigo3D c3d;
+    
     public Traductor(){}
     
     public String traducir(Codigo3D c3d, TablaSimbolos ts){
@@ -132,7 +134,7 @@ public class Traductor {
     }
 
     private String traduceSKIP(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "e" + inst.dest + ":\n";
     }
 
     private String traduceIFEQ(Instruccion3D inst) {
@@ -189,16 +191,66 @@ public class Traductor {
         res += "\nsegment .bss";
         for(TablaSimbolos.FilaTD fila : ts.td){
             if(fila.mvp == TablaSimbolos.Mvp.dvar || fila.mvp == TablaSimbolos.Mvp.dconst){
-                int cant;
-                if(fila.tipo == TablaSimbolos.Tipo.tBool)
-                    cant = 1;
-                else if(fila.tipo == TablaSimbolos.Tipo.tInt)
-                    cant = 4;
-                else 
-                    cant = 2;
-                
+                int cant = getDesp(fila.tipo);
                 res += "\n    v" + fila.nv + " resb " + cant;
             }
         }
+    }
+    
+    private String desref(int nv){
+        Variable var = c3d.TV.TV.get(nv);
+        int desp = 0;
+        String ref = "";
+        if(var.isp){
+        /*  COMO ENCONTRAR PARAMETROS
+            1- Encontrar el subprograma de la variable mediante la TV
+            2- Por cada variable de la TV que esté en el mismo subprograma y sea un parametro
+               sumamos al desplazamiento su ocupación hasta encontrar la buena.
+            3- Retornamos el desplazamiento en negativo*/
+            int i = 0;
+            while(i < nv){
+                Variable aux = c3d.TV.TV.get(i);
+                if(aux.isp && var.np == aux.np){
+                    desp += getDesp(aux.tipo);
+                }
+            }
+            ref = "[ebp-"+ desp +"]";
+        }else{
+            if(var.np > -1){
+            /*  COMO ENCONTRAR VARIABLES LOCALES
+                1- Encontrar el subprograma de la variable mediante la TV
+                2- Por cada variable de la TV que esté en el mismo subprograma y no sea un parametro
+                   sumamos al desplazamiento su ocupación hasta encontrar la buena.
+                3- Retornamos el desplazamiento*/
+                int i = 0;
+                while(i < nv){
+                    Variable aux = c3d.TV.TV.get(i);
+                    if(!aux.isp && var.np == aux.np){
+                        desp += getDesp(aux.tipo);
+                    }
+                }
+                ref = "[ebp+"+ desp +"]";
+            }else{
+            /*  COMO ENCONTRAR GLOBALES */
+                ref = "[v"+ nv +"]";
+            }
+        }
+        return ref;
+    }
+    
+    private int getDesp(TablaSimbolos.Tipo t){
+        int cant;
+        switch (t) {
+            case tBool:
+                cant = 1;
+                break;
+            case tInt:
+                cant = 4;
+                break;
+            default:
+                cant = 8;
+                break;
+        }
+        return cant;
     }
 }

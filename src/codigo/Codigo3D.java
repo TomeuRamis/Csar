@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class Codigo3D {
     int ne = 0;
     public TablaVariables TV = new TablaVariables();
-    TablaProcedimientos TP = new TablaProcedimientos();
+    public TablaProcedimientos TP = new TablaProcedimientos();
     ArrayList<Instruccion3D> codigo;
     
     public Codigo3D() {
@@ -39,8 +39,8 @@ public class Codigo3D {
         return ne++;
     }
     
-    public int nuevaVar(codigo.TablaSimbolos.Tipo tipo){
-        return TV.nuevaVar(tipo);
+    public int nuevaVar(codigo.TablaSimbolos.Tipo tipo, int np, boolean isp){
+        return TV.nuevaVar(tipo,np,isp);
     }
     
     public int nuevoProcedimiento(){
@@ -53,6 +53,10 @@ public class Codigo3D {
     
     public void incrementarNParam(int n){
         TP.incrementarNParams(n);
+    }
+    
+    public void llenaTP(){
+        TP.llenaTP(TV);
     }
     
     public void reset(){
@@ -83,7 +87,7 @@ public class Codigo3D {
         
         res += "\n\n-----------------------------\nNV: "+TV.nv+"\n";
         res += TV.toString();
-        res += "------------------------------\nNP: "+TP.np+"\n";
+        res += "\n------------------------------\nNP: "+TP.np+"\n";
         res += TP.toString();
         return res;
     }
