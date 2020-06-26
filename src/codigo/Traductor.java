@@ -95,42 +95,61 @@ public class Traductor {
     }
 
     private String traduceCOPY(Instruccion3D inst) {
-        String res = "    mov     ";
-        
-//        if(inst.literal1){
-//            res += ",'" + inst.op1 + "'";
-//        }else{
-//            
-//        }
+        String res = "    mov     " + desref(inst.dest,false) + ", " + desref(inst.op1,inst.literal1);
         return res;
     }
 
     private String traduceADD(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    mov     ebx, " + desref(inst.op2, false) + "\n";
+        res += "    add     eax, ebx\n";
+        res += "    mov     " + desref(inst.dest, false) + ", eax\n";
+        return res;
     }
 
     private String traduceSUB(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    mov     ebx, " + desref(inst.op2, false) + "\n";
+        res += "    sub     eax, ebx\n";
+        res += "    mov     " + desref(inst.dest, false) + ", eax\n";
+        return res;
     }
 
     private String traducePROD(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    imul    " + desref(inst.op2, false) + "\n";;
+        res += "    mov     " + desref(inst.dest, false) + ", eax\n";
+        return res;
     }
 
     private String traduceDIV(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    idiv    " + desref(inst.op2, false) + "\n";;
+        res += "    mov     " + desref(inst.dest, false) + ", eax\n";
+        return res;
     }
 
     private String traduceMOD(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    idiv    " + desref(inst.op2, false) + "\n";;
+        res += "    mov     " + desref(inst.dest, false) + ", edx\n";
+        return res;
     }
 
     private String traduceAND(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    mov     ebx, " + desref(inst.op2, false) + "\n";
+        res += "    and     eax, ebx\n";
+        res += "    mov     " + desref(inst.dest, false) + ", eax\n";
+        return res;
     }
 
     private String traduceOR(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    mov     ebx, " + desref(inst.op2, false) + "\n";
+        res += "    or     eax, ebx\n";
+        res += "    mov     " + desref(inst.dest, false) + ", eax\n";
+        return res;
     }
 
     private String traduceSKIP(Instruccion3D inst) {
@@ -138,27 +157,39 @@ public class Traductor {
     }
 
     private String traduceIFEQ(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
+        res += "     je    e" + inst.dest;
+        return res;
     }
 
     private String traduceIFNE(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
+        res += "     jne    e" + inst.dest;
+        return res;
     }
 
     private String traduceIFLT(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
+        res += "     jl    e" + inst.dest;
+        return res;
     }
 
     private String traduceIFLE(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
+        res += "     jle    e" + inst.dest;
+        return res;
     }
 
     private String traduceIFGE(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
+        res += "     jge    e" + inst.dest;
+        return res;
     }
 
     private String traduceIFGT(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
+        res += "     jg    e" + inst.dest;
+        return res;
     }
 
     private String traducePMB(Instruccion3D inst) {
@@ -178,7 +209,8 @@ public class Traductor {
     }
 
     private String traduceGOTO(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "     jmp    e" + inst.dest;
+        return res;
     }
 
     private String traduceNEG(Instruccion3D inst) {
@@ -197,42 +229,46 @@ public class Traductor {
         }
     }
     
-    private String desref(int nv){
+    private String desref(int nv,  boolean literal){
         Variable var = c3d.TV.TV.get(nv);
         int desp = 0;
         String ref = "";
-        if(var.isp){
-        /*  COMO ENCONTRAR PARAMETROS
-            1- Encontrar el subprograma de la variable mediante la TV
-            2- Por cada variable de la TV que esté en el mismo subprograma y sea un parametro
-               sumamos al desplazamiento su ocupación hasta encontrar la buena.
-            3- Retornamos el desplazamiento en negativo*/
-            int i = 0;
-            while(i < nv){
-                Variable aux = c3d.TV.TV.get(i);
-                if(aux.isp && var.np == aux.np){
-                    desp += getDesp(aux.tipo);
-                }
-            }
-            ref = "[ebp-"+ desp +"]";
-        }else{
-            if(var.np > -1){
-            /*  COMO ENCONTRAR VARIABLES LOCALES
+        if(literal){
+            ref = "" + nv;
+        } else{
+            if(var.isp){
+            /*  COMO ENCONTRAR PARAMETROS
                 1- Encontrar el subprograma de la variable mediante la TV
-                2- Por cada variable de la TV que esté en el mismo subprograma y no sea un parametro
+                2- Por cada variable de la TV que esté en el mismo subprograma y sea un parametro
                    sumamos al desplazamiento su ocupación hasta encontrar la buena.
-                3- Retornamos el desplazamiento*/
+                3- Retornamos el desplazamiento en negativo*/
                 int i = 0;
                 while(i < nv){
                     Variable aux = c3d.TV.TV.get(i);
-                    if(!aux.isp && var.np == aux.np){
+                    if(aux.isp && var.np == aux.np){
                         desp += getDesp(aux.tipo);
                     }
                 }
-                ref = "[ebp+"+ desp +"]";
+                ref = "[ebp-"+ desp +"]";
             }else{
-            /*  COMO ENCONTRAR GLOBALES */
-                ref = "[v"+ nv +"]";
+                if(var.np > -1){
+                /*  COMO ENCONTRAR VARIABLES LOCALES
+                    1- Encontrar el subprograma de la variable mediante la TV
+                    2- Por cada variable de la TV que esté en el mismo subprograma y no sea un parametro
+                       sumamos al desplazamiento su ocupación hasta encontrar la buena.
+                    3- Retornamos el desplazamiento*/
+                    int i = 0;
+                    while(i < nv){
+                        Variable aux = c3d.TV.TV.get(i);
+                        if(!aux.isp && var.np == aux.np){
+                            desp += getDesp(aux.tipo);
+                        }
+                    }
+                    ref = "[ebp+"+ desp +"]";
+                }else{
+                /*  COMO ENCONTRAR GLOBALES */
+                    ref = "[v"+ nv +"]";
+                }
             }
         }
         return ref;
