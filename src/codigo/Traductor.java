@@ -214,7 +214,7 @@ public class Traductor {
                     desp += getDesp(aux.tipo);
                 }
             }
-            ref = "[ebp-"+ desp +"]";
+            ref = "[ebp+"+ desp +"]";
         }else{
             if(var.np > -1){
             /*  COMO ENCONTRAR VARIABLES LOCALES
@@ -229,7 +229,7 @@ public class Traductor {
                         desp += getDesp(aux.tipo);
                     }
                 }
-                ref = "[ebp+"+ desp +"]";
+                ref = "[ebp-"+ desp +"]";
             }else{
             /*  COMO ENCONTRAR GLOBALES */
                 ref = "[v"+ nv +"]";
