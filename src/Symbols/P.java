@@ -45,6 +45,8 @@ public class P extends SimboloBase{
         C3D.llenaTP();
         System.out.println(C3D);
         C3D.imprimir("output/Codigo3Direcciones.txt");
+        codigo.Traductor traductor = new codigo.Traductor();
+        traductor.traducir("output/CodigoEnsambladorSinOptimizar.asm", C3D);
         C3D.reset();
     }
 }

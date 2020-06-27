@@ -17,86 +17,121 @@ import java.util.ArrayList;
 public class Traductor {
 
     private Codigo3D c3d;
-
+    boolean imprimirInt = false;
+  
     public Traductor() {
     }
 
-    public String traducir(Codigo3D c3d, TablaSimbolos ts) {
+    public String traducir(Codigo3D c3d) {
+        this.c3d = c3d;
+
         String res = "";
-        declarar(c3d.TV, ts);
+        res += declarar();
+        res += "section .text\n";
+        res += "    global _main\n";
+        res += "    extern _printf\n";
+        res += "    extern _scanf\n";
+        res += "_main:\n";
         ArrayList<Instruccion3D> cod = c3d.getCodigo();
         for (Instruccion3D inst : cod) {
             switch (inst.cod) {
                 case 0://COPY
-                    res = traduceCOPY(inst);
+                    res += traduceCOPY(inst);
                     break;
                 case 1://ADD
-                    res = traduceADD(inst);
+                    res += traduceADD(inst);
                     break;
                 case 2://SUB
-                    res = traduceSUB(inst);
+                    res += traduceSUB(inst);
                     break;
                 case 3://PROD
-                    res = traducePROD(inst);
+                    res += traducePROD(inst);
                     break;
                 case 4://DIV
-                    res = traduceDIV(inst);
+                    res += traduceDIV(inst);
                     break;
                 case 5://MOD
-                    res = traduceMOD(inst);
+                    res += traduceMOD(inst);
                     break;
                 case 6://AND
-                    res = traduceAND(inst);
+                    res += traduceAND(inst);
                     break;
                 case 7://OR
-                    res = traduceOR(inst);
+                    res += traduceOR(inst);
                     break;
                 case 8://SKIP
-                    res = traduceSKIP(inst);
+                    res += traduceSKIP(inst);
                     break;
                 case 9://IFEQ
-                    res = traduceIFEQ(inst);
+                    res += traduceIFEQ(inst);
                     break;
                 case 10://IFNE
-                    res = traduceIFNE(inst);
+                    res += traduceIFNE(inst);
                     break;
                 case 11://IFLT
-                    res = traduceIFLT(inst);
+                    res += traduceIFLT(inst);
                     break;
                 case 12://IFLE
-                    res = traduceIFLE(inst);
+                    res += traduceIFLE(inst);
                     break;
                 case 13://IFGE
-                    res = traduceIFGE(inst);
+                    res += traduceIFGE(inst);
                     break;
                 case 14://IFGT
-                    res = traduceIFGT(inst);
+                    res += traduceIFGT(inst);
                     break;
                 case 15://PMB
-                    res = traducePMB(inst);
+                    res += traducePMB(inst);
                     break;
                 case 16://CALL
-                    res = traduceCALL(inst);
+                    res += traduceCALL(inst);
                     break;
                 case 17://RTN
-                    res = traduceRTN(inst);
+                    res += traduceRTN(inst);
                     break;
                 case 18://PARAM_S
-                    res = traducePARAM_S(inst);
+                    res += traducePARAM_S(inst);
                     break;
                 case 19://GOTO
-                    res = traduceGOTO(inst);
+                    res += traduceGOTO(inst);
                     break;
-                case 20://NEG
-                    res = traduceNEG(inst);
+                case 20://IN
+                    res += traduceIN(inst);
+                    break;
+                case 21: //OUT
+                    res += traduceOUT(inst);
+                    break;
+                case 22://NEG
+                    res += traduceNEG(inst);
                     break;
             }
+        }
+        res += "    ret\n";
+        if(imprimirInt){
+            res +=  "printNumber:\n" +
+                    "    push    eax\n" +
+                    "    push    edx\n" +
+                    "    xor     edx,edx\n" +
+                    "    div     dword [const10]\n" +
+                    "    test    eax,eax\n" +
+                    "    je      l1\n" +
+                    "    call    printNumber\n" +
+                    "l1:\n" +
+                    "    add     edx, '0'\n" +
+                    "    mov     [outInt], edx\n" +
+                    "    push    outInt\n" +
+                    "    call    _printf\n" +
+                    "    add     esp,4\n" +
+                    "    pop     edx\n" +
+                    "    pop     eax\n" +
+                    "    ret\n";
         }
         return res;
     }
 
     private String traduceCOPY(Instruccion3D inst) {
-        String res = "    mov     " + desref(inst.dest, false) + ", " + desref(inst.op1, inst.literal1);
+        String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
     }
 
@@ -148,7 +183,7 @@ public class Traductor {
     private String traduceOR(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
         res += "    mov     ebx, " + desref(inst.op2, false) + "\n";
-        res += "    or     eax, ebx\n";
+        res += "    or      eax, ebx\n";
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
     }
@@ -159,58 +194,129 @@ public class Traductor {
 
     private String traduceIFEQ(Instruccion3D inst) {
         String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     je    e" + inst.dest;
+        res += "     je    e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFNE(Instruccion3D inst) {
         String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jne    e" + inst.dest;
+        res += "     jne    e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFLT(Instruccion3D inst) {
         String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jl    e" + inst.dest;
+        res += "     jl    e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFLE(Instruccion3D inst) {
         String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jle    e" + inst.dest;
+        res += "     jle    e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFGE(Instruccion3D inst) {
         String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jge    e" + inst.dest;
+        res += "     jge    e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFGT(Instruccion3D inst) {
         String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jg    e" + inst.dest;
+        res += "     jg    e" + inst.dest + "\n";
         return res;
     }
 
     private String traducePMB(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "";
+        //Igual aquí hay que guardar el stack pointer
+        res += "    push    ebp\n";
+        res += "    mov     ebp, esp \n";
+        int ocupacion = 0;
+        int np = inst.dest;
+        int tvsize = c3d.TV.TV.size();
+        int i = 0;
+        Variable aux = c3d.TV.TV.get(i);
+        while (i < tvsize && aux.np <= np) {
+            aux = c3d.TV.TV.get(i);
+            if (!aux.isp && np == aux.np) {
+                ocupacion += getDesp(aux.tipo);
+            }
+            i++;
+        }
+
+        res += "    sub     esp, " + ocupacion + "\n";
+        return res;
     }
 
     private String traduceCALL(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "";
+        res += "    call    e" + c3d.TP.TP.get(inst.dest).etiqueta + "\n";
+        return res;
     }
 
     private String traduceRTN(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "";
+        int ocupacion = 0;
+        int np = inst.dest;
+        int tvsize = c3d.TV.TV.size();
+        int i = 0;
+        Variable aux = c3d.TV.TV.get(i);
+        while (i < tvsize && aux.np <= np) {
+            aux = c3d.TV.TV.get(i);
+            if (!aux.isp && np == aux.np) {
+                ocupacion += getDesp(aux.tipo);
+            }
+            i++;
+        }
+
+        res += "    add     esp, " + ocupacion + "\n";
+        res += "    pop     ebp\n";
+        res += "    ret\n";
+        return res;
     }
 
     private String traducePARAM_S(Instruccion3D inst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String res = "";
+        res += "    push    " + desref(inst.dest, false) + "\n";
+        return res;
     }
 
     private String traduceGOTO(Instruccion3D inst) {
-        String res = "     jmp    e" + inst.dest;
+        String res = "    jmp     e" + inst.dest + "\n";
+        return res;
+    }
+
+    private String traduceIN(Instruccion3D inst) {
+        String res = "";
+        String desref = desref(inst.dest, false);
+        desref = desref.substring(5);
+        res += "    lea     eax, "+desref+"\n";
+        res += "    push    eax\n";
+        if (c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tInt) {
+            res += "    push    formatInt \n";
+        } else if (c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tString) {
+            res += "    push    formatStr \n";
+        } else {
+            res += "    push    formatInt \n";
+        }
+
+        res += "    call    _scanf\n";
+        res += "    add     esp, 8\n";
+        return res;
+    }
+
+    private String traduceOUT(Instruccion3D inst) {
+        String res = "";
+        if (c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tInt) {
+            imprimirInt = true;
+            res += "    mov     eax, "+desref(inst.dest, false)+"\n";
+            res += "    jmp     printNumber\n";
+        } else if (c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tString) {
+            res += "    push    "+desref(inst.dest, false)+"\n";
+            res += "    call    _printf\n";
+        }
         return res;
     }
 
@@ -218,25 +324,33 @@ public class Traductor {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void declarar(TablaVariables TV, TablaSimbolos ts) {
-        String res = "section .data";
+    private String declarar() {
+        String res = "section .data\n";
+        res += "    formatInt: db \"%d\", 0 \n";
+        res += "    formatStr: db \"%s\", 0 \n";
+        res += "    const10:    dd 10\n";
+        res += "    outInt:     dd 0\n";
+        res += "segment .bss\n";
 
-        res += "\nsegment .bss";
-        for (TablaSimbolos.FilaTD fila : ts.td) {
-            if (fila.mvp == TablaSimbolos.Mvp.dvar || fila.mvp == TablaSimbolos.Mvp.dconst) {
-                int cant = getDesp(fila.tipo);
-                res += "\n    v" + fila.nv + " resb " + cant;
+        for (int i = 0; i < c3d.TV.nv + 1; i++) {
+            Variable var = c3d.TV.TV.get(i);
+            if (!var.isp && var.np == -1) {
+                int cant = getDesp(var.tipo);
+                res += "    v" + i + " resb " + cant + "\n";
             }
         }
+        return res;
     }
 
     private String desref(int nv, boolean literal) {
-        Variable var = c3d.TV.TV.get(nv);
+
         int desp = 0;
         String ref = "";
         if (literal) {
-            ref = "" + nv;
+            ref = "dword " + nv;
         } else {
+            Variable var = c3d.TV.TV.get(nv);
+            ref += getOperationSize(var.tipo) + " ";
             if (var.isp) {
                 /*  COMO ENCONTRAR PARAMETROS
         if(var.isp){
@@ -251,8 +365,9 @@ public class Traductor {
                     if (aux.isp && var.np == aux.np) {
                         desp += getDesp(aux.tipo);
                     }
+                    i++;
                 }
-                ref = "[ebp+" + desp + "]";
+                ref += "[ebp+" + (desp + 8) + "]"; //sumamos 4+4 para contabilizar el espacio ocupado por la direccion de retorno y el ebp
             } else {
                 if (var.np > -1) {
                     /*  COMO ENCONTRAR VARIABLES LOCALES
@@ -263,14 +378,15 @@ public class Traductor {
                     int i = 0;
                     while (i < nv) {
                         Variable aux = c3d.TV.TV.get(i);
-                        if (aux.isp && var.np == aux.np) {
+                        if (!aux.isp && var.np == aux.np) {
                             desp += getDesp(aux.tipo);
                         }
+                        i++;
                     }
-                    ref = "[ebp-" + desp + "]";
+                    ref += "[ebp-" + (desp + 4) + "]"; //Por el puntero de la pila
                 } else {
                     /*  COMO ENCONTRAR GLOBALES */
-                    ref = "[v" + nv + "]";
+                    ref += "[v" + nv + "]";
                 }
             }
         }
@@ -291,5 +407,36 @@ public class Traductor {
                 break;
         }
         return cant;
+    }
+
+    private String getOperationSize(TablaSimbolos.Tipo t) {
+        String opsize;
+        switch (t) {
+            case tBool:
+                opsize = "byte";
+                break;
+            case tInt:
+                opsize = "dword";
+                break;
+            default:
+                opsize = "dword";
+                break;
+        }
+        return opsize;
+    }
+
+    public void traducir(String path, Codigo3D c3d) {
+        String traduccion = traducir(c3d);
+        imprimir(path, traduccion);
+    }
+
+    private void imprimir(String path, String traduccion) {
+        Writer writer;
+        try {
+            writer = new FileWriter(path);
+            writer.write(traduccion);
+            writer.close();
+        } catch (IOException ex) {
+        }
     }
 }

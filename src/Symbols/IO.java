@@ -5,6 +5,8 @@
  */
 package Symbols;
 
+import codigo.idInstrucciones;
+
 /**
  *
  * @author Juan
@@ -27,6 +29,8 @@ public class IO extends SimboloBase{
         SimboloBase i = new SimboloBase(id);
         g.addEdge(this, new SimboloBase(")"));
         g.addEdge(this, i);
+        
+        C3D.genera(idInstrucciones.IN.ordinal(), -1, -1, fTd.nv);
     }
     
     public IO(EXPRP exprp){
@@ -36,6 +40,8 @@ public class IO extends SimboloBase{
         g.addEdge(this, new SimboloBase("("));
         g.addEdge(this, exprp);
         g.addEdge(this, new SimboloBase(")"));
+        
+        C3D.genera(idInstrucciones.OUT.ordinal(), -1, -1, exprp.r);
     }
     
 }

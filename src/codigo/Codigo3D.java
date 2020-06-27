@@ -182,7 +182,13 @@ class Instruccion3D {
             case 19://GOTO
                 res = "goto et" + dest;
                 break;
-            case 20://NEG
+            case 20: //IN
+                res +="in v"+dest;
+                break;
+            case 21: //Out
+                res +="out v"+dest;
+                break;
+            case 22://NEG
                 res = dest + " = -" + op1;
                 break;
         }
