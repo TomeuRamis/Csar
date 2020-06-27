@@ -1,7 +1,7 @@
 //(igual ya no)Generar constantes DECL.java
 
 generar Strings LITERAL.java
-generar CALLS EXPR.java
+generar CALLS EXPR.java (mas o menos, falta el tema de la pila)
 no sabemos hacer nada EXPR.java (el caso de una varibale y constante ya esta (creo))
 generar codigo 3@ para EXPRP.java con strings
 Cuando hay un error en el analisis semántico, C3D no se resetea (arregladlo!)

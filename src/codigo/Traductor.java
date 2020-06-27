@@ -15,17 +15,18 @@ import java.util.ArrayList;
  * @author tomeu
  */
 public class Traductor {
-    
+
     private Codigo3D c3d;
-    
-    public Traductor(){}
-    
-    public String traducir(Codigo3D c3d, TablaSimbolos ts){
+
+    public Traductor() {
+    }
+
+    public String traducir(Codigo3D c3d, TablaSimbolos ts) {
         String res = "";
-        declarar(c3d.TV,ts);
+        declarar(c3d.TV, ts);
         ArrayList<Instruccion3D> cod = c3d.getCodigo();
-        for(Instruccion3D inst : cod){
-            switch(inst.cod){
+        for (Instruccion3D inst : cod) {
+            switch (inst.cod) {
                 case 0://COPY
                     res = traduceCOPY(inst);
                     break;
@@ -95,7 +96,7 @@ public class Traductor {
     }
 
     private String traduceCOPY(Instruccion3D inst) {
-        String res = "    mov     " + desref(inst.dest,false) + ", " + desref(inst.op1,inst.literal1);
+        String res = "    mov     " + desref(inst.dest, false) + ", " + desref(inst.op1, inst.literal1);
         return res;
     }
 
@@ -219,62 +220,64 @@ public class Traductor {
 
     private void declarar(TablaVariables TV, TablaSimbolos ts) {
         String res = "section .data";
-        
+
         res += "\nsegment .bss";
-        for(TablaSimbolos.FilaTD fila : ts.td){
-            if(fila.mvp == TablaSimbolos.Mvp.dvar || fila.mvp == TablaSimbolos.Mvp.dconst){
+        for (TablaSimbolos.FilaTD fila : ts.td) {
+            if (fila.mvp == TablaSimbolos.Mvp.dvar || fila.mvp == TablaSimbolos.Mvp.dconst) {
                 int cant = getDesp(fila.tipo);
                 res += "\n    v" + fila.nv + " resb " + cant;
             }
         }
     }
-    
-    private String desref(int nv,  boolean literal){
+
+    private String desref(int nv, boolean literal) {
         Variable var = c3d.TV.TV.get(nv);
         int desp = 0;
         String ref = "";
-        if(literal){
+        if (literal) {
             ref = "" + nv;
-        } else{
-            if(var.isp){
-            /*  COMO ENCONTRAR PARAMETROS
+        } else {
+            if (var.isp) {
+                /*  COMO ENCONTRAR PARAMETROS
+        if(var.isp){
+        /*  COMO ENCONTRAR PARAMETROS
+            1- Encontrar el subprograma de la variable mediante la TV
+            2- Por cada variable de la TV que esté en el mismo subprograma y sea un parametro
+               sumamos al desplazamiento su ocupación hasta encontrar la buena.
+            3- Retornamos el desplazamiento en negativo*/
+                int i = 0;
+                while (i < nv) {
+                    Variable aux = c3d.TV.TV.get(i);
+                    if (aux.isp && var.np == aux.np) {
+                        desp += getDesp(aux.tipo);
+                    }
+                }
+                ref = "[ebp+" + desp + "]";
+            } else {
+                if (var.np > -1) {
+                    /*  COMO ENCONTRAR VARIABLES LOCALES
                 1- Encontrar el subprograma de la variable mediante la TV
                 2- Por cada variable de la TV que esté en el mismo subprograma y sea un parametro
                    sumamos al desplazamiento su ocupación hasta encontrar la buena.
                 3- Retornamos el desplazamiento en negativo*/
-                int i = 0;
-                while(i < nv){
-                    Variable aux = c3d.TV.TV.get(i);
-                    if(aux.isp && var.np == aux.np){
-                        desp += getDesp(aux.tipo);
-                    }
-                }
-                ref = "[ebp-"+ desp +"]";
-            }else{
-                if(var.np > -1){
-                /*  COMO ENCONTRAR VARIABLES LOCALES
-                    1- Encontrar el subprograma de la variable mediante la TV
-                    2- Por cada variable de la TV que esté en el mismo subprograma y no sea un parametro
-                       sumamos al desplazamiento su ocupación hasta encontrar la buena.
-                    3- Retornamos el desplazamiento*/
                     int i = 0;
-                    while(i < nv){
+                    while (i < nv) {
                         Variable aux = c3d.TV.TV.get(i);
-                        if(!aux.isp && var.np == aux.np){
+                        if (aux.isp && var.np == aux.np) {
                             desp += getDesp(aux.tipo);
                         }
                     }
-                    ref = "[ebp+"+ desp +"]";
-                }else{
-                /*  COMO ENCONTRAR GLOBALES */
-                    ref = "[v"+ nv +"]";
+                    ref = "[ebp-" + desp + "]";
+                } else {
+                    /*  COMO ENCONTRAR GLOBALES */
+                    ref = "[v" + nv + "]";
                 }
             }
         }
         return ref;
     }
-    
-    private int getDesp(TablaSimbolos.Tipo t){
+
+    private int getDesp(TablaSimbolos.Tipo t) {
         int cant;
         switch (t) {
             case tBool:
