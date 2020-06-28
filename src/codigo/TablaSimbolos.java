@@ -211,6 +211,18 @@ public class TablaSimbolos {
         return (index > tp.size()-1 || index == -1) ? null : tp.get(index);
     }
 
+    public void incializaVar(String id){       
+        FilaTD ftd = consulta(id, Mvp.dvar);//Buscamos la variable con el id       
+        if(ftd == null){ //Si no exsiste la variable, buscamos la constante
+            ftd = consulta(id, Mvp.dconst);
+        }       
+        if(ftd == null){ //Si la constante tampoco exsiste, ERROR
+            //ERROR
+            FrmPrincipal.notificarError("ERROR semántico: no exsiste ninguna variable ni constante con el id: "+id);
+        }else{
+            ftd.inicializado = true;
+        }
+    }
     public class FilaTD {
 
         public String nombre;
@@ -220,6 +232,8 @@ public class TablaSimbolos {
         public int first;
         public Mvp mvp; //Indica si es una constante, una variable o un subprograma
         public int nv; //Referencia a la tabla de variables o en el caso de procedimientos a la tabla de procedimientos
+        
+        public boolean inicializado = false;
 
         public FilaTD(String n, Tipo t, int amb, Mvp mvp) {
             nombre = n;

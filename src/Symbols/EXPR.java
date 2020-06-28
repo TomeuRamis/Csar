@@ -47,7 +47,10 @@ public class EXPR extends SimboloBase{
         codigo.TablaSimbolos.FilaTD d = ts.consulta(id, codigo.TablaSimbolos.Mvp.dvar);
         if (d == null){
             //ERROR
-            codigo.FrmPrincipal.notificarError("Error semantico: Variable "+id+" no declarada. Linea: "+(left+1));
+            codigo.FrmPrincipal.notificarError("Error semántico: Variable "+id+" no declarada. Linea: "+(left+1));
+        }else if(!d.inicializado){
+            //ERROR
+            codigo.FrmPrincipal.notificarError("Error semántico: Variable "+id+" no inicializada. Linea: "+(left+1));
         }
         tipo = d.tipo;
 

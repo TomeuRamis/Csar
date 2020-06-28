@@ -32,6 +32,9 @@ public class DCL extends SimboloBase {
             codigo.FrmPrincipal.notificarError("Error semántico: " + id + " ya esta definido  Linea: " + (tipo.fila + 1));
         } else {
             this.id = id;
+            if (asignacion.tipo != codigo.TablaSimbolos.Tipo.tNull) {
+                ts.incializaVar(id);
+            }
         }
 
         g.addEdge(this, tipo);

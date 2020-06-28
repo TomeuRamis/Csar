@@ -30,6 +30,8 @@ public class ASIG extends SimboloBase{
         } else if(fTd.tipo != exprp.tipo){
             //ERROR
             codigo.FrmPrincipal.notificarError("Error semántico: " + id +" los tipos son inconpatibles. Linea: "+(exprp.fila+1));
+        }else{
+            fTd.inicializado = true;
         }
         
         g.addEdge(this, new SimboloBase(id));
