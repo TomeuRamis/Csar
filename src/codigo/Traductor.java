@@ -313,7 +313,7 @@ public class Traductor {
 
     private String traducePARAM_S(Instruccion3D inst) {
         String res = "";
-        res += "    push    " + desref(inst.dest, false) + "\n";
+        res += "    push    " + desref(inst.op1, inst.literal1) + "\n";
         return res;
     }
 

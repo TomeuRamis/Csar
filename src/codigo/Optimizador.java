@@ -38,13 +38,13 @@ public class Optimizador {
         //Contamos las apariciones de cada variable
         for (int i = 0; i < op_c3d.codigo.size(); i++) {
             Instruccion3D inst = op_c3d.codigo.get(i);
-            /*if (!inst.literal1) {
+            if (!inst.literal1 && inst.op1 != -1) {
                 usosVariables[inst.op1]++;
             }
-            if (!inst.literal2) {
+            if (!inst.literal2 && inst.op2 != -1) {
                 usosVariables[inst.op2]++;
-            }*/
-            if (inst.dest != -1) {
+            }
+            /*if (inst.dest != -1) {
                 switch (inst.cod) {
                     case 0: //copy
                         usosVariables[inst.dest]++;
@@ -67,57 +67,49 @@ public class Optimizador {
                         usosVariables[inst.dest]++;
                         break;
                 }
-            }
+            }*/
         }
-        //Los variables que solo tengan una asignacion seran OPTIMIZADAS
         
-        //Esto funciona mal
-        /*
-        for (int i = 0; i < op_c3d.codigo.size(); i++) { //por cada instruccion de 3d
-            Instruccion3D inst = op_c3d.codigo.get(i);
-
-            if (inst.op1 != -1 && !inst.literal1) {
-                if (usosVariables[inst.op1] == 1) { //si esta variable solo se asigna una vez se sustituye por el valor al que apunta
-                    if (esLiteral[inst.op1]) {
-                        inst.op1 = valoresVariables[inst.op1];
-                        inst.literal1 = true;
-                        if (inst.cod == 0) { //es un copy
-                            valoresVariables[inst.dest] = inst.op1;
-                            esLiteral[inst.dest] = true;
+        
+        for(int i = 0; i < usosVariables.length; i ++){
+            if(usosVariables[i] == 1){
+                Instruccion3D inst = null;
+                
+                for(int j = 0; j < op_c3d.codigo.size(); j++){
+                    Instruccion3D aux = op_c3d.codigo.get(j);
+                    if(aux.cod != 20 && aux.cod != 21 && aux.cod != 8 && aux.cod != 15 && aux.cod != 19){ //ignoramos in out skip PMB y goto
+                        if(aux.dest == i){
+                            inst = aux;
+                        }                        
+                    }
+                    if(inst != null && ((!aux.literal1 && aux.op1 == i) || (!aux.literal2 && aux.op2 == i))){
+                        if(aux.cod == 0 && inst.cod == 0){//ambos son copy
+                            aux.op1 = inst.op1;
+                            aux.literal1 = inst.literal1;
+                            op_c3d.codigo.remove(inst);
+                        } else if(aux.cod == 0){//aux es copy
+                            aux.cod = inst.cod;
+                            aux.op1 = inst.op1;
+                            aux.literal1 = inst.literal1;
+                            aux.op2 = inst.op2;
+                            aux.literal2 = inst.literal2;
+                            op_c3d.codigo.remove(inst);
+                        } else if(inst.cod == 0){ //inst es copy
+                            if(!aux.literal1 && aux.op1 == i){
+                                aux.op1 = inst.op1;
+                                aux.literal1 = inst.literal1;
+                            } else if(!aux.literal2 && aux.op2 == i){
+                                aux.op2 = inst.op1;
+                                aux.literal2 = inst.literal1;                                
+                            }
+                            op_c3d.codigo.remove(inst);
                         }
+                        
+                        
                     }
                 }
             }
-            if (inst.op2 != -1 && !inst.literal2) {
-                if (usosVariables[inst.op2] == 1) { //si esta variable solo se asigna una vez se sustituye por el valor al que apunta
-                    if (esLiteral[inst.op2]) {
-                        inst.op2 = valoresVariables[inst.op2]; 
-                        inst.literal2 = true;                    
-                        if (inst.cod == 0) { //es un copy
-                            valoresVariables[inst.dest] = inst.op2;
-                            esLiteral[inst.dest] = true;
-                        }
-                    }
-                }
-            }
-
-
-            /*
-            if (inst.cod == 0) { //si la instruccion es un copy
-                if (usosVariables[inst.dest] == 1) { //la variable destino solo se asigna usa una vez
-                    valoresVariables[inst.dest] = inst.op1; //guardamos el valor que se le asigna
-                    esLiteral[inst.dest] = inst.literal1;
-                    if (!inst.literal1) {
-                        if (valoresVariables[inst.op1] != -1) { //si no es literal y existe un valor anterior, se lo asignamos
-                            valoresVariables[inst.dest] = valoresVariables[inst.op1];
-                        }
-                    }
-                    op_c3d.codigo.remove(i);
-                }
-            }
-             
         }
-        */
         return op_c3d;
     }
 }

@@ -191,7 +191,7 @@ class Instruccion3D {
                 }
                 break;
             case 18://PARAM_S
-                res = "param_s v" + dest;
+                res = "param_s " + op1;
                 break;
             case 19://GOTO
                 res = "goto et" + dest;
