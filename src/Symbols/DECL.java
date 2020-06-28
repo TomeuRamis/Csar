@@ -26,10 +26,4 @@ public class DECL extends SimboloBase {
         g.addEdge(this, dcl);
     }
     
-    public void gest(){
-        if(con){
-            //generar CONSTANTE
-        }
-        //declaracion.gest();
-    }
 }

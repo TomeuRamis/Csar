@@ -18,7 +18,8 @@ public class Traductor {
 
     private Codigo3D c3d;
     boolean imprimirInt = false;
-  
+    boolean imprimirBool = false;
+
     public Traductor() {
     }
 
@@ -107,24 +108,38 @@ public class Traductor {
             }
         }
         res += "    ret\n";
-        if(imprimirInt){
-            res +=  "printNumber:\n" +
-                    "    push    eax\n" +
-                    "    push    edx\n" +
-                    "    xor     edx,edx\n" +
-                    "    div     dword [const10]\n" +
-                    "    test    eax,eax\n" +
-                    "    je      l1\n" +
-                    "    call    printNumber\n" +
-                    "l1:\n" +
-                    "    add     edx, '0'\n" +
-                    "    mov     [outInt], edx\n" +
-                    "    push    outInt\n" +
-                    "    call    _printf\n" +
-                    "    add     esp,4\n" +
-                    "    pop     edx\n" +
-                    "    pop     eax\n" +
-                    "    ret\n";
+        if (imprimirInt) {
+            res += "printNumber:\n"
+                    + "    push    eax\n"
+                    + "    push    edx\n"
+                    + "    xor     edx,edx\n"
+                    + "    div     dword [const10]\n"
+                    + "    test    eax,eax\n"
+                    + "    je      l1\n"
+                    + "    call    printNumber\n"
+                    + "l1:\n"
+                    + "    add     edx, '0'\n"
+                    + "    mov     [outInt], edx\n"
+                    + "    push    outInt\n"
+                    + "    call    _printf\n"
+                    + "    add     esp,4\n"
+                    + "    pop     edx\n"
+                    + "    pop     eax\n"
+                    + "    ret\n";
+        }
+        if(imprimirBool){
+            res += "printBool:\n";
+            res += "    mov     ebx, 0\n";
+            res += "    cmp     ebx, eax\n";
+            res += "    je      efalse\n";
+            res += "    push    strtrue\n";
+            res += "    jmp     eibf\n";
+            res += "efalse:\n";
+            res += "    push    strfalse\n";
+            res += "eibf:\n";
+            res += "    call    _printf\n";
+            res += "    add     esp,4\n";
+            res += "    ret\n";
         }
         return res;
     }
@@ -193,38 +208,50 @@ public class Traductor {
     }
 
     private String traduceIFEQ(Instruccion3D inst) {
-        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     je    e" + inst.dest + "\n";
+        String res = "";
+        res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    je      e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFNE(Instruccion3D inst) {
-        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jne    e" + inst.dest + "\n";
+        String res = "";
+        res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    jne     e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFLT(Instruccion3D inst) {
-        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jl    e" + inst.dest + "\n";
+        String res = "";
+        res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    jl      e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFLE(Instruccion3D inst) {
-        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jle    e" + inst.dest + "\n";
+        String res = "";
+        res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    jle     e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFGE(Instruccion3D inst) {
-        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jge    e" + inst.dest + "\n";
+        String res = "";
+        res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    jge     e" + inst.dest + "\n";
         return res;
     }
 
     private String traduceIFGT(Instruccion3D inst) {
-        String res = "     cmp    " + desref(inst.op1, inst.literal1) + ", " + desref(inst.op2, false) + "\n";
-        res += "     jg    e" + inst.dest + "\n";
+        String res = "";
+        res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    jg      e" + inst.dest + "\n";
         return res;
     }
 
@@ -252,7 +279,11 @@ public class Traductor {
 
     private String traduceCALL(Instruccion3D inst) {
         String res = "";
+
         res += "    call    e" + c3d.TP.TP.get(inst.dest).etiqueta + "\n";
+        if (inst.op1 != -1) {
+            res += "    mov     " + desref(inst.op1, inst.literal1) + ", eax\n";
+        }
         return res;
     }
 
@@ -271,6 +302,9 @@ public class Traductor {
             i++;
         }
 
+        if (inst.op1 != -1) {
+            res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        }
         res += "    add     esp, " + ocupacion + "\n";
         res += "    pop     ebp\n";
         res += "    ret\n";
@@ -292,7 +326,7 @@ public class Traductor {
         String res = "";
         String desref = desref(inst.dest, false);
         desref = desref.substring(5);
-        res += "    lea     eax, "+desref+"\n";
+        res += "    lea     eax, " + desref + "\n";
         res += "    push    eax\n";
         if (c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tInt) {
             res += "    push    formatInt \n";
@@ -311,12 +345,20 @@ public class Traductor {
         String res = "";
         if (c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tInt) {
             imprimirInt = true;
-            res += "    mov     eax, "+desref(inst.dest, false)+"\n";
-            res += "    jmp     printNumber\n";
+            res += "    mov     eax, " + desref(inst.dest, false) + "\n";
+            res += "    call    printNumber\n";
         } else if (c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tString) {
-            res += "    push    "+desref(inst.dest, false)+"\n";
+            res += "    push    " + desref(inst.dest, false) + "\n";
             res += "    call    _printf\n";
+        }else{
+            imprimirBool = true;
+            res += "    mov     eax, "+desref(inst.dest, false) + "\n";
+            res += "    call    printBool\n";
+            
         }
+        res += "    push    barraN\n";
+        res += "    call    _printf\n";
+        res += "    add     esp, 4\n";
         return res;
     }
 
@@ -330,6 +372,9 @@ public class Traductor {
         res += "    formatStr: db \"%s\", 0 \n";
         res += "    const10:    dd 10\n";
         res += "    outInt:     dd 0\n";
+        res += "    strtrue:   db \"true\"\n";
+        res += "    strfalse:  db \"false\"\n";
+        res += "    barraN:    db 10,0 \n";
         res += "segment .bss\n";
 
         for (int i = 0; i < c3d.TV.nv + 1; i++) {
@@ -413,7 +458,7 @@ public class Traductor {
         String opsize;
         switch (t) {
             case tBool:
-                opsize = "byte";
+                opsize = "dword";
                 break;
             case tInt:
                 opsize = "dword";

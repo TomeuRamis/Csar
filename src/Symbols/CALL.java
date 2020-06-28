@@ -37,10 +37,13 @@ public class CALL extends SimboloBase {
             g.addEdge(this, new SimboloBase("("));
             g.addEdge(this, new SimboloBase(")"));
 
-            C3D.genera(idInstrucciones.CALL.ordinal(), -1, -1, d.nv); //pone nv pero es np (porque es un dproc)
+           
             if (tipo != codigo.TablaSimbolos.Tipo.tNull) { //NOS FALTA INFROMACIÓN DE LA PILA (reservamos una variable para el valor de retorno de la funcion)
                 r = C3D.nuevaVar(tipo, C3D.TP.np, false);
+            } else{
+                r = -1;
             }
+            C3D.genera(idInstrucciones.CALL.ordinal(), r, -1, d.nv); //pone nv pero es np (porque es un dproc)
         }
 
     }
@@ -96,10 +99,13 @@ public class CALL extends SimboloBase {
                 p = exprs.pparams.remove(0);
                 C3D.genera(idInstrucciones.PARAM_S.ordinal(), -1, -1, p);
             }
-            C3D.genera(idInstrucciones.CALL.ordinal(), -1, -1, d.nv);
+            
             if (tipo != codigo.TablaSimbolos.Tipo.tNull) {//NOS FALTA INFROMACIÓN DE LA PILA (reservamos una variable para el valor de retorno de la funcion)
                 r = C3D.nuevaVar(tipo, C3D.TP.np, false);
+            }else{
+                r = -1;
             }
+            C3D.genera(idInstrucciones.CALL.ordinal(), r, -1, d.nv);
         }
     }
 

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Symbols;
-
+import static codigo.idInstrucciones.*;
 /**
  *
  * @author Juan
@@ -19,6 +19,8 @@ public class RET extends SimboloBase{
         
         g.addEdge(this, new SimboloBase("return"));
         g.addEdge(this, exprp);
+        
+        C3D.genera(codigo.idInstrucciones.RTN.ordinal(), exprp.r, -1, C3D.TP.np);
     }
     
     

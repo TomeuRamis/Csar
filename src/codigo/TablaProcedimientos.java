@@ -66,7 +66,7 @@ public class TablaProcedimientos {
 }
 
 class Procedimiento{
-    int etiqueta, ocupacion, nParam; 
+    int etiqueta, ocupacion, nParam, nvRet; 
     
     Procedimiento(){
         nParam = 0;
@@ -79,6 +79,10 @@ class Procedimiento{
     
     public void incrementarNParams(){
         nParam++;
+    }
+    
+    public void setNvRet(int nvRet){
+        this.nvRet = nvRet;
     }
     
     @Override
