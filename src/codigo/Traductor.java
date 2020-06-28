@@ -152,7 +152,7 @@ public class Traductor {
 
     private String traduceADD(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    mov     ebx, " + desref(inst.op2, false) + "\n";
+        res += "    mov     ebx, " + desref(inst.op2,inst.literal2) + "\n";
         res += "    add     eax, ebx\n";
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
@@ -160,7 +160,7 @@ public class Traductor {
 
     private String traduceSUB(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    mov     ebx, " + desref(inst.op2, false) + "\n";
+        res += "    mov     ebx, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    sub     eax, ebx\n";
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
@@ -168,28 +168,28 @@ public class Traductor {
 
     private String traducePROD(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    imul    " + desref(inst.op2, false) + "\n";;
+        res += "    imul    " + desref(inst.op2, inst.literal2) + "\n";;
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
     }
 
     private String traduceDIV(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    idiv    " + desref(inst.op2, false) + "\n";;
+        res += "    idiv    " + desref(inst.op2, inst.literal2) + "\n";;
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
     }
 
     private String traduceMOD(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    idiv    " + desref(inst.op2, false) + "\n";;
+        res += "    idiv    " + desref(inst.op2, inst.literal2) + "\n";;
         res += "    mov     " + desref(inst.dest, false) + ", edx\n";
         return res;
     }
 
     private String traduceAND(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    mov     ebx, " + desref(inst.op2, false) + "\n";
+        res += "    mov     ebx, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    and     eax, ebx\n";
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
@@ -197,7 +197,7 @@ public class Traductor {
 
     private String traduceOR(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    mov     ebx, " + desref(inst.op2, false) + "\n";
+        res += "    mov     ebx, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    or      eax, ebx\n";
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
@@ -210,7 +210,7 @@ public class Traductor {
     private String traduceIFEQ(Instruccion3D inst) {
         String res = "";
         res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    je      e" + inst.dest + "\n";
         return res;
     }
@@ -218,7 +218,7 @@ public class Traductor {
     private String traduceIFNE(Instruccion3D inst) {
         String res = "";
         res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    jne     e" + inst.dest + "\n";
         return res;
     }
@@ -226,7 +226,7 @@ public class Traductor {
     private String traduceIFLT(Instruccion3D inst) {
         String res = "";
         res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    jl      e" + inst.dest + "\n";
         return res;
     }
@@ -234,7 +234,7 @@ public class Traductor {
     private String traduceIFLE(Instruccion3D inst) {
         String res = "";
         res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    jle     e" + inst.dest + "\n";
         return res;
     }
@@ -242,7 +242,7 @@ public class Traductor {
     private String traduceIFGE(Instruccion3D inst) {
         String res = "";
         res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    jge     e" + inst.dest + "\n";
         return res;
     }
@@ -250,7 +250,7 @@ public class Traductor {
     private String traduceIFGT(Instruccion3D inst) {
         String res = "";
         res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    cmp     eax, " + desref(inst.op2, false) + "\n";
+        res += "    cmp     eax, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    jg      e" + inst.dest + "\n";
         return res;
     }
@@ -372,8 +372,8 @@ public class Traductor {
         res += "    formatStr: db \"%s\", 0 \n";
         res += "    const10:    dd 10\n";
         res += "    outInt:     dd 0\n";
-        res += "    strtrue:   db \"true\"\n";
-        res += "    strfalse:  db \"false\"\n";
+        res += "    strtrue:   db \"true\",0\n";
+        res += "    strfalse:  db \"false\",0\n";
         res += "    barraN:    db 10,0 \n";
         res += "segment .bss\n";
 

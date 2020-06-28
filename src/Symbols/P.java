@@ -48,13 +48,13 @@ public class P extends SimboloBase{
         codigo.Traductor traductor = new codigo.Traductor();
         traductor.traducir("output/CodigoEnsambladorSinOptimizar.asm", C3D);
         
-        /*System.out.println("***************************************************");
+        System.out.println("***************************************************");
         
         codigo.Optimizador optimizador= new codigo.Optimizador(C3D);
         codigo.Codigo3D op_C3D = optimizador.optimiza();
         System.out.println(op_C3D);
         op_C3D.imprimir("output/Codigo3Direcciones.txt");
-        traductor.traducir("output/CodigoEnsambladorOptimizado.asm", op_C3D);*/
+        traductor.traducir("output/CodigoEnsambladorOptimizado.asm", op_C3D);
         
         C3D.reset();
     }

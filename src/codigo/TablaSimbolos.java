@@ -163,6 +163,7 @@ public class TablaSimbolos {
         tp.add(ftp);
 
         this.add(idparam, tipo, Mvp.dvar, c3d, true);
+        incializaVar(idparam);
         return true;
     }
 

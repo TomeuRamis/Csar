@@ -20,7 +20,7 @@ public class PARAM extends SimboloBase{
         super("PARAM",t.fila,t.columna);
         tipo = t.tipo;
         idParam = id;      
-        
+              
         g.addEdge(this, t);
         g.addEdge(this, new SimboloBase(id));
         

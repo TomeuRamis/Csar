@@ -110,6 +110,38 @@ public class Optimizador {
                 }
             }
         }
+        
+        
+        //7 - normalitzacio d'operacions commutatives
+        for(int i = 0; i < op_c3d.codigo.size(); i++){
+            Instruccion3D inst = op_c3d.codigo.get(i);
+            switch (inst.cod) {
+                    case 1:                         
+                    case 3:
+                    case 6:
+                    case 7:
+                        if(!inst.literal1 && inst.literal2){
+                            int aux = inst.op1;
+                            boolean auxb = inst.literal1;
+                            inst.op1 = inst.op2;
+                            inst.literal1 = inst.literal2;
+                            inst.op2 = aux;
+                            inst.literal2 = auxb;
+                        }else if(!inst.literal1 && !inst.literal2){
+                            if(inst.op1 > inst.op2){
+                                int aux = inst.op1;
+                                boolean auxb = inst.literal1;
+                                inst.op1 = inst.op2;
+                                inst.literal1 = inst.literal2;
+                                inst.op2 = aux;
+                                inst.literal2 = auxb;
+                            }
+                        }
+                        break;                   
+                    default:                       
+                        break;
+                }
+        }
         return op_c3d;
     }
 }
