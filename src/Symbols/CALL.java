@@ -97,7 +97,7 @@ public class CALL extends SimboloBase {
             int p;
             while (!exprs.pparams.isEmpty()) {
                 p = exprs.pparams.remove(0);
-                C3D.genera(idInstrucciones.PARAM_S.ordinal(), -1, -1, p);
+                C3D.genera(idInstrucciones.PARAM_S.ordinal(), p, -1, -1);
             }
             
             if (tipo != codigo.TablaSimbolos.Tipo.tNull) {//NOS FALTA INFROMACIÓN DE LA PILA (reservamos una variable para el valor de retorno de la funcion)
