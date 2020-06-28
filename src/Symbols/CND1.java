@@ -37,6 +37,6 @@ public class CND1 extends SimboloBase {
         g.addEdge(this, new SimboloBase("{"));
 
         this.e = C3D.nuevaEtiqueta();
-        C3D.genera(idInstrucciones.IFEQ.ordinal(), 0, true, exprp.r, e);
+        C3D.genera(idInstrucciones.IFEQ.ordinal(), 0, true, exprp.r, false, e);
     }
 }

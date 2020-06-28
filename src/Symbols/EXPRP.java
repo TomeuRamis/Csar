@@ -79,10 +79,10 @@ public class EXPRP extends SimboloBase {
                     int e2 = C3D.nuevaEtiqueta();
                     int t = C3D.nuevaVar(tipo, C3D.TP.np, false);
                     C3D.genera(op.ordinal(), exprp.r, expr.r, e1);
-                    C3D.genera(idInstrucciones.COPY.ordinal(), 0, true, -1, t);
+                    C3D.genera(idInstrucciones.COPY.ordinal(), 0, true, -1,false, t);
                     C3D.genera(idInstrucciones.GOTO.ordinal(), -1, -1, e2);
                     C3D.genera(idInstrucciones.SKIP.ordinal(), -1, -1, e1);
-                    C3D.genera(idInstrucciones.COPY.ordinal(), -1, true, -1, t);
+                    C3D.genera(idInstrucciones.COPY.ordinal(), -1, true, -1,false, t);
                     C3D.genera(idInstrucciones.SKIP.ordinal(), -1, -1, e2);
                     this.r = t; //estoy llorando
 
@@ -152,10 +152,10 @@ public class EXPRP extends SimboloBase {
                     int e2 = C3D.nuevaEtiqueta();
                     int t = C3D.nuevaVar(tipo, C3D.TP.np, false);
                     C3D.genera(op.ordinal(), exprp.r, expr.r, e1);
-                    C3D.genera(idInstrucciones.COPY.ordinal(), 0, true, -1, t);
+                    C3D.genera(idInstrucciones.COPY.ordinal(), 0, true, -1,false, t);
                     C3D.genera(idInstrucciones.GOTO.ordinal(), -1, -1, e2);
                     C3D.genera(idInstrucciones.SKIP.ordinal(), -1, -1, e1);
-                    C3D.genera(idInstrucciones.COPY.ordinal(), -1, true, -1, t);
+                    C3D.genera(idInstrucciones.COPY.ordinal(), -1, true, -1,false, t);
                     C3D.genera(idInstrucciones.SKIP.ordinal(), -1, -1, e2);
                     this.r = t;
 

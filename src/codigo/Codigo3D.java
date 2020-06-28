@@ -27,8 +27,8 @@ public class Codigo3D {
         codigo.add(new Instruccion3D(cod, op1, op2, dest));
     }
 
-    public void genera(int cod, int op1, boolean literal, int op2, int dest) {
-        codigo.add(new Instruccion3D(cod, op1, literal, op2, dest));
+    public void genera(int cod, int op1, boolean literal, int op2, boolean literal2, int dest) {
+        codigo.add(new Instruccion3D(cod, op1, literal, op2, literal2, dest));
     }
 
     public ArrayList<Instruccion3D> getCodigo() {
@@ -97,6 +97,7 @@ class Instruccion3D {
 
     int cod, op1, op2, dest;
     boolean literal1 = false;
+    boolean literal2 = false;
 
     public Instruccion3D(int cod, int op1, int op2, int dest) {
         this.cod = cod;
@@ -105,21 +106,26 @@ class Instruccion3D {
         this.dest = dest;
     }
 
-    public Instruccion3D(int cod, int op1, boolean literal, int op2, int dest) {
+    public Instruccion3D(int cod, int op1, boolean literal1, int op2, boolean literal2, int dest) {
         this.cod = cod;
         this.op1 = op1;
         this.op2 = op2;
         this.dest = dest;
-        this.literal1 = literal;
+        this.literal1 = literal1;
+        this.literal2 = literal2;
     }
 
     @Override
     public String toString() {
-        String op1 = "", op2 = "v" + this.op2;
+        String op1 = "", op2 = "";
         if (!literal1) {
             op1 += "v";
         }
+        if(!literal2){
+            op2 += "v";
+        }
         op1 += this.op1;
+        op2 += this.op2;
         String res = "";
         switch (cod) {
             case 0://COPY

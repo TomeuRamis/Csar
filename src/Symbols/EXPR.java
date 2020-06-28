@@ -26,7 +26,7 @@ public class EXPR extends SimboloBase{
         g.addEdge(this, literal);
         
         this.r = C3D.nuevaVar(tipo, C3D.TP.np, false);
-        C3D.genera(COPY.ordinal(), l.valor,true, -1, r);
+        C3D.genera(COPY.ordinal(), l.valor,true, -1,false, r);
     }
     
     public EXPR(CALL c){
