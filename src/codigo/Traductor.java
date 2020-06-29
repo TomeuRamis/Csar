@@ -105,6 +105,12 @@ public class Traductor {
                 case 22://NEG
                     res += traduceNEG(inst);
                     break;
+                case 23:
+                    res += traduceMULP2(inst);
+                    break;
+                case 24:
+                    res += traduceDIVP2(inst);
+                    break;
             }
         }
         res += "    ret\n";
@@ -127,7 +133,7 @@ public class Traductor {
                     + "    pop     eax\n"
                     + "    ret\n";
         }
-        if(imprimirBool){
+        if (imprimirBool) {
             res += "printBool:\n";
             res += "    mov     ebx, 0\n";
             res += "    cmp     ebx, eax\n";
@@ -152,7 +158,7 @@ public class Traductor {
 
     private String traduceADD(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    mov     ebx, " + desref(inst.op2,inst.literal2) + "\n";
+        res += "    mov     ebx, " + desref(inst.op2, inst.literal2) + "\n";
         res += "    add     eax, ebx\n";
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
@@ -350,11 +356,11 @@ public class Traductor {
         } else if (c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tString) {
             res += "    push    " + desref(inst.dest, false) + "\n";
             res += "    call    _printf\n";
-        }else{
+        } else {
             imprimirBool = true;
-            res += "    mov     eax, "+desref(inst.dest, false) + "\n";
+            res += "    mov     eax, " + desref(inst.dest, false) + "\n";
             res += "    call    printBool\n";
-            
+
         }
         res += "    push    barraN\n";
         res += "    call    _printf\n";
@@ -364,6 +370,22 @@ public class Traductor {
 
     private String traduceNEG(Instruccion3D inst) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private String traduceMULP2(Instruccion3D inst) {
+        String res = "";
+        res += "    mov     eax, " + desref(inst.op2, inst.literal2) + "\n";
+        res += "    mov     " + desref(inst.dest, false) + ", eax\n";
+        res += "    shl     " + desref(inst.dest, false) + ", " + inst.op1 + "\n";
+        return res;
+    }
+
+    private String traduceDIVP2(Instruccion3D inst) {
+        String res = "";
+        res += "    mov     eax, " + desref(inst.op2, inst.literal2) + "\n";
+        res += "    mov     " + desref(inst.dest, false) + ", eax\n";
+        res += "    shr     " + desref(inst.dest, false) + ", " + inst.op1 + "\n";
+        return res;
     }
 
     private String declarar() {

@@ -113,8 +113,8 @@ public class Optimizador {
                                 inst.op2 = -1;
                                 inst.literal1 = false;
                                 inst.literal2 = false;
-                            }else{
-                               op_c3d.codigo.remove(i);
+                            } else {
+                                op_c3d.codigo.remove(i);
                             }
                             cambios = true;
                             break;
@@ -125,8 +125,8 @@ public class Optimizador {
                                 inst.op2 = -1;
                                 inst.literal1 = false;
                                 inst.literal2 = false;
-                            }else{
-                               op_c3d.codigo.remove(i);
+                            } else {
+                                op_c3d.codigo.remove(i);
                             }
                             cambios = true;
                             break;
@@ -137,8 +137,8 @@ public class Optimizador {
                                 inst.op2 = -1;
                                 inst.literal1 = false;
                                 inst.literal2 = false;
-                            }else{
-                               op_c3d.codigo.remove(i);
+                            } else {
+                                op_c3d.codigo.remove(i);
                             }
                             cambios = true;
                             break;
@@ -149,8 +149,8 @@ public class Optimizador {
                                 inst.op2 = -1;
                                 inst.literal1 = false;
                                 inst.literal2 = false;
-                            }else{
-                               op_c3d.codigo.remove(i);
+                            } else {
+                                op_c3d.codigo.remove(i);
                             }
                             cambios = true;
                             break;
@@ -161,8 +161,8 @@ public class Optimizador {
                                 inst.op2 = -1;
                                 inst.literal1 = false;
                                 inst.literal2 = false;
-                            }else{
-                               op_c3d.codigo.remove(i);
+                            } else {
+                                op_c3d.codigo.remove(i);
                             }
                             cambios = true;
                             break;
@@ -173,8 +173,8 @@ public class Optimizador {
                                 inst.op2 = -1;
                                 inst.literal1 = false;
                                 inst.literal2 = false;
-                            }else{
-                               op_c3d.codigo.remove(i);
+                            } else {
+                                op_c3d.codigo.remove(i);
                             }
                             cambios = true;
                             break;
@@ -184,6 +184,44 @@ public class Optimizador {
                 }
             }
 
+            //5 - eliminació de codi inaccessible
+            boolean[] etUsadas = new boolean[op_c3d.ne];
+            int[] posEt = new int[op_c3d.ne];
+            
+            for (int i = 0; i < etUsadas.length; i++) {//inicializamos todas las etiquetas como no usadas
+                etUsadas[i] = false;
+            }
+            
+            for (int i = 0; i < op_c3d.codigo.size(); i++) {//Borramos las etiquetas a las que no se salta
+                Instruccion3D inst = op_c3d.codigo.get(i);
+                if (inst.cod == 19 || (inst.cod >= 9 && inst.cod <= 14)) {
+                    etUsadas[inst.dest] = true;
+                }else if(inst.cod == 8){ //guardamos las posiciones de las etiquetas
+                    posEt[inst.dest] = i;
+                }              
+            }
+            for (int i = 0; i < etUsadas.length; i++) { //Borramos las etiquetas a las que no se salta 
+                if(!etUsadas[i]){
+                    op_c3d.codigo.remove(posEt[i]);
+                    cambios = true;
+                    for(int j = 0; j < etUsadas.length; j++){ //acualizamos la posicion de las etiquetas situadas despues de la etiqueta i
+                        if(posEt[j] > posEt[i]){
+                            posEt[j]--;
+                        }
+                    }
+                }
+            }           
+            for (int i = 0; i < op_c3d.codigo.size(); i++) {//eliminamos todas aquellas instrucciones entre un goto y una etiqueta
+                Instruccion3D inst = op_c3d.codigo.get(i);
+                if (inst.cod == 19) {
+                    int j = i + 1;
+                    while(op_c3d.codigo.get(j).cod != 8){
+                        op_c3d.codigo.remove(j);
+                        cambios = true;
+                    }
+                }             
+            }
+            
             //7 - normalitzacio d'operacions commutatives
             for (int i = 0; i < op_c3d.codigo.size(); i++) {
                 Instruccion3D inst = op_c3d.codigo.get(i);
@@ -319,8 +357,26 @@ public class Optimizador {
                     }
                 }
             }
-
         } while (cambios);
+
+        //9 - Reducció de força
+        for (int i = 0; i < op_c3d.codigo.size(); i++) {
+            Instruccion3D inst = op_c3d.codigo.get(i);
+            if (inst.cod == 3 && inst.literal1 && !inst.literal2) { //Si la instrucción es una multiplicación y tiene el forato var = const * var
+                double result = (Math.log(inst.op1) / Math.log(2));
+                if (result % 1 == 0) {
+                    inst.cod = 23; //Si el operando 2 es una potencia de dos cambiamos la instrucción
+                    inst.op1 = (int) result;
+                }
+            } else if (inst.cod == 4 && inst.literal1 && !inst.literal2) { //Si la instrucción es una division y tiene el forato var = const * var
+                double result = (Math.log(inst.op1) / Math.log(2));
+                if (result % 1 == 0) {
+                    inst.cod = 24; //Si el operando 2 es una potencia de dos cambiamos la instrucción
+                    inst.op1 = (int) result;
+                }
+            }
+        }
+
         return op_c3d;
     }
 

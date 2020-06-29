@@ -203,7 +203,13 @@ class Instruccion3D {
                 res += "out v" + dest;
                 break;
             case 22://NEG
-                res = dest + " = -" + op1;
+                res += "v"+dest + " = -" + op1;
+                break;
+            case 23: //MULTP2
+                res += "v"+dest + " = "+op1+" <- "+op2;
+                break;
+            case 24: //DIVP2
+                res += "v" +dest + " = "+op1+" -> "+op2;
                 break;
         }
         return res;
