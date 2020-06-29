@@ -39,7 +39,7 @@ public class WHL1 extends SimboloBase {
         g.addEdge(this, new SimboloBase("{"));
 
         this.efi = C3D.nuevaEtiqueta();
-        C3D.genera(idInstrucciones.IFEQ.ordinal(), 0, true, exprp.r, false, efi);
+        C3D.genera(idInstrucciones.IFEQ.ordinal(), 0, true, exprp.r, false, efi, true);
         this.e = m.e;
 
     }

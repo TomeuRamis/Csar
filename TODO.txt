@@ -1,10 +1,5 @@
-//(igual ya no)Generar constantes DECL.java
-
 generar Strings LITERAL.java
-no sabemos hacer nada EXPR.java (el caso de una varibale y constante ya esta (creo))
 generar codigo 3@ para EXPRP.java con strings
 
-
-//ensamblador
 
  

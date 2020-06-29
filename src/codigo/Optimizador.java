@@ -28,6 +28,7 @@ public class Optimizador {
 
         do {
             cambios = false;
+            
             //2 - brancaments sobre brancaments
             for (int i = 0; i < op_c3d.codigo.size(); i++) {
                 Instruccion3D inst = op_c3d.codigo.get(i);
@@ -190,18 +191,21 @@ public class Optimizador {
             
             for (int i = 0; i < etUsadas.length; i++) {//inicializamos todas las etiquetas como no usadas
                 etUsadas[i] = false;
+                posEt[i] = -1;
             }
             
-            for (int i = 0; i < op_c3d.codigo.size(); i++) {//Borramos las etiquetas a las que no se salta
+            for (int i = 0; i < op_c3d.codigo.size(); i++) {
                 Instruccion3D inst = op_c3d.codigo.get(i);
-                if (inst.cod == 19 || (inst.cod >= 9 && inst.cod <= 14)) {
+                if (inst.cod == 19 || (inst.cod >= 9 && inst.cod <= 14)) { //Si la instruccion salta a una etiqueta, marcamos esa etiqueta como usada
                     etUsadas[inst.dest] = true;
-                }else if(inst.cod == 8){ //guardamos las posiciones de las etiquetas
+                }else if(inst.cod == 16){ //si es un call, mirar la etiqueta de este
+                    etUsadas[op_c3d.TP.TP.get(inst.dest).etiqueta] = true;
+                }else if(inst.cod == 8){ //si es un skip guardamos las posiciones de las etiquetas
                     posEt[inst.dest] = i;
                 }              
             }
             for (int i = 0; i < etUsadas.length; i++) { //Borramos las etiquetas a las que no se salta 
-                if(!etUsadas[i]){
+                if(!etUsadas[i] && posEt[i]!=-1){
                     op_c3d.codigo.remove(posEt[i]);
                     cambios = true;
                     for(int j = 0; j < etUsadas.length; j++){ //acualizamos la posicion de las etiquetas situadas despues de la etiqueta i
@@ -213,7 +217,7 @@ public class Optimizador {
             }           
             for (int i = 0; i < op_c3d.codigo.size(); i++) {//eliminamos todas aquellas instrucciones entre un goto y una etiqueta
                 Instruccion3D inst = op_c3d.codigo.get(i);
-                if (inst.cod == 19) {
+                if (inst.cod == 19 && i < op_c3d.codigo.size()-1) {
                     int j = i + 1;
                     while(op_c3d.codigo.get(j).cod != 8){
                         op_c3d.codigo.remove(j);
@@ -303,7 +307,7 @@ public class Optimizador {
                                 break;
                         }
                         
-                        if ((aux.cod < 9 || aux.cod > 14) || ((aux.cod >= 9 && aux.cod <= 14) && op_c3d.codigo.get(j-1).cod != 8)) { //ignoramos si es un if para evitar problemas con los whiles
+                        if ((aux.cod < 9 || aux.cod > 14) && !aux.esunwhile) { //ignoramos si es un if para evitar problemas con los whiles
                             if (inst != null && ((!aux.literal1 && aux.op1 == i) || (!aux.literal2 && aux.op2 == i))) {
                                 if (aux.cod == 0 && inst.cod == 0) {//ambos son copy
                                     aux.op1 = inst.op1;
