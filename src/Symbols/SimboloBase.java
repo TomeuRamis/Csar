@@ -47,9 +47,10 @@ public class SimboloBase{
         columna = -1;
     }
     
-    public static void resetArbol(){
+    public static void reset(){
         g = new DefaultDirectedGraph<>(DefaultEdge.class);
         contador = 0;
+        C3D = new codigo.Codigo3D();
     }
 
     public void imprimirArbol() {

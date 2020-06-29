@@ -32,7 +32,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     public static void notificarError(String msg) {
-        if(msg.equals("Error sintactico: null en linea: 0 y columna: 0")){
+        if (msg.equals("Error sintactico: null en linea: 0 y columna: 0")) {
             msg = "Error sintactico: No se ha encontrado el bloque 'main'.";
         }
         errores += msg + "\n";
@@ -188,7 +188,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             try {
                 String ST = new String(Files.readAllBytes(archivo.toPath()));
                 txtInput.setText(ST);
-            }catch (IOException ex) {
+            } catch (IOException ex) {
                 notificarError("Error en la lectura del fichero");
             }
         }
@@ -211,10 +211,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Lexer lexico = new codigo.Lexer(new StringReader(ST));
         Sintax s = new Sintax(lexico);
         errores = "";
-        SimboloBase.resetArbol();
+        SimboloBase.reset();
 
         try {
             s.parse();
+
+            Codigo3D C3D = SimboloBase.C3D;
+            C3D.llenaTP();
+            System.out.println(C3D);
+            C3D.imprimir("output/Codigo3Direcciones.txt");
+            codigo.Traductor traductor = new codigo.Traductor();
+            traductor.traducir("output/CodigoEnsambladorSinOptimizar.asm", C3D);
+
+            System.out.println("***************************************************");
+
+            codigo.Optimizador optimizador = new codigo.Optimizador(C3D);
+            codigo.Codigo3D op_C3D = optimizador.optimiza();
+            System.out.println(op_C3D);
+            op_C3D.imprimir("output/Codigo3Direcciones.txt");
+            traductor.traducir("output/CodigoEnsambladorOptimizado.asm", op_C3D);
+
             if (errores.equals("")) {
                 txtOutput.setForeground(new Color(25, 111, 61));
             } else {
@@ -226,7 +242,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } finally {
             BufferedWriter writer = null;
             try {
-                errores += "Analisis finalizado";
+                errores += "Analisis finalizado\n";
+
+                //Intento de usar compilar.cmd automáticamente
+                /*Runtime run = Runtime.getRuntime();
+                Process p = null;
+                String cmd = "output/compilar.cmd";
+                try {
+                    p = run.exec(cmd);
+                    errores += "Compilación correcta\n";
+                    p = run.exec(cmd);
+                    p.waitFor();
+                    p.destroy();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("ERROR.RUNNING.CMD");
+                    p.destroy();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                */
+                
                 txtOutput.setText(errores);
                 writer = new BufferedWriter(new FileWriter("output/ficheroErrores.txt"));
                 writer.write(errores);
@@ -244,6 +281,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 }
             }
         }
+
+
     }//GEN-LAST:event_btnAnalizarActionPerformed
 
     /**

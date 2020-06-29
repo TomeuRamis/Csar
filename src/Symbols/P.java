@@ -42,7 +42,7 @@ public class P extends SimboloBase{
         g.addEdge(this, p2);
         
         this.imprimirArbol();
-        C3D.llenaTP();
+        /*C3D.llenaTP();
         System.out.println(C3D);
         C3D.imprimir("output/Codigo3Direcciones.txt");
         codigo.Traductor traductor = new codigo.Traductor();
@@ -56,6 +56,6 @@ public class P extends SimboloBase{
         op_C3D.imprimir("output/Codigo3Direcciones.txt");
         traductor.traducir("output/CodigoEnsambladorOptimizado.asm", op_C3D);
         
-        C3D.reset();
+        C3D.reset();*/
     }
 }
