@@ -119,6 +119,13 @@ public class Traductor {
                     + "    push    eax\n"
                     + "    push    edx\n"
                     + "    xor     edx,edx\n"
+                    + "    cmp     eax, 0\n"
+                    + "    jge     l2\n"
+                    + "    push    menos\n"
+                    + "    call    _printf\n"
+                    + "    neg     eax\n"
+                    + "    add     esp, 4\n"
+                    + "l2:\n"
                     + "    div     dword [const10]\n"
                     + "    test    eax,eax\n"
                     + "    je      l1\n"
@@ -396,6 +403,7 @@ public class Traductor {
         res += "    outInt:     dd 0\n";
         res += "    strtrue:   db \"true\",0\n";
         res += "    strfalse:  db \"false\",0\n";
+        res += "    menos:  db \"-\",0\n";
         res += "    barraN:    db 10,0 \n";
         res += "segment .bss\n";
 
