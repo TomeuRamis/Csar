@@ -34,7 +34,7 @@ public class Optimizador {
                 if ((inst.cod >= 9 && inst.cod <= 14) || inst.cod == 19) {
                     for (int j = 0; j < op_c3d.codigo.size(); j++) {
                         Instruccion3D aux = op_c3d.codigo.get(j);
-                        if (aux.cod == 8 && inst.dest == aux.dest) {
+                        if (aux.cod == 8 && inst.dest == aux.dest && j < op_c3d.codigo.size() - 1) {
                             if (op_c3d.codigo.get(j + 1).cod == 19) {
                                 inst.dest = op_c3d.codigo.get(j + 1).dest;
                                 cambios = true;
@@ -237,30 +237,6 @@ public class Optimizador {
                 if (!inst.literal2 && inst.op2 != -1) {
                     usosVariables[inst.op2]++;
                 }
-                /*if (inst.dest != -1) {
-                switch (inst.cod) {
-                    case 0: //copy
-                        usosVariables[inst.dest]++;
-                        valoresVariables[inst.dest] = inst.op1;
-                        esLiteral[inst.dest] = inst.literal1;
-                        break;
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 19:
-                        break;
-                    default:
-                        usosVariables[inst.dest]++;
-                        break;
-                }
-            }*/
             }
 
             for (int i = 0; i < usosVariables.length; i++) {
@@ -288,7 +264,8 @@ public class Optimizador {
                                 }
                                 break;
                         }
-                        if (aux.cod < 9 || aux.cod > 14) { //ignoramos si es un if para evitar problemas con los whiles
+                        
+                        if ((aux.cod < 9 || aux.cod > 14) || ((aux.cod >= 9 && aux.cod <= 14) && op_c3d.codigo.get(j-1).cod != 8)) { //ignoramos si es un if para evitar problemas con los whiles
                             if (inst != null && ((!aux.literal1 && aux.op1 == i) || (!aux.literal2 && aux.op2 == i))) {
                                 if (aux.cod == 0 && inst.cod == 0) {//ambos son copy
                                     aux.op1 = inst.op1;
