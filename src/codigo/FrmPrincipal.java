@@ -264,13 +264,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 }
                 */
                 
-                txtOutput.setText(errores);
+                
                 writer = new BufferedWriter(new FileWriter("output/ficheroErrores.txt"));
                 writer.write(errores);
                 writer.close();
                 writer = new BufferedWriter(new FileWriter("output/ficheroTokens.txt"));
                 writer.write(lexico.getTokens());
                 writer.close();
+                txtOutput.setText(errores);
             } catch (IOException ex) {
                 Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } finally {

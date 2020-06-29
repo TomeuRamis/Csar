@@ -116,20 +116,22 @@ public class Traductor {
         res += "    ret\n";
         if (imprimirInt) {
             res += "printNumber:\n"
+                    + "    cmp     eax, 0\n"
+                    + "    jge     l2\n" 
+                    + "    neg     eax\n"
+                    + "    push    eax\n"
+                    + "    push    menos\n"
+                    + "    call    _printf\n"
+                    + "    add     esp, 4\n"
+                    + "    pop     eax\n"
+                    + "l2:\n"
                     + "    push    eax\n"
                     + "    push    edx\n"
                     + "    xor     edx,edx\n"
-                    + "    cmp     eax, 0\n"
-                    + "    jge     l2\n"
-                    + "    push    menos\n"
-                    + "    call    _printf\n"
-                    + "    neg     eax\n"
-                    + "    add     esp, 4\n"
-                    + "l2:\n"
                     + "    div     dword [const10]\n"
                     + "    test    eax,eax\n"
                     + "    je      l1\n"
-                    + "    call    printNumber\n"
+                    + "    call    l2\n"
                     + "l1:\n"
                     + "    add     edx, '0'\n"
                     + "    mov     [outInt], edx\n"
@@ -188,6 +190,7 @@ public class Traductor {
 
     private String traduceDIV(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+        res += "    xor     edx, edx\n";
         res += "    idiv    " + desref(inst.op2, inst.literal2) + "\n";;
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
@@ -297,6 +300,7 @@ public class Traductor {
         if (inst.op1 != -1) {
             res += "    mov     " + desref(inst.op1, inst.literal1) + ", eax\n";
         }
+        res += "    add     esp, "+ 4* c3d.TP.TP.get(inst.dest).nParam+"\n";
         return res;
     }
 
