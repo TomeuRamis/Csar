@@ -221,9 +221,9 @@ public class Optimizador {
             }
             for (int i = 0; i < op_c3d.codigo.size(); i++) {//eliminamos todas aquellas instrucciones entre un goto y una etiqueta
                 Instruccion3D inst = op_c3d.codigo.get(i);
-                if (inst.cod == 19 && i < op_c3d.codigo.size() - 1) {
+                if (inst.cod == 19) {
                     int j = i + 1;
-                    while (op_c3d.codigo.get(j).cod != 8) {
+                    while (j < op_c3d.codigo.size() && op_c3d.codigo.get(j).cod != 8) {
                         op_c3d.codigo.remove(j);
                         cambios = true;
                     }
@@ -292,9 +292,11 @@ public class Optimizador {
                     for (int j = 0; j < op_c3d.codigo.size(); j++) {
                         Instruccion3D aux = op_c3d.codigo.get(j);
                         switch (aux.cod) {
-                            case 20: //ignoramos las instrucciones que no nos gustan
-                            case 21:
-                            case 8:
+                            case 20: //in
+                            case 8: //skip
+                            inst = null;
+                                break;
+                            case 21://ignoramos las instrucciones que no nos gustan                         
                             case 15:
                             case 19:
                             case 9:
@@ -311,7 +313,7 @@ public class Optimizador {
                                 break;
                         }
 
-                        if ((aux.cod < 9 || aux.cod > 14) && !aux.esunwhile) { //ignoramos si es un if para evitar problemas con los whiles
+                        //if ((aux.cod < 9 || aux.cod > 14) && !aux.esunwhile) { //ignoramos si es un if para evitar problemas con los whiles
                             if (inst != null && ((!aux.literal1 && aux.op1 == i) || (!aux.literal2 && aux.op2 == i))) {
                                 if (aux.cod == 0 && inst.cod == 0) {//ambos son copy
                                     aux.op1 = inst.op1;
@@ -338,7 +340,7 @@ public class Optimizador {
                                     cambios = true;
                                 }
                             }
-                        }
+                        //}
                     }
                 }
             }

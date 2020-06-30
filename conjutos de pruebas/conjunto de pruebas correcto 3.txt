@@ -1,39 +1,39 @@
-const int a = 10;
-int b = 9;
+//Prueba de comportamiento de todas las instrucciones del lenguaje
+
+def bool not(bool a){
+	return a == false;
+}
 
 main{
-   while(true){
-      int a = 8;
-      int b = 7;
-         if(false){
-            int a = 6;
-            int b = 5;
-         } else if(1>0){
-            if(true){
-               if(true){
-                  if(true){
-                     if(false){
-                        int a = 100;
-                        int b = a*a;
-                     }
-                  }
-               }
-            }    
-         }else {
-            int a = 4;
-            int b = 3;
-         }
-      while(a > b){
-         int a = 2;
-         int b = 1;
-         int c = 0;
-      }
-   }
-   if(a == 10){
-      out(a);
-      int a = (-1);
-      int b = (-2);
-      int c = 5-7;
-   }
-   if(true){if(true){if(true){if(true){if(true){if(true){if(true){if(true){if(true){if(true){if(true){if(true){if(true){if(true){}}}}}}}}}}}}}}
+	int a = 0;
+	int b = 0;
+	in(a);
+	in(b);
+	
+	out(a + b);
+	out(a - b);
+	out(a * b);
+	out(a / b);
+	out(a % b);
+	out(a == b);
+	out(a != b);
+	out(a < b);
+	out(a =< b);
+	out(a > b);
+	out(a => b);
+	out(a * 4);
+	out(a / 4);
+	
+	bool c = true;
+	bool d = true;
+	in(c);
+	in(d);
+	
+	out(not(c));
+	out(not(d));
+	out(c && d);
+	out(c || d);
+	out(c == d);
+	out(c != d);
+	
 }

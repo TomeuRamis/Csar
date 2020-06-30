@@ -1,39 +1,33 @@
-int a = (-2);
-bool b = true;
-const int h = 2 + 8 / 4;
-const bool tr = true;
+//El programa recibe n e imprime los n primeros numeros primos
 
-def int beber(int f, int k){
-   return f + k - 3;
+def void imprimir(int a){
+	out(a);
 }
 
-def void comer(){
-   int b = 700;
-   int s = 3;
-   s = s+2;
-   s = beber(s, b);
-}
-
-
-def bool cierto(){
-   return true;
+def bool esPrimo(int n){
+	bool primo = true;
+	int i = 2;
+	while(i < (n/2) && primo){
+		if(n%i == 0){
+			primo = false;
+		}
+		i = i +1;
+	}
+	return primo;
 }
 
 main{
-   comer();
-   if(cierto() || (a < h) ){
-      a = h;
-   } else if (3 == 3 ){
-      int p;
-      in(p);
-   } else {
-      
-   }
-	out(a);
-	
-   int i = 0;
-   while((a != h) && true){
-      i = i + 1;
-      a = h * 3;
-   }
+
+	int contador = 1;
+	int n = 0;
+	int encontrados = 0;
+	in(n);
+
+	while(encontrados < n){
+		if(esPrimo(contador)){
+			imprimir(contador);
+			encontrados = encontrados + 1;
+		}
+		contador = contador + 1;
+	}
 }

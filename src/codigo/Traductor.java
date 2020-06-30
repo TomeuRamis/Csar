@@ -19,6 +19,7 @@ public class Traductor {
     private Codigo3D c3d;
     boolean imprimirInt = false;
     boolean imprimirBool = false;
+    boolean leerBool = false;
 
     public Traductor() {
     }
@@ -117,7 +118,7 @@ public class Traductor {
         if (imprimirInt) {
             res += "printNumber:\n"
                     + "    cmp     eax, 0\n"
-                    + "    jge     l2\n" 
+                    + "    jge     l2\n"
                     + "    neg     eax\n"
                     + "    push    eax\n"
                     + "    push    menos\n"
@@ -156,6 +157,14 @@ public class Traductor {
             res += "    add     esp,4\n";
             res += "    ret\n";
         }
+        if(leerBool){
+            res += "readBool:\n";
+            res += "    cmp     eax, 0\n";
+            res += "    je      isfalse\n";
+            res += "    mov     eax, -1\n";
+            res += "isfalse:\n";
+            res += "    ret\n";
+        }
         return res;
     }
 
@@ -182,8 +191,13 @@ public class Traductor {
     }
 
     private String traducePROD(Instruccion3D inst) {
-        String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    imul    " + desref(inst.op2, inst.literal2) + "\n";;
+       String res = "";
+        if(inst.literal1){
+            res += "    imul     eax, "+desref(inst.op2,inst.literal2)+" , "+inst.op1+"\n";
+        }else{ 
+            res += "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
+            res += "    imul    " + desref(inst.op2, inst.literal2) + "\n";
+        }
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
     }
@@ -191,14 +205,25 @@ public class Traductor {
     private String traduceDIV(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
         res += "    xor     edx, edx\n";
-        res += "    idiv    " + desref(inst.op2, inst.literal2) + "\n";;
+        if (inst.literal2) {
+            res += "    mov     ebx, " + inst.op2 + "\n";
+            res += "    idiv    ebx\n";
+        } else {
+            res += "    idiv    " + desref(inst.op2, inst.literal2) + "\n";
+        }
         res += "    mov     " + desref(inst.dest, false) + ", eax\n";
         return res;
     }
 
     private String traduceMOD(Instruccion3D inst) {
         String res = "    mov     eax, " + desref(inst.op1, inst.literal1) + "\n";
-        res += "    idiv    " + desref(inst.op2, inst.literal2) + "\n";;
+        res += "    xor     edx, edx\n";
+        if (inst.literal2) {
+            res += "    mov     ebx, " + inst.op2 + "\n";
+            res += "    idiv    ebx\n";
+        } else {
+            res += "    idiv    " + desref(inst.op2, inst.literal2) + "\n";;
+        }
         res += "    mov     " + desref(inst.dest, false) + ", edx\n";
         return res;
     }
@@ -300,7 +325,7 @@ public class Traductor {
         if (inst.op1 != -1) {
             res += "    mov     " + desref(inst.op1, inst.literal1) + ", eax\n";
         }
-        res += "    add     esp, "+ 4* c3d.TP.TP.get(inst.dest).nParam+"\n";
+        res += "    add     esp, " + 4 * c3d.TP.TP.get(inst.dest).nParam + "\n";
         return res;
     }
 
@@ -350,11 +375,19 @@ public class Traductor {
         } else if (c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tString) {
             res += "    push    formatStr \n";
         } else {
-            res += "    push    formatInt \n";
+            res += "    mov     "+desref(inst.dest, false) + ", eax\n";
+            res += "    push    formatInt \n"; 
         }
 
         res += "    call    _scanf\n";
         res += "    add     esp, 8\n";
+        
+        if(c3d.TV.TV.get(inst.dest).tipo == TablaSimbolos.Tipo.tBool){
+            leerBool = true;
+            res += "    mov     eax, "+desref(inst.dest, false)+"\n";
+            res += "    call    readBool\n";
+            res += "    mov     "+desref(inst.dest, false)+", eax\n";
+        }
         return res;
     }
 
@@ -476,7 +509,7 @@ public class Traductor {
         int cant;
         switch (t) {
             case tBool:
-                cant = 1;
+                cant = 4;
                 break;
             case tInt:
                 cant = 4;

@@ -1,33 +1,13 @@
-const int numero1 = 10;
-int numero2 = 9;
-int numero3;
+//Calcula recursivamente el sumatorio de los numeros desde 0 hasta n
 
-def int suma(int numero1, int numero2){
-   out(numero1+numero2);
-   return numero1+numero2;
-}
-
-def int resta(int numero1, int numero2){ 
-   out(numero1-numero2);
-   return numero1-numero2;
-}
-
-
-def void output(int a){
-   out(a);
-}
-
-
-def int operacion(int a, int b, bool d, int e, bool f){
-   out(0);
-   return 0;
+def int suma(int numero1){
+   if(numero1 == 0){
+	return 0;
+   }else{
+		return (numero1  + suma(numero1-1));
+   }
 }
 
 main{
-   int resultado = suma(numero1, numero2);
-   int result = resta(numero1, numero2);
-   output( 5 );
-   if (true){
-      int operacion = operacion(1, 2, false, 3, true);
-   }
+   out(suma(10));
 }

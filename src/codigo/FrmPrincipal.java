@@ -71,7 +71,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
 
         txtInput.setColumns(20);
+        txtInput.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         txtInput.setRows(5);
+        txtInput.setTabSize(2);
         txtInput.setText("//Code here");
         jScrollPane1.setViewportView(txtInput);
 
