@@ -463,9 +463,7 @@ public class Traductor {
         } else {
             Variable var = c3d.TV.TV.get(nv);
             ref += getOperationSize(var.tipo) + " ";
-            if (var.isp) {
-                /*  COMO ENCONTRAR PARAMETROS
-        if(var.isp){
+            if (var.isp) {             
         /*  COMO ENCONTRAR PARAMETROS
             1- Encontrar el subprograma de la variable mediante la TV
             2- Por cada variable de la TV que esté en el mismo subprograma y sea un parametro
@@ -482,7 +480,7 @@ public class Traductor {
                 ref += "[ebp+" + (desp + 8) + "]"; //sumamos 4+4 para contabilizar el espacio ocupado por la direccion de retorno y el ebp
             } else {
                 if (var.np > -1) {
-                    /*  COMO ENCONTRAR VARIABLES LOCALES
+            /*  COMO ENCONTRAR VARIABLES LOCALES
                 1- Encontrar el subprograma de la variable mediante la TV
                 2- Por cada variable de la TV que esté en el mismo subprograma y sea un parametro
                    sumamos al desplazamiento su ocupación hasta encontrar la buena.

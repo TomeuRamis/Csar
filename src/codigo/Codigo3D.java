@@ -30,10 +30,6 @@ public class Codigo3D {
     public void genera(int cod, int op1, boolean literal, int op2, boolean literal2, int dest) {
         codigo.add(new Instruccion3D(cod, op1, literal, op2, literal2, dest));
     }
-    
-    public void genera(int cod, int op1, boolean literal, int op2, boolean literal2, int dest, boolean esunw) {
-        codigo.add(new Instruccion3D(cod, op1, literal, op2, literal2, dest, esunw));
-    }
 
     public ArrayList<Instruccion3D> getCodigo() {
         return codigo;
@@ -122,7 +118,6 @@ class Instruccion3D {
     int cod, op1, op2, dest;
     boolean literal1 = false;
     boolean literal2 = false;
-    boolean esunwhile = false;
 
     public Instruccion3D(int cod, int op1, int op2, int dest) {
         this.cod = cod;
@@ -138,16 +133,6 @@ class Instruccion3D {
         this.dest = dest;
         this.literal1 = literal1;
         this.literal2 = literal2;
-    }
-    
-    public Instruccion3D(int cod, int op1, boolean literal1, int op2, boolean literal2, int dest, boolean esW) {
-        this.cod = cod;
-        this.op1 = op1;
-        this.op2 = op2;
-        this.dest = dest;
-        this.literal1 = literal1;
-        this.literal2 = literal2;
-        this.esunwhile = esW;
     }
 
     @Override
