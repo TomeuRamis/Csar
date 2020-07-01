@@ -84,16 +84,36 @@ public class Codigo3D {
 
     @Override
     public String toString() {
-        String res = "Codigo \t Operando 1 \t Operando 2 \t Destino";
+        String res = "";
         for (int i = 0; i < codigo.size(); i++) {
-            res += "\n" + codigo.get(i).toString();
+            res += codigo.get(i).toString()+"\n";
         }
-
-        res += "\n\n-----------------------------\nNV: " + TV.nv + "\n";
-        res += TV.toString();
-        res += "\n------------------------------\nNP: " + TP.np + "\n";
-        res += TP.toString();
         return res;
+    }
+    
+    public void imprimirTV(){
+        String res = "";
+        res += "NV: " + TV.nv + "\n";
+        res += TV.toString();
+        Writer writer;
+        try {
+            writer = new FileWriter("output/tablaVariables.txt");
+            writer.write(res);
+            writer.close();
+        } catch (IOException ex) {
+        }
+    }
+    public void imprimirTP(){
+        String res = "";
+        res += "NP: " + TP.np + "\n";
+        res += TP.toString();
+        Writer writer;
+        try {
+            writer = new FileWriter("output/tablaProcedimientos.txt");
+            writer.write(res);
+            writer.close();
+        } catch (IOException ex) {
+        }
     }
 }
 
@@ -144,87 +164,87 @@ class Instruccion3D {
         String res = "";
         switch (cod) {
             case 0://COPY
-                res = "v" + dest + " = " + op1;
+                res = "    v" + dest + " = " + op1;
                 break;
             case 1://ADD
-                res = "v" + dest + " = " + op1 + " + " + op2;
+                res = "    v" + dest + " = " + op1 + " + " + op2;
                 break;
             case 2://SUB
-                res = "v" + dest + " = " + op1 + " - " + op2;
+                res = "    v" + dest + " = " + op1 + " - " + op2;
                 break;
             case 3://PROD
-                res = "v" + dest + " = " + op1 + " * " + op2;
+                res = "    v" + dest + " = " + op1 + " * " + op2;
                 break;
             case 4://DIV
-                res = "v" + dest + " = " + op1 + " / " + op2;
+                res = "    v" + dest + " = " + op1 + " / " + op2;
                 break;
             case 5://MOD
-                res = "v" + dest + " = " + op1 + " % " + op2;
+                res = "    v" + dest + " = " + op1 + " % " + op2;
                 break;
             case 6://AND
-                res = "v" + dest + " = " + op1 + " && " + op2;
+                res = "    v" + dest + " = " + op1 + " && " + op2;
                 break;
             case 7://OR
-                res = "v" + dest + " = " + op1 + " || " + op2;
+                res = "    v" + dest + " = " + op1 + " || " + op2;
                 break;
             case 8://SKIP
-                res = "et" + dest + " : skip";
+                res = "et" + dest + ": skip";
                 break;
             case 9://IFEQ
-                res = "if " + op1 + "=" + op2 + " goto et" + dest;
+                res = "    if " + op1 + "=" + op2 + " goto et" + dest;
                 break;
             case 10://IFNE
-                res = "if " + op1 + "!=" + op2 + " goto et" + dest;
+                res = "    if " + op1 + "!=" + op2 + " goto et" + dest;
                 break;
             case 11://IFLT
-                res = "if " + op1 + "<" + op2 + " goto et" + dest;
+                res = "    if " + op1 + "<" + op2 + " goto et" + dest;
                 break;
             case 12://IFLE
-                res = "if " + op1 + "<=" + op2 + " goto et" + dest;
+                res = "    if " + op1 + "<=" + op2 + " goto et" + dest;
                 break;
             case 13://IFGE
-                res = "if " + op1 + ">=" + op2 + " goto et" + dest;
+                res = "    if " + op1 + ">=" + op2 + " goto et" + dest;
                 break;
             case 14://IFGT
-                res = "if " + op1 + ">" + op2 + " goto et" + dest;
+                res = "    if " + op1 + ">" + op2 + " goto et" + dest;
                 break;
             case 15://PMB
-                res = "pmb p" + dest;
+                res = "    pmb p" + dest;
                 break;
             case 16://CALL
                 if(this.op1 != -1){
-                    res = "call p"+dest + " "+op1;
+                    res = "    call p"+dest + " "+op1;
                 }else{
-                    res = "call p" + dest;
+                    res = "    call p" + dest;
                 }
                 break;
             case 17://RTN
                 if (this.op1 != -1) {
-                    res = "rtn p" + dest + " " + op1;
+                    res = "    rtn p" + dest + " " + op1;
                 } else {
-                    res = "rtn p" + dest;
+                    res = "    rtn p" + dest;
                 }
                 break;
             case 18://PARAM_S
-                res = "param_s " + op1;
+                res = "    param_s " + op1;
                 break;
             case 19://GOTO
-                res = "goto et" + dest;
+                res = "    goto et" + dest;
                 break;
             case 20: //IN
-                res += "in v" + dest;
+                res += "    in v" + dest;
                 break;
             case 21: //OUT
-                res += "out v" + dest;
+                res += "    out v" + dest;
                 break;
             case 22://NEG
-                res += "v"+dest + " = -" + op1;
+                res += "    v"+dest + " = -" + op1;
                 break;
             case 23: //MULTP2
-                res += "v"+dest + " = "+op1+" <- "+op2;
+                res += "    v"+dest + " = "+op1+" <- "+op2;
                 break;
             case 24: //DIVP2
-                res += "v" +dest + " = "+op1+" -> "+op2;
+                res += "    v" +dest + " = "+op1+" -> "+op2;
                 break;
         }
         return res;

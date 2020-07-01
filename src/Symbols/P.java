@@ -21,7 +21,8 @@ public class P extends SimboloBase{
     public P(P1 p1, P2 p2, codigo.TablaSimbolos ts){
         super("P");
         
-        BufferedWriter writer = null;
+        //imprimir la tabla de símbolos
+        /*BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter("output/tablaSimbolos.xls"));
             writer.write(ts.toString());
@@ -37,10 +38,10 @@ public class P extends SimboloBase{
             } catch (IOException ex) {
                 Logger.getLogger(P.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }*/
         g.addEdge(this, p1);
         g.addEdge(this, p2);
         
-        this.imprimirArbol();      
+        //this.imprimirArbol();      
     }
 }
