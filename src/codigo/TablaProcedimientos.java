@@ -38,7 +38,7 @@ public class TablaProcedimientos {
                     int ocu;
                     switch(var.tipo.ordinal()){
                         case 0: //Bool
-                            ocu = 1;
+                            ocu = 4;
                             break;
                         case 1: //String
                             ocu = 8;
