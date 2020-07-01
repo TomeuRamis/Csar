@@ -1,0 +1,3 @@
+NP: 0
+TABLA PROCEDIMIENTOS
+np: 0 Etiqueta: 0	NParams: 0	Ocupacion: 352

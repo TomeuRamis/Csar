@@ -1,0 +1,7 @@
+    goto et0
+et0: skip
+    pmb p0
+    v85 = 43
+    out v85
+    v85 = 2 <- v85
+    out v85
