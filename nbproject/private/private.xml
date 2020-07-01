@@ -3,50 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/WHL2.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/OPERADOR.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/TablaProcedimientos.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/Lexer.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/P1.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/WHL.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/SimboloBase.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/TablaSimbolos.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/ASIGNACION.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/CND1.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/P.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/DECLS.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/LITERAL.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/PARAMSP.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/IO.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/Lexer.flex</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/Principal.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/Sintax.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/DEFINICION.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/ELS.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/FrmPrincipal.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/EXPR.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/RET.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/DECL.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/Optimizador.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/Codigo3D.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/idInstrucciones.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/CALL.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/FUNC1.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/FUNC.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/ASIG.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/ELS3.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/PARAM.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/PARAMS.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/WHL1.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/Traductor.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/EXPRP.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/Sintax.cup</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/DCL.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/LAMBDA.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/FUNC2.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/codigo/TablaVariables.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/CND2.java</file>
-            <file>file:/C:/Users/tomeu/Documents/UIB/Compiladors/Csar/src/Symbols/CND.java</file>
+            <file>file:/C:/Users/davidcan/Documents/GitHub/Csar/src/codigo/Codigo3D.java</file>
+            <file>file:/C:/Users/davidcan/Documents/GitHub/Csar/src/codigo/TablaProcedimientos.java</file>
+            <file>file:/C:/Users/davidcan/Documents/GitHub/Csar/src/codigo/Traductor.java</file>
+            <file>file:/C:/Users/davidcan/Documents/GitHub/Csar/src/codigo/idInstrucciones.java</file>
+            <file>file:/C:/Users/davidcan/Documents/GitHub/Csar/src/codigo/FrmPrincipal.java</file>
         </group>
     </open-files>
 </project-private>
