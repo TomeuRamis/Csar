@@ -1,3 +1,4 @@
-NP: 0
+NP: 1
 TABLA PROCEDIMIENTOS
-np: 0 Etiqueta: 0	NParams: 0	Ocupacion: 352
+np: 0 Etiqueta: 1	NParams: 1	Ocupacion: 2
+np: 1 Etiqueta: 0	NParams: 0	Ocupacion: 70

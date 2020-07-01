@@ -9,5 +9,7 @@ def int suma(int numero1){
 }
 
 main{
-   out(suma(10));
+   int n = 0;
+   in(n);
+   out(suma(n));
 }

@@ -239,8 +239,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 txtOutput.setForeground(Color.red);
             }
         } catch (Exception ex) {
-            txtOutput.setForeground(Color.red);
-            ex.printStackTrace();
+            txtOutput.setForeground(Color.red);            
         } finally {
             BufferedWriter writer = null;
             try {

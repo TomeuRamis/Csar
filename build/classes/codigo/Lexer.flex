@@ -26,7 +26,7 @@ linea=[\n]+
     }
 %}
 %%
-int | bool | string {tokens+="<tipo>"; return symbol(sym.Tipo, yytext());}
+int | bool {tokens+="<tipo>"; return symbol(sym.Tipo, yytext());}
 const { tokens+="<const>"; return symbol(sym.Const, yytext());}
 if { tokens+="<if>"; return symbol(sym.If, yytext());}
 else { tokens+="<else>"; return symbol(sym.Else, yytext());} 
@@ -52,7 +52,7 @@ out { tokens+="<out>"; return symbol(sym.Out, yytext());}
 "{" { tokens+="<a_llave>"; return symbol(sym.A_llave, yytext());}
 "}" { tokens+="<c_llave>"; return symbol(sym.C_llave, yytext());}
 ({L}|{T})({L}|{D}|{T})* { tokens+="<id>"; return symbol(sym.Id, yytext());}
-\"([^\\\"]|\\.)*\" { tokens+="<string>"; return symbol(sym.String, yytext());}
+/* \"([^\\\"]|\\.)*\" { tokens+="<string>"; return symbol(sym.String, yytext());} */
 ("(-"{D}+")")|{D}+ { tokens+="<numero>"; return symbol(sym.Numero, yytext());}
  . { tokens+="<error>"; FrmPrincipal.notificarError("Error léxico: "+yytext()+" en linea: "+(yyline+1)+" columna: "+(yycolumn+1));}
 
