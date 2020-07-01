@@ -229,8 +229,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             traductor.traducir("output/CodigoEnsambladorSinOptimizar.asm", C3D);     
 
             codigo.Optimizador optimizador = new codigo.Optimizador(C3D);
-            codigo.Codigo3D op_C3D = optimizador.optimiza();          
-            op_C3D.imprimir("output/Codigo3Direcciones.txt");
+            codigo.Codigo3D op_C3D = optimizador.optimiza();
             traductor.traducir("output/CodigoEnsambladorOptimizado.asm", op_C3D);
        
             if (errores.equals("")) {

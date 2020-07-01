@@ -7,7 +7,7 @@ def void imprimir(int a){
 def bool esPrimo(int n){
 	bool primo = true;
 	int i = 2;
-	while(i < (n/2) && primo){
+	while(i =< (n/2) && primo){
 		if(n%i == 0){
 			primo = false;
 		}

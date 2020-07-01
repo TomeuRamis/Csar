@@ -17,28 +17,96 @@ _main:
 e1:
     push    ebp
     mov     ebp, esp 
-    sub     esp, 8
-    mov     eax, dword 0
-    mov     dword [ebp-4], eax
+    sub     esp, 0
     mov     eax, dword [ebp+8]
-    cmp     eax, dword [ebp-4]
-    je      e2
-    mov     eax, dword 0
-    mov     dword [ebp-8], eax
-    jmp     e3
+    call    printNumber
+    push    barraN
+    call    _printf
+    add     esp, 4
+    add     esp, 0
+    pop     ebp
+    ret
 e2:
+    push    ebp
+    mov     ebp, esp 
+    sub     esp, 56
     mov     eax, dword -1
+    mov     dword [ebp-4], eax
+    mov     eax, dword [ebp-4]
     mov     dword [ebp-8], eax
+    mov     eax, dword 2
+    mov     dword [ebp-12], eax
+    mov     eax, dword [ebp-12]
+    mov     dword [ebp-16], eax
 e3:
+    mov     eax, dword 2
+    mov     dword [ebp-20], eax
+    mov     eax, dword [ebp+8]
+    xor     edx, edx
+    idiv    dword [ebp-20]
+    mov     dword [ebp-24], eax
+    mov     eax, dword [ebp-16]
+    cmp     eax, dword [ebp-24]
+    jle     e4
+    mov     eax, dword 0
+    mov     dword [ebp-28], eax
+    jmp     e5
+e4:
+    mov     eax, dword -1
+    mov     dword [ebp-28], eax
+e5:
+    mov     eax, dword [ebp-28]
+    mov     ebx, dword [ebp-8]
+    and     eax, ebx
+    mov     dword [ebp-32], eax
+    mov     eax, dword 0
+    cmp     eax, dword [ebp-32]
+    je      e6
+    mov     eax, dword [ebp+8]
+    xor     edx, edx
+    idiv    dword [ebp-16]
+    mov     dword [ebp-36], edx
+    mov     eax, dword 0
+    mov     dword [ebp-40], eax
+    mov     eax, dword [ebp-36]
+    cmp     eax, dword [ebp-40]
+    je      e7
+    mov     eax, dword 0
+    mov     dword [ebp-44], eax
+    jmp     e8
+e7:
+    mov     eax, dword -1
+    mov     dword [ebp-44], eax
+e8:
+    mov     eax, dword 0
+    cmp     eax, dword [ebp-44]
+    je      e9
+    mov     eax, dword 0
+    mov     dword [ebp-48], eax
+    mov     eax, dword [ebp-48]
+    mov     dword [ebp-8], eax
+    jmp     e10
+e9:
+e10:
+    mov     eax, dword 1
+    mov     dword [ebp-52], eax
+    mov     eax, dword [ebp-16]
+    mov     ebx, dword [ebp-52]
+    add     eax, ebx
+    mov     dword [ebp-56], eax
+    mov     eax, dword [ebp-56]
+    mov     dword [ebp-16], eax
+    jmp     e3
+e6:
     mov     eax, dword [ebp-8]
-    add     esp, 8
+    add     esp, 56
     pop     ebp
     ret
 e0:
     push    ebp
     mov     ebp, esp 
-    sub     esp, 124
-    mov     eax, dword 0
+    sub     esp, 52
+    mov     eax, dword 1
     mov     dword [ebp-4], eax
     mov     eax, dword [ebp-4]
     mov     dword [ebp-8], eax
@@ -46,267 +114,62 @@ e0:
     mov     dword [ebp-12], eax
     mov     eax, dword [ebp-12]
     mov     dword [ebp-16], eax
-    lea     eax,  [ebp-8]
-    push    eax
-    push    formatInt 
-    call    _scanf
-    add     esp, 8
+    mov     eax, dword 0
+    mov     dword [ebp-20], eax
+    mov     eax, dword [ebp-20]
+    mov     dword [ebp-24], eax
     lea     eax,  [ebp-16]
     push    eax
     push    formatInt 
     call    _scanf
     add     esp, 8
-    mov     eax, dword [ebp-8]
-    mov     ebx, dword [ebp-16]
-    add     eax, ebx
-    mov     dword [ebp-20], eax
-    mov     eax, dword [ebp-20]
-    call    printNumber
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
-    mov     ebx, dword [ebp-16]
-    sub     eax, ebx
-    mov     dword [ebp-24], eax
-    mov     eax, dword [ebp-24]
-    call    printNumber
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
-    imul    dword [ebp-16]
-    mov     dword [ebp-28], eax
-    mov     eax, dword [ebp-28]
-    call    printNumber
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
-    xor     edx, edx
-    idiv    dword [ebp-16]
-    mov     dword [ebp-32], eax
-    mov     eax, dword [ebp-32]
-    call    printNumber
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
-    xor     edx, edx
-    idiv    dword [ebp-16]
-    mov     dword [ebp-36], edx
-    mov     eax, dword [ebp-36]
-    call    printNumber
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
-    cmp     eax, dword [ebp-16]
-    je      e4
-    mov     eax, dword 0
-    mov     dword [ebp-40], eax
-    jmp     e5
-e4:
-    mov     eax, dword -1
-    mov     dword [ebp-40], eax
-e5:
-    mov     eax, dword [ebp-40]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
-    cmp     eax, dword [ebp-16]
-    jne     e6
-    mov     eax, dword 0
-    mov     dword [ebp-44], eax
-    jmp     e7
-e6:
-    mov     eax, dword -1
-    mov     dword [ebp-44], eax
-e7:
-    mov     eax, dword [ebp-44]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
-    cmp     eax, dword [ebp-16]
-    jl      e8
-    mov     eax, dword 0
-    mov     dword [ebp-48], eax
-    jmp     e9
-e8:
-    mov     eax, dword -1
-    mov     dword [ebp-48], eax
-e9:
-    mov     eax, dword [ebp-48]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
-    cmp     eax, dword [ebp-16]
-    jle     e10
-    mov     eax, dword 0
-    mov     dword [ebp-52], eax
-    jmp     e11
-e10:
-    mov     eax, dword -1
-    mov     dword [ebp-52], eax
 e11:
-    mov     eax, dword [ebp-52]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
+    mov     eax, dword [ebp-24]
     cmp     eax, dword [ebp-16]
-    jg      e12
+    jl      e12
     mov     eax, dword 0
-    mov     dword [ebp-56], eax
+    mov     dword [ebp-28], eax
     jmp     e13
 e12:
     mov     eax, dword -1
-    mov     dword [ebp-56], eax
+    mov     dword [ebp-28], eax
 e13:
-    mov     eax, dword [ebp-56]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-8]
-    cmp     eax, dword [ebp-16]
-    jge     e14
     mov     eax, dword 0
-    mov     dword [ebp-60], eax
-    jmp     e15
-e14:
-    mov     eax, dword -1
-    mov     dword [ebp-60], eax
+    cmp     eax, dword [ebp-28]
+    je      e14
+    push    dword [ebp-8]
+    call    e2
+    mov     dword [ebp-32], eax
+    add     esp, 4
+    mov     eax, dword [ebp-32]
+    mov     dword [ebp-36], eax
+    mov     eax, dword 0
+    cmp     eax, dword [ebp-36]
+    je      e15
+    push    dword [ebp-8]
+    call    e1
+    add     esp, 4
+    mov     eax, dword 1
+    mov     dword [ebp-40], eax
+    mov     eax, dword [ebp-24]
+    mov     ebx, dword [ebp-40]
+    add     eax, ebx
+    mov     dword [ebp-44], eax
+    mov     eax, dword [ebp-44]
+    mov     dword [ebp-24], eax
+    jmp     e16
 e15:
-    mov     eax, dword [ebp-60]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword 4
-    mov     dword [ebp-64], eax
-    mov     eax, dword [ebp-8]
-    imul    dword [ebp-64]
-    mov     dword [ebp-68], eax
-    mov     eax, dword [ebp-68]
-    call    printNumber
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword 4
-    mov     dword [ebp-72], eax
-    mov     eax, dword [ebp-8]
-    xor     edx, edx
-    idiv    dword [ebp-72]
-    mov     dword [ebp-76], eax
-    mov     eax, dword [ebp-76]
-    call    printNumber
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword -1
-    mov     dword [ebp-80], eax
-    mov     eax, dword [ebp-80]
-    mov     dword [ebp-84], eax
-    mov     eax, dword -1
-    mov     dword [ebp-88], eax
-    mov     eax, dword [ebp-88]
-    mov     dword [ebp-92], eax
-    lea     eax,  [ebp-84]
-    push    eax
-    mov     dword [ebp-84], eax
-    push    formatInt 
-    call    _scanf
-    add     esp, 8
-    mov     eax, dword [ebp-84]
-    call    readBool
-    mov     dword [ebp-84], eax
-    lea     eax,  [ebp-92]
-    push    eax
-    mov     dword [ebp-92], eax
-    push    formatInt 
-    call    _scanf
-    add     esp, 8
-    mov     eax, dword [ebp-92]
-    call    readBool
-    mov     dword [ebp-92], eax
-    push    dword [ebp-84]
-    call    e1
-    mov     dword [ebp-96], eax
-    add     esp, 4
-    mov     eax, dword [ebp-96]
-    mov     dword [ebp-100], eax
-    mov     eax, dword [ebp-100]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    push    dword [ebp-92]
-    call    e1
-    mov     dword [ebp-104], eax
-    add     esp, 4
-    mov     eax, dword [ebp-104]
-    mov     dword [ebp-108], eax
-    mov     eax, dword [ebp-108]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-84]
-    mov     ebx, dword [ebp-92]
-    and     eax, ebx
-    mov     dword [ebp-112], eax
-    mov     eax, dword [ebp-112]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-84]
-    mov     ebx, dword [ebp-92]
-    or      eax, ebx
-    mov     dword [ebp-116], eax
-    mov     eax, dword [ebp-116]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-84]
-    cmp     eax, dword [ebp-92]
-    je      e16
-    mov     eax, dword 0
-    mov     dword [ebp-120], eax
-    jmp     e17
 e16:
-    mov     eax, dword -1
-    mov     dword [ebp-120], eax
-e17:
-    mov     eax, dword [ebp-120]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
-    mov     eax, dword [ebp-84]
-    cmp     eax, dword [ebp-92]
-    jne     e18
-    mov     eax, dword 0
-    mov     dword [ebp-124], eax
-    jmp     e19
-e18:
-    mov     eax, dword -1
-    mov     dword [ebp-124], eax
-e19:
-    mov     eax, dword [ebp-124]
-    call    printBool
-    push    barraN
-    call    _printf
-    add     esp, 4
+    mov     eax, dword 1
+    mov     dword [ebp-48], eax
+    mov     eax, dword [ebp-8]
+    mov     ebx, dword [ebp-48]
+    add     eax, ebx
+    mov     dword [ebp-52], eax
+    mov     eax, dword [ebp-52]
+    mov     dword [ebp-8], eax
+    jmp     e11
+e14:
     ret
 printNumber:
     cmp     eax, 0
@@ -333,22 +196,4 @@ l1:
     add     esp,4
     pop     edx
     pop     eax
-    ret
-printBool:
-    mov     ebx, 0
-    cmp     ebx, eax
-    je      efalse
-    push    strtrue
-    jmp     eibf
-efalse:
-    push    strfalse
-eibf:
-    call    _printf
-    add     esp,4
-    ret
-readBool:
-    cmp     eax, 0
-    je      isfalse
-    mov     eax, -1
-isfalse:
     ret

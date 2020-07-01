@@ -1,2 +1,1 @@
-Error semántico: Variable aasas no declarada. Linea: 2
 Analisis finalizado

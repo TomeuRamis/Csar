@@ -1,102 +1,76 @@
     goto et0
 et1: skip
     pmb p0
-    if v0=0 goto et2
-    v2 = 0
-    goto et3
+    out v0
+    rtn p0
 et2: skip
-    v2 = -1
-et3: skip
-    rtn p0 v2
-et0: skip
     pmb p1
-    v4 = 0
-    v6 = 0
-    in v4
-    in v6
-    v7 = v4 + v6
-    out v7
-    v8 = v4 - v6
-    out v8
-    v9 = v4 * v6
-    out v9
-    v10 = v4 / v6
-    out v10
-    v11 = v4 % v6
-    out v11
-    if v4=v6 goto et4
-    v12 = 0
+    v2 = -1
+    v3 = v2
+    v4 = 2
+    v5 = v4
+et3: skip
+    v6 = 2
+    v7 = v1 / v6
+    if v5<=v7 goto et4
+    v8 = 0
     goto et5
 et4: skip
-    v12 = -1
+    v8 = -1
 et5: skip
-    out v12
-    if v4!=v6 goto et6
-    v13 = 0
-    goto et7
-et6: skip
-    v13 = -1
+    v9 = v8 && v3
+    if 0=v9 goto et6
+    v10 = v1 % v5
+    v11 = 0
+    if v10=v11 goto et7
+    v12 = 0
+    goto et8
 et7: skip
-    out v13
-    if v4<v6 goto et8
-    v14 = 0
-    goto et9
+    v12 = -1
 et8: skip
-    v14 = -1
+    if 0=v12 goto et9
+    v13 = 0
+    v3 = v13
+    goto et10
 et9: skip
-    out v14
-    if v4<=v6 goto et10
-    v15 = 0
-    goto et11
 et10: skip
-    v15 = -1
+    v14 = 1
+    v15 = v5 + v14
+    v5 = v15
+    goto et3
+et6: skip
+    rtn p1 v3
+et0: skip
+    pmb p2
+    v16 = 1
+    v17 = v16
+    v18 = 0
+    v19 = v18
+    v20 = 0
+    v21 = v20
+    in v19
 et11: skip
-    out v15
-    if v4>v6 goto et12
-    v16 = 0
+    if v21<v19 goto et12
+    v22 = 0
     goto et13
 et12: skip
-    v16 = -1
+    v22 = -1
 et13: skip
-    out v16
-    if v4>=v6 goto et14
-    v17 = 0
-    goto et15
-et14: skip
-    v17 = -1
+    if 0=v22 goto et14
+    param_s v17
+    call p1 v23
+    v24 = v23
+    if 0=v24 goto et15
+    param_s v17
+    call p0
+    v25 = 1
+    v26 = v21 + v25
+    v21 = v26
+    goto et16
 et15: skip
-    out v17
-    v19 = 2 <- v4
-    out v19
-    v21 = v4 / 4
-    out v21
-    v23 = -1
-    v25 = -1
-    in v23
-    in v25
-    param_s v23
-    call p0 v26
-    v27 = v26
-    out v27
-    param_s v25
-    call p0 v28
-    v29 = v28
-    out v29
-    v30 = v23 && v25
-    out v30
-    v31 = v23 || v25
-    out v31
-    if v23=v25 goto et16
-    v32 = 0
-    goto et17
 et16: skip
-    v32 = -1
-et17: skip
-    out v32
-    if v23!=v25 goto et18
-    v33 = 0
-    goto et19
-et18: skip
-    v33 = -1
-et19: skip
-    out v33
+    v27 = 1
+    v28 = v17 + v27
+    v17 = v28
+    goto et11
+et14: skip
